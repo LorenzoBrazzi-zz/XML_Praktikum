@@ -1,0 +1,40 @@
+RESSOURCEN: 
+- https://www.pokerstarscasino.eu/de/games/blackjack/rules/
+- https://www.besteonlinecasinos.co/blackjack/begriffe/
+
+
+- Max. 5 Spieler
+- Asse zählen 11 und nicht 1
+- 2 bis 10 zählen entsprechend
+- Bildkarten zählen 10
+
+- AUSZAHLUNG:
+    - BlackJack: Auszahlung 3:2 + Einsatz zurück (Außer SONDERFALL siehe unten)
+    - Normaler Gewinn: Auszahlung 1:1 + Einsatz zurück
+    - Bei Gleichstand: Einsatz zurück
+    
+- REGELN:
+    - Wenn Spieler 21 überschreitet ist er direkt raus
+    - Höchster erreichbarer Wert: BlackJack (Ass + [10 ODER Bube ODER Dame ODER König])
+    - Hit: Spieler verlangt zusätzliche Karte
+    - Stand: Spieler verweigert weitere Karte und ist vom aktiven Spiel ausgeschlossen
+    - Surrender: bevor der elaer seine Karte erhält, kann der Spieler aufgeben und die Hälfte seines Wetteinsatzes zurück bekommen
+    - Double down: nachdem alle ihr zwei Karten bekommen haben hat jeder Spieler das Recht seinen Einsatz zu verdoppeln im Gegenzug zu einer zusätzlichen Karte
+    - Split: wenn die ersten beiden Karten gleich sind kann der Spieler diese in "2 Hände" aufteilen und bekommt zu jeder Karte eine Karte hinzu
+    - (Für alle BlackJack Spiele gilt dass der Dealer bei allen Kartenwerten von 16 oder darunter eine Karte ziehen muss) -> BIN ICH MIR NOCH NICHT GANZ SICHER
+    - Sollte der Dealer sich überkaufen, gewinnen alle Spieler am Tisch, die sich selbst noch nicht überkauft haben, und werden 1:1 ausbezahlt.
+
+SONDERFALL:
+Ein Spieler setzt $20 und bekommt eine Blackjack-Hand ausgeteilt – die Auszahlung beträgt dann $50. Bekommt ein Spieler eine gewinnende Blackjack-Hand, wird er sofort ausbezahlt und ist aus dem Spiel. Die einzige AUSNAHME ist, wenn die erste offene Karte des Dealers ein Ass oder eine Karte mit dem Wert 10 ist. Hat der Dealer nämlich ebenfalls einen Blackjack, gilt die Runde als Unentschieden oder “Push”. In diesem Fall erhält der Spieler seinen Einsatz zurück.)
+(Quelle: http://de.blackjack.org/blackjack-regeln/, vom 15.07.17)
+
+-	Falls erste Karte des Dealer ein Ass ist, darf man eine Versicherung abschließen
+-	Insurance: wie folgt
+
+(Zu Beginn teilt der Dealer dem Spieler zu seiner linken eine Karte aus dem Kartenschuh aus und fährt dann reihum fort, bis alle Spieler eine Karte haben. Die Karten werden den Spielern offen ausgeteilt, die erste Karte des Dealers jedoch bleibt verdeckt und nur die zweite Karte des Dealers wird offen ausgeteilt. Wenn die offene Karte des Dealers ein Ass zeigt, haben die Spieler die Möglichkeit, eine Versicherung für 50% des Einsatzes abzuschließen. Beispiel: Wenn ein Spieler einen Einsatz von $100 gemacht hat, kann er seine Hand gegen einen möglichen Blackjack des Dealers mit einer Versicherung für $50 absichern. Hat der Dealer tatsächlich einen Blackjack, so verliert der Spieler zwar seinen usrpünglichen Einsatz von $100, erhält aber eine 1:1 Auszahlung auf die Versicherung. Alle anderen Hände (sofern sie keinen Blackjack bilden), die keine Versicherung haben, verlieren ebenfalls und ihre Einsätze werden vom Dealer eingesammelt. Damit ist die Runde dann beendet. Sollte ein Spieler ebenfalls einen Blackjack haben, nennt man dies “Push”, der Spieler erhält seinen Einsatz zurück und die Runde ist beendet.)
+(Quelle: http://de.blackjack.org/blackjack-regeln/, )
+
+
+FRAGEN:
+- In bestimmten BJ Varianten ist ein Double Down nach einem Split erlaubt. Da kommen noch weitere Einschränkungen dazu die die Logik des Programmes glaub ich ein bisschen zu schwer mahen würden deswegen würde ich sagen dass wir das nicht zulassen aber ihr könnt gerne dagegen stimmen :)
+
