@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://docbook.org/xml/4.5/docbookx.dtd">
+
+<book>
+
+    <bookinfo>
+        <title>XML Technology - SS17 - BlackJack Project - Technische Universität München
+            (TUM)</title>
+        <author>
+            <honorific>Mr</honorific>
+            <firstname>Ikbal</firstname>
+            <surname>Yesiltas</surname>
+            <authorblurb>
+                <simpara>B.Sc. Information Systems</simpara>
+            </authorblurb>
+            <affiliation>
+                <orgname>Technische Universität München (TUM)</orgname>
+            </affiliation>
+        </author>
+        <author>
+            <honorific>Mr</honorific>
+            <firstname>Lorenzo</firstname>
+            <surname>Brazzi</surname>
+            <authorblurb>
+                <simpara>B.Sc. Information Systems</simpara>
+            </authorblurb>
+            <affiliation>
+                <orgname>Technische Universität München (TUM)</orgname>
+            </affiliation>
+        </author>
+        <author>
+            <honorific>Mr</honorific>
+            <firstname>Markus</firstname>
+            <surname>Zuber</surname>
+            <authorblurb>
+                <simpara>M.Sc. TUM-BWL</simpara>
+            </authorblurb>
+            <affiliation>
+                <orgname>Technische Universität München (TUM)</orgname>
+            </affiliation>
+        </author>
+        <author>
+            <honorific>Mr</honorific>
+            <firstname>Patrick</firstname>
+            <surname>Reto</surname>
+            <authorblurb>
+                <simpara>B.Sc. Information System</simpara>
+            </authorblurb>
+            <affiliation>
+                <orgname>Technische Universität München (TUM)</orgname>
+            </affiliation>
+        </author>
+    </bookinfo>
+
+    <dedication>
+        <beginpage />
+        <important>
+            <para>Through the support, sources, and references provided by the instructers, we were able to build this Project. Our appreciation hence goes to Prof. Brügemann-Klein and Ulreich Philip.</para>
+        </important>
+    </dedication>
+
+    <preface>
+        <title>Development of BlackJack in XML</title>
+        <beginpage />
+        <abstract>
+            <para>
+                        To be filled throughout the XML-Praktikum.
+                    </para>
+        </abstract>
+    </preface>
+
+</book>
