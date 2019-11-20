@@ -8,7 +8,8 @@
 - XSLT Karten anpassung (Ikbal)
 - DTD erstellen und Instances ungefähr übernehmen
 
-Fragen: 
-- Müssen wir den Tisch selebr machen?
+FRAGEN: 
+- Müssen wir den Tisch selber machen?
 - Müssen wir die Rückseite von den Karten selber machen?
 - Müssen wirklich die Karten die Anzahl an Symbolen haben wie auf der Karte steht?
+- Geht das Klassendiagramm in die richtige Richtung?
