@@ -1,3 +1,14 @@
-- Karten (ids, suits)
-- Karten Rückseite integrieren
-- Figuren Bilder ändern (card_specials.svg)
+- Karten (ids, suits) -Lorenzo bearbeitet
+- Karten Rückseite integrieren -Lorenzo bearbeitet
+- Figuren Bilder ändern (card_specials.svg) -Lorenzo bearbeitet
+- DocBook (Ikbal und Lorenzo Treffen) -Ikbal bearbeitet
+- Screenshots erstellen (Ikbal)
+- card_deck.xml erstellen mit den Daten der Karten (Lorenzo)
+- Wir müssen für jede Zahl das Layout der Karte anpassen (7 Herz hat 7 Herze auf der Karte)
+- XSLT Karten anpassung (Ikbal)
+- DTD erstellen und Instances ungefähr übernehmen
+
+Fragen: 
+- Müssen wir den Tisch selebr machen?
+- Müssen wir die Rückseite von den Karten selber machen?
+- Müssen wirklich die Karten die Anzahl an Symbolen haben wie auf der Karte steht?
