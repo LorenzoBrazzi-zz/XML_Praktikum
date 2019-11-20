@@ -1,0 +1,3 @@
+- Karten (ids, suits)
+- Karten Rückseite integrieren
+- Figuren Bilder ändern (card_specials.svg)

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<svg width="100%" height="auto" viewBox="0 0 2000 1200" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    
+    <!-- LOGO -->
+    <image xlink:href="https://cdn.imgbin.com/1/7/0/imgbin-baccarat-game-blackjack-logo-telephone-poker-chips-LRwKRTbEWwrFsjD4irsaj25ug.jpg" x="120" y="50" height="100" width="1175" />
+    
+    <defs>
+        <g id="black-5">
+            <!-- top left number -->
+            <text id="black-card-number-5" x="100" y="50" font-size="35"
+                fill="black">5
+            </text>
+            <!-- bottom right number -->
+            <use xlink:href="#black-card-number-5" x="200" y="290"
+                transform="rotate(180, 268, 330)" />
+        </g>
+    </defs>
+    <defs>
+        <g id="hearts">
+            <!--top middle heart-->
+            <polygon points="170,160 130,115 210,115" style="stroke:red;fill:red;stroke-width:1"/>
+            <circle cx="150" cy="159" r="20" style="stroke:red;fill:red"/>
+            <circle cx="190" cy="159" r="20" style="stroke:red;fill:red"/>
+        </g>
+    </defs>
+    <defs>
+        <g id="diamonds">
+            <!--top middle diamond-->
+            <polygon points="170,30 140,80 170,130 200,80" style="fill:red;stroke:red;stroke-width:1"/>
+            <!--bottom middle diamond-->
+            <polygon points="170,230 140,280 170,330 200,280" style="fill:red;stroke:red;stroke-width:1"/>
+        </g>
+    </defs>
+    <defs>
+        <g id="suits">
+            <!--top middle suit-->
+            <circle cx="170" cy="165" r="29"/>
+            <circle cx="200" cy="201" r="29 "/>
+            <circle cx="140" cy="201" r="29"/>
+            <line x1="170" y1="190" x2="170" y2="255" style="stroke:#000;fill:#000;stroke-width:10"/>
+
+        </g>
+    </defs>
+    <defs>
+        <g id="peaks">
+            <!--top middle peak-->
+            <polygon points="170,130 130,180 210,180" style="stroke-width:1"/>
+            <circle cx="150" cy="201" r="29"/>
+            <circle cx="190" cy="201" r="29 "/>
+            <line x1="170" y1="190" x2="170" y2="255" style="stroke:#000;fill:#000;stroke-width:10"/>
+
+        </g>
+    </defs>
+
+    <!-- Example card Peak 7 -->
+    <g >
+            <rect height="350" width="250" x="45" y="10" rx="30" ry="30" style="fill:white;stroke:black;stroke-width:5;opacity:1.0" />
+            <!-- top left number -->
+            <text id="black-5" x="57" y="50" font-size="35" fill="black">
+            
+            </text>
+            <!-- bottom right number -->
+            <use xlink:href="#black-5" x="200" y="290" transform="rotate(180, 268, 330)" />
+            
+            <use xlink:href="#suits"/>
+    </g>
+</svg>
