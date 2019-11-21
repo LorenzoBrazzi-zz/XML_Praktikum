@@ -3,13 +3,14 @@
 - Figuren Bilder ändern (card_specials.svg) -Lorenzo bearbeitet
 - DocBook (Ikbal und Lorenzo Treffen) -Ikbal bearbeitet
 - Screenshots erstellen (Ikbal)
-- card_deck.xml erstellen mit den Daten der Karten (Lorenzo)
 - Wir müssen für jede Zahl das Layout der Karte anpassen (7 Herz hat 7 Herze auf der Karte)
-- XSLT Karten anpassung (Ikbal)
+- XSLT Karten anpassung (Ikbal) --> MehrfachSymbole nötig (Lorenzo)
 - DTD erstellen und Instances ungefähr übernehmen
 - Figuren aus der einen Datei in die Datei mit den Zahlen kopieren
 - Chips machen
 
 FRAGEN: 
+- Müssen wir den Tisch selber machen? --> Ja
+- Müssen wir die Rückseite von den Karten selber machen? --> Nein
+- Müssen wirklich die Karten die Anzahl an Symbolen haben wie auf der Karte steht? --> Ja
 - Geht das Klassendiagramm in die richtige Richtung?
-- Wie soll das DocBook ungefähr aufgebaut sein? (1 Eintrag pro Tag, Woche,...?)
