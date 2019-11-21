@@ -5,7 +5,7 @@
 - Screenshots erstellen (Ikbal)
 - Wir müssen für jede Zahl das Layout der Karte anpassen (7 Herz hat 7 Herze auf der Karte)
 - XSLT Karten anpassung (Ikbal) --> MehrfachSymbole nötig (Lorenzo)
-- DTD erstellen und Instances ungefähr übernehmen
+- DTD erstellen und Spielinstanzen erstellen Aufgabe 3 Blatt 3 (Ikbal)
 
 FRAGEN: 
 - Müssen wir den Tisch selber machen? --> Ja
