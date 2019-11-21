@@ -22,8 +22,8 @@
                         <xsl:when test="$Farbe = 'Karo'">
                             <use href="#Karo-K" />
                         </xsl:when>
-                        <xsl:when test="$Farbe = Kreuz">
-                            <use href="#Herz-K" />
+                        <xsl:when test="$Farbe = 'Kreuz'">
+                            <use href="#Kreuz-K" />
                         </xsl:when>
                     </xsl:choose>
                 </xsl:when>
@@ -38,8 +38,8 @@
                         <xsl:when test="$Farbe = 'Karo'">
                             <use href="#Karo-Q" />
                         </xsl:when>
-                        <xsl:when test="$Farbe = Kreuz">
-                            <use href="#Herz-Q" />
+                        <xsl:when test="$Farbe = 'Kreuz'">
+                            <use href="#Kreuz-Q" />
                         </xsl:when>
                     </xsl:choose>
                 </xsl:when>
@@ -54,8 +54,8 @@
                         <xsl:when test="$Farbe = 'Karo'">
                             <use href="#Karo-B" />
                         </xsl:when>
-                        <xsl:when test="$Farbe = Kreuz">
-                            <use href="#Herz-B" />
+                        <xsl:when test="$Farbe = 'Kreuz'">
+                            <use href="#Kreuz-B" />
                         </xsl:when>
                     </xsl:choose>
                 </xsl:when>
@@ -135,83 +135,71 @@
                 </g>
             </defs>
             <defs>
-                <use href="'Kartenrand" />
                 <g id="Karo-K">
-                    <image xlink:href="https://t4.ftcdn.net/jpg/00/40/03/67/500_F_40036731_mPYQRYDtnqpLXIqxewu5bmq5q8ItclVE.jpg" width="250" height="330" x="45" y="20" />
+                    <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/0/06/KD.svg" width="250" height="330" x="45" y="20" />
                 </g>
             </defs>
 
             <defs>
                 <g id="Karo-Q">
-                    <use xlink:href="#Kartenrand" />
-                    <image xlink:href="
-                            https://t4.ftcdn.net/jpg/00/40/22/75/500_F_40227576_KVEzuQcMDkW9KrFNoVIhTBjaKwAiWnnh.jpg" width="250" height="330" x="45" y="20" />
+             
+                    <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/6/63/QD.svg" width="250" height="330" x="45" y="20" />
                 </g>
             </defs>
             <defs>
                 <g id="Karo-B">
-                    <use xlink:href="#Kartenrand" />
-                    <image xlink:href="https://t3.ftcdn.net/jpg/00/40/03/66/500_F_40036663_ezasrJwmIyGGPlLptnFD76PPm9wukzyF.jpg" width="250" height="330" x="45" y="20" />
+                    <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/3/33/JD.svg" width="250" height="330" x="45" y="20" />
                 </g>
             </defs>
             <defs>
                 <g id="Herz-K">
-                    <use xlink:href="#Kartenrand" />
-                    <image xlink:href="https://t3.ftcdn.net/jpg/00/40/03/64/500_F_40036471_ezXtaJezu9hsSeuk6CpQHVm2zXaH8WZd.jpg" width="250" height="330" x="45" y="20" />
+                    <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/e/e5/KH.svg" width="250" height="330" x="45" y="20" />
                 </g>
             </defs>
 
             <defs>
                 <g id="Herz-Q">
-                    <use xlink:href="#Kartenrand" />
-                    <image xlink:href="https://t3.ftcdn.net/jpg/00/40/03/64/500_F_40036449_s0yWNKg9MyFrZ4siWskMTxvdFEltiFIQ.jpg" width="250" height="330" x="45" y="20" />
+                    <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/d/d2/QH.svg" width="250" height="330" x="45" y="20" />
                 </g>
             </defs>
 
             <defs>
                 <g id="Herz-B">
-                    <use xlink:href="#Kartenrand" />
-                    <image xlink:href="https://t3.ftcdn.net/jpg/00/40/03/64/500_F_40036415_56z5BJ2vcHYOW34CG3xdpDDPRH2VKGMF.jpg" width="250" height="330" x="45" y="20" />
+                    <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/1/15/JH.svg" width="250" height="330" x="45" y="20" />
                 </g>
             </defs>
             <defs>
                 <g id="Kreuz-K">
-                    <use xlink:href="#Kartenrand" />
-                    <image xlink:href="https://t3.ftcdn.net/jpg/00/40/03/70/500_F_40037001_yiHav7FQ1ww6Tl5PbQXI0wGRF0CBLigA.jpg" width="250" height="330" x="45" y="20" />
+                    <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/e/e1/KC.svg" width="250" height="330" x="45" y="20" />
                 </g>
             </defs>
 
             <defs>
                 <g id="Kreuz-Q">
-                    <use xlink:href="#Kartenrand" />
-                    <image xlink:href="https://t3.ftcdn.net/jpg/00/40/22/76/500_F_40227647_m0JvJccVZuHargU9QnT0s7gqkU55VC47.jpg" width="250" height="330" x="45" y="20" />
+                    <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/9/9e/QC.svg" width="250" height="330" x="45" y="20" />
                 </g>
             </defs>
 
             <defs>
                 <g id="Kreuz-B">
-                    <use xlink:href="#Kartenrand" />
-                    <image xlink:href="https://t4.ftcdn.net/jpg/00/40/03/69/500_F_40036926_6E84Mh57txnlb6a3LhA58y0I5ELGAQL6.jpg" width="250" height="330" x="45" y="20" />
+                    <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/1/11/JC.svg" width="250" height="330" x="45" y="20" />
                 </g>
             </defs>
             <defs>
                 <g id="Pik-K">
-                    <use xlink:href="#Kartenrand" />
-                    <image xlink:href="https://t3.ftcdn.net/jpg/00/40/03/72/500_F_40037201_OzwAPPdNIESKCALqZ1UZTrUHC1ub8csM.jpg" width="250" height="330" x="45" y="20" />
+                    <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/5/5c/KS.svg" width="250" height="330" x="45" y="20" />
                 </g>
             </defs>
 
             <defs>
                 <g id="Pik-Q">
-                    <use xlink:href="#Kartenrand" />
-                    <image xlink:href="https://t4.ftcdn.net/jpg/00/40/03/71/500_F_40037169_qHdy4yyUxubUewdd6MKK84tRy2zLkFsR.jpg" width="250" height="330" x="45" y="20" />
+                    <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/3/35/QS.svg" width="250" height="330" x="45" y="20" />
                 </g>
             </defs>
 
             <defs>
                 <g id="Pik-B">
-                    <use xlink:href="#Kartenrand" />
-                    <image xlink:href="https://t4.ftcdn.net/jpg/00/40/03/71/500_F_40037139_yHRxBbB4ITnfYJ7AW0CDqszVJ9wiR0HG.jpg" width="250" height="330" x="45" y="20" />
+                    <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/d/d9/JS.svg" width="250" height="330" x="45" y="20" />
                 </g>
             </defs>
         </svg>
