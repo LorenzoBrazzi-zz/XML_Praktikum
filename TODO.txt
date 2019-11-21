@@ -8,7 +8,7 @@
 - DTD erstellen und Instances ungefähr übernehmen
 
 FRAGEN: 
-- Müssen wir den Tisch selber machen?
+- Müssen wir den Tisch selber machen? --> Ja
 - Müssen wir die Rückseite von den Karten selber machen?
 - Müssen wirklich die Karten die Anzahl an Symbolen haben wie auf der Karte steht?
 - Geht das Klassendiagramm in die richtige Richtung?
