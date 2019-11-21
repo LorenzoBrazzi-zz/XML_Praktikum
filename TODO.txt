@@ -9,6 +9,6 @@
 
 FRAGEN: 
 - Müssen wir den Tisch selber machen? --> Ja
-- Müssen wir die Rückseite von den Karten selber machen?
-- Müssen wirklich die Karten die Anzahl an Symbolen haben wie auf der Karte steht?
+- Müssen wir die Rückseite von den Karten selber machen? --> Nein
+- Müssen wirklich die Karten die Anzahl an Symbolen haben wie auf der Karte steht? --> Ja
 - Geht das Klassendiagramm in die richtige Richtung?
