@@ -4,19 +4,105 @@
     <!-- LOGO -->
     <image xlink:href="https://cdn.imgbin.com/1/7/0/imgbin-baccarat-game-blackjack-logo-telephone-poker-chips-LRwKRTbEWwrFsjD4irsaj25ug.jpg" x="120" y="50" height="100" width="1175" />
     
+    <!-- SCHWARZE ZAHLEN UND FIGUREN AB HIER -->
+
+    <!-- Schwarze Zahl: 2 -->
     <defs>
-        <g id="black-5">
-            <!-- top left number -->
-            <text id="black-card-number-5" x="100" y="50" font-size="35"
-                fill="black">5
-            </text>
-            <!-- bottom right number -->
-            <use xlink:href="#black-card-number-5" x="200" y="290"
-                transform="rotate(180, 268, 330)" />
+        <g id="schwarz_2">
+            <!-- obere Zahl -->
+            <text id="schwarze_zahl_2" x="80" y="70" font-size="45" fill="black">2</text>
+            <!-- untere Zahl -->
+            <use xlink:href="#schwarze_zahl_2" x="200" y="290" transform="rotate(180, 268, 330)" />
         </g>
     </defs>
+
+    <!-- Schwarze Zahl: 3 -->
     <defs>
-        <g id="hearts">
+        <g id="schwarz_3">
+            <!-- obere Zahl -->
+            <text id="schwarze_zahl_3" x="80" y="70" font-size="45" fill="black">3</text>
+            <!-- untere Zahl -->
+            <use xlink:href="#schwarze_zahl_3" x="200" y="290" transform="rotate(180, 268, 330)" />
+        </g>
+    </defs>
+    
+    <!-- Schwarze Zahl: 4 -->
+    <defs>
+        <g id="schwarz_4">
+            <!-- obere Zahl -->
+            <text id="schwarze_zahl_4" x="80" y="70" font-size="45" fill="black">4</text>
+            <!-- untere Zahl -->
+            <use xlink:href="#schwarze_zahl_4" x="200" y="290" transform="rotate(180, 268, 330)" />
+        </g>
+    </defs>
+
+    <!-- Schwarze Zahl: 5 -->
+    <defs>
+        <g id="schwarz_5">
+            <!-- obere Zahl -->
+            <text id="schwarze_zahl_5" x="80" y="70" font-size="45" fill="black">5</text>
+            <!-- untere Zahl -->
+            <use xlink:href="#schwarze_zahl_3" x="200" y="290" transform="rotate(180, 268, 330)" />
+        </g>
+    </defs>
+
+    <!-- Schwarze Zahl: 6 -->
+    <defs>
+        <g id="schwarz_6">
+            <!-- obere Zahl -->
+            <text id="schwarze_zahl_6" x="80" y="70" font-size="45" fill="black">6</text>
+            <!-- untere Zahl -->
+            <use xlink:href="#schwarze_zahl_6" x="200" y="290" transform="rotate(180, 268, 330)" />
+        </g>
+    </defs>
+
+    <!-- Schwarze Zahl: 7 -->
+    <defs>
+        <g id="schwarz_7">
+            <!-- obere Zahl -->
+            <text id="schwarze_zahl_7" x="80" y="70" font-size="45" fill="black">7</text>
+            <!-- untere Zahl -->
+            <use xlink:href="#schwarze_zahl_7" x="200" y="290" transform="rotate(180, 268, 330)" />
+        </g>
+    </defs>
+
+    <!-- Schwarze Zahl: 8 -->
+    <defs>
+        <g id="schwarz_8">
+            <!-- obere Zahl -->
+            <text id="schwarze_zahl_8" x="80" y="70" font-size="45" fill="black">8</text>
+            <!-- untere Zahl -->
+            <use xlink:href="#schwarze_zahl_8" x="200" y="290" transform="rotate(180, 268, 330)" />
+        </g>
+    </defs>
+
+    <!-- Schwarze Zahl: 9 -->
+    <defs>
+        <g id="schwarz_9">
+            <!-- obere Zahl -->
+            <text id="schwarze_zahl_9" x="80" y="70" font-size="45" fill="black">9</text>
+            <!-- untere Zahl -->
+            <use xlink:href="#schwarze_zahl_9" x="200" y="290" transform="rotate(180, 268, 330)" />
+        </g>
+    </defs>
+
+    <!-- Schwarze Zahl: 5 -->
+    <defs>
+        <g id="schwarz_10">
+            <!-- obere Zahl -->
+            <text id="schwarze_zahl_10" x="80" y="70" font-size="45" fill="black">10</text>
+            <!-- untere Zahl -->
+            <use xlink:href="#schwarze_zahl_10" x="200" y="290" transform="rotate(180, 268, 330)" />
+        </g>
+    </defs>
+
+    <!-- ENDE SCHWARZE ZAHLEN UND FIGUREN -->
+
+
+
+
+    <defs>
+        <g id="herz">
             <!--top middle heart-->
             <polygon points="170,160 130,115 210,115" style="stroke:red;fill:red;stroke-width:1"/>
             <circle cx="150" cy="159" r="20" style="stroke:red;fill:red"/>
@@ -24,7 +110,7 @@
         </g>
     </defs>
     <defs>
-        <g id="diamonds">
+        <g id="karo">
             <!--top middle diamond-->
             <polygon points="170,30 140,80 170,130 200,80" style="fill:red;stroke:red;stroke-width:1"/>
             <!--bottom middle diamond-->
@@ -32,17 +118,17 @@
         </g>
     </defs>
     <defs>
-        <g id="suits">
+        <g id="kreuz">
             <!--top middle suit-->
-            <circle cx="170" cy="165" r="29"/>
-            <circle cx="200" cy="201" r="29 "/>
-            <circle cx="140" cy="201" r="29"/>
+            <circle cx="170" cy="152" r="27"/>
+            <circle cx="190" cy="195" r="25"/>
+            <circle cx="150" cy="195" r="25"/>
             <line x1="170" y1="190" x2="170" y2="255" style="stroke:#000;fill:#000;stroke-width:10"/>
 
         </g>
     </defs>
     <defs>
-        <g id="peaks">
+        <g id="pik">
             <!--top middle peak-->
             <polygon points="170,130 130,180 210,180" style="stroke-width:1"/>
             <circle cx="150" cy="201" r="29"/>
@@ -60,8 +146,8 @@
             
             </text>
             <!-- bottom right number -->
-            <use xlink:href="#black-5" x="200" y="290" transform="rotate(180, 268, 330)" />
+            <use xlink:href="#schwarz_10" x="200" y="290" transform="rotate(180, 268, 330)" />
             
-            <use xlink:href="#suits"/>
+            <use xlink:href="#pik"/>
     </g>
 </svg>
