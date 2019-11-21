@@ -3,9 +3,8 @@
 - Figuren Bilder ändern (card_specials.svg) -Lorenzo bearbeitet
 - DocBook (Ikbal und Lorenzo Treffen) -Ikbal bearbeitet
 - Screenshots erstellen (Ikbal)
-- card_deck.xml erstellen mit den Daten der Karten (Lorenzo)
 - Wir müssen für jede Zahl das Layout der Karte anpassen (7 Herz hat 7 Herze auf der Karte)
-- XSLT Karten anpassung (Ikbal)
+- XSLT Karten anpassung (Ikbal) --> MehrfachSymbole nötig (Lorenzo)
 - DTD erstellen und Instances ungefähr übernehmen
 
 FRAGEN: 
