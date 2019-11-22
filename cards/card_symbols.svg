@@ -211,76 +211,76 @@
     <!-- KARTEN MIT FIGUREN AB HIER -->
     <!-- karo -->
     <defs>
-        <g id="karo-king">
+        <g id="karo_koenig">
             <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/1/1c/English_pattern_king_of_diamonds.svg" width="250" height="330" x="45" y="20" />
         </g>
     </defs>
     
     <defs>
-        <g id="karo-queen">
+        <g id="karo_dame">
             <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/4/4f/English_pattern_queen_of_diamonds.svg" width="250" height="330" x="45" y="20" />
         </g>
     </defs>
     
     <defs>
-        <g id="karo-boy">
+        <g id="karo_bube">
             <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/1/16/English_pattern_jack_of_diamonds.svg" width="250" height="330" x="45" y="20" />
         </g>
     </defs>
 
     <!-- herz -->
     <defs>
-        <g id="herz-king">
+        <g id="herz_koenig">
             <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/1/14/English_pattern_king_of_hearts.svg" width="250" height="330" x="45" y="20" />
         </g>
     </defs>
     
     <defs>
-        <g id="herz-queen">
+        <g id="herz_dame">
             <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/9/9d/English_pattern_queen_of_hearts.svg" width="250" height="330" x="45" y="20" />
         </g>
     </defs>
     
     <defs>
-        <g id="herz-boy">
+        <g id="herz_bube">
             <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/5/56/English_pattern_jack_of_hearts.svg" width="250" height="330" x="45" y="20" />
         </g>
     </defs>
     
     <!-- kreuz -->
     <defs>
-        <g id="kreuz-king">
+        <g id="kreuz_koenig">
             <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/3/3e/English_pattern_king_of_clubs.svg" width="250" height="330" x="45" y="20" />
         </g>
     </defs>
     
     <defs>
-        <g id="kreuz-queen">
+        <g id="kreuz_dame">
             <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/b/b3/English_pattern_queen_of_clubs.svg" width="250" height="330" x="45" y="20" />
         </g>
     </defs>
     
     <defs>
-        <g id="kreuz-boy">
+        <g id="kreuz_bube">
             <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/8/80/English_pattern_jack_of_clubs.svg" width="250" height="330" x="45" y="20" />
         </g>
     </defs>
     
     <!-- pik -->
     <defs>
-        <g id="pik-king">
+        <g id="pik_koenig">
             <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/f/f1/English_pattern_king_of_spades.svg" width="250" height="330" x="45" y="20" />
         </g>
     </defs>
     
     <defs>
-        <g id="pik-queen">
+        <g id="pik_dame">
             <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/c/ca/English_pattern_queen_of_spades.svg" width="250" height="330" x="45" y="20" />
         </g>
     </defs>
     
     <defs>
-        <g id="pik-boy">
+        <g id="pik_bube">
             <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/4/4f/English_pattern_jack_of_spades.svg" width="250" height="330" x="45" y="20" />
         </g>
     </defs>

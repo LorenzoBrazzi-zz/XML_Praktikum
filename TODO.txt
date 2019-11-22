@@ -1,4 +1,3 @@
-- Karten (ids) -Lorenzo bearbeitet
 - Karten Rückseite integrieren -Lorenzo bearbeitet
 - Figuren Bilder ändern (card_specials.svg) -Lorenzo bearbeitet
 - DocBook (Ikbal und Lorenzo Treffen) -Ikbal bearbeitet
