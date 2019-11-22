@@ -12,3 +12,7 @@ FRAGEN:
 - Müssen wir die Rückseite von den Karten selber machen? --> Nein
 - Müssen wirklich die Karten die Anzahl an Symbolen haben wie auf der Karte steht? --> Ja
 - Geht das Klassendiagramm in die richtige Richtung?
+
+FRAGE an Team:
+- (von Lorenzo): Sollen wir bei den Karten mit Figuren die LInks drin lassen oder sollen wir lieber die .svg Dateien runterladen und sie in einen Ordner in das Verzeichnis tun? Dadurch ist die App zwar ein bisschen heavyer aber
+    die Bilder sind zumindest immer verfügbar. Denn wenn der LInk deaktiviert wird oder so haben wir keine Karten mehr.
