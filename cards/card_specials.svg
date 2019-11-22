@@ -4,84 +4,81 @@
     <!-- diamonds -->
     <defs>
         <g id="diamonds-king">
-            <image xlink:href="https://t4.ftcdn.net/jpg/00/40/03/67/500_F_40036731_mPYQRYDtnqpLXIqxewu5bmq5q8ItclVE.jpg" width="250" height="330" x="45" y="20" />
+            <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/1/1c/English_pattern_king_of_diamonds.svg" width="250" height="330" x="45" y="20" />
         </g>
     </defs>
     
     <defs>
         <g id="diamonds-queen">
-            <use xlink:href="#generic-card-border" />
-            <image xlink:href="
-                https://t4.ftcdn.net/jpg/00/40/22/75/500_F_40227576_KVEzuQcMDkW9KrFNoVIhTBjaKwAiWnnh.jpg" width="250" height="330" x="45" y="20" />
+            <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/4/4f/English_pattern_queen_of_diamonds.svg" width="250" height="330" x="45" y="20" />
         </g>
     </defs>
     
     <defs>
         <g id="diamonds-boy">
-            <use xlink:href="#generic-card-border" />
-            <image xlink:href="https://t3.ftcdn.net/jpg/00/40/03/66/500_F_40036663_ezasrJwmIyGGPlLptnFD76PPm9wukzyF.jpg" width="250" height="330" x="45" y="20" />
+            <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/1/16/English_pattern_jack_of_diamonds.svg" width="250" height="330" x="45" y="20" />
         </g>
     </defs>
     
     <!-- hearts -->
     <defs>
         <g id="hearts-king">
-            <image xlink:href="https://t3.ftcdn.net/jpg/00/40/03/64/500_F_40036471_ezXtaJezu9hsSeuk6CpQHVm2zXaH8WZd.jpg" width="250" height="330" x="45" y="20" />
+            <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/1/14/English_pattern_king_of_hearts.svg" width="250" height="330" x="45" y="20" />
         </g>
     </defs>
     
     <defs>
         <g id="hearts-queen">
-            <image xlink:href="https://t3.ftcdn.net/jpg/00/40/03/64/500_F_40036449_s0yWNKg9MyFrZ4siWskMTxvdFEltiFIQ.jpg" width="250" height="330" x="45" y="20" />
+            <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/9/9d/English_pattern_queen_of_hearts.svg" width="250" height="330" x="45" y="20" />
         </g>
     </defs>
     
     <defs>
         <g id="hearts-boy">
-            <image xlink:href="https://t3.ftcdn.net/jpg/00/40/03/64/500_F_40036415_56z5BJ2vcHYOW34CG3xdpDDPRH2VKGMF.jpg" width="250" height="330" x="45" y="20" />
+            <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/5/56/English_pattern_jack_of_hearts.svg" width="250" height="330" x="45" y="20" />
         </g>
     </defs>
     
-    <!-- suits -->
+    <!-- clubs -->
     <defs>
-        <g id="suits-king">
-            <image xlink:href="https://t3.ftcdn.net/jpg/00/40/03/70/500_F_40037001_yiHav7FQ1ww6Tl5PbQXI0wGRF0CBLigA.jpg" width="250" height="330" x="45" y="20" />
-        </g>
-    </defs>
-    
-    <defs>
-        <g id="suits-queen">
-            <image xlink:href="https://t3.ftcdn.net/jpg/00/40/22/76/500_F_40227647_m0JvJccVZuHargU9QnT0s7gqkU55VC47.jpg" width="250" height="330" x="45" y="20" />
+        <g id="clubs-king">
+            <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/3/3e/English_pattern_king_of_clubs.svg" width="250" height="330" x="45" y="20" />
         </g>
     </defs>
     
     <defs>
-        <g id="suits-boy">
-            <image xlink:href="https://t4.ftcdn.net/jpg/00/40/03/69/500_F_40036926_6E84Mh57txnlb6a3LhA58y0I5ELGAQL6.jpg" width="250" height="330" x="45" y="20" />
-        </g>
-    </defs>
-    
-    <!-- peaks -->
-    <defs>
-        <g id="peaks-king">
-            <image xlink:href="https://t3.ftcdn.net/jpg/00/40/03/72/500_F_40037201_OzwAPPdNIESKCALqZ1UZTrUHC1ub8csM.jpg" width="250" height="330" x="45" y="20" />
+        <g id="clubs-queen">
+            <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/b/b3/English_pattern_queen_of_clubs.svg" width="250" height="330" x="45" y="20" />
         </g>
     </defs>
     
     <defs>
-        <g id="peaks-queen">
-            <image xlink:href="https://t4.ftcdn.net/jpg/00/40/03/71/500_F_40037169_qHdy4yyUxubUewdd6MKK84tRy2zLkFsR.jpg" width="250" height="330" x="45" y="20" />
+        <g id="clubs-boy">
+            <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/8/80/English_pattern_jack_of_clubs.svg" width="250" height="330" x="45" y="20" />
+        </g>
+    </defs>
+    
+    <!-- spades -->
+    <defs>
+        <g id="spades-king">
+            <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/f/f1/English_pattern_king_of_spades.svg" width="250" height="330" x="45" y="20" />
         </g>
     </defs>
     
     <defs>
-        <g id="peaks-boy">
-            <image xlink:href="https://t4.ftcdn.net/jpg/00/40/03/71/500_F_40037139_yHRxBbB4ITnfYJ7AW0CDqszVJ9wiR0HG.jpg" width="250" height="330" x="45" y="20" />
+        <g id="spades-queen">
+            <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/c/ca/English_pattern_queen_of_spades.svg" width="250" height="330" x="45" y="20" />
+        </g>
+    </defs>
+    
+    <defs>
+        <g id="spades-boy">
+            <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/4/4f/English_pattern_jack_of_spades.svg" width="250" height="330" x="45" y="20" />
         </g>
     </defs>
 
 
         
-        <use xlink:href="#peaks-queen"  />
+        <use xlink:href="#diamonds-queen"/>
       
 </svg>

@@ -5,6 +5,15 @@
     <image xlink:href="https://cdn.imgbin.com/1/7/0/imgbin-baccarat-game-blackjack-logo-telephone-poker-chips-LRwKRTbEWwrFsjD4irsaj25ug.jpg" x="120" y="50" height="100" width="1175" />
     
     <!-- SCHWARZE ZAHLEN UND FIGUREN AB HIER -->
+    <!-- Schwarze Zahl: 1 -->
+    <defs>
+        <g id="schwarz_1">
+            <!-- obere Zahl -->
+            <text id="schwarze_zahl_2" x="80" y="70" font-size="45" fill="black">1</text>
+            <!-- untere Zahl -->
+            <use xlink:href="#schwarze_zahl_1" x="200" y="290" transform="rotate(180, 268, 330)" />
+        </g>
+    </defs>
 
     <!-- Schwarze Zahl: 2 -->
     <defs>
@@ -86,7 +95,7 @@
         </g>
     </defs>
 
-    <!-- Schwarze Zahl: 5 -->
+    <!-- Schwarze Zahl: 10 -->
     <defs>
         <g id="schwarz_10">
             <!-- obere Zahl -->
@@ -97,6 +106,108 @@
     </defs>
 
     <!-- ENDE SCHWARZE ZAHLEN UND FIGUREN -->
+
+    <!-- ROTHE ZAHLEN UND FIGUREN AB HIER -->
+    <!-- Rote Zahl: 1 -->
+    <defs>
+        <g id="rot_1">
+            <!-- obere Zahl -->
+            <text id="rote_zahl_1" x="80" y="70" font-size="45" fill="rgb(191, 48, 38)">1</text>
+            <!-- untere Zahl -->
+            <use xlink:href="#rote_zahl_1" x="200" y="290" transform="rotate(180, 268, 330)" />
+        </g>
+    </defs>
+
+    <!-- Rote Zahl: 2 -->
+    <defs>
+        <g id="rot_2">
+            <!-- obere Zahl -->
+            <text id="rote_zahl_2" x="80" y="70" font-size="45" fill="rgb(191, 48, 38)">2</text>
+            <!-- untere Zahl -->
+            <use xlink:href="#rote_zahl_2" x="200" y="290" transform="rotate(180, 268, 330)" />
+        </g>
+    </defs>
+
+    <!-- Rote Zahl: 3 -->
+    <defs>
+        <g id="rot_3">
+            <!-- obere Zahl -->
+            <text id="rote_zahl_3" x="80" y="70" font-size="45" fill="rgb(191, 48, 38)">3</text>
+            <!-- untere Zahl -->
+            <use xlink:href="#rote_zahl_3" x="200" y="290" transform="rotate(180, 268, 330)" />
+        </g>
+    </defs>
+
+    <!-- Rote Zahl: 4 -->
+    <defs>
+        <g id="rot_4">
+            <!-- obere Zahl -->
+            <text id="rote_zahl_4" x="80" y="70" font-size="45" fill="rgb(191, 48, 38)">4</text>
+            <!-- untere Zahl -->
+            <use xlink:href="#rote_zahl_4" x="200" y="290" transform="rotate(180, 268, 330)" />
+        </g>
+    </defs>
+
+    <!-- Rote Zahl: 5 -->
+    <defs>
+        <g id="rot_5">
+            <!-- obere Zahl -->
+            <text id="rote_zahl_5" x="80" y="70" font-size="45" fill="rgb(191, 48, 38)">5</text>
+            <!-- untere Zahl -->
+            <use xlink:href="#rote_zahl_5" x="200" y="290" transform="rotate(180, 268, 330)" />
+        </g>
+    </defs>
+
+    <!-- Rote Zahl: 6 -->
+    <defs>
+        <g id="rot_6">
+            <!-- obere Zahl -->
+            <text id="rote_zahl_6" x="80" y="70" font-size="45" fill="rgb(191, 48, 38)">6</text>
+            <!-- untere Zahl -->
+            <use xlink:href="#rote_zahl_6" x="200" y="290" transform="rotate(180, 268, 330)" />
+        </g>
+    </defs>
+
+    <!-- Rote Zahl: 7 -->
+    <defs>
+        <g id="rot_7">
+            <!-- obere Zahl -->
+            <text id="rote_zahl_7" x="80" y="70" font-size="45" fill="rgb(191, 48, 38)">7</text>
+            <!-- untere Zahl -->
+            <use xlink:href="#rote_zahl_7" x="200" y="290" transform="rotate(180, 268, 330)" />
+        </g>
+    </defs>
+
+    <!-- Rote Zahl: 8 -->
+    <defs>
+        <g id="rot_8">
+            <!-- obere Zahl -->
+            <text id="rote_zahl_8" x="80" y="70" font-size="45" fill="rgb(191, 48, 38)">8</text>
+            <!-- untere Zahl -->
+            <use xlink:href="#rote_zahl_8" x="200" y="290" transform="rotate(180, 268, 330)" />
+        </g>
+    </defs>
+
+    <!-- Rote Zahl: 9 -->
+    <defs>
+        <g id="rot_9">
+            <!-- obere Zahl -->
+            <text id="rote_zahl_9" x="80" y="70" font-size="45" fill="rgb(191, 48, 38)">9</text>
+            <!-- untere Zahl -->
+            <use xlink:href="#rote_zahl_9" x="200" y="290" transform="rotate(180, 268, 330)" />
+        </g>
+    </defs>
+
+    <!-- Rote Zahl: 10 -->
+    <defs>
+        <g id="rot_10">
+            <!-- obere Zahl -->
+            <text id="rote_zahl_10" x="80" y="70" font-size="45" fill="rgb(191, 48, 38)">10</text>
+            <!-- untere Zahl -->
+            <use xlink:href="#rote_zahl_10" x="200" y="290" transform="rotate(180, 268, 330)" />
+        </g>
+    </defs>
+
 
 
 
