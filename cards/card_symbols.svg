@@ -4,7 +4,7 @@
     <!-- LOGO -->
     <image xlink:href="https://cdn.imgbin.com/1/7/0/imgbin-baccarat-game-blackjack-logo-telephone-poker-chips-LRwKRTbEWwrFsjD4irsaj25ug.jpg" x="120" y="50" height="100" width="1175" />
     
-    <!-- SCHWARZE ZAHLEN UND FIGUREN AB HIER -->
+    <!-- SCHWARZE ZAHLEN AB HIER -->
     <!-- Schwarze Zahl: 1 -->
     <defs>
         <g id="schwarz_1">
@@ -105,9 +105,9 @@
         </g>
     </defs>
 
-    <!-- ENDE SCHWARZE ZAHLEN UND FIGUREN -->
+    <!-- ENDE SCHWARZE ZAHLEN -->
 
-    <!-- ROTHE ZAHLEN UND FIGUREN AB HIER -->
+    <!-- ROTE ZAHLEN AB HIER -->
     <!-- Rote Zahl: 1 -->
     <defs>
         <g id="rot_1">
@@ -208,13 +208,86 @@
         </g>
     </defs>
 
+    <!-- KARTEN MIT FIGUREN AB HIER -->
+    <!-- karo -->
+    <defs>
+        <g id="karo-king">
+            <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/1/1c/English_pattern_king_of_diamonds.svg" width="250" height="330" x="45" y="20" />
+        </g>
+    </defs>
+    
+    <defs>
+        <g id="karo-queen">
+            <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/4/4f/English_pattern_queen_of_diamonds.svg" width="250" height="330" x="45" y="20" />
+        </g>
+    </defs>
+    
+    <defs>
+        <g id="karo-boy">
+            <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/1/16/English_pattern_jack_of_diamonds.svg" width="250" height="330" x="45" y="20" />
+        </g>
+    </defs>
 
-
+    <!-- herz -->
+    <defs>
+        <g id="herz-king">
+            <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/1/14/English_pattern_king_of_hearts.svg" width="250" height="330" x="45" y="20" />
+        </g>
+    </defs>
+    
+    <defs>
+        <g id="herz-queen">
+            <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/9/9d/English_pattern_queen_of_hearts.svg" width="250" height="330" x="45" y="20" />
+        </g>
+    </defs>
+    
+    <defs>
+        <g id="herz-boy">
+            <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/5/56/English_pattern_jack_of_hearts.svg" width="250" height="330" x="45" y="20" />
+        </g>
+    </defs>
+    
+    <!-- kreuz -->
+    <defs>
+        <g id="kreuz-king">
+            <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/3/3e/English_pattern_king_of_clubs.svg" width="250" height="330" x="45" y="20" />
+        </g>
+    </defs>
+    
+    <defs>
+        <g id="kreuz-queen">
+            <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/b/b3/English_pattern_queen_of_clubs.svg" width="250" height="330" x="45" y="20" />
+        </g>
+    </defs>
+    
+    <defs>
+        <g id="kreuz-boy">
+            <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/8/80/English_pattern_jack_of_clubs.svg" width="250" height="330" x="45" y="20" />
+        </g>
+    </defs>
+    
+    <!-- pik -->
+    <defs>
+        <g id="pik-king">
+            <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/f/f1/English_pattern_king_of_spades.svg" width="250" height="330" x="45" y="20" />
+        </g>
+    </defs>
+    
+    <defs>
+        <g id="pik-queen">
+            <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/c/ca/English_pattern_queen_of_spades.svg" width="250" height="330" x="45" y="20" />
+        </g>
+    </defs>
+    
+    <defs>
+        <g id="pik-boy">
+            <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/4/4f/English_pattern_jack_of_spades.svg" width="250" height="330" x="45" y="20" />
+        </g>
+    </defs>
 
 
     <defs>
         <g id="herz">
-            <!--top middle heart-->
             <polygon points="170,160 130,115 210,115" style="stroke:red;fill:red;stroke-width:1"/>
             <circle cx="150" cy="159" r="20" style="stroke:red;fill:red"/>
             <circle cx="190" cy="159" r="20" style="stroke:red;fill:red"/>
@@ -222,15 +295,12 @@
     </defs>
     <defs>
         <g id="karo">
-            <!--top middle diamond-->
             <polygon points="170,30 140,80 170,130 200,80" style="fill:red;stroke:red;stroke-width:1"/>
-            <!--bottom middle diamond-->
             <polygon points="170,230 140,280 170,330 200,280" style="fill:red;stroke:red;stroke-width:1"/>
         </g>
     </defs>
     <defs>
         <g id="kreuz">
-            <!--top middle suit-->
             <circle cx="170" cy="152" r="27"/>
             <circle cx="190" cy="195" r="25"/>
             <circle cx="150" cy="195" r="25"/>
@@ -240,7 +310,6 @@
     </defs>
     <defs>
         <g id="pik">
-            <!--top middle peak-->
             <polygon points="170,130 130,180 210,180" style="stroke-width:1"/>
             <circle cx="150" cy="201" r="29"/>
             <circle cx="190" cy="201" r="29 "/>
@@ -251,14 +320,9 @@
 
     <!-- Example card Peak 7 -->
     <g >
-            <rect height="350" width="250" x="45" y="10" rx="30" ry="30" style="fill:white;stroke:black;stroke-width:5;opacity:1.0" />
-            <!-- top left number -->
-            <text id="black-5" x="57" y="50" font-size="35" fill="black">
-            
-            </text>
-            <!-- bottom right number -->
-            <use xlink:href="#schwarz_10" x="200" y="290" transform="rotate(180, 268, 330)" />
-            
-            <use xlink:href="#pik"/>
+        <rect height="350" width="250" x="45" y="10" rx="30" ry="30" style="fill:white;stroke:black;stroke-width:5;opacity:1.0" />
+        <!-- bottom right number -->
+        <use xlink:href="#schwarz_10" x="200" y="290" transform="rotate(180, 268, 330)" />        
+        <use xlink:href="#pik"/>
     </g>
 </svg>
