@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd" [
+
+        <!-- Allgemeine Werte -->
+        <!ENTITY GanzeViewBox "0 0 200 100">
+        <!ENTITY RundeViewBox "0 40 200 100">
+        <!ENTITY mitteViewBox "100">
+        <!ENTITY KreisRadius "115">
+        <!ENTITY kreispunkt "0">
+        <!ENTITY yRechteck "35">
+        <!ENTITY breiteRechteck "200">
+        <!ENTITY hoeheRechteck "100">
+
+        <!ENTITY xSpieler1 "30">
+        <!ENTITY xSpieler2 "70">
+        <!ENTITY xSpieler3 "130">
+        <!ENTITY xSpieler4 "170">
+        <!ENTITY ySpieler1 "45">
+        <!ENTITY ySpieler2 "70">
+        <!ENTITY ySpieler3 "70">
+        <!ENTITY ySpieler4 "45">
+
+        <!-- Schriften -->
+        <!ENTITY yBJText "27.5">
+        <!ENTITY bjSchriftzug "fill: black;; font-family: 'Algerian', sans-serif; font-weight: bold;font-size:10px; opacity: 0.5; text-anchor=middle">
+        <!ENTITY namensKarten "fill: silver;; font-family: 'Arial', serif; font-weight: bold;font-size:3px;">
+        ]>
+
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%">
+
+  <!-- Hintergrund -->
+  <rect id="hintergrund" fill="none" width="100%" height="100%" />
+
+
+  <!-- Halbkreis für Tischform -->
+  <svg viewBox="&RundeViewBox;" width="100%" height="100%">
+    <clipPath id="haelfte">
+      <rect x="&kreispunkt;" y="&yRechteck;" width="&breiteRechteck;" height="&hoeheRechteck;" />
+    </clipPath>
+    <circle id="kreis" cx="&mitteViewBox;" cy="&kreispunkt;" r="&KreisRadius;" fill="green" clip-path="url(#haelfte)" />
+  </svg>
+
+  <svg viewBox="&GanzeViewBox;" width="100%" height="100%">
+    <!-- Blackjack-Schriftzug -->
+    <text style="&bjSchriftzug;" text-anchor="middle" x="&mitteViewBox;" y="&yBJText;">BLACKJACK</text>
+
+    <!-- Spielernamen -->
+    <text style="&namensKarten;" text-anchor="middle" x="&xSpieler1;" y="&ySpieler1;">Lorenzo</text>
+    <text style="&namensKarten;" text-anchor="start" x="&xSpieler2;" y="&ySpieler2;">Ikbal</text>
+    <text style="&namensKarten;" text-anchor="end" x="&xSpieler3;" y="&ySpieler3;">Markus</text>
+    <text style="&namensKarten;" text-anchor="middle" x="&xSpieler4;" y="&ySpieler4;">Patrick</text>
+  </svg>
+</svg>
