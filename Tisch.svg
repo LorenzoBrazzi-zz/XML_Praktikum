@@ -22,7 +22,7 @@
         <!ENTITY ySpieler4 "45">
 
         <!-- Schriften -->
-        <!ENTITY yBJText "27.5">
+        <!ENTITY yBJText "30">
         <!ENTITY bjSchriftzug "fill: black;; font-family: 'Algerian', sans-serif; font-weight: bold;font-size:10px; opacity: 0.5; text-anchor=middle">
         <!ENTITY namensKarten "fill: silver;; font-family: 'Arial', serif; font-weight: bold;font-size:3px;">
         ]>
