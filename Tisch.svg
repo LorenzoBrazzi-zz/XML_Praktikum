@@ -6,25 +6,30 @@
         <!ENTITY GanzeViewBox "0 0 200 100">
         <!ENTITY RundeViewBox "0 40 200 100">
         <!ENTITY mitteViewBox "100">
-        <!ENTITY KreisRadius "115">
-        <!ENTITY kreispunkt "0">
-        <!ENTITY yRechteck "35">
+        <!ENTITY KreisRadius "125">
+        <!ENTITY kreispunkt "10">
+        <!ENTITY xRechteck "0">
+        <!ENTITY yRechteck "40">
         <!ENTITY breiteRechteck "200">
         <!ENTITY hoeheRechteck "100">
 
-        <!ENTITY xSpieler1 "30">
-        <!ENTITY xSpieler2 "70">
-        <!ENTITY xSpieler3 "130">
-        <!ENTITY xSpieler4 "170">
-        <!ENTITY ySpieler1 "45">
-        <!ENTITY ySpieler2 "70">
-        <!ENTITY ySpieler3 "70">
-        <!ENTITY ySpieler4 "45">
+
+        <!ENTITY xDealer "60">
+        <!ENTITY yDealer "10">
+        <!ENTITY xSpieler1 "20">
+        <!ENTITY xSpieler2 "65">
+        <!ENTITY xSpieler3 "135">
+        <!ENTITY xSpieler4 "180">
+        <!ENTITY ySpieler1 "55">
+        <!ENTITY ySpieler2 "85">
+        <!ENTITY ySpieler3 "85">
+        <!ENTITY ySpieler4 "55">
 
         <!-- Schriften -->
         <!ENTITY yBJText "30">
-        <!ENTITY bjSchriftzug "fill: black;; font-family: 'Algerian', sans-serif; font-weight: bold;font-size:10px; opacity: 0.5; text-anchor=middle">
-        <!ENTITY namensKarten "fill: silver;; font-family: 'Arial', serif; font-weight: bold;font-size:3px;">
+        <!ENTITY bjSchriftzug "fill: black; font-family: 'Algerian', sans-serif; font-weight: bold;font-size:12px; opacity: 0.6; text-anchor=middle">
+        <!ENTITY namensKarten "fill: silver; font-family: 'Arial', serif; font-weight: bold;font-size:4px;">
+        <!ENTITY nameDealer "fill: black; font-family: 'Arial', serif; font-weight: bold;font-size:4px;">
         ]>
 
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%">
@@ -36,9 +41,10 @@
   <!-- Halbkreis für Tischform -->
   <svg viewBox="&RundeViewBox;" width="100%" height="100%">
     <clipPath id="haelfte">
-      <rect x="&kreispunkt;" y="&yRechteck;" width="&breiteRechteck;" height="&hoeheRechteck;" />
+      <rect x="&xRechteck;" y="&yRechteck;" width="&breiteRechteck;" height="&hoeheRechteck;" />
     </clipPath>
     <circle id="kreis" cx="&mitteViewBox;" cy="&kreispunkt;" r="&KreisRadius;" fill="green" clip-path="url(#haelfte)" />
+
   </svg>
 
   <svg viewBox="&GanzeViewBox;" width="100%" height="100%">
@@ -46,9 +52,10 @@
     <text style="&bjSchriftzug;" text-anchor="middle" x="&mitteViewBox;" y="&yBJText;">BLACKJACK</text>
 
     <!-- Spielernamen -->
+    <text style="&nameDealer;" text-anchor="middle" x="&xDealer;" y="&yDealer;">Dealer</text>
     <text style="&namensKarten;" text-anchor="middle" x="&xSpieler1;" y="&ySpieler1;">Lorenzo</text>
-    <text style="&namensKarten;" text-anchor="start" x="&xSpieler2;" y="&ySpieler2;">Ikbal</text>
-    <text style="&namensKarten;" text-anchor="end" x="&xSpieler3;" y="&ySpieler3;">Markus</text>
+    <text style="&namensKarten;" text-anchor="middle" x="&xSpieler2;" y="&ySpieler2;">Ikbal</text>
+    <text style="&namensKarten;" text-anchor="middle" x="&xSpieler3;" y="&ySpieler3;">Markus</text>
     <text style="&namensKarten;" text-anchor="middle" x="&xSpieler4;" y="&ySpieler4;">Patrick</text>
   </svg>
 </svg>
