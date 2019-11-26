@@ -60,7 +60,7 @@
                     </xsl:choose>
                 </xsl:when>
 
-                <!-- Symbole (Einzel, mehrfach muss noch gemacht werden) und reguläre Zahlen, die aus der XML Datei entnommen werden -->
+                <!-- Symbole und reguläre Zahlen, die aus der XML Datei entnommen werden -->
                 <xsl:when test="$Farbe = 'Pik'">
 
                     <g>
@@ -177,16 +177,6 @@
             <defs>
                 <g id="Pik-B">
                     <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/d/d9/JS.svg" width="250" height="330" x="45" y="20" />
-                </g>
-            </defs>
-            <!-- Einzelsymbole -->
-            <defs>
-                <g id="Pik_einzeln">
-                    <polygon points="170,130 130,180 210,180" style="stroke-width:1" />
-                    <circle cx="150" cy="201" r="29" />
-                    <circle cx="190" cy="201" r="29 " />
-                    <line x1="170" y1="190" x2="170" y2="255" style="stroke:#000;fill:#000;stroke-width:10" />
-
                 </g>
             </defs>
 
