@@ -3,4 +3,7 @@
   <component name="JavaScriptSettings">
     <option name="languageLevel" value="ES6" />
   </component>
+  <component name="ProjectResources">
+    <resource url="http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" location="$PROJECT_DIR$/docBook/docbookx.dtd" />
+  </component>
 </project>
