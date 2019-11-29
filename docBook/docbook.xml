@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xml-stylesheet type="text/xsl" href="docbook-xsl-snapshot/html/docbook.xsl"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+
+
+<book>
+
+    <bookinfo>
+        <title>XML Technology - WS19/20 - BlackJack Project - Technische Universität München
+            (TUM)</title>
+        <author>
+            <honorific>Mr</honorific>
+            <firstname>Ikbal</firstname>
+            <surname>Yesiltas</surname>
+            <authorblurb>
+                <simpara>B.Sc. Information Systems</simpara>
+            </authorblurb>
+            <affiliation>
+                <orgname>Technische Universität München (TUM)</orgname>
+            </affiliation>
+        </author>
+        <author>
+            <honorific>Mr</honorific>
+            <firstname>Lorenzo</firstname>
+            <surname>Brazzi</surname>
+            <authorblurb>
+                <simpara>B.Sc. Information Systems</simpara>
+            </authorblurb>
+            <affiliation>
+                <orgname>Technische Universität München (TUM)</orgname>
+            </affiliation>
+        </author>
+        <author>
+            <honorific>Mr</honorific>
+            <firstname>Markus</firstname>
+            <surname>Zuber</surname>
+            <authorblurb>
+                <simpara>M.Sc. TUM-BWL</simpara>
+            </authorblurb>
+            <affiliation>
+                <orgname>Technische Universität München (TUM)</orgname>
+            </affiliation>
+        </author>
+        <author>
+            <honorific>Mr</honorific>
+            <firstname>Patrick</firstname>
+            <surname>Reto</surname>
+            <authorblurb>
+                <simpara>B.Sc. Information System</simpara>
+            </authorblurb>
+            <affiliation>
+                <orgname>Technische Universität München (TUM)</orgname>
+            </affiliation>
+        </author>
+    </bookinfo>
+
+    <dedication>
+        <beginpage />
+        <important>
+            <para>Through the support, sources, and references provided by the instructers, we were able to build this Project. Our appreciation hence goes to Prof. Brügemann-Klein and Ulreich Philip.</para>
+        </important>
+    </dedication>
+
+
+    <chapter>
+        <title>Design Choices</title>
+        <para>
+        Our Implementation covers all mandatory Rules and Structures of the classic Blackjack game and is leaned towards the exercise sheets provided by the Instructors.
+    </para>
+
+        <sect1>
+            <title>Scalable Vector Graphics of Game Elements</title>
+            <sect2>
+                <title>Cards</title>
+                <para>We implemented the cards as XML objects containing 3 elements (hidden, color, and value). The set is the classic 52-piece french deck.</para>
+                <para>
+                First, we created each individual symbols and inserted them in a card template.
+                This template covers a number at the upper right corner, which we mirrored on both axes to get the impression of a more realistic card.
+                For the special cards, J, Q, K, we used images from the web. Lastly, we extended our implementation by multiple symbols for higher numbers.
+                This could be achieved very straightforwardedly, as a number usually is built upon and complements a lower number, e.g. the 4 uses two 2s.
+            </para>
+                <para>To reduce redundancy, we used plenty of defs and use, with which also the XSLT-processor can create cards dynamically.</para>
+            </sect2>
+            <sect2>
+                <title>Table</title>
+                <para>The table is a rather simple but intuitive round blackjack table, achieved by using clip-paths.</para>
+            </sect2>
+            <sect2>
+                <title>Chips</title>
+                <para>
+                For the currency in the game, we used generic blackjack chips, i.e. 1,5,25,100,500, and 1000. In addition to that,
+                we colorized each value relative distinctively, so that the players can immediately/intuitively see which coin to choose.
+            </para>
+            </sect2>
+        </sect1>
+
+        <sect1>
+            <title>XSLT Processor</title>
+            <para>
+            One single xsl file is responsible for the transformation of all SVGs. This Processor adjusts the table, cards, chips, etc. dynamically,
+            and returns and updated html file, as soon as the database is changed by the course of the game.
+        </para>
+
+            <para>
+            The Processor waits for an Input, the main game xml file, and transforms each element into correct SVGs
+            by using multiple nested xsl:choose and xsl:when instructions. Hence, all SVG definitions are also contained in this file.
+        </para>
+        </sect1>
+    </chapter>
+
+</book>
