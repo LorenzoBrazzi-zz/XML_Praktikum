@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<?xml-stylesheet type="text/xsl" href="docbook-xsl-snapshot/html/docbook.xsl"?>
-<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<?xml-stylesheet type="text/xsl" href="Test.xsl"?>
+<!--<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">-->
 
 
 <book>
@@ -53,13 +53,6 @@
             </affiliation>
         </author>
     </bookinfo>
-
-    <dedication>
-        <beginpage />
-        <important>
-            <para>Through the support, sources, and references provided by the instructers, we were able to build this Project. Our appreciation hence goes to Prof. Brügemann-Klein and Ulreich Philip.</para>
-        </important>
-    </dedication>
 
 
     <chapter>
