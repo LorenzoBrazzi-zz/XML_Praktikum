@@ -6,4 +6,5 @@
   <component name="ProjectResources">
     <resource url="http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" location="$PROJECT_DIR$/docBook/docbookx.dtd" />
   </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_13" default="false" project-jdk-name="11" project-jdk-type="JavaSDK" />
 </project>
