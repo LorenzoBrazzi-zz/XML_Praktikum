@@ -7,6 +7,6 @@ xquery version "3.0";
 : To change this template use File | Settings | File Templates.
 :)
 
-module namespace dealer = "dealer.xqm";
+module namespace dealer = "bj/dealer";
 
-declare variable $spiel:instance := db:open("blackjack")/instance
+declare variable $spiel:spiele := db:open("blackjack")/spiele;

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!ELEMENT games (game*)>
+<!ELEMENT spiele (game*)>
 
 <!ELEMENT game (id, player+, dealer, minBet, cashPool, activePlayer, deck)>
+<!ELEMENT dealer (currentHand)
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT minBet (#PCDATA)>
 <!ELEMENT cashPool (chip*)>
@@ -14,7 +15,7 @@
 <!ELEMENT currentBet (chip*)>
 <!ELEMENT balance (chip*)>
 <!ELEMENT name (#PCDATA)>
-<!ELEMENT insureance (#PCDATA)>
+<!ELEMENT insurance (#PCDATA)>
 <!ELEMENT position (#PCDATA)>
 
 <!ELEMENT card (color, value, hidden)>
@@ -23,5 +24,3 @@
 <!ELEMENT hidden (#PCDATA)>
 
 <!ELEMENT chip (value, color)>
-<!ELEMENT value (#PCDATA)>
-<!ELEMENT color (#PCDATA)>
