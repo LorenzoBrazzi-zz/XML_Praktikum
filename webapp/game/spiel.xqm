@@ -9,7 +9,7 @@ xquery version "3.0";
 
 (: Nötige Module importieren:)
 module namespace game = "bj/game";
-import module namespace player = "bj/player" at "player.xqm";
+import module namespace player = "bj/spieler" at "spieler.xqm";
 import module namespace dealer = "bj/dealer" at "dealer.xqm";
 
 declare variable $game:games := db:open("bj")/games;
@@ -20,7 +20,7 @@ declare function game:getGame() {
 
 (: Spiel aus den Daten der Formulare instanzieren:)
 declare function game:createEmptyGame(){
-    let $id := fn:generate-id()
+    let $id := 3
     return(
         <game id="{$id}">
         </game>

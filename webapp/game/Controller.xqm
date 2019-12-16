@@ -8,8 +8,8 @@ xquery version "3.0";
 :)
 
 module namespace controller = "bj/controller";
-import module namespace s = "bj/s" at "spiel.xqm";
-import module namespace spieler = "bj/spieler" at "spieler.xqm";
+import module namespace game = "bj/game" at "spiel.xqm";
+import module namespace player = "bj/spieler" at "spieler.xqm";
 import module namespace dealer = "bj/dealer" at "dealer.xqm";
 
 
@@ -22,7 +22,7 @@ declare
 %rest:GET
 function controller:setup(){
     let $bjModel := doc("db-init/spiele.xml")
-    let $redirectLink := "/bj"
+    let $redirectLink := "/bj/leerTest"
     return(db:create("spiele",$bjModel),update:output(web:redirect($redirectLink)))
 };
 
@@ -32,6 +32,14 @@ declare
 %rest:GET
 function controller:landingPage() {
     $controller:landing
+};
+
+declare
+%rest:path("/bj/leerTest")
+%rest:GET
+function controller:leerTest() {
+    let $emptyGame := game:createEmptyGame()
+    return(game:insertGame)
 };
 
 (: Diese Funktion leitet zur Seite weiter wo man die Balances angeben kann :)
