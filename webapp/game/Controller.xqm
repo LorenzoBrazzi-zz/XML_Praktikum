@@ -8,7 +8,7 @@ xquery version "3.0";
 :)
 
 module namespace controller = "bj/controller";
-import module namespace spiel = "bj/spiel" at "spiel.xqm";
+import module namespace s = "bj/s" at "spiel.xqm";
 import module namespace spieler = "bj/spieler" at "spieler.xqm";
 import module namespace dealer = "bj/dealer" at "dealer.xqm";
 
