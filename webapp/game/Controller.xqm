@@ -21,9 +21,9 @@ declare
 %updating
 %rest:GET
 function controller:setup(){
-    let $bjModel := doc("db-init/spiele.xml")
+    let $bjModel := doc("db-init/games.xml")
     let $redirectLink := "/bj/leerTest"
-    return(db:create("spiele",$bjModel),update:output(web:redirect($redirectLink)))
+    return(db:create("games",$bjModel),update:output(web:redirect($redirectLink)))
 };
 
 (: Diese Funktion ruft die Startseite auf :)
@@ -37,9 +37,10 @@ function controller:landingPage() {
 declare
 %rest:path("/bj/leerTest")
 %rest:GET
+%updating
 function controller:leerTest() {
     let $emptyGame := game:createEmptyGame()
-    return(game:insertGame)
+    return(game:insertGame($emptyGame))
 };
 
 (: Diese Funktion leitet zur Seite weiter wo man die Balances angeben kann :)

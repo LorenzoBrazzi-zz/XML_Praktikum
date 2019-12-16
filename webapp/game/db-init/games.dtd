@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!ELEMENT spiele (game*)>
+<!ELEMENT games (game*)>
 
 <!ELEMENT game (id, player+, dealer, minBet, cashPool, activePlayer, deck)>
 <!ELEMENT dealer (currentHand)
