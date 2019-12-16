@@ -8,6 +8,8 @@ xquery version "3.0";
 :)
 
 module namespace spiel = "bj/spiel";
+import module namespace spieler = "bj/spieler" at "spieler.xqm";
+import module namespace dealer = "bj/dealer" at "dealer.xqm";
 
 declare variable $spiel:spiele := db:open("bj")/spiele;
 
