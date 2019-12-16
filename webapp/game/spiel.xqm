@@ -7,13 +7,27 @@ xquery version "3.0";
 : To change this template use File | Settings | File Templates.
 :)
 
-module namespace spiel = "bj/spiel";
-import module namespace spieler = "bj/spieler" at "spieler.xqm";
+(: Nötige Module importieren:)
+module namespace game = "bj/game";
+import module namespace player = "bj/player" at "player.xqm";
 import module namespace dealer = "bj/dealer" at "dealer.xqm";
 
-declare variable $spiel:spiele := db:open("bj")/spiele;
+declare variable $game:games := db:open("bj")/games;
 
-declare function spiel:getSpiel() {
-    $spiel:spiele
+declare function game:getGame() {
+    $game:games
 };
+
+(: Spiel aus den Daten der Formulare instanzieren:)
+declare function game:createEmptyGame(){
+    let $id := fn:generate-id()
+    return(
+        <game id="{$id}">
+        </game>
+    )
+};
+
+
+
+
 
