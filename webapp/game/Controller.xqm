@@ -11,7 +11,6 @@ module namespace controller = "bj/controller";
 import module namespace game = "bj/game" at "spiel.xqm";
 import module namespace player = "bj/spieler" at "spieler.xqm";
 import module namespace dealer = "bj/dealer" at "dealer.xqm";
-
 import module namespace rq = "http://exquery.org/ns/request";
 
 
