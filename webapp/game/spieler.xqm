@@ -9,4 +9,4 @@ xquery version "3.0";
 
 module namespace spieler = "bj/spieler";
 
-declare variable $spieler:spiele := db:open("bj")/spiele;
+declare variable $spieler:spiele := db:open("spiele")/spiele;

@@ -7,9 +7,11 @@ xquery version "3.0";
 : To change this template use File | Settings | File Templates.
 :)
 
-module namespace s = "bj/spiel";
-import module namespace dealer = "bj/dealer" at "dealer.xqm";
-import module namespace spieler = "bj/spieler" at "spieler.xqm";
+module namespace spiel = "bj/spiel";
 
-declare variable $spiel:spiele := db:open("spiele")/spiele;
+declare variable $spiel:spiele := db:open("bj")/spiele;
+
+declare function spiel:getSpiel() {
+    $spiel:spiele
+};
 
