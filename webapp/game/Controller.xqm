@@ -22,7 +22,7 @@ declare
 %rest:GET
 function controller:setup(){
     let $bjModel := doc("db-init/games.xml")
-    let $redirectLink := "/bj/leerTest"
+    let $redirectLink := "/bj/startingPage"
     return(db:create("games",$bjModel),update:output(web:redirect($redirectLink)))
 };
 
@@ -44,12 +44,13 @@ function controller:leerTest() {
 };
 
 (: Diese Funktion leitet zur Seite weiter wo man die Balances angeben kann :)
-(:declare
+declare
 %rest:path("/bj/startingPage")
 %rest:GET
+%output:method("html")
 function controller:startingPage() {
     $controller:start
-};:)
+};
 
 declare
 %updating
