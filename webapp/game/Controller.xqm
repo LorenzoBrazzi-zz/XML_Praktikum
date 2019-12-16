@@ -9,13 +9,12 @@ xquery version "3.0";
 
 module namespace controller = "bj/controller";
 import module namespace spiel = "bj/spiel" at "spiel.xqm";
-(:import module namespace spieler = "bj/spieler" at "spieler.xqm";
-import module namespace dealer = "bj/dealer" at "dealer.xqm"; :)
-import module namespace db = "http://basex.org/modules/db";
+import module namespace spieler = "bj/spieler" at "spieler.xqm";
+import module namespace dealer = "bj/dealer" at "dealer.xqm";
 
 
 declare variable $controller:landing := doc("../static/index.html");
-(:declare variable $controller:start := doc("../static/startGame.html");:)
+declare variable $controller:start := doc("../static/startGame.html");
 
 declare
 %rest:path("bj/setup")

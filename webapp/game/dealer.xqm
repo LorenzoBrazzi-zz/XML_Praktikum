@@ -8,5 +8,7 @@ xquery version "3.0";
 :)
 
 module namespace dealer = "bj/dealer";
+import module namespace spieler = "bj/spieler" at "spieler.xqm";
+import module namespace s = "bj/s" at "spiel.xqm";
 
-declare variable $spiel:spiele := db:open("blackjack")/spiele;
+declare variable $spiel:spiele := db:open("spiele")/spiele;
