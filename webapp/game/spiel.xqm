@@ -28,6 +28,17 @@ declare function game:createEmptyGame(){
     )
 };
 
+declare function game:createGame($names as xs:string+, $balances as xs:integer+, $minBet as xs:integer, $maxBet as xs:integer){
+    let $id := xs:string(uuid:randomUUID())
+    return(
+        <game id="{$id}">
+            <maxBet>{$maxBet}</maxBet>
+            <minBet>{$minBet}</minBet>
+            <activePlayer>{$names[1]}</activePlayer>
+        </game>
+    )
+};
+
 declare
 %updating
 function game:insertGame($g as element(game)){
