@@ -58,5 +58,4 @@ declare
 %rest:GET
 function controller:startGame() {
 
-    (: Hier müssen wir die Namen aus de Datei die bei startingPage abgeschickt wurde holen -> let $user_names :)
 };
