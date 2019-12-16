@@ -22,12 +22,13 @@ declare function game:getGame() {
 (: Spiel aus den Daten der Formulare instanzieren:)
 declare function game:createEmptyGame(){
     let $id := xs:string(uuid:randomUUID())
-    return(
+    return (
         <game id="{$id}">
         </game>
     )
 };
 
+(:Fügt ein leeres Spielelement in die Datenbank ein. !!Ersetzt jedoch bei jedem Einfügen!!:)
 declare
 %updating
 function game:insertGame($g as element(game)){

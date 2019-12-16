@@ -11,6 +11,7 @@ module namespace controller = "bj/controller";
 import module namespace game = "bj/game" at "spiel.xqm";
 import module namespace player = "bj/spieler" at "spieler.xqm";
 import module namespace dealer = "bj/dealer" at "dealer.xqm";
+import module namespace rq = "http://exist-db.org/xquery/request";
 
 
 declare variable $controller:landing := doc("../static/index.html");
@@ -54,8 +55,21 @@ function controller:startingPage() {
 
 declare
 %updating
-%rest:path("/bj/startGame")
+%rest:path("/bj/form")
 %rest:GET
 function controller:startGame() {
-
+    let $minBet := rq:get-parameter("minBet", "")
+    let $maxBet := rq:get-parameter("maxBet", "")
+    let $names := (for $i in (1,2,3,4,5)
+                    return(
+                        rq:get-parameter("inputname{i}", "")
+                    ))
+    let $balances := (for $i in (1,2,3,4,5)
+                        return(
+                            rq:get-parameter("inputbalance{i}", "")
+                        ))
+    let $game := game:createGame($names, $balances, $minBet, $maxBet)
+    return(
+        game:insertGame($game)
+    )
 };
