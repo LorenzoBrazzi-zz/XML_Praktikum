@@ -11,8 +11,6 @@ module namespace controller = "bj/controller";
 import module namespace game = "bj/game" at "spiel.xqm";
 import module namespace player = "bj/spieler" at "spieler.xqm";
 import module namespace dealer = "bj/dealer" at "dealer.xqm";
-import module namespace rq = "http://exist-db.org/xquery/request";
-
 
 declare variable $controller:landing := doc("../static/index.html");
 declare variable $controller:start := doc("../static/startGame.html");
