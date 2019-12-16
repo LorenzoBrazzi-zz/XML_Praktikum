@@ -11,6 +11,11 @@ module namespace controller = "bj/controller";
 import module namespace game = "bj/game" at "spiel.xqm";
 import module namespace player = "bj/spieler" at "spieler.xqm";
 import module namespace dealer = "bj/dealer" at "dealer.xqm";
+<<<<<<< HEAD
+=======
+import module namespace rq = "http://exquery.org/ns/request";
+
+>>>>>>> 1c6c1766d0d9b57fe103d588f79fed3521c9ac2c
 
 declare variable $controller:landing := doc("../static/index.html");
 declare variable $controller:start := doc("../static/startGame.html");
@@ -56,15 +61,15 @@ declare
 %rest:path("/bj/form")
 %rest:GET
 function controller:startGame() {
-    let $minBet := rq:get-parameter("minBet", "")
-    let $maxBet := rq:get-parameter("maxBet", "")
+    let $minBet := rq:parameter("minBet", "")
+    let $maxBet := rq:parameter("maxBet", "")
     let $names := (for $i in (1,2,3,4,5)
                     return(
-                        rq:get-parameter("inputname{i}", "")
+                        rq:parameter("inputname{i}", "")
                     ))
     let $balances := (for $i in (1,2,3,4,5)
                         return(
-                            rq:get-parameter("inputbalance{i}", "")
+                            rq:parameter("inputbalance{i}", "")
                         ))
     let $game := game:createGame($names, $balances, $minBet, $maxBet)
     return(
