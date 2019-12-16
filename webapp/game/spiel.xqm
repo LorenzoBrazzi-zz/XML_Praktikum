@@ -28,7 +28,6 @@ declare function game:createEmptyGame(){
     )
 };
 
-(:Fügt ein leeres Spielelement in die Datenbank ein. !!Ersetzt jedoch bei jedem Einfügen!!:)
 declare
 %updating
 function game:insertGame($g as element(game)){
