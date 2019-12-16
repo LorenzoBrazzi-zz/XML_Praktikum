@@ -58,15 +58,15 @@ declare
 %rest:path("/bj/form")
 %rest:GET
 function controller:startGame() {
-    let $minBet := rq:parameter("minBet", "")
-    let $maxBet := rq:parameter("maxBet", "")
+    let $minBet := rq:parameter("minBet", 0)
+    let $maxBet := rq:parameter("maxBet", 100)
     let $names := (for $i in (1,2,3,4,5)
                     return(
-                        rq:parameter("inputname{i}", "")
+                        rq:parameter(fn:concat("inputname",$i), "lol")
                     ))
     let $balances := (for $i in (1,2,3,4,5)
                         return(
-                            rq:parameter("inputbalance{i}", "")
+                            rq:parameter(fn:concat("inputbalance",$i), 0)
                         ))
     let $game := game:createGame($names, $balances, $minBet, $maxBet)
     return(
