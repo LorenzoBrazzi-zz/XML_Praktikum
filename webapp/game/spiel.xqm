@@ -22,7 +22,7 @@ declare function game:getGame() {
 (: Spiel aus den Daten der Formulare instanzieren:)
 declare function game:createEmptyGame(){
     let $id := xs:string(uuid:randomUUID())
-    return (
+    return(
         <game id="{$id}">
         </game>
     )
