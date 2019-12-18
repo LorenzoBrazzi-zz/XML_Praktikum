@@ -35,10 +35,10 @@ declare function game:createEmptyGame(){
 declare function game:createGame($names as xs:string+, $balances as xs:integer+, $minBet as xs:integer,
         $maxBet as xs:integer) as element(game){
     let $gameId := xs:string(uuid:randomUUID())
-    let $players := (for $name in $names, $i in fn:count($balances)
+    let $players := (for $i in (1 to fn:count($balances))
     return (
         player:createPlayer(xs:string(uuid:randomUUID()), card:emptyHand(), chip:emptyChipSet(), $balances[$i],
-                $name, false(), $i)
+                $names[$i], false(), $i)
     ))
     return (
         <game>
