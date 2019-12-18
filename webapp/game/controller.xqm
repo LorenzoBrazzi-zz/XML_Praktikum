@@ -24,7 +24,7 @@ declare
 function controller:setup(){
     let $bjModel := doc("db-init/games.xml")
     let $redirectLink := "/bj/startingPage"
-    return(db:create("games",$bjModel),update:output(web:redirect($redirectLink)))
+    return (db:create("games", $bjModel), update:output(web:redirect($redirectLink)))
 };
 
 (: Diese Funktion ruft die Startseite auf :)
@@ -41,7 +41,7 @@ declare
 %updating
 function controller:leerTest() {
     let $emptyGame := game:createEmptyGame()
-    return(game:insertGame($emptyGame))
+    return (game:insertGame($emptyGame))
 };
 
 (: Diese Funktion leitet zur Seite weiter wo man die Balances angeben kann :)
@@ -53,6 +53,8 @@ function controller:startingPage() {
     $controller:start
 };
 
+(:Extrahiert Formulardaten aus der Starting Page und leitet diese dem Game Modul weiter, welcher damit ein neues
+Spiel generiert, das der Controller letzendlich in die Datenbank hinzufügt:)
 declare
 %updating
 %rest:path("/bj/form")
@@ -60,17 +62,34 @@ declare
 function controller:startGame() {
     let $minBet := rq:parameter("minBet", 0)
     let $maxBet := rq:parameter("maxBet", 100)
-    let $names := (for $i in (1,2,3,4,5)
-                    return(
-                        rq:parameter(fn:concat("inputname",$i), "lol")
-                    ))
-    let $balances := (for $i in (1,2,3,4,5)
-                        return(
-                            rq:parameter(fn:concat("inputbalance",$i), 0)
-                        ))
+    let $names := (for $i in (1, 2, 3, 4, 5)
+    return (
+        rq:parameter(fn:concat("inputname", $i), "")
+    ))
 
-    let $game := game:createGame($names, $balances, $minBet, $maxBet)
-    return(
+    (:Leere Nameneingabe wird ignoiert:)
+    let $actualNames := (for $name in $names
+    where $name != ""
+    return (
+        $name
+    ))
+
+    (:Filter Balances raus, die mit einem leeren Namen assoziiert sind:)
+    let $balances := (for $i in (1, 2, 3, 4, 5), $name in $names
+    where $name != ""
+    return (
+        rq:parameter(fn:concat("inputbalance", $i), 0)
+    ))
+
+    (:Falsche Balance eingaben ignorieren:)
+    let $actualBalances := (for $balance in $balances
+        where $balance >= 0
+        return(
+            $balance
+        ))
+
+    let $game := game:createGame($actualNames, $balances, $minBet, $maxBet)
+    return (
         game:insertGame($game)
     )
 };

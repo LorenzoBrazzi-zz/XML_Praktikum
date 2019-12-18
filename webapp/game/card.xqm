@@ -8,3 +8,8 @@ xquery version "3.0";
 :)
 
 module namespace card = "card.xqm";
+
+declare function card:emptyHand(){
+    <cards>
+    </cards>
+};

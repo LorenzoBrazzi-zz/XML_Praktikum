@@ -14,7 +14,7 @@ import module namespace chip = "bj/chip" at "chips.xqm";
 declare variable $player:games := db:open("games")/games;
 
 declare function player:createPlayer($id as xs:string, $currentHand as xs:card*, $currentBet as xs:chip*,
-        $balance as xs:chip*, $name as xs:string, $insurance as xs:boolean, $position as xs:integer){
+        $balance as xs:integer, $name as xs:string, $insurance as xs:boolean, $position as xs:integer){
     <player>
         <id>{$id}</id>
         <name>{$name}</name>

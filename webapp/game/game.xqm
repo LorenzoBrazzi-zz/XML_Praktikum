@@ -11,6 +11,9 @@ xquery version "3.0";
 module namespace game = "bj/game";
 import module namespace player = "bj/player" at "player.xqm";
 import module namespace dealer = "bj/dealer" at "dealer.xqm";
+import module namespace chip = "bj/chip" at "chip.xqm";
+import module namespace card = "bj/card" at "card.xqm";
+
 declare namespace uuid = "java:java.util.UUID";
 
 declare variable $game:games := db:open("games")/games;
@@ -19,27 +22,41 @@ declare function game:getGame() {
     $game:games
 };
 
-(: Spiel aus den Daten der Formulare instanzieren:)
+(:Zum testen der Datenbank:)
 declare function game:createEmptyGame(){
     let $id := xs:string(uuid:randomUUID())
-    return(
+    return (
         <game id="{$id}">
         </game>
     )
 };
 
-declare function game:createGame($names as xs:string+, $balances as xs:integer+, $minBet as xs:integer, $maxBet as xs:integer) as element(game){
-    let $id := xs:string(uuid:randomUUID())
-    let $players := (for $name in $names
-        return(
-
-        ))
+(: Spiel aus den Daten der Formulare instanzieren:)
+declare function game:createGame($names as xs:string+, $balances as xs:integer+, $minBet as xs:integer,
+        $maxBet as xs:integer) as element(game){
+    let $gameId := xs:string(uuid:randomUUID())
+    let $players := (for $name in $names, $i in fn:count($balances)
+    return (
+        player:createPlayer(xs:string(uuid:randomUUID()), card:emptyHand(), chip:emptyChipSet(), $balances[$i],
+                $name, false(), $i)
+    ))
     return (
         <game>
-            <id>{$id}</id>
+            <id>{$gameId}</id>
             <maxBet>{$maxBet}</maxBet>
             <minBet>{$minBet}</minBet>
-            <activePlayer>{$names}</activePlayer>
+            <players>{$players}</players>
+            <activePlayer>{$players[1]/id}</activePlayer>
+            <cashPool>
+                <chips>
+                    <chip>
+                        <value>100</value>
+                        <color>green</color>
+                    </chip>
+                </chips>
+            </cashPool>
+            <dealer></dealer>
+            <deck></deck>
         </game>
     )
 };

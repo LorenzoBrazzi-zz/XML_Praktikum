@@ -8,3 +8,8 @@ xquery version "3.0";
 :)
 
 module namespace chip = "chip.xqm";
+
+declare function chip:emptyChipSet(){
+    <chips>
+    </chips>
+};
