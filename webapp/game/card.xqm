@@ -7,7 +7,7 @@ xquery version "3.0";
 : To change this template use File | Settings | File Templates.
 :)
 
-module namespace card = "card.xqm";
+module namespace card = "bj/card";
 
 declare function card:emptyHand(){
     <cards>

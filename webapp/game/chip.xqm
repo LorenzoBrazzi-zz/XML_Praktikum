@@ -7,7 +7,7 @@ xquery version "3.0";
 : To change this template use File | Settings | File Templates.
 :)
 
-module namespace chip = "chip.xqm";
+module namespace chip = "bj/chip";
 
 declare function chip:emptyChipSet(){
     <chips>
