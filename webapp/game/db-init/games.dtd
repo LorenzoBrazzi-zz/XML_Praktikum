@@ -8,7 +8,7 @@
 <!ELEMENT minBet (#PCDATA)>
 <!ELEMENT maxBet (#PCDATA)>
 <!ELEMENT cashPool (chips)>
-<!ELEMENT activePlayer (player)>
+<!ELEMENT activePlayer (#PCDATA)>
 <!ELEMENT deck (cards)>
 <!ELEMENT players (player*)>
 

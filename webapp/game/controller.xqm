@@ -100,8 +100,8 @@ function controller:deleteGame($gameID as xs:string){
 
 declare
 %updating
-%rest:path("bj/{gameID}/setActivePlayer/{$playerID}")
+%rest:path("bj/setActivePlayer/{$gameID}")
 %rest:GET
-function controller:setActivePlayer($playerID as xs:string, $gameID as xs:string) {
-    game:setActivePlayer($playerID, $gameID)
+function controller:setActivePlayer($gameID as xs:string) {
+    game:setActivePlayer($gameID)
 };

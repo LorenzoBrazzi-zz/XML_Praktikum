@@ -46,7 +46,7 @@ declare function game:createGame($names as xs:string+, $balances as xs:integer+,
             <maxBet>{$maxBet}</maxBet>
             <minBet>{$minBet}</minBet>
             <players>{$players}</players>
-            <activePlayer>{$players[1]/id}</activePlayer>
+            <activePlayer>{$players[1]/id/text()}</activePlayer>
             <cashPool>
                 <chips>
                     <chip>
@@ -79,7 +79,8 @@ declare
 %updating
 function game:setActivePlayer($gameID as xs:string){
     let $oldPlayerID := $game:games/game[id = $gameID]/activePlayer
+    let $oldPlayer := $game:games/game[id = $gameID]/players/player[id = $oldPlayerID]
     let $players := $game:games/game[id = $gameID]/players
-    let $newPlayerID := $players/following::*[1]/id
+    let $newPlayerID := $players/$oldPlayer/following::*[1]/id/text()
     return(replace value of node $oldPlayerID with $newPlayerID)
 };
