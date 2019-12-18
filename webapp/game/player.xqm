@@ -7,6 +7,21 @@ xquery version "3.0";
 : To change this template use File | Settings | File Templates.
 :)
 
-module namespace spieler = "bj/player";
+module namespace player = "bj/player";
+import module namespace card = "bj/card" at "card.xqm";
+import module namespace chip = "bj/chip" at "chips.xqm";
 
-declare variable $spieler:spiele := db:open("games")/games;
+declare variable $player:games := db:open("games")/games;
+
+declare function player:createPlayer($id as xs:string, $currentHand as xs:card*, $currentBet as xs:chip*,
+        $balance as xs:chip*, $name as xs:string, $insurance as xs:boolean, $position as xs:integer){
+    <player>
+        <id>{$id}</id>
+        <name>{$name}</name>
+        <balance>{$balance}</balance>
+        <currentHand>{$currentHand}</currentHand>
+        <currentBet>{$currentBet}</currentBet>
+        <insurance>{$insurance}</insurance>
+        <position>{$position}</position>
+    </player>
+};

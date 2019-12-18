@@ -9,7 +9,7 @@ xquery version "3.0";
 
 (: Nötige Module importieren:)
 module namespace game = "bj/game";
-import module namespace player = "bj/spieler" at "player.xqm";
+import module namespace player = "bj/player" at "player.xqm";
 import module namespace dealer = "bj/dealer" at "dealer.xqm";
 declare namespace uuid = "java:java.util.UUID";
 
@@ -30,8 +30,13 @@ declare function game:createEmptyGame(){
 
 declare function game:createGame($names as xs:string+, $balances as xs:integer+, $minBet as xs:integer, $maxBet as xs:integer) as element(game){
     let $id := xs:string(uuid:randomUUID())
+    let $players := (for $name in $names
+        return(
+
+        ))
     return (
-        <game id="{$id}">
+        <game>
+            <id>{$id}</id>
             <maxBet>{$maxBet}</maxBet>
             <minBet>{$minBet}</minBet>
             <activePlayer>{$names}</activePlayer>
