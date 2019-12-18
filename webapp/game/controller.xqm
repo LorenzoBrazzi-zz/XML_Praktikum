@@ -103,5 +103,5 @@ declare
 %rest:path("bj/{gameID}/setActivePlayer/{$playerID}")
 %rest:GET
 function controller:setActivePlayer($playerID as xs:string, $gameID as xs:string) {
-
+    game:setActivePlayer($playerID, $gameID)
 };
