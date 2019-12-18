@@ -68,6 +68,7 @@ function controller:startGame() {
                         return(
                             rq:parameter(fn:concat("inputbalance",$i), 0)
                         ))
+
     let $game := game:createGame($names, $balances, $minBet, $maxBet)
     return(
         game:insertGame($game)

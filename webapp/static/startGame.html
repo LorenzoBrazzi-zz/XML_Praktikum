@@ -9,12 +9,12 @@
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
 </head>
 
-<body class="container second">
+<body class="container second" background="blackjack.jpg">
 <h1 style="color:#fff !important">
     Please Insert Name and Balance of the Players<br/><br/>
 </h1>
 <form class="form-group" action="/bj/form" style="display:flex; flex-direction:column;">
-    <div class="line">
+    <div class="row">
         <div class="col">
             <label for="inputname1">Name of Player 1</label>
             <input type="text" class="form-control" placeholder="name" id="inputname1" name="inputname1"/>
@@ -25,7 +25,7 @@
                    name="inputbalance1"/>
         </div>
     </div>
-    <div class="line">
+    <div class="row">
         <div class="col">
             <label for="inputname2">Name of Player 2</label>
             <input type="text" class="form-control" placeholder="name" id="inputname2" name="inputname2"/>
@@ -37,7 +37,7 @@
         </div>
         <br/>
     </div>
-    <div class="line">
+    <div class="row">
         <div class="col">
             <label for="inputname3">Name of Player 3</label>
             <input type="text" class="form-control" placeholder="name" id="inputname3" name="inputname3"/>
@@ -49,7 +49,7 @@
         </div>
         <br/>
     </div>
-    <div class="line">
+    <div class="row">
         <div class="col">
             <label for="inputname4">Name of Player 4</label>
             <input type="text" class="form-control" placeholder="name" id="inputname4" name="inputname4"/>
@@ -61,7 +61,7 @@
         </div>
         <br/>
     </div>
-    <div class="line">
+    <div class="row">
         <div class="col">
             <label for="inputname5">Name of Player 5</label>
             <input type="text" class="form-control" placeholder="name" id="inputname5" name="inputname5"/>
@@ -73,29 +73,29 @@
         </div>
         <br/><br/>
     </div>
-    <div class="line" style="flex-flow: column; align-items: flex-end;">
+    <div class="row" style="flex-flow: column; align-items: flex-end;">
         <div class="col">
-            <label for="maxBet">Maximum Bet</label>
-            <input type="number" class="form-control" id="maxBet" placeholder="Maximum Bet" name="maxBet"/>
-        </div>
-        <div class="col">
-            <label for="minBet">Minimum Bet</label>
-            <input type="number" class="form-control" id="minBet" placeholder="Minimum Bet" name="minBet"/>
-        </div>
-    </div>
+    <label for="maxBet">Maximum Bet</label>
+    <input type="number" class="form-control" id="maxBet" placeholder="Maximum Bet" name="maxBet"/>
+</div>
+<div class="col">
+    <label for="minBet">Minimum Bet</label>
+    <input type="number" class="form-control" id="minBet" placeholder="Minimum Bet" name="minBet"/>
+</div>
+</div>
 
-    <input class = "submit twoButtons leftFloat btn btn-primary btn-lg" type="submit" value="Start playing"/>
+<input class = "submit twoButtons leftFloat btn btn-primary btn-lg" type="submit" value="Start playing"/>
 
-    <!-- JavaScript files required by Bootstrap -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-            crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-            crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-            crossorigin="anonymous"></script>
+<!-- JavaScript files required by Bootstrap -->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
 
 </form>
 </body>
