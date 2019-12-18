@@ -74,9 +74,12 @@ function game:deleteGame($gameID as xs:string){
     delete node $game:games/game[id = $gameID]
 };
 
+(:Nächsten Spieler lokalisieren und festlegen als Aktiver Spieler:)
 declare
 %updating
-function game:setActivePlayer($playerID as xs:string, $gameID as xs:string){
-    let $oldPlayer := $game:games/game[id = $gameID]/activePlayer
-    return (replace value of node $oldPlayer with $playerID)
+function game:setActivePlayer($gameID as xs:string){
+    let $oldPlayerID := $game:games/game[id = $gameID]/activePlayer
+    let $players := $game:games/game[id = $gameID]/players
+    let $newPlayerID := $players/following::*[1]/id
+    return(replace value of node $oldPlayerID with $newPlayerID)
 };
