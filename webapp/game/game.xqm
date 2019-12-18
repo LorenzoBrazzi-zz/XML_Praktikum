@@ -64,19 +64,19 @@ declare function game:createGame($names as xs:string+, $balances as xs:integer+,
 declare
 %updating
 function game:insertGame($g as element(game)){
-return (insert node $g as first into $game:games)
-} ;
+    insert node $g as first into $game:games
+};
 
 
 declare
 %updating
 function game:deleteGame($gameID as xs:string){
-return (delete node $game:games/game[id = $gameID])
+    delete node $game:games/game[id = $gameID]
 };
 
 declare
 %updating
 function game:setActivePlayer($playerID as xs:string, $gameID as xs:string){
-let $oldPlayer = $game:games/game[id ={gameID}]/activePlayer
-return (replace value of node $oldPlayer with $playerID)
+    let $oldPlayer := $game:games/game[id = $gameID]/activePlayer
+    return (replace value of node $oldPlayer with $playerID)
 };
