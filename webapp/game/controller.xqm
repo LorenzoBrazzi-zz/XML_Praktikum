@@ -62,17 +62,11 @@ declare
 function controller:startGame() {
     let $minBet := rq:parameter("minBet", 0)
     let $maxBet := rq:parameter("maxBet", 100)
+
     let $names := (for $i in (1, 2, 3, 4, 5)
     return (
         rq:parameter(fn:concat("inputname", $i), "")
     ))
-
-    (:)(:Leere Nameneingabe wird ignoiert:)
-    let $actualNames := (for $name in $names
-    where $name != ""
-    return (
-        $name
-    )):)
 
     (:Filter Balances raus, die mit einem leeren Namen assoziiert sind:)
     let $balances := (for $i in (1, 2, 3, 4, 5)
@@ -80,31 +74,25 @@ function controller:startGame() {
         rq:parameter(fn:concat("inputbalance", $i), "")
     ))
 
-    (:let $actualBalances := (for $balance in $balances, $name in $names
-    where $balance != "" and $name != ""
-    return $balance):)
-
     let $actualBalances := (for $i in (1,2,3,4,5)
     where $balances[$i] != "" and $names[$i] != ""
     return $balances[$i])
-
-    (:)let $actualNames := (for $balance in $balances, $name in $names
-    where $balance != "" and $name != ""
-    return $name):)
 
     let $actualNames := (for $i in (1,2,3,4,5)
     where $balances[$i] != "" and $names[$i] != ""
     return $names[$i])
 
-    (:)(:Falsche Balance eingaben ignorieren:)
-    let $actualBalances := (for $balance in $balances
-        where $balance != ""
-        return(
-            $balance
-        )):)
 
     let $game := game:createGame($actualNames, $actualBalances, $minBet, $maxBet)
     return (
         game:insertGame($game)
     )
+};
+
+declare
+%updating
+%rest:path("bj/delete/{$gameID}")
+%rest:GET
+function controller:deleteGame($gameID as xs:string){
+    game:deleteGame($gameID)
 };

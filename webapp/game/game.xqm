@@ -66,3 +66,10 @@ declare
 function game:insertGame($g as element(game)){
     insert node $g as first into $game:games
 };
+
+
+declare
+%updating
+function game:deleteGame($gameID as xs:string){
+    delete node $game:games/game[id=$gameID]
+};
