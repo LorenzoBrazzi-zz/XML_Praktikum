@@ -209,98 +209,98 @@
     </defs>
 
     <!-- KARTEN MIT FIGUREN AB HIER -->
-    <!-- karo -->
+    <!-- Diamond -->
     <defs>
-        <g id="karo_koenig">
+        <g id="Diamond_koenig">
             <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/1/1c/English_pattern_king_of_diamonds.svg" width="250" height="330" x="45" y="20" />
         </g>
     </defs>
     
     <defs>
-        <g id="karo_dame">
+        <g id="Diamond_dame">
             <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/4/4f/English_pattern_queen_of_diamonds.svg" width="250" height="330" x="45" y="20" />
         </g>
     </defs>
     
     <defs>
-        <g id="karo_bube">
+        <g id="Diamond_bube">
             <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/1/16/English_pattern_jack_of_diamonds.svg" width="250" height="330" x="45" y="20" />
         </g>
     </defs>
 
-    <!-- herz -->
+    <!-- Heart -->
     <defs>
-        <g id="herz_koenig">
+        <g id="Heart_koenig">
             <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/1/14/English_pattern_king_of_hearts.svg" width="250" height="330" x="45" y="20" />
         </g>
     </defs>
     
     <defs>
-        <g id="herz_dame">
+        <g id="Heart_dame">
             <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/9/9d/English_pattern_queen_of_hearts.svg" width="250" height="330" x="45" y="20" />
         </g>
     </defs>
     
     <defs>
-        <g id="herz_bube">
+        <g id="Heart_bube">
             <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/5/56/English_pattern_jack_of_hearts.svg" width="250" height="330" x="45" y="20" />
         </g>
     </defs>
     
-    <!-- kreuz -->
+    <!-- Club -->
     <defs>
-        <g id="kreuz_koenig">
+        <g id="Club_koenig">
             <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/3/3e/English_pattern_king_of_clubs.svg" width="250" height="330" x="45" y="20" />
         </g>
     </defs>
     
     <defs>
-        <g id="kreuz_dame">
+        <g id="Club_dame">
             <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/b/b3/English_pattern_queen_of_clubs.svg" width="250" height="330" x="45" y="20" />
         </g>
     </defs>
     
     <defs>
-        <g id="kreuz_bube">
+        <g id="Club_bube">
             <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/8/80/English_pattern_jack_of_clubs.svg" width="250" height="330" x="45" y="20" />
         </g>
     </defs>
     
-    <!-- pik -->
+    <!-- Spade -->
     <defs>
-        <g id="pik_koenig">
+        <g id="Spade_koenig">
             <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/f/f1/English_pattern_king_of_spades.svg" width="250" height="330" x="45" y="20" />
         </g>
     </defs>
     
     <defs>
-        <g id="pik_dame">
+        <g id="Spade_dame">
             <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/c/ca/English_pattern_queen_of_spades.svg" width="250" height="330" x="45" y="20" />
         </g>
     </defs>
     
     <defs>
-        <g id="pik_bube">
+        <g id="Spade_bube">
             <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/4/4f/English_pattern_jack_of_spades.svg" width="250" height="330" x="45" y="20" />
         </g>
     </defs>
 
 
     <defs>
-        <g id="herz">
+        <g id="Heart">
             <polygon points="170,160 130,115 210,115" style="stroke:red;fill:red;stroke-width:1"/>
             <circle cx="150" cy="159" r="20" style="stroke:red;fill:red"/>
             <circle cx="190" cy="159" r="20" style="stroke:red;fill:red"/>
         </g>
     </defs>
     <defs>
-        <g id="karo">
+        <g id="Diamond">
             <polygon points="170,30 140,80 170,130 200,80" style="fill:red;stroke:red;stroke-width:1"/>
             <polygon points="170,230 140,280 170,330 200,280" style="fill:red;stroke:red;stroke-width:1"/>
         </g>
     </defs>
     <defs>
-        <g id="kreuz">
+        <g id="Club">
             <circle cx="170" cy="152" r="27"/>
             <circle cx="190" cy="195" r="25"/>
             <circle cx="150" cy="195" r="25"/>
@@ -309,7 +309,7 @@
         </g>
     </defs>
     <defs>
-        <g id="pik">
+        <g id="Spade">
             <polygon points="170,130 130,180 210,180" style="stroke-width:1"/>
             <circle cx="150" cy="201" r="29"/>
             <circle cx="190" cy="201" r="29 "/>
@@ -323,6 +323,6 @@
         <rect height="350" width="250" x="45" y="10" rx="30" ry="30" style="fill:white;stroke:black;stroke-width:5;opacity:1.0" />
         <!-- bottom right number -->
         <use xlink:href="#schwarz_10" x="200" y="290" transform="rotate(180, 268, 330)" />        
-        <use xlink:href="#pik"/>
+        <use xlink:href="#Spade"/>
     </g>
 </svg>

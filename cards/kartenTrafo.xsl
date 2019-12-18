@@ -13,55 +13,55 @@
                 <!-- Spezial Karten Sonderfälle-->
                 <xsl:when test="$wert = 'K'">
                     <xsl:choose>
-                        <xsl:when test="$Farbe = 'Pik'">
-                            <use href="#Pik-K" />
+                        <xsl:when test="$Farbe = 'Spade'">
+                            <use href="#Spade-K" />
                         </xsl:when>
-                        <xsl:when test="$Farbe = 'Herz'">
-                            <use href="#Herz-K" />
+                        <xsl:when test="$Farbe = 'Heart'">
+                            <use href="#Heart-K" />
                         </xsl:when>
-                        <xsl:when test="$Farbe = 'Karo'">
-                            <use href="#Karo-K" />
+                        <xsl:when test="$Farbe = 'Diamond'">
+                            <use href="#Diamond-K" />
                         </xsl:when>
-                        <xsl:when test="$Farbe = 'Kreuz'">
-                            <use href="#Kreuz-K" />
+                        <xsl:when test="$Farbe = 'Club'">
+                            <use href="#Club-K" />
                         </xsl:when>
                     </xsl:choose>
                 </xsl:when>
                 <xsl:when test="$wert = 'Q'">
                     <xsl:choose>
-                        <xsl:when test="$Farbe = 'Pik'">
-                            <use href="#Pik-Q" />
+                        <xsl:when test="$Farbe = 'Spade'">
+                            <use href="#Spade-Q" />
                         </xsl:when>
-                        <xsl:when test="$Farbe = 'Herz'">
-                            <use href="#Herz-Q" />
+                        <xsl:when test="$Farbe = 'Heart'">
+                            <use href="#Heart-Q" />
                         </xsl:when>
-                        <xsl:when test="$Farbe = 'Karo'">
-                            <use href="#Karo-Q" />
+                        <xsl:when test="$Farbe = 'Diamond'">
+                            <use href="#Diamond-Q" />
                         </xsl:when>
-                        <xsl:when test="$Farbe = 'Kreuz'">
-                            <use href="#Kreuz-Q" />
+                        <xsl:when test="$Farbe = 'Club'">
+                            <use href="#Club-Q" />
                         </xsl:when>
                     </xsl:choose>
                 </xsl:when>
                 <xsl:when test="$wert = 'B'">
                     <xsl:choose>
-                        <xsl:when test="$Farbe = 'Pik'">
-                            <use href="#Pik-B" />
+                        <xsl:when test="$Farbe = 'Spade'">
+                            <use href="#Spade-B" />
                         </xsl:when>
-                        <xsl:when test="$Farbe = 'Herz'">
-                            <use href="#Herz-B" />
+                        <xsl:when test="$Farbe = 'Heart'">
+                            <use href="#Heart-B" />
                         </xsl:when>
-                        <xsl:when test="$Farbe = 'Karo'">
-                            <use href="#Karo-B" />
+                        <xsl:when test="$Farbe = 'Diamond'">
+                            <use href="#Diamond-B" />
                         </xsl:when>
-                        <xsl:when test="$Farbe = 'Kreuz'">
-                            <use href="#Kreuz-B" />
+                        <xsl:when test="$Farbe = 'Club'">
+                            <use href="#Club-B" />
                         </xsl:when>
                     </xsl:choose>
                 </xsl:when>
 
                 <!-- Symbole und reguläre Zahlen, die aus der XML Datei entnommen werden -->
-                <xsl:when test="$Farbe = 'Pik'">
+                <xsl:when test="$Farbe = 'Spade'">
 
                     <g>
 
@@ -69,37 +69,37 @@
                             <xsl:value-of select="wert"></xsl:value-of>
                         </text>
                         <use xlink:href="#kar" x="200" y="290" transform="rotate(180, 268, 330)" />
-                        <use xlink:href="#Pik-{$wert}" />
+                        <use xlink:href="#Spade-{$wert}" />
 
                     </g>
 
                 </xsl:when>
-                <xsl:when test="$Farbe = 'Kreuz'">
+                <xsl:when test="$Farbe = 'Club'">
                     <g>
                         <text id="kar" x="57" y="70" font-size="55" fill="black">
                             <xsl:value-of select="wert"></xsl:value-of>
                         </text>
                         <use xlink:href="#kar" x="200" y="290" transform="rotate(180, 268, 330)" />
-                        <use xlink:href="#Kreuz-{$wert}" />
+                        <use xlink:href="#Club-{$wert}" />
                     </g>
                 </xsl:when>
-                <xsl:when test="$Farbe = 'Herz'">
+                <xsl:when test="$Farbe = 'Heart'">
                     <g>
                         <text id="kar" x="57" y="70" font-size="55" fill="red">
                             <xsl:value-of select="wert"></xsl:value-of>
                         </text>
                         <use xlink:href="#kar" x="200" y="290" transform="rotate(180, 268, 330)" />
-                        <use xlink:href="#Herz-{$wert}"/>
+                        <use xlink:href="#Heart-{$wert}"/>
                     </g>
                 </xsl:when>
-                <xsl:when test="$Farbe = 'Karo'">
+                <xsl:when test="$Farbe = 'Diamond'">
                            
                             <g>
                                 <text id="kar" x="57" y="70" font-size="55" fill="red">
                                     <xsl:value-of select="wert"></xsl:value-of>
                                 </text>
                                 <use xlink:href="#kar" x="200" y="290" transform="rotate(180, 268, 330)" />
-                                <use xlink:href="#Karo-{$wert}" />
+                                <use xlink:href="#Diamond-{$wert}" />
                             </g>
                 </xsl:when>
             </xsl:choose>
@@ -112,364 +112,364 @@
                 </g>
             </defs>
             <defs>
-                <g id="Karo-K">
+                <g id="Diamond-K">
                     <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/0/06/KD.svg" width="250" height="330" x="45" y="20" />
                 </g>
             </defs>
 
             <defs>
-                <g id="Karo-Q">
+                <g id="Diamond-Q">
 
                     <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/6/63/QD.svg" width="250" height="330" x="45" y="20" />
                 </g>
             </defs>
             <defs>
-                <g id="Karo-B">
+                <g id="Diamond-B">
                     <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/3/33/JD.svg" width="250" height="330" x="45" y="20" />
                 </g>
             </defs>
             <defs>
-                <g id="Herz-K">
+                <g id="Heart-K">
                     <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/e/e5/KH.svg" width="250" height="330" x="45" y="20" />
                 </g>
             </defs>
 
             <defs>
-                <g id="Herz-Q">
+                <g id="Heart-Q">
                     <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/d/d2/QH.svg" width="250" height="330" x="45" y="20" />
                 </g>
             </defs>
 
             <defs>
-                <g id="Herz-B">
+                <g id="Heart-B">
                     <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/1/15/JH.svg" width="250" height="330" x="45" y="20" />
                 </g>
             </defs>
             <defs>
-                <g id="Kreuz-K">
+                <g id="Club-K">
                     <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/e/e1/KC.svg" width="250" height="330" x="45" y="20" />
                 </g>
             </defs>
 
             <defs>
-                <g id="Kreuz-Q">
+                <g id="Club-Q">
                     <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/9/9e/QC.svg" width="250" height="330" x="45" y="20" />
                 </g>
             </defs>
 
             <defs>
-                <g id="Kreuz-B">
+                <g id="Club-B">
                     <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/1/11/JC.svg" width="250" height="330" x="45" y="20" />
                 </g>
             </defs>
             <defs>
-                <g id="Pik-K">
+                <g id="Spade-K">
                     <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/5/5c/KS.svg" width="250" height="330" x="45" y="20" />
                 </g>
             </defs>
 
             <defs>
-                <g id="Pik-Q">
+                <g id="Spade-Q">
                     <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/3/35/QS.svg" width="250" height="330" x="45" y="20" />
                 </g>
             </defs>
 
             <defs>
-                <g id="Pik-B">
+                <g id="Spade-B">
                     <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/d/d9/JS.svg" width="250" height="330" x="45" y="20" />
                 </g>
             </defs>
 
-            <!-- alle Piks -->
+            <!-- alle Spades -->
             <defs>
-                <g id="Pik-A">
+                <g id="Spade-A">
                     <text x="120" y="240" font-size="180" fill="black">♠</text>
                 </g>
 
             </defs>
             <defs>
-                <g id="Pik-2">
-                    <text id="Pik_symbol" x="140" y="110" font-size="80" fill="black">♠</text>
+                <g id="Spade-2">
+                    <text id="Spade_symbol" x="140" y="110" font-size="80" fill="black">♠</text>
                     <!-- Das Symbol an der Y achse spiegeln -->
 
-                    <use xlink:href="#Pik_symbol" x="145" y="200" transform="rotate(180, 233, 290)" />
+                    <use xlink:href="#Spade_symbol" x="145" y="200" transform="rotate(180, 233, 290)" />
                 </g>
 
             </defs>
 
             <defs>
-                <g id="Pik-3">
-                    <use xlink:href="#Pik-2" />
+                <g id="Spade-3">
+                    <use xlink:href="#Spade-2" />
                     <text x="140" y="215" font-size="80" fill="black">♠</text>
                 </g>
             </defs>
 
             <defs>
-                <g id="Pik-4">
-                    <use xlink:href="#Pik-2" transform="translate(-40, 0)" />
-                    <use xlink:href="#Pik-2" transform="translate(40, 0)" />
+                <g id="Spade-4">
+                    <use xlink:href="#Spade-2" transform="translate(-40, 0)" />
+                    <use xlink:href="#Spade-2" transform="translate(40, 0)" />
                 </g>
             </defs>
 
             <defs>
-                <g id="Pik-5">
-                    <use xlink:href="#Pik-4" />
+                <g id="Spade-5">
+                    <use xlink:href="#Spade-4" />
                     <text x="140" y="215" font-size="80" fill="black">♠</text>
                 </g>
             </defs>
             <defs>
-                <g id="Pik-6">
-                    <use xlink:href="#Pik-3" transform="translate(-40,0)" />
-                    <use xlink:href="#Pik-3" transform="translate(40,0)" />
+                <g id="Spade-6">
+                    <use xlink:href="#Spade-3" transform="translate(-40,0)" />
+                    <use xlink:href="#Spade-3" transform="translate(40,0)" />
                 </g>
             </defs>
             <defs>
-                <g id="Pik-7">
-                    <use xlink:href="#Pik-6" />
+                <g id="Spade-7">
+                    <use xlink:href="#Spade-6" />
                     <text x="140" y="170" font-size="80" fill="black">♠</text>
                 </g>
             </defs>
             <defs>
-                <g id="Pik-8">
-                    <use xlink:href="#Pik-4" />
-                    <g id="Pik-Zweier">
+                <g id="Spade-8">
+                    <use xlink:href="#Spade-4" />
+                    <g id="Spade-Zweier">
                         <text x="100" y="173" font-size="80" fill="black">♠</text>
                         <text x="180" y="173" font-size="80" fill="black">♠</text>
                     </g>
-                    <use xlink:href="#Pik-Zweier" transform="rotate(180, 161, 190)" />
+                    <use xlink:href="#Spade-Zweier" transform="rotate(180, 161, 190)" />
                 </g>
             </defs>
             <defs>
-                <g id="Pik-9">
-                    <use xlink:href="#Pik-8" />
+                <g id="Spade-9">
+                    <use xlink:href="#Spade-8" />
                     <text x="140" y="215" font-size="80" fill="black">♠</text>
                 </g>
             </defs>
             <defs>
-                <g id="Pik-10">
-                    <use xlink:href="#Pik-8" />
-                    <text id="Pik_Einser" x="140" y="150" font-size="80" fill="black">♠</text>
-                    <use xlink:href="#Pik_Einser" transform="rotate(180, 161, 190)" />
+                <g id="Spade-10">
+                    <use xlink:href="#Spade-8" />
+                    <text id="Spade_Einser" x="140" y="150" font-size="80" fill="black">♠</text>
+                    <use xlink:href="#Spade_Einser" transform="rotate(180, 161, 190)" />
                 </g>
             </defs>
 
-            <!-- alle Kreuze -->
+            <!-- alle Clube -->
             <defs>
-                <g id="Kreuz-A">
+                <g id="Club-A">
                     <text x="110" y="240" font-size="180" fill="black">♣</text>
                 </g>
 
             </defs>
             <defs>
-                <g id="Kreuz-2">
-                    <text id="Kreuz_symbol" x="140" y="110" font-size="80" fill="black">♣</text>
+                <g id="Club-2">
+                    <text id="Club_symbol" x="140" y="110" font-size="80" fill="black">♣</text>
                     <!-- Das Symbol an der X-Achse spiegeln -->
 
-                    <use xlink:href="#Kreuz_symbol" x="135" y="200" transform="rotate(180, 233, 290)" />
+                    <use xlink:href="#Club_symbol" x="135" y="200" transform="rotate(180, 233, 290)" />
                 </g>
 
             </defs>
 
             <defs>
-                <g id="Kreuz-3">
-                    <use xlink:href="#Kreuz-2" />
+                <g id="Club-3">
+                    <use xlink:href="#Club-2" />
                     <text x="135" y="215" font-size="80" fill="black">♣</text>
                 </g>
             </defs>
 
             <defs>
-                <g id="Kreuz-4">
-                    <use xlink:href="#Kreuz-2" transform="translate(-40, 0)" />
-                    <use xlink:href="#Kreuz-2" transform="translate(40, 0)" />
+                <g id="Club-4">
+                    <use xlink:href="#Club-2" transform="translate(-40, 0)" />
+                    <use xlink:href="#Club-2" transform="translate(40, 0)" />
                 </g>
             </defs>
 
             <defs>
-                <g id="Kreuz-5">
-                    <use xlink:href="#Kreuz-4" />
+                <g id="Club-5">
+                    <use xlink:href="#Club-4" />
                     <text x="140" y="215" font-size="80" fill="black">♣</text>
                 </g>
             </defs>
             <defs>
-                <g id="Kreuz-6">
-                    <use xlink:href="#Kreuz-3" transform="translate(-40,0)" />
-                    <use xlink:href="#Kreuz-3" transform="translate(40,0)" />
+                <g id="Club-6">
+                    <use xlink:href="#Club-3" transform="translate(-40,0)" />
+                    <use xlink:href="#Club-3" transform="translate(40,0)" />
                 </g>
             </defs>
             <defs>
-                <g id="Kreuz-7">
-                    <use xlink:href="#Kreuz-6" />
+                <g id="Club-7">
+                    <use xlink:href="#Club-6" />
                     <text x="140" y="170" font-size="80" fill="black">♣</text>
                 </g>
             </defs>
             <defs>
-                <g id="Kreuz-8">
-                    <use xlink:href="#Kreuz-4" />
-                    <g id="Kreuz-Zweier">
+                <g id="Club-8">
+                    <use xlink:href="#Club-4" />
+                    <g id="Club-Zweier">
                         <text x="100" y="173" font-size="80" fill="black">♣</text>
                         <text x="180" y="173" font-size="80" fill="black">♣</text>
                     </g>
-                    <use xlink:href="#Kreuz-Zweier" transform="rotate(180, 166, 183)" />
+                    <use xlink:href="#Club-Zweier" transform="rotate(180, 166, 183)" />
                 </g>
             </defs>
             <defs>
-                <g id="Kreuz-9">
-                    <use xlink:href="#Kreuz-8" />
+                <g id="Club-9">
+                    <use xlink:href="#Club-8" />
                     <text x="140" y="215" font-size="80" fill="black">♣</text>
                 </g>
             </defs>
             <defs>
-                <g id="Kreuz-10">
-                    <use xlink:href="#Kreuz-8" />
-                    <text id="Kreuz_Einser" x="140" y="150" font-size="80" fill="black">♣</text>
-                    <use xlink:href="#Kreuz_Einser" transform="rotate(180, 167, 196)" />
+                <g id="Club-10">
+                    <use xlink:href="#Club-8" />
+                    <text id="Club_Einser" x="140" y="150" font-size="80" fill="black">♣</text>
+                    <use xlink:href="#Club_Einser" transform="rotate(180, 167, 196)" />
                 </g>
             </defs>
 
-            <!-- alle Herzen -->
+            <!-- alle Hearten -->
 
             <defs>
-                <g id="Herz-A">
+                <g id="Heart-A">
                     <text x="120" y="240" font-size="180" fill="red">♥</text>
                 </g>
 
             </defs>
             <defs>
-                <g id="Herz-2">
-                    <text id="Herz_symbol" x="140" y="110" font-size="80" fill="red">♥</text>
+                <g id="Heart-2">
+                    <text id="Heart_symbol" x="140" y="110" font-size="80" fill="red">♥</text>
                     <!-- Das Symbol an der X-Achse spiegeln -->
 
-                    <use xlink:href="#Herz_symbol" x="145" y="200" transform="rotate(180, 235, 290)" />
+                    <use xlink:href="#Heart_symbol" x="145" y="200" transform="rotate(180, 235, 290)" />
                 </g>
 
             </defs>
 
             <defs>
-                <g id="Herz-3">
-                    <use xlink:href="#Herz-2" />
+                <g id="Heart-3">
+                    <use xlink:href="#Heart-2" />
                     <text x="140" y="215" font-size="80" fill="red">♥</text>
                 </g>
             </defs>
 
             <defs>
-                <g id="Herz-4">
-                    <use xlink:href="#Herz-2" transform="translate(-40, 0)" />
-                    <use xlink:href="#Herz-2" transform="translate(40, 0)" />
+                <g id="Heart-4">
+                    <use xlink:href="#Heart-2" transform="translate(-40, 0)" />
+                    <use xlink:href="#Heart-2" transform="translate(40, 0)" />
                 </g>
             </defs>
 
             <defs>
-                <g id="Herz-5">
-                    <use xlink:href="#Herz-4" />
+                <g id="Heart-5">
+                    <use xlink:href="#Heart-4" />
                     <text x="140" y="215" font-size="80" fill="red">♥</text>
                 </g>
             </defs>
             <defs>
-                <g id="Herz-6">
-                    <use xlink:href="#Herz-3" transform="translate(-40,0)" />
-                    <use xlink:href="#Herz-3" transform="translate(40,0)" />
+                <g id="Heart-6">
+                    <use xlink:href="#Heart-3" transform="translate(-40,0)" />
+                    <use xlink:href="#Heart-3" transform="translate(40,0)" />
                 </g>
             </defs>
             <defs>
-                <g id="Herz-7">
-                    <use xlink:href="#Herz-6" />
+                <g id="Heart-7">
+                    <use xlink:href="#Heart-6" />
                     <text x="140" y="170" font-size="80" fill="red">♥</text>
                 </g>
             </defs>
             <defs>
-                <g id="Herz-8">
-                    <use xlink:href="#Herz-4" />
-                    <g id="Herz-Zweier">
+                <g id="Heart-8">
+                    <use xlink:href="#Heart-4" />
+                    <g id="Heart-Zweier">
                         <text x="99" y="173" font-size="80" fill="red">♥</text>
                         <text x="180" y="173" font-size="80" fill="red">♥</text>
                     </g>
-                    <use xlink:href="#Herz-Zweier" transform="rotate(180, 162, 190)" />
+                    <use xlink:href="#Heart-Zweier" transform="rotate(180, 162, 190)" />
                 </g>
             </defs>
             <defs>
-                <g id="Herz-9">
-                    <use xlink:href="#Herz-8" />
+                <g id="Heart-9">
+                    <use xlink:href="#Heart-8" />
                     <text x="140" y="215" font-size="80" fill="red">♥</text>
                 </g>
             </defs>
             <defs>
-                <g id="Herz-10">
-                    <use xlink:href="#Herz-8" />
-                    <text id="Herz_Einser" x="140" y="150" font-size="80" fill="red">♥</text>
-                    <use xlink:href="#Herz_Einser" transform="rotate(180, 162, 190)" />
+                <g id="Heart-10">
+                    <use xlink:href="#Heart-8" />
+                    <text id="Heart_Einser" x="140" y="150" font-size="80" fill="red">♥</text>
+                    <use xlink:href="#Heart_Einser" transform="rotate(180, 162, 190)" />
                 </g>
             </defs>
 
-            <!-- alle Karo -->
+            <!-- alle Diamond -->
             <defs>
-                <g id="Karo-A">
+                <g id="Diamond-A">
                     <text x="120" y="240" font-size="180" fill="red">♦</text>
                 </g>
 
             </defs>
             <defs>
-                <g id="Karo-2">
-                    <text id="Karo_symbol" x="140" y="110" font-size="80" fill="red">♦</text>
+                <g id="Diamond-2">
+                    <text id="Diamond_symbol" x="140" y="110" font-size="80" fill="red">♦</text>
                     <!-- Das Symbol an der X-Achse spiegeln -->
 
-                    <use xlink:href="#Karo_symbol" transform="rotate(180, 160, 190)" />
+                    <use xlink:href="#Diamond_symbol" transform="rotate(180, 160, 190)" />
                 </g>
 
             </defs>
 
             <defs>
-                <g id="Karo-3">
-                    <use xlink:href="#Karo-2" />
+                <g id="Diamond-3">
+                    <use xlink:href="#Diamond-2" />
                     <text x="140" y="215" font-size="80" fill="red">♦</text>
                 </g>
             </defs>
 
             <defs>
-                <g id="Karo-4">
-                    <use xlink:href="#Karo-2" transform="translate(-40, 0)" />
-                    <use xlink:href="#Karo-2" transform="translate(40, 0)" />
+                <g id="Diamond-4">
+                    <use xlink:href="#Diamond-2" transform="translate(-40, 0)" />
+                    <use xlink:href="#Diamond-2" transform="translate(40, 0)" />
                 </g>
             </defs>
 
             <defs>
-                <g id="Karo-5">
-                    <use xlink:href="#Karo-4" />
+                <g id="Diamond-5">
+                    <use xlink:href="#Diamond-4" />
                     <text x="140" y="215" font-size="80" fill="red">♦</text>
                 </g>
             </defs>
             <defs>
-                <g id="Karo-6">
-                    <use xlink:href="#Karo-3" transform="translate(-40,0)" />
-                    <use xlink:href="#Karo-3" transform="translate(40,0)" />
+                <g id="Diamond-6">
+                    <use xlink:href="#Diamond-3" transform="translate(-40,0)" />
+                    <use xlink:href="#Diamond-3" transform="translate(40,0)" />
                 </g>
             </defs>
             <defs>
-                <g id="Karo-7">
-                    <use xlink:href="#Karo-6" />
+                <g id="Diamond-7">
+                    <use xlink:href="#Diamond-6" />
                     <text x="140" y="170" font-size="80" fill="red">♦</text>
                 </g>
             </defs>
             <defs>
-                <g id="Karo-8">
-                    <use xlink:href="#Karo-4" />
-                    <g id="Karo-Zweier">
+                <g id="Diamond-8">
+                    <use xlink:href="#Diamond-4" />
+                    <g id="Diamond-Zweier">
                         <text x="100" y="173" font-size="80" fill="red">♦</text>
                         <text x="180" y="173" font-size="80" fill="red">♦</text>
                     </g>
-                    <use xlink:href="#Karo-Zweier" transform="rotate(180, 160, 190)" />
+                    <use xlink:href="#Diamond-Zweier" transform="rotate(180, 160, 190)" />
                 </g>
             </defs>
             <defs>
-                <g id="Karo-9">
-                    <use xlink:href="#Karo-8" />
+                <g id="Diamond-9">
+                    <use xlink:href="#Diamond-8" />
                     <text x="140" y="215" font-size="80" fill="red">♦</text>
                 </g>
             </defs>
             <defs>
-                <g id="Karo-10">
-                    <use xlink:href="#Karo-8" />
-                    <text id="Karo_Einser" x="140" y="150" font-size="80" fill="red">♦</text>
-                    <use xlink:href="#Karo_Einser" transform="rotate(180, 160, 190)" />
+                <g id="Diamond-10">
+                    <use xlink:href="#Diamond-8" />
+                    <text id="Diamond_Einser" x="140" y="150" font-size="80" fill="red">♦</text>
+                    <use xlink:href="#Diamond_Einser" transform="rotate(180, 160, 190)" />
                 </g>
             </defs>
         </svg>
