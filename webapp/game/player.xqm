@@ -8,11 +8,13 @@ xquery version "3.0";
 :)
 
 module namespace player = "bj/player";
+import module namespace chip = "bj/chip" at "chip.xqm";
+import module namespace card = "bj/card" at "card.xqm";
 
 declare variable $player:games := db:open("games")/games;
 
-declare function player:createPlayer($id as xs:string, $currentHand as xs:card*, $currentBet as xs:chip*,
-        $balance as xs:integer, $name as xs:string, $insurance as xs:boolean, $position as xs:integer){
+declare function player:createPlayer($id as xs:string, $currentHand as element(card)*, $currentBet as element(chip)*,
+        $balance as xs:integer, $name as xs:string, $insurance as xs:boolean, $position as xs:integer) as element(player){
     <player>
         <id>{$id}</id>
         <name>{$name}</name>

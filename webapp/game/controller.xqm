@@ -9,7 +9,7 @@ xquery version "3.0";
 
 module namespace controller = "bj/controller";
 import module namespace game = "bj/game" at "game.xqm";
-import module namespace player = "bj/spieler" at "player.xqm";
+import module namespace player = "bj/player" at "player.xqm";
 import module namespace dealer = "bj/dealer" at "dealer.xqm";
 import module namespace rq = "http://exquery.org/ns/request";
 
@@ -83,12 +83,12 @@ function controller:startGame() {
 
     (:Falsche Balance eingaben ignorieren:)
     let $actualBalances := (for $balance in $balances
-        where $balance >= 0
+        where $balance != 0
         return(
             $balance
         ))
 
-    let $game := game:createGame($actualNames, $balances, $minBet, $maxBet)
+    let $game := game:createGame($actualNames, $actualBalances, $minBet, $maxBet)
     return (
         game:insertGame($game)
     )
