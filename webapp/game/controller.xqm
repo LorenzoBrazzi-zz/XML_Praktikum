@@ -78,12 +78,12 @@ function controller:startGame() {
     let $balances := (for $i in (1, 2, 3, 4, 5), $name in $names
     where $name != ""
     return (
-        rq:parameter(fn:concat("inputbalance", $i), 0)
+        rq:parameter(fn:concat("inputbalance", $i), "")
     ))
 
     (:Falsche Balance eingaben ignorieren:)
     let $actualBalances := (for $balance in $balances
-        where $balance != 0
+        where $balance != ""
         return(
             $balance
         ))

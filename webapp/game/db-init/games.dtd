@@ -7,18 +7,20 @@
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT minBet (#PCDATA)>
 <!ELEMENT maxBet (#PCDATA)>
-<!ELEMENT cashPool (chip*)>
+<!ELEMENT cashPool (chips)>
 <!ELEMENT activePlayer (player)>
-<!ELEMENT deck (card*)>
+<!ELEMENT deck (cards)>
 <!ELEMENT players (player*)>
 
 <!ELEMENT player (id, currentHand, currentBet, balance, name, insurance, position)>
-<!ELEMENT currentHand (card*)>
-<!ELEMENT currentBet (chip*)>
+<!ELEMENT currentHand (cards)>
+<!ELEMENT currentBet (chips)>
 <!ELEMENT balance (#PCDATA)>
 <!ELEMENT name (#PCDATA)>
 <!ELEMENT insurance (#PCDATA)>
 <!ELEMENT position (#PCDATA)>
+
+<!ELEMENT cards (card*)>
 
 <!ELEMENT card (color, value, hidden)>
 <!ELEMENT color (#PCDATA)>
@@ -26,3 +28,5 @@
 <!ELEMENT hidden (#PCDATA)>
 
 <!ELEMENT chip (value, color)>
+
+<!ELEMENT chips (chip*)>
