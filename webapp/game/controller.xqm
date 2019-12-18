@@ -74,11 +74,11 @@ function controller:startGame() {
         rq:parameter(fn:concat("inputbalance", $i), "")
     ))
 
-    let $actualBalances := (for $i in (1,2,3,4,5)
+    let $actualBalances := (for $i in (1, 2, 3, 4, 5)
     where $balances[$i] != "" and $names[$i] != ""
     return $balances[$i])
 
-    let $actualNames := (for $i in (1,2,3,4,5)
+    let $actualNames := (for $i in (1, 2, 3, 4, 5)
     where $balances[$i] != "" and $names[$i] != ""
     return $names[$i])
 
@@ -89,10 +89,19 @@ function controller:startGame() {
     )
 };
 
+(:Löscht das Spiel mit ID gameID:)
 declare
 %updating
 %rest:path("bj/delete/{$gameID}")
 %rest:GET
 function controller:deleteGame($gameID as xs:string){
     game:deleteGame($gameID)
+};
+
+declare
+%updating
+%rest:path("bj/{gameID}/setActivePlayer/{$playerID}")
+%rest:GET
+function controller:setActivePlayer($playerID as xs:string, $gameID as xs:string) {
+
 };
