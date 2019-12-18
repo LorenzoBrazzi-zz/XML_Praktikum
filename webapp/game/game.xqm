@@ -14,6 +14,7 @@ import module namespace dealer = "bj/dealer" at "dealer.xqm";
 import module namespace chip = "bj/chip" at "chip.xqm";
 import module namespace card = "bj/card" at "card.xqm";
 
+(: Hiermit generieren wir die IDs sowohl der Spiele als auch der Spieler :)
 declare namespace uuid = "java:java.util.UUID";
 
 declare variable $game:games := db:open("games")/games;
