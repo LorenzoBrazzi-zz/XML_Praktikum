@@ -9,7 +9,7 @@ xquery version "3.0";
 
 (: Nötige Module importieren:)
 module namespace game = "bj/game";
-import module namespace player = "bj/spieler" at "spieler.xqm";
+import module namespace player = "bj/spieler" at "player.xqm";
 import module namespace dealer = "bj/dealer" at "dealer.xqm";
 declare namespace uuid = "java:java.util.UUID";
 

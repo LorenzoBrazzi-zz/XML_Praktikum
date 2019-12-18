@@ -7,6 +7,6 @@ xquery version "3.0";
 : To change this template use File | Settings | File Templates.
 :)
 
-module namespace spieler = "bj/spieler";
+module namespace spieler = "bj/player";
 
-declare variable $spieler:spiele := db:open("spiele")/spiele;
+declare variable $spieler:spiele := db:open("games")/games;
