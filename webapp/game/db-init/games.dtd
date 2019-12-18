@@ -2,18 +2,20 @@
 
 <!ELEMENT games (game*)>
 
-<!ELEMENT game (id, player+, dealer, minBet, cashPool, activePlayer, deck)>
+<!ELEMENT game (id, players, dealer, maxBet, minBet, cashPool, activePlayer, deck)>
 <!ELEMENT dealer (currentHand)>
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT minBet (#PCDATA)>
+<!ELEMENT maxBet (#PCDATA)>
 <!ELEMENT cashPool (chip*)>
 <!ELEMENT activePlayer (player)>
 <!ELEMENT deck (card*)>
+<!ELEMENT players (player*)>
 
 <!ELEMENT player (id, currentHand, currentBet, balance, name, insurance, position)>
 <!ELEMENT currentHand (card*)>
 <!ELEMENT currentBet (chip*)>
-<!ELEMENT balance (chip*)>
+<!ELEMENT balance (#PCDATA)>
 <!ELEMENT name (#PCDATA)>
 <!ELEMENT insurance (#PCDATA)>
 <!ELEMENT position (#PCDATA)>
