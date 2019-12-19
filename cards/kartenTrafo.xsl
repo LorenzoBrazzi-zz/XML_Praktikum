@@ -1,105 +1,105 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0">
 
-    <!-- Jede Karte wird als ein Svg element ausgegeben -->
-    <xsl:template match="/karte">
-        <xsl:variable name="Farbe" select="farbe"></xsl:variable>
-        <xsl:variable name="wert" select="wert"></xsl:variable>
+    <!-- Jede card wird als ein Svg element ausgegeben -->
+    <xsl:template match="/card">
+        <xsl:variable name="Color" select="color"></xsl:variable>
+        <xsl:variable name="value" select="value"></xsl:variable>
         <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" xmlns:xlink="http://www.w3.org/1999/xlink">
             <g alignment-baseline="baseline" />
             <rect height="350" width="250" x="45" y="10" rx="30" ry="30" style="fill:white;stroke:black;stroke-width:5;opacity:1.0" />
             <xsl:choose>
 
-                <!-- Spezial Karten Sonderfälle-->
-                <xsl:when test="$wert = 'K'">
+                <!-- Spezial cardn Sonderfälle-->
+                <xsl:when test="$value = 'K'">
                     <xsl:choose>
-                        <xsl:when test="$Farbe = 'Spade'">
+                        <xsl:when test="$Color = 'Spade'">
                             <use href="#Spade-K" />
                         </xsl:when>
-                        <xsl:when test="$Farbe = 'Heart'">
+                        <xsl:when test="$Color = 'Heart'">
                             <use href="#Heart-K" />
                         </xsl:when>
-                        <xsl:when test="$Farbe = 'Diamond'">
+                        <xsl:when test="$Color = 'Diamond'">
                             <use href="#Diamond-K" />
                         </xsl:when>
-                        <xsl:when test="$Farbe = 'Club'">
+                        <xsl:when test="$Color = 'Club'">
                             <use href="#Club-K" />
                         </xsl:when>
                     </xsl:choose>
                 </xsl:when>
-                <xsl:when test="$wert = 'Q'">
+                <xsl:when test="$value = 'Q'">
                     <xsl:choose>
-                        <xsl:when test="$Farbe = 'Spade'">
+                        <xsl:when test="$Color = 'Spade'">
                             <use href="#Spade-Q" />
                         </xsl:when>
-                        <xsl:when test="$Farbe = 'Heart'">
+                        <xsl:when test="$Color = 'Heart'">
                             <use href="#Heart-Q" />
                         </xsl:when>
-                        <xsl:when test="$Farbe = 'Diamond'">
+                        <xsl:when test="$Color = 'Diamond'">
                             <use href="#Diamond-Q" />
                         </xsl:when>
-                        <xsl:when test="$Farbe = 'Club'">
+                        <xsl:when test="$Color = 'Club'">
                             <use href="#Club-Q" />
                         </xsl:when>
                     </xsl:choose>
                 </xsl:when>
-                <xsl:when test="$wert = 'B'">
+                <xsl:when test="$value = 'B'">
                     <xsl:choose>
-                        <xsl:when test="$Farbe = 'Spade'">
+                        <xsl:when test="$Color = 'Spade'">
                             <use href="#Spade-B" />
                         </xsl:when>
-                        <xsl:when test="$Farbe = 'Heart'">
+                        <xsl:when test="$Color = 'Heart'">
                             <use href="#Heart-B" />
                         </xsl:when>
-                        <xsl:when test="$Farbe = 'Diamond'">
+                        <xsl:when test="$Color = 'Diamond'">
                             <use href="#Diamond-B" />
                         </xsl:when>
-                        <xsl:when test="$Farbe = 'Club'">
+                        <xsl:when test="$Color = 'Club'">
                             <use href="#Club-B" />
                         </xsl:when>
                     </xsl:choose>
                 </xsl:when>
 
                 <!-- Symbole und reguläre Zahlen, die aus der XML Datei entnommen werden -->
-                <xsl:when test="$Farbe = 'Spade'">
+                <xsl:when test="$Color = 'Spade'">
 
                     <g>
 
                         <text id="kar" x="57" y="70" font-size="55" fill="black">
-                            <xsl:value-of select="wert"></xsl:value-of>
+                            <xsl:value-of select="value"></xsl:value-of>
                         </text>
                         <use xlink:href="#kar" x="200" y="290" transform="rotate(180, 268, 330)" />
-                        <use xlink:href="#Spade-{$wert}" />
+                        <use xlink:href="#Spade-{$value}" />
 
                     </g>
 
                 </xsl:when>
-                <xsl:when test="$Farbe = 'Club'">
+                <xsl:when test="$Color = 'Club'">
                     <g>
                         <text id="kar" x="57" y="70" font-size="55" fill="black">
-                            <xsl:value-of select="wert"></xsl:value-of>
+                            <xsl:value-of select="value"></xsl:value-of>
                         </text>
                         <use xlink:href="#kar" x="200" y="290" transform="rotate(180, 268, 330)" />
-                        <use xlink:href="#Club-{$wert}" />
+                        <use xlink:href="#Club-{$value}" />
                     </g>
                 </xsl:when>
-                <xsl:when test="$Farbe = 'Heart'">
+                <xsl:when test="$Color = 'Heart'">
                     <g>
                         <text id="kar" x="57" y="70" font-size="55" fill="red">
-                            <xsl:value-of select="wert"></xsl:value-of>
+                            <xsl:value-of select="value"></xsl:value-of>
                         </text>
                         <use xlink:href="#kar" x="200" y="290" transform="rotate(180, 268, 330)" />
-                        <use xlink:href="#Heart-{$wert}"/>
+                        <use xlink:href="#Heart-{$value}"/>
                     </g>
                 </xsl:when>
-                <xsl:when test="$Farbe = 'Diamond'">
+                <xsl:when test="$Color = 'Diamond'">
                            
                             <g>
                                 <text id="kar" x="57" y="70" font-size="55" fill="red">
-                                    <xsl:value-of select="wert"></xsl:value-of>
+                                    <xsl:value-of select="value"></xsl:value-of>
                                 </text>
                                 <use xlink:href="#kar" x="200" y="290" transform="rotate(180, 268, 330)" />
-                                <use xlink:href="#Diamond-{$wert}" />
+                                <use xlink:href="#Diamond-{$value}" />
                             </g>
                 </xsl:when>
             </xsl:choose>
@@ -107,7 +107,7 @@
 
             <!-- SVG Definitionen um Redundanz zu vermeiden -->
             <defs>
-                <g id="Kartenrand">
+                <g id="CardTemplate">
                     <rect height="350" width="250" x="45" y="10" rx="30" ry="30" style="fill:white;stroke:black;stroke-width:5;opacity:1.0" />
                 </g>
             </defs>
