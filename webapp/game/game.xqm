@@ -39,7 +39,7 @@ declare function game:createGame($names as xs:string+, $balances as xs:integer+,
     let $players := (for $i in (1 to fn:count($balances))
     return (
         player:createPlayer(xs:string(uuid:randomUUID()), card:emptyHand(), chip:emptyChipSet(), $balances[$i],
-                $names[$i], false(), $i)
+                $names[$i], fn:false(), $i)
     ))
     return (
         <game>
@@ -83,5 +83,22 @@ function game:setActivePlayer($gameID as xs:string){
     let $oldPlayer := $game:games/game[id = $gameID]/players/player[id = $oldPlayerID]
     let $players := $game:games/game[id = $gameID]/players
     let $newPlayerID := $players/$oldPlayer/following::*[1]/id/text()
-    return(replace value of node $oldPlayerID with $newPlayerID)
+    return (
+        if(fn:empty($newPlayerID)) then (
+
+        )
+        replace value of node $oldPlayerID with $newPlayerID
+    )
+
+    (: WIR MÜSSEN NOCH DEN FALL ABCHECNKEN WENN KEIN SPIELER MEHR DA IST ALSO WENN activePlayer = "" :)
+};
+
+declare function game:getPlayerNames($gameID as xs:string){
+    let $players := $game:games/game[id = $gameID]/players
+    let $playerNames := (for $player in $players
+    return (
+        $player/name/text()
+    )
+    )
+    return $playerNames
 };
