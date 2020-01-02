@@ -105,3 +105,11 @@ declare
 function controller:setActivePlayer($gameID as xs:string) {
     game:setActivePlayer($gameID)
 };
+
+declare
+%updating
+%rest:path("bj/shuffle/{$gameID}")
+%rest:GET
+function controller:shuffle($gameID as xs:string){
+    game:setShuffledDeck($gameID)
+};

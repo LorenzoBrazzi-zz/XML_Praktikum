@@ -16,6 +16,7 @@ import module namespace card = "bj/card" at "card.xqm";
 
 (: Hiermit generieren wir die IDs sowohl der Spiele als auch der Spieler :)
 declare namespace uuid = "java:java.util.UUID";
+declare namespace random = "http://basex.org/modules/random";
 
 declare variable $game:games := db:open("games")/games;
 
@@ -84,13 +85,16 @@ function game:setActivePlayer($gameID as xs:string){
     let $players := $game:games/game[id = $gameID]/players
     let $newPlayerID := $players/$oldPlayer/following::*[1]/id/text()
     return (
-        if(fn:empty($newPlayerID)) then (
-
+        if (fn:empty($newPlayerID)) then (
+            replace value of node $oldPlayerID with $players/player[1]/id/text()
         )
-        replace value of node $oldPlayerID with $newPlayerID
+        else (replace value of node $oldPlayerID with $newPlayerID)
+
     )
 
-    (: WIR MÜSSEN NOCH DEN FALL ABCHECNKEN WENN KEIN SPIELER MEHR DA IST ALSO WENN activePlayer = "" :)
+(: WIR MÜSSEN NOCH DEN FALL ABCHECNKEN WENN KEIN SPIELER MEHR DA IST ALSO WENN activePlayer = ""
+    --> Wir haben doch die Position IDs mit Zahlen von 1 bis 5 gemacht, somit können wir einfach den Spieler dann
+    aufrufen, der an Pos 1 sitzt:)
 };
 
 declare function game:getPlayerNames($gameID as xs:string){
@@ -101,4 +105,39 @@ declare function game:getPlayerNames($gameID as xs:string){
     )
     )
     return $playerNames
+};
+
+
+(: Shuffle Function:)
+declare
+%private
+function game:shuffleDeck() as element(cards){
+    let $cardSet := doc("./deck.xml")/cards/*
+    let $deck := <cards>
+        {$cardSet}
+        {$cardSet}
+        {$cardSet}
+        {$cardSet}
+        {$cardSet}
+        {$cardSet}
+    </cards>
+
+    let $shuffled :=
+        for $c in $deck/card
+        order by random:integer(52)
+        return $c
+
+    return <cards>
+        {$shuffled}
+    </cards>
+};
+
+(:Public setter Function of shuffle():)
+declare
+%updating
+function game:setShuffledDeck($gameID as xs:string){
+    let $deck := $game:games/game[id = $gameID]/deck
+    let $shuffled := game:shuffleDeck()
+
+    return replace value of node $deck with $shuffled
 };
