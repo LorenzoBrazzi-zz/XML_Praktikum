@@ -105,3 +105,15 @@ declare function player:calculateCardValue($gameID as xs:string, $playerID as xs
             return $c
     )
 };
+
+declare
+    %updating
+function player:drawCard($gameID, $playerID as xs:string){
+    let $player := $player:games/game[id = $gameID]/players/player[id = $playerID]
+    let $hand := $player/currentHand
+    let $card := game:drawPlayer($gameID)
+
+    return(
+        insert node $card into $hand
+    )
+};

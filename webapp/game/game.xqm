@@ -141,7 +141,16 @@ declare function game:getDeck($gameID as xs:string) as element(cards){
     return $deck
 };
 
-(:Funktion für Spieler und Dealer um eine Karte zu ziehen:)
-declare function game:drawCard(){
+(:Funktion für Spieler und Dealer um eine Karte zu ziehen und zugleich die gezogene Karte aus dem Deck Stack
+zu entfernen:)
+declare
+    %updating
+function game:drawPlayer($gameID as xs:string) as element(card){
+    let $deck := game:getDeck($gameID)
+    let $card := $deck/card[1]
 
+    return(
+        $card,
+        delete node $deck/card[1]
+    )
 };
