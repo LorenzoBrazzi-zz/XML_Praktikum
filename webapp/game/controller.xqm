@@ -1,12 +1,5 @@
 xquery version "3.0";
 
-(:~
-: User: lorenzobrazzi
-: Date: 06.12.19
-: Time: 08:43
-: To change this template use File | Settings | File Templates.
-:)
-
 module namespace controller = "bj/controller";
 import module namespace game = "bj/game" at "game.xqm";
 import module namespace player = "bj/player" at "player.xqm";

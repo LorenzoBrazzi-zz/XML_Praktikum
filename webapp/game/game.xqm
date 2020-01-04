@@ -1,12 +1,5 @@
 xquery version "3.0";
 
-(:~
-: User: lorenzobrazzi
-: Date: 14.12.19
-: Time: 13:21
-: To change this template use File | Settings | File Templates.
-:)
-
 (: Nötige Module importieren:)
 module namespace game = "bj/game";
 import module namespace player = "bj/player" at "player.xqm";
@@ -140,4 +133,15 @@ function game:setShuffledDeck($gameID as xs:string){
     let $shuffled := game:shuffleDeck()
 
     return replace value of node $deck with $shuffled
+};
+
+(:Erhatle Deck für diverse andere Funktionen:)
+declare function game:getDeck($gameID as xs:string) as element(cards){
+    let $deck := $game:games/game[id = $gameID]/deck
+    return $deck
+};
+
+(:Funktion für Spieler und Dealer um eine Karte zu ziehen:)
+declare function game:drawCard(){
+
 };

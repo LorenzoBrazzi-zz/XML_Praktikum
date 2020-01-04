@@ -1,12 +1,5 @@
 xquery version "3.0";
 
-(:~
-: User: lorenzobrazzi
-: Date: 14.12.19
-: Time: 13:21
-: To change this template use File | Settings | File Templates.
-:)
-
 module namespace player = "bj/player";
 import module namespace chip = "bj/chip" at "chip.xqm";
 import module namespace card = "bj/card" at "card.xqm";
@@ -27,10 +20,14 @@ declare function player:createPlayer($id as xs:string, $currentHand as element(c
     </player>
 };
 
+
+(:Der Spieler wählt die Chips im View aus, welche dann hier automatisch konvertiert werden,
+ um die Rechnung zu erleichtern:)
 declare
 %updating
-function player:setBet($gameID as xs:string, $amount as xs:integer) {
+function player:setBet($gameID as xs:string, $bet as element(chips)) {
 
+    let $amount := player:calculateChipsValue($bet)
     let $activePlayer := $player:games/game[id = $gameID]/activePlayer
     let $path := $player:games/game[id = $gameID]/players/player[id = $activePlayer]
     let $activePlayerNewBalance := $path/balance - $amount
@@ -38,21 +35,21 @@ function player:setBet($gameID as xs:string, $amount as xs:integer) {
     let $minBet := $player:games/game[id = $gameID]/minBet
 
     return (
-        (: Falls die Balance unter 5 geht dann wird der Spieler entfernt da er dann verloren hat :)
-        if ($amount > $path/balance) then (
-        (: Error message und ggf neue eingabe :)
-        ) else if ($amount > $maxBet) then (
-        (: Error message und ggf neue eingabe :)
-        ) else if ($amount < $minBet) then (
-        (: Error message und ggf neue eingabe :)
-        ) else (
-            if ($activePlayerNewBalance < 5) then ( delete node $path)
-            else (
-                replace value of node $path/currentBet with ($path/currentBet + $amount),
-                replace value of node $path/balance with$activePlayerNewBalance
-            ),
-            game:setActivePlayer($gameID)
-        )
+    (: Falls die Balance unter 5 geht dann wird der Spieler entfernt da er dann verloren hat :)
+    if ($amount > $path/balance) then (
+    (: Error message und ggf neue eingabe :)
+    ) else if ($amount > $maxBet) then (
+    (: Error message und ggf neue eingabe :)
+    ) else if ($amount < $minBet) then (
+    (: Error message und ggf neue eingabe :)
+    ) else (
+        if ($activePlayerNewBalance < 5) then ( delete node $path)
+        else (
+            replace value of node $path/currentBet with ($path/currentBet + $amount),
+            replace value of node $path/balance with$activePlayerNewBalance
+        ),
+        game:setActivePlayer($gameID)
+    )
     )
 };
 
@@ -82,4 +79,29 @@ declare
 %updating
 function player:setHit(){
 
+};
+
+(:
+Berechnet den Int Value der Chips Objekte um für die anderen Funktionen die Rechnung zu erleichtern.
+Der Spieler wählt sozusagen seine zu setzenden Chips einfach aus, und im Backend wird dies automatisch zu einem Int
+konvetiert und so auch dann angezeigt.
+:)
+declare
+%private
+function player:calculateChipsValue($chips as element(chips)){
+    fn:sum(
+            for $c in $chips/chip/value
+            return $c
+    )
+};
+
+(:Berechnet den Blattscore des Spielers:)
+declare function player:calculateCardValue($gameID as xs:string, $playerID as xs:string){
+    let $player := $player:games/game[id = $gameID]/players/player[id = $playerID]
+    let $hand := $player/currentHand
+
+    return fn:sum(
+            for $c in $hand/value
+            return $c
+    )
 };
