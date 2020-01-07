@@ -10,6 +10,7 @@ import module namespace card = "bj/card" at "card.xqm";
 (: Hiermit generieren wir die IDs sowohl der Spiele als auch der Spieler :)
 declare namespace uuid = "java:java.util.UUID";
 declare namespace random = "http://basex.org/modules/random";
+declare namespace update = "http://basex.org/modules/update";
 
 declare variable $game:games := db:open("games")/games;
 
@@ -150,7 +151,7 @@ function game:drawPlayer($gameID as xs:string) as element(card){
     let $card := $deck/card[1]
 
     return(
-        $card,
+        update:output($card),
         delete node $deck/card[1]
     )
 };
