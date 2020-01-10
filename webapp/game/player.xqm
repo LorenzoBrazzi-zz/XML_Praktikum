@@ -111,7 +111,7 @@ declare
 function player:drawCard($gameID, $playerID as xs:string){
     let $player := $player:games/game[id = $gameID]/players/player[id = $playerID]
     let $hand := $player/currentHand
-    let $card := game:drawPlayer($gameID)
+    let $card := game:drawCard($gameID)
 
     return(
         insert node $card into $hand
