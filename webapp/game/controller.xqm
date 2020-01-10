@@ -110,7 +110,6 @@ function controller:shuffle($gameID as xs:string){
 declare
 %rest:path("bj/test/{$gameID}")
 %rest:GET
-function controller:test($gameID as xs:string){
-    let $d := doc("./deck.xml")/cards/*
-    return $d
+function controller:testLogic($gameID as xs:string){
+    player:getHand($gameID)
 };

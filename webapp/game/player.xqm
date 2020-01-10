@@ -7,14 +7,30 @@ import module namespace game = "bj/game" at "game.xqm";
 
 declare variable $player:games := db:open("games")/games;
 
+(: WERTE NUR ZUM TESTEN GEÄNDERT :)
 declare function player:createPlayer($id as xs:string, $currentHand as element(cards), $currentBet as element(chips),
         $balance as xs:integer, $name as xs:string, $insurance as xs:boolean, $position as xs:integer) as element(player){
     <player>
         <id>{$id}</id>
         <name>{$name}</name>
         <balance>{$balance}</balance>
-        <currentHand>{$currentHand}</currentHand>
-        <currentBet>{$currentBet}</currentBet>
+        <currentHand>
+            <cards>
+                <card>
+                    <value>9</value>
+                    <color>Club</color>
+                    <hidden>false</hidden>
+                </card>
+            </cards>
+        </currentHand>
+        <currentBet>
+            <chips>
+                <chip>
+                    <value>100</value>
+                    <color>yellow</color>
+                </chip>
+            </chips>
+        </currentBet>
         <insurance>{$insurance}</insurance>
         <position>{$position}</position>
     </player>
@@ -89,20 +105,19 @@ declare
 %updating
 function player:hit($gameID as xs:string){
     let $playerID := $player:games[id = $gameID]/activePlayer
-    let $score := player:calculateCardValue($gameID, $playerID)
+    let $score := player:calculateCardValue($gameID)
     (:Wenn Aktiver Spieler mehr als 21 Scorerpunkte hat, dann kann er folglich keine weiteren Karten mehr ziehen, da
 er schließlich schon verloren hat. Demnach muss der nöchste activePlayer gesetted werden!:)
-    return if ($score > 21) then (
-    (:Fehlermeldung hinzufügen:)
-    game:setActivePlayer($gameID)
-    )
-    (:Wenn er Hitted, dann erhält der aktiveSpieler ganz einfach ne neue Karte. Jetzt kann er wieder einen Knopf seiner
+    return
+        if ($score > 21) then (
+        (:Fehlermeldung hinzufügen:)
+        game:setActivePlayer($gameID)
+        )
+        (:Wenn er Hitted, dann erhält der aktiveSpieler ganz einfach ne neue Karte. Jetzt kann er wieder einen Knopf seiner
     Wahlt drücken.:)
-    else (
+        else (
             player:drawCard($gameID)
         )
-
-
 };
 
 (:
@@ -120,9 +135,9 @@ function player:calculateChipsValue($chips as element(chips)){
 };
 
 (:Berechnet den Blattscore des Spielers:)
-declare function player:calculateCardValue($gameID as xs:string, $playerID as xs:string){
-    let $player := $player:games/game[id = $gameID]/players/player[id = $playerID]
-    let $hand := $player/currentHand
+declare function player:calculateCardValue($gameID as xs:string){
+    let $playerID := $player:games/game[id = $gameID]/activePlayer
+    let $hand := $player:games/game[id = $gameID]/players/player[id = $playerID]/currentHand/cards/*
 
     return fn:sum(
             for $c in $hand/value
@@ -132,13 +147,22 @@ declare function player:calculateCardValue($gameID as xs:string, $playerID as xs
 
 declare
 %updating
-function player:drawCard($gameID){
+function player:drawCard($gameID as xs:string) {
     let $playerID := $player:games[id = $gameID]/activePlayer
     let $player := $player:games/game[id = $gameID]/players/player[id = $playerID]
-    let $hand := $player/currentHand
+    let $hand := $player/currentHand/cards
     let $card := game:drawCard($gameID)
 
     return (
-        insert node $card into $hand
+        insert node $card as first into $hand,
+        game:popDeck($gameID)
     )
+};
+
+declare function player:getHand($gameID as xs:string){
+    let $playerID := $player:games[id = $gameID]/activePlayer
+    let $player := $player:games/game[id = $gameID]/players/player[id = $playerID]
+    let $hand := $player/currentHand/cards
+
+    return $hand
 };
