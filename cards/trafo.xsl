@@ -2,7 +2,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0">
 <!--
     Bemerkungen zum Spielfeld:
-    Im Spielfeld sollten die Knöpfe:    STAND, HIT, DOUBLE, INSURANCE, ENDTURN
+    Im Spielfeld sollten die Knöpfe:    STAND, HIT, DOUBLE, INSURANCE
     Zusätzlich muss jeder Chip einmal abgebildet sein (am besten die Zeile über den Knöpfen), die dann im Backend anklickbar
     gemacht werden.
 -->

@@ -22,7 +22,8 @@ declare function player:createPlayer($id as xs:string, $currentHand as element(c
 
 
 (:Der Spieler wählt die Chips im View aus, welche dann hier automatisch konvertiert werden,
- um die Rechnung zu erleichtern:)
+ um die Rechnung zu erleichtern. Diese Funktion initialisiert den Bet. Folgende bet funktionen arbeiten nur auf Integer!
+:)
 declare
 %updating
 function player:setBet($gameID as xs:string, $bet as element(chips)) {
@@ -54,12 +55,19 @@ function player:setBet($gameID as xs:string, $bet as element(chips)) {
 };
 
 
+(:Stand heisst einfach, dass der aktiveSpieler seinen Zug beendet. Demnach wird einfach nur setActivePlayer aufgerufen:)
+declare
+%updating
+function player:stand($gameID as xs:string){
+    game:setActivePlayer($gameID)
+};
+
 declare
 %updating
 function player:double($gameID as xs:string) {
 
     let $activePlayer := $player:games/game[id = $gameID]/activePlayer
-    let $currentBet := $player:games/game[id = $gameID]/players/player[id = $activePlayer]/currentBet
+    let $currentBet := player:calculateChipsValue($player:games/game[id = $gameID]/players/player[id = $activePlayer]/currentBet)
     let $path := $player:games/game[id = $gameID]/players/player[id = $activePlayer]/currentBet
     let $newBet := $currentBet * 2
     let $maxBet := $player:games/game[id = $gameID]/maxBet
@@ -68,16 +76,18 @@ function player:double($gameID as xs:string) {
     return (
     (: Falls der vedoppelte Einsatz höher ist als maxBet dann setze einfach den Einsatz auf maxBet :)
     if ($newBet > $maxBet) then (
-        replace value of node $path with $maxBet
+        replace value of node $path with $maxBet,
+        player:hit($gameID)
     ) else (
-        replace value of node $path with $newBet
+        replace value of node $path with $newBet,
+        player:hit($gameID)
     )
     )
 };
 
 declare
 %updating
-function player:Hit($gameID as xs:string){
+function player:hit($gameID as xs:string){
     let $playerID := $player:games[id = $gameID]/activePlayer
     let $score := player:calculateCardValue($gameID, $playerID)
     (:Wenn Aktiver Spieler mehr als 21 Scorerpunkte hat, dann kann er folglich keine weiteren Karten mehr ziehen, da
