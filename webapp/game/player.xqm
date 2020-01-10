@@ -15,22 +15,9 @@ declare function player:createPlayer($id as xs:string, $currentHand as element(c
         <name>{$name}</name>
         <balance>{$balance}</balance>
         <currentHand>
-            <cards>
-                <card>
-                    <value>9</value>
-                    <color>Club</color>
-                    <hidden>false</hidden>
-                </card>
-            </cards>
+            <cards></cards>
         </currentHand>
-        <currentBet>
-            <chips>
-                <chip>
-                    <value>100</value>
-                    <color>yellow</color>
-                </chip>
-            </chips>
-        </currentBet>
+        <currentBet></currentBet>
         <insurance>{$insurance}</insurance>
         <position>{$position}</position>
     </player>
@@ -38,7 +25,10 @@ declare function player:createPlayer($id as xs:string, $currentHand as element(c
 
 
 (:Der Spieler wählt die Chips im View aus, welche dann hier automatisch konvertiert werden,
- um die Rechnung zu erleichtern. Diese Funktion initialisiert den Bet. Folgende bet funktionen arbeiten nur auf Integer!
+ um die Rechnung zu erleichtern. Diese Funktion initialisiert den Bet. Darauffolgende bet funktionen arbeiten nur auf Integer!
+
+ --> Für diese Funktion müssen wir die aus der View angeklickten CHips akkumulieren und hier als parameter eingeben <--
+        --> Gegebenfalls den Philip ne email schreiben und kurz fragen wie das zu implementieren wäre <--
 :)
 declare
 %updating
@@ -83,8 +73,7 @@ declare
 function player:double($gameID as xs:string) {
 
     let $activePlayer := $player:games/game[id = $gameID]/activePlayer
-    let $currentBet := player:calculateChipsValue($player:games/game[id = $gameID]/players/player[id = $activePlayer]/currentBet)
-    let $path := $player:games/game[id = $gameID]/players/player[id = $activePlayer]/currentBet
+    let $currentBet := $player:games/game[id = $gameID]/players/player[id = $activePlayer]/currentBet
     let $newBet := $currentBet * 2
     let $maxBet := $player:games/game[id = $gameID]/maxBet
 
@@ -92,10 +81,10 @@ function player:double($gameID as xs:string) {
     return (
     (: Falls der vedoppelte Einsatz höher ist als maxBet dann setze einfach den Einsatz auf maxBet :)
     if ($newBet > $maxBet) then (
-        replace value of node $path with $maxBet,
+        replace value of node $currentBet with $maxBet,
         player:hit($gameID)
     ) else (
-        replace value of node $path with $newBet,
+        replace value of node $currentBet with $newBet,
         player:hit($gameID)
     )
     )
@@ -145,10 +134,11 @@ declare function player:calculateCardValue($gameID as xs:string){
     )
 };
 
+(:Ziehen einer Karte und darauffolgendes entfernen eben dieser aus dem Stack:)
 declare
 %updating
 function player:drawCard($gameID as xs:string) {
-    let $playerID := $player:games[id = $gameID]/activePlayer
+    let $playerID := $player:games/game[id = $gameID]/activePlayer
     let $player := $player:games/game[id = $gameID]/players/player[id = $playerID]
     let $hand := $player/currentHand/cards
     let $card := game:drawCard($gameID)
@@ -157,12 +147,4 @@ function player:drawCard($gameID as xs:string) {
         insert node $card as first into $hand,
         game:popDeck($gameID)
     )
-};
-
-declare function player:getHand($gameID as xs:string){
-    let $playerID := $player:games[id = $gameID]/activePlayer
-    let $player := $player:games/game[id = $gameID]/players/player[id = $playerID]
-    let $hand := $player/currentHand/cards
-
-    return $hand
 };

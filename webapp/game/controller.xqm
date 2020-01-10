@@ -108,8 +108,18 @@ function controller:shuffle($gameID as xs:string){
 };
 
 declare
-%rest:path("bj/test/{$gameID}")
+%updating
+%rest:path("bj/playerHIT/{$gameID}")
 %rest:GET
-function controller:testLogic($gameID as xs:string){
-    player:getHand($gameID)
+function controller:hit($gameID as xs:string){
+    player:hit($gameID)
 };
+
+declare
+%updating
+%rest:path("bj/playerDOUBLE/{$gameID}")
+%rest:GET
+function controller:double($gameID as xs:string){
+    player:double($gameID)
+};
+
