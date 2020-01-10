@@ -155,7 +155,8 @@ declare function game:drawCard($gameID as xs:string) as element (card){
     return $card
 };
 
-(:Nach ziehen einer Karte wird diese aus dem Stack entfernt:)
+(:Nach ziehen einer Karte wird diese aus dem Stack entfernt, Controller muss diese hier bei jeder Draw funktion
+extern aufrufen:)
 declare
     %updating
 function game:popDeck($gameID as xs:string){

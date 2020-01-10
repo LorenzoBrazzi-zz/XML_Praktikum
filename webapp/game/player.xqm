@@ -77,7 +77,21 @@ function player:double($gameID as xs:string) {
 
 declare
 %updating
-function player:setHit(){
+function player:Hit($gameID as xs:string){
+    let $playerID := $player:games[id = $gameID]/activePlayer
+    let $score := player:calculateCardValue($gameID, $playerID)
+    (:Wenn Aktiver Spieler mehr als 21 Scorerpunkte hat, dann kann er folglich keine weiteren Karten mehr ziehen, da
+er schließlich schon verloren hat. Demnach muss der nöchste activePlayer gesetted werden!:)
+    return if ($score > 21) then (
+    (:Fehlermeldung hinzufügen:)
+    game:setActivePlayer($gameID)
+    )
+    (:Wenn er Hitted, dann erhält der aktiveSpieler ganz einfach ne neue Karte. Jetzt kann er wieder einen Knopf seiner
+    Wahlt drücken.:)
+    else (
+            player:drawCard($gameID)
+        )
+
 
 };
 
@@ -107,13 +121,14 @@ declare function player:calculateCardValue($gameID as xs:string, $playerID as xs
 };
 
 declare
-    %updating
-function player:drawCard($gameID, $playerID as xs:string){
+%updating
+function player:drawCard($gameID){
+    let $playerID := $player:games[id = $gameID]/activePlayer
     let $player := $player:games/game[id = $gameID]/players/player[id = $playerID]
     let $hand := $player/currentHand
     let $card := game:drawCard($gameID)
 
-    return(
+    return (
         insert node $card into $hand
     )
 };
