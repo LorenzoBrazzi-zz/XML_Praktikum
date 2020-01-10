@@ -13,6 +13,7 @@ declare namespace random = "http://basex.org/modules/random";
 declare namespace update = "http://basex.org/modules/update";
 
 declare variable $game:games := db:open("games")/games;
+declare variable $game:d := game:shuffleDeck();
 
 declare function game:getGame() {
     $game:games
@@ -52,7 +53,7 @@ declare function game:createGame($names as xs:string+, $balances as xs:integer+,
                 </chips>
             </cashPool>
             <dealer></dealer>
-            <deck></deck>
+            {$game:d}
         </game>
     )
 };
@@ -130,15 +131,18 @@ function game:shuffleDeck() as element(cards){
 declare
 %updating
 function game:setShuffledDeck($gameID as xs:string){
-    let $deck := $game:games/game[id = $gameID]/deck
+    let $deck := $game:games/game[id = $gameID]/cards
     let $shuffled := game:shuffleDeck()
 
-    return replace value of node $deck with $shuffled
+    return (
+        delete node $deck,
+        insert node $shuffled into $game:games/game[id = $gameID]
+    )
 };
 
 (:Erhatle Deck für diverse andere Funktionen:)
 declare function game:getDeck($gameID as xs:string) as element(cards){
-    let $deck := $game:games/game[id = $gameID]/deck
+    let $deck := $game:games/game[id = $gameID]/cards
     return $deck
 };
 
