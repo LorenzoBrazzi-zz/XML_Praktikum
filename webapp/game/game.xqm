@@ -146,7 +146,7 @@ declare function game:getDeck($gameID as xs:string) as element(cards){
 zu entfernen:)
 declare
     %updating
-function game:drawPlayer($gameID as xs:string) as element(card){
+function game:drawCard($gameID as xs:string){
     let $deck := game:getDeck($gameID)
     let $card := $deck/card[1]
 
