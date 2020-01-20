@@ -157,3 +157,23 @@ function controller:testIns($gameID as xs:string){
     player:setInsurance($gameID)
 };
 
+declare
+%updating
+%rest:path("bj/testDealer1/{$gameID}")
+%rest:GET
+function controller:testDealer1($gameID as xs:string){
+    dealer:drawCard($gameID)
+
+};
+
+declare
+%updating
+%rest:path("bj/testDealer2/{$gameID}")
+%rest:GET
+function controller:testDealer2($gameID as xs:string){
+    dealer:turnCard($gameID)
+
+};
+
+
+

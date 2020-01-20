@@ -46,7 +46,7 @@ declare function game:createGame($names as xs:string+, $balances as xs:integer+,
             <activePlayer>{$players[1]/id/text()}</activePlayer>
             <dealer>
                 <currentHand></currentHand>
-                <isInsurance></isInsurance>
+                <isInsurance>{fn:false()}</isInsurance>
             </dealer>
             {$game:d}
         </game>

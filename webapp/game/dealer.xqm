@@ -10,7 +10,7 @@ declare variable $dealer:games := db:open("games")/games;
 declare
 %updating
 function dealer:drawCard($gameID as xs:string) {
-    let $hand := $dealer:games/game[id=$gameID]/dealer/currentHand
+    let $hand := $dealer:games/game[id = $gameID]/dealer/currentHand
     let $card := game:drawCard($gameID)
 
     return (
@@ -22,15 +22,21 @@ function dealer:drawCard($gameID as xs:string) {
 declare
 %updating
 function dealer:turnCard($gameID as xs:string){
-    let $hand := $dealer:games/game[id=$gameID]/dealer/currentHand
+    let $hand := $dealer:games/game[id = $gameID]/dealer/currentHand
     let $cards := $hand/card
-    for  $i in $cards
-    return replace value of node $i/hidden with false()
-
+    return (for $i in $cards
+    return replace value of node $i/hidden with false(),
+    dealer:setInsurance($gameID))
 };
 
 declare
 %updating
 function dealer:setInsurance($gameID as xs:string){
-    replace value of node $dealer:games/game[id=$gameID]/dealer/isInsurance with true()
+    let $hand := $dealer:games/game[id = $gameID]/dealer/currentHand
+    let $cards := $hand/card
+    return ( if ($cards[2]/value = "A") then
+        replace value of node $dealer:games/game[id = $gameID]/dealer/isInsurance with true()
+    else
+        replace value of node $dealer:games/game[id = $gameID]/dealer/isInsurance with true()
+    )
 };
