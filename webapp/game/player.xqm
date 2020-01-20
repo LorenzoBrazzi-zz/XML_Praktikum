@@ -115,7 +115,7 @@ function player:setInsurance($gameID as xs:string){
     let $playerID := $player:games/game[id = $gameID]/activePlayer
     let $path := $player:games/game[id = $gameID]/players/player[id = $playerID]
 
-    return(
+    return (
         replace value of node $path/insurance with fn:true()
     )
 };
@@ -160,6 +160,19 @@ function player:drawCard($gameID as xs:string) {
         game:popDeck($gameID)
     )
 };
+
+declare
+%updating
+function player:drawCards($gameID as xs:string, $playerID as xs:string) {
+    let $p := $player:games/game[id = $gameID]/players/player[id = $playerID]
+    let $hand := $p/currentHand/cards
+    let $deck := game:getDeck($gameID)
+
+    for $i in (1, 2)
+    return (insert node $deck/card[1] as first into $hand,
+    delete node $deck/card[1])
+};
+
 
 declare
 %updating

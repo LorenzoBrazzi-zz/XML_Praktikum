@@ -175,5 +175,14 @@ function controller:testDealer2($gameID as xs:string){
 
 };
 
+declare
+%updating
+%rest:path("bj/testDealOut/{$gameID}")
+%rest:GET
+function controller:testDealOut($gameID as xs:string){
+    game:dealOutCards($gameID)
+
+};
+
 
 

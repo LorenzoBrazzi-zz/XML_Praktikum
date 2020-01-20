@@ -145,7 +145,7 @@ declare function game:getDeck($gameID as xs:string) as element(cards){
 
 (:Funktion für Spieler und Dealer um eine Karte zu ziehen und zugleich die gezogene Karte aus dem Deck Stack
 zu entfernen:)
-declare function game:drawCard($gameID as xs:string) as element (card){
+declare function game:drawCard($gameID as xs:string) as element(card){
     let $deck := game:getDeck($gameID)
     let $card := $deck/card[1]
 
@@ -155,14 +155,18 @@ declare function game:drawCard($gameID as xs:string) as element (card){
 (:Nach ziehen einer Karte wird diese aus dem Stack entfernt, Controller muss diese hier bei jeder Draw funktion
 extern aufrufen:)
 declare
-    %updating
+%updating
 function game:popDeck($gameID as xs:string){
     let $deck := game:getDeck($gameID)
     return delete node $deck/card[1]
 };
 
+(: Kriegen alle die Selbe Karte!! Fehler muss behoben werden nächstes mal! :)
 declare
 %updating
 function game:dealOutCards($gameID as xs:string){
+    for $p in $game:games/game[id = $gameID]/players/player
+    return player:drawCards($gameID, $p/id),
+    dealer:drawCards($gameID)
 
 };

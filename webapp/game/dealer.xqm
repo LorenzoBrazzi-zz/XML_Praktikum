@@ -21,12 +21,23 @@ function dealer:drawCard($gameID as xs:string) {
 
 declare
 %updating
+function dealer:drawCards($gameID as xs:string) {
+    let $hand := $dealer:games/game[id = $gameID]/dealer/currentHand
+    let $deck := game:getDeck($gameID)
+
+    for $i in (1, 2)
+    return (insert node $deck/card[1] as first into $hand,
+    delete node $deck/card[1])
+
+};
+
+declare
+%updating
 function dealer:turnCard($gameID as xs:string){
     let $hand := $dealer:games/game[id = $gameID]/dealer/currentHand
     let $cards := $hand/card
-    return (for $i in $cards
-    return replace value of node $i/hidden with false(),
-    dealer:setInsurance($gameID))
+    for $i in $cards
+    return replace value of node $i/hidden with false()
 };
 
 declare
@@ -34,9 +45,9 @@ declare
 function dealer:setInsurance($gameID as xs:string){
     let $hand := $dealer:games/game[id = $gameID]/dealer/currentHand
     let $cards := $hand/card
-    return ( if ($cards[2]/value = "A") then
+    return ( if ($cards[1]/value = "A") then
         replace value of node $dealer:games/game[id = $gameID]/dealer/isInsurance with true()
     else
-        replace value of node $dealer:games/game[id = $gameID]/dealer/isInsurance with true()
+        replace value of node $dealer:games/game[id = $gameID]/dealer/isInsurance with false()
     )
 };
