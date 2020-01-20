@@ -53,7 +53,7 @@ function player:setBet($gameID as xs:string, $bet as element(chips)) {
         if ($activePlayerNewBalance < 5) then ( delete node $path)
         else (
             replace value of node $path/currentBet with xs:integer($amount),
-            replace value of node $path/balance with$activePlayerNewBalance
+            replace value of node $path/balance with $activePlayerNewBalance
         ),
         game:setActivePlayer($gameID)
     )
@@ -109,6 +109,17 @@ er schließlich schon verloren hat. Demnach muss der nöchste activePlayer geset
         )
 };
 
+declare
+%updating
+function player:setInsurance($gameID as xs:string){
+    let $playerID := $player:games[id = $gameID]/activePlayer
+    let $path := $player:games/game[id = $gameID]/players/player[id = $playerID]
+
+    return(
+        replace value of node $path/insurance with fn:true()
+    )
+};
+
 (:
 Berechnet den Int Value der Chips Objekte um für die anderen Funktionen die Rechnung zu erleichtern.
 Der Spieler wählt sozusagen seine zu setzenden Chips einfach aus, und im Backend wird dies automatisch zu einem Int
@@ -152,9 +163,29 @@ function player:drawCard($gameID as xs:string) {
 
 declare
 %updating
-function player:payoutBalanceNormal($gameID as xs:string, $playerID){
+function player:payoutBalanceNormal($gameID as xs:string, $playerID as xs:string){
     let $player := $player:games/game[id = $gameID]/players/player[id = $playerID]
     let $newBalance := $player/balance + $player/currentBet * 2
+    return (
+        replace value of node $player/balance with $newBalance
+    )
+};
+
+declare
+%updating
+function player:payoutBJ($gameID as xs:string, $playerID as xs:string){
+    let $player := $player:games/game[id = $gameID]/players/player[id = $playerID]
+    let $newBalance := $player/balance + $player/currentBet + xs:integer($player/currentBet * 1.5)
+    return (
+        replace value of node $player/balance with $newBalance
+    )
+};
+
+declare
+%updating
+function player:payoutInsurance($gameID as xs:string, $playerID as xs:string){
+    let $player := $player:games/game[id = $gameID]/players/player[id = $playerID]
+    let $newBalance := $player/balance + xs:integer($player/currentBet * 0.5)
     return (
         replace value of node $player/balance with $newBalance
     )

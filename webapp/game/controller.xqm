@@ -149,3 +149,11 @@ function controller:testWin($gameID as xs:string, $playerID as xs:string){
     player:payoutBalanceNormal($gameID, $playerID)
 };
 
+declare
+%updating
+%rest:path("bj/testIns/{$gameID}")
+%rest:GET
+function controller:testIns($gameID as xs:string){
+    player:setInsurance($gameID)
+};
+

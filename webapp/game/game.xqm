@@ -44,7 +44,10 @@ declare function game:createGame($names as xs:string+, $balances as xs:integer+,
             <minBet>{$minBet}</minBet>
             <players>{$players}</players>
             <activePlayer>{$players[1]/id/text()}</activePlayer>
-            <dealer></dealer>
+            <dealer>
+                <currentHand></currentHand>
+                <isInsurance></isInsurance>
+            </dealer>
             {$game:d}
         </game>
     )
@@ -63,7 +66,9 @@ function game:deleteGame($gameID as xs:string){
     delete node $game:games/game[id = $gameID]
 };
 
-(:Nächsten Spieler lokalisieren und festlegen als Aktiver Spieler:)
+(:Nächsten Spieler lokalisieren und festlegen als Aktiver Spieler
+  Falls letzter Spieler fertig ist, rufe evaluateRound() auf
+:)
 declare
 %updating
 function game:setActivePlayer($gameID as xs:string){
@@ -154,4 +159,10 @@ declare
 function game:popDeck($gameID as xs:string){
     let $deck := game:getDeck($gameID)
     return delete node $deck/card[1]
+};
+
+declare
+%updating
+function game:dealOutCards($gameID as xs:string){
+
 };
