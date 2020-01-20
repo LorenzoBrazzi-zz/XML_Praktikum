@@ -93,7 +93,7 @@ function player:double($gameID as xs:string) {
 declare
 %updating
 function player:hit($gameID as xs:string){
-    let $playerID := $player:games[id = $gameID]/activePlayer
+    let $playerID := $player:games/game[id = $gameID]/activePlayer
     let $score := player:calculateCardValue($gameID)
     (:Wenn Aktiver Spieler mehr als 21 Scorerpunkte hat, dann kann er folglich keine weiteren Karten mehr ziehen, da
 er schließlich schon verloren hat. Demnach muss der nöchste activePlayer gesetted werden!:)
@@ -112,7 +112,7 @@ er schließlich schon verloren hat. Demnach muss der nöchste activePlayer geset
 declare
 %updating
 function player:setInsurance($gameID as xs:string){
-    let $playerID := $player:games[id = $gameID]/activePlayer
+    let $playerID := $player:games/game[id = $gameID]/activePlayer
     let $path := $player:games/game[id = $gameID]/players/player[id = $playerID]
 
     return(
