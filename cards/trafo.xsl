@@ -5,6 +5,7 @@
     Im Spielfeld sollten die Knöpfe:    STAND, HIT, DOUBLE, INSURANCE fixiert sein.
     Zusätzlich muss jeder Chip einmal abgebildet sein (am besten die Zeile über den Knöpfen), die dann im Backend anklickbar
     gemacht werden.
+    Der Insurance knopf soll grau sein bis Insurance möglich wird. Dann soll dieser Heller und farbig werden!
 -->
     <!-- Jede card wird als ein Svg element ausgegeben -->
     <xsl:template match="/card">
