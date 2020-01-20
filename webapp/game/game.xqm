@@ -34,7 +34,7 @@ declare function game:createGame($names as xs:string+, $balances as xs:integer+,
     let $gameId := xs:string(uuid:randomUUID())
     let $players := (for $i in (1 to fn:count($balances))
     return (
-        player:createPlayer(xs:string(uuid:randomUUID()), card:emptyHand(), chip:emptyChipSet(), $balances[$i],
+        player:createPlayer(xs:string(uuid:randomUUID()), card:emptyHand(), $minBet, $balances[$i],
                 $names[$i], fn:false(), $i)
     ))
     return (
@@ -44,14 +44,6 @@ declare function game:createGame($names as xs:string+, $balances as xs:integer+,
             <minBet>{$minBet}</minBet>
             <players>{$players}</players>
             <activePlayer>{$players[1]/id/text()}</activePlayer>
-            <cashPool>
-                <chips>
-                    <chip>
-                        <value>100</value>
-                        <color>green</color>
-                    </chip>
-                </chips>
-            </cashPool>
             <dealer></dealer>
             {$game:d}
         </game>

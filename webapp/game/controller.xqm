@@ -123,3 +123,29 @@ function controller:double($gameID as xs:string){
     player:double($gameID)
 };
 
+declare
+%updating
+%rest:path("bj/setBet/{$gameID}")
+%rest:GET
+function controller:testSetBet($gameID as xs:string){
+    player:setBet($gameID, <chips>
+        <chip>
+            <value>100</value>
+            <color>Red</color>
+        </chip>
+        <chip>
+            <value>100</value>
+            <color>Red</color>
+        </chip>
+    </chips>
+    )
+};
+
+declare
+%updating
+%rest:path("bj/win/{$gameID}/{$playerID}")
+%rest:GET
+function controller:testWin($gameID as xs:string, $playerID as xs:string){
+    player:payoutBalanceNormal($gameID, $playerID)
+};
+

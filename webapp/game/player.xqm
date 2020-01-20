@@ -8,7 +8,7 @@ import module namespace game = "bj/game" at "game.xqm";
 declare variable $player:games := db:open("games")/games;
 
 (: WERTE NUR ZUM TESTEN GEÄNDERT :)
-declare function player:createPlayer($id as xs:string, $currentHand as element(cards), $currentBet as element(chips),
+declare function player:createPlayer($id as xs:string, $currentHand as element(cards), $bet as xs:integer,
         $balance as xs:integer, $name as xs:string, $insurance as xs:boolean, $position as xs:integer) as element(player){
     <player>
         <id>{$id}</id>
@@ -17,7 +17,7 @@ declare function player:createPlayer($id as xs:string, $currentHand as element(c
         <currentHand>
             <cards></cards>
         </currentHand>
-        <currentBet></currentBet>
+        <currentBet>{$bet}</currentBet>
         <insurance>{$insurance}</insurance>
         <position>{$position}</position>
     </player>
@@ -52,7 +52,7 @@ function player:setBet($gameID as xs:string, $bet as element(chips)) {
     ) else (
         if ($activePlayerNewBalance < 5) then ( delete node $path)
         else (
-            replace value of node $path/currentBet with ($path/currentBet + $amount),
+            replace value of node $path/currentBet with xs:integer($amount),
             replace value of node $path/balance with$activePlayerNewBalance
         ),
         game:setActivePlayer($gameID)
@@ -117,10 +117,11 @@ konvetiert und so auch dann angezeigt.
 declare
 %private
 function player:calculateChipsValue($chips as element(chips)){
-    fn:sum(
+    let $result := fn:sum(
             for $c in $chips/chip/value
             return $c
     )
+    return $result
 };
 
 (:Berechnet den Blattscore des Spielers:)
@@ -146,5 +147,15 @@ function player:drawCard($gameID as xs:string) {
     return (
         insert node $card as first into $hand,
         game:popDeck($gameID)
+    )
+};
+
+declare
+%updating
+function player:payoutBalanceNormal($gameID as xs:string, $playerID){
+    let $player := $player:games/game[id = $gameID]/players/player[id = $playerID]
+    let $newBalance := $player/balance + $player/currentBet * 2
+    return (
+        replace value of node $player/balance with $newBalance
     )
 };
