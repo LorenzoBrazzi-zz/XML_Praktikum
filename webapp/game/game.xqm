@@ -77,12 +77,12 @@ function game:setActivePlayer($gameID as xs:string){
     let $players := $game:games/game[id = $gameID]/players
     let $newPlayerID := $players/$oldPlayer/following::*[1]/id/text()
     return (
-        if(game:isRoundCompleted()) then (
-        if (fn:empty($newPlayerID)) then (
-            replace value of node $oldPlayerID with $players/player[1]/id/text()
-        )
-        else (replace value of node $oldPlayerID with $newPlayerID))
-        else(evaluateRound($gameID))
+        if(fn:not(game:isRoundCompleted($gameID))) then (
+            if (fn:empty($newPlayerID)) then (
+                replace value of node $oldPlayerID with $players/player[1]/id/text()
+            ) else (replace value of node $oldPlayerID with $newPlayerID))
+        else(dealer:turnCard($gameID),
+            game:evaluateRound($gameID))
 
     )
 
@@ -179,5 +179,18 @@ declare function game:isRoundCompleted($gameID as xs:string) as xs:Boolean{
     return (
         if ($activePlayer/position = 5)
         then (fn:true) else (fn:false)
+    )
+};
+
+declare
+%updating
+function game:evaluateRound($gameID as xs:string) {
+    let $players := $game:games/game[id = $gameID]/players
+    let $dealerCardsValue := dealer:calculateDealerValue($gameID)
+
+    for $p in $players
+    return (
+        let $playerCardValue := player:calculateCardValuePlayers($gameID, $p/id/text()),
+        if ($playerCardValue > 21) then (replace value of node $p/won with fn:false()) else ()
     )
 };

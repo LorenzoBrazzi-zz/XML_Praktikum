@@ -20,6 +20,7 @@ declare function player:createPlayer($id as xs:string, $currentHand as element(c
         <currentBet>{$bet}</currentBet>
         <insurance>{$insurance}</insurance>
         <position>{$position}</position>
+        <won></won>
     </player>
 };
 
@@ -136,8 +137,18 @@ function player:calculateChipsValue($chips as element(chips)){
 };
 
 (:Berechnet den Blattscore des Spielers:)
-declare function player:calculateCardValue($gameID as xs:string){
+declare function player:calculateCardValue($gameID as xs:string) as xs:integer{
     let $playerID := $player:games/game[id = $gameID]/activePlayer
+    let $hand := $player:games/game[id = $gameID]/players/player[id = $playerID]/currentHand/cards/*
+
+    return fn:sum(
+            for $c in $hand/value
+            return $c
+    )
+};
+
+(:Berechnet den Blattscore des Spielers:)
+declare function player:calculateCardValuePlayers($gameID as xs:string, $playerID as xs:string) as xs:integer{
     let $hand := $player:games/game[id = $gameID]/players/player[id = $playerID]/currentHand/cards/*
 
     return fn:sum(
