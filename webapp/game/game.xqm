@@ -173,6 +173,24 @@ function game:dealOutCards($gameID as xs:string){
 
 };
 
+(:
+declare
+%updating
+function game:dealOutOneRound($gameID as xs:string){
+    let $g := $game:games/game[id = $gameID]
+    return (
+        for $p in $game:games/game[id = $gameID]/players/player
+        return (
+            let $pos := xs:integer($p/position)
+            return ( insert node $game:games/game[id = $gameID]/cards/card[($pos * 2) - 1] into $p/currentHand/cards,
+            insert node $game:games/game[id = $gameID]/cards/card[($pos * 2)] into $p/currentHand/cards,
+            delete node $game:games/game[id = $gameID]/cards/card[($pos * 2) - 1],
+            delete node $game:games/game[id = $gameID]/cards/card[($pos * 2)])
+        )
+    )
+};
+:)
+
 declare function game:isRoundCompleted($gameID as xs:string) as xs:Boolean{
     let $activeID := $game:games/game[id = $gameID]/activePlayer
     let $activePlayer := $game:games/game[id = $gameID]/players/player[id = $activeID]
