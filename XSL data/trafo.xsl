@@ -525,14 +525,14 @@
         <!-- coins with value defines a chip -->
 
         <defs>
-            <g id="chip-5">
+            <g id="chip-1">
                 <use xlink:href="#default-chip" />
                 <use xlink:href="#chip-value-1" x="-2" y="5" />
             </g>
         </defs>
 
         <defs>
-            <g id="chip-10">
+            <g id="chip-5">
                 <use xlink:href="#default-chip" />
                 <use xlink:href="#chip-value-5" x="-5" y="5" />
             </g>
