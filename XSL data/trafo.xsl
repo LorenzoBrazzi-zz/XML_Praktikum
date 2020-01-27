@@ -497,21 +497,17 @@
             </h>
         </defs>
 
-        <!-- different chip values: from 5 to 1000 -->
+        <!-- different chip values: from 1 to 1000 -->
+        <defs>
+            <text id="chip-value-1" font-size="11.5" fill="black">1</text>
+        </defs>
+
         <defs>
             <text id="chip-value-5" font-size="11.5" fill="black">5</text>
         </defs>
 
         <defs>
-            <text id="chip-value-10" font-size="11.5" fill="black">10</text>
-        </defs>
-
-        <defs>
-            <text id="chip-value-20" font-size="11.5" fill="black">20</text>
-        </defs>
-
-        <defs>
-            <text id="chip-value-50" font-size="11.5" fill="black">50</text>
+            <text id="chip-value-25" font-size="11.5" fill="black">25</text>
         </defs>
 
         <defs>
@@ -531,28 +527,21 @@
         <defs>
             <g id="chip-5">
                 <use xlink:href="#default-chip" />
-                <use xlink:href="#chip-value-5" x="-2" y="5" />
+                <use xlink:href="#chip-value-1" x="-2" y="5" />
             </g>
         </defs>
 
         <defs>
             <g id="chip-10">
                 <use xlink:href="#default-chip" />
-                <use xlink:href="#chip-value-10" x="-5" y="5" />
+                <use xlink:href="#chip-value-5" x="-5" y="5" />
             </g>
         </defs>
 
         <defs>
             <g id="chip-20">
                 <use xlink:href="#default-chip" />
-                <use xlink:href="#chip-value-20" x="-5" y="5" />
-            </g>
-        </defs>
-
-        <defs>
-            <g id="chip-50">
-                <use xlink:href="#default-chip" />
-                <use xlink:href="#chip-value-50" x="-5" y="5" />
+                <use xlink:href="#chip-value-25" x="-5" y="5" />
             </g>
         </defs>
 
