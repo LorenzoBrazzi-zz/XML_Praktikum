@@ -539,7 +539,7 @@
         </defs>
 
         <defs>
-            <g id="chip-20">
+            <g id="chip-25">
                 <use xlink:href="#default-chip" />
                 <use xlink:href="#chip-value-25" x="-5" y="5" />
             </g>
