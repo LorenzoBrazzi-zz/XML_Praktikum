@@ -3,6 +3,7 @@
                 xmlns:xs="http://www.w3.org/2001/XMLSchema"
                 exclude-result-prefixes="xs"
                 version="2.0">
+    <xsl:variable name="nummer5" select="number(50)"/>
 
     <xsl:template match="/">
         <svg width="100%" height="100%" version="1.1" viewBox="0 0 1600 900"
@@ -37,6 +38,12 @@
             <text x="700" y="350" font-family="Arial" font-size="15" fill="black">
                 Insurance Pays 2 to 1
             </text>
+
+            <!-- UI-->
+            <circle cx="{$nummer5}" cy="50" r="50" fill="red"/>
+            <circle cx="155" cy="50" r="50" fill="blue"/>
+            <circle cx="255" cy="50" r="50" fill="purple"/>
+
         </svg>
     </xsl:template>
 
