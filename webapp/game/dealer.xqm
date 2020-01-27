@@ -12,10 +12,22 @@ declare
 function dealer:drawCard($gameID as xs:string) {
     let $hand := $dealer:games/game[id = $gameID]/dealer/currentHand
     let $card := game:drawCard($gameID)
+    let $val := dealer:calculateDealerValue($gameID)
 
     return (
-        insert node $card as first into $hand,
-        game:popDeck($gameID)
+        if ($val < 17) then (
+            insert node $card as first into $hand,
+            game:popDeck($gameID)
+        )
+        else ()
+    )
+};
+
+declare function dealer:calculateDealerValue($gameID as xs:string) as xs:string{
+    let $hand := $dealer:games/game[id = $gameID]/dealer/currentHand
+    return fn:sum(
+            for $c in $hand/value
+            return $c
     )
 };
 
@@ -25,9 +37,10 @@ function dealer:drawCards($gameID as xs:string) {
     let $hand := $dealer:games/game[id = $gameID]/dealer/currentHand
     let $deck := game:getDeck($gameID)
 
-    for $i in (1, 2)
-    return (insert node $deck/card[1] as first into $hand,
-    delete node $deck/card[1])
+    return
+        for $i in (1, 2)
+        return (insert node $deck/card[1] as first into $hand,
+        delete node $deck/card[1])
 
 };
 

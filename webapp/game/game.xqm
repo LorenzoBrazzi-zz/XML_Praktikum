@@ -77,12 +77,12 @@ function game:setActivePlayer($gameID as xs:string){
     let $players := $game:games/game[id = $gameID]/players
     let $newPlayerID := $players/$oldPlayer/following::*[1]/id/text()
     return (
-        if(game:isRoundCompleted()) then (
+        if(game:isRoundCompleted($gameID)) then (
         if (fn:empty($newPlayerID)) then (
             replace value of node $oldPlayerID with $players/player[1]/id/text()
         )
         else (replace value of node $oldPlayerID with $newPlayerID))
-        else(evaluateRound($gameID))
+        else(game:evaluateRound($gameID))
 
     )
 
