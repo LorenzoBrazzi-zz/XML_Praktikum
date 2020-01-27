@@ -20,7 +20,7 @@ declare function player:createPlayer($id as xs:string, $currentHand as element(c
         <currentBet>{$bet}</currentBet>
         <insurance>{$insurance}</insurance>
         <position>{$position}</position>
-        <won></won>
+        <won bj="false"></won>
     </player>
 };
 

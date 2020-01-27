@@ -77,12 +77,12 @@ function game:setActivePlayer($gameID as xs:string){
     let $players := $game:games/game[id = $gameID]/players
     let $newPlayerID := $players/$oldPlayer/following::*[1]/id/text()
     return (
-        if(fn:not(game:isRoundCompleted($gameID))) then (
+        if (fn:not(game:isRoundCompleted($gameID))) then (
             if (fn:empty($newPlayerID)) then (
                 replace value of node $oldPlayerID with $players/player[1]/id/text()
             ) else (replace value of node $oldPlayerID with $newPlayerID))
-        else(dealer:turnCard($gameID),
-            game:evaluateRound($gameID))
+        else (dealer:turnCard($gameID),
+        game:evaluateRound($gameID))
     )
 
 (: WIR MÜSSEN NOCH DEN FALL ABCHECNKEN WENN KEIN SPIELER MEHR DA IST ALSO WENN activePlayer = ""
@@ -170,6 +170,7 @@ function game:dealOutCards($gameID as xs:string){
     return player:drawCards($gameID, $p/id),
     dealer:drawCards($gameID)
 
+
 };
 
 declare function game:isRoundCompleted($gameID as xs:string) as xs:Boolean{
@@ -183,13 +184,45 @@ declare function game:isRoundCompleted($gameID as xs:string) as xs:Boolean{
 
 declare
 %updating
-function game:evaluateRound($gameID as xs:string) {
+function game:determineWinners($gameID as xs:string) {
     let $players := $game:games/game[id = $gameID]/players
     let $dealerCardsValue := dealer:calculateDealerValue($gameID)
 
+
     for $p in $players
     return (
-        let $playerCardValue := player:calculateCardValuePlayers($gameID, $p/id/text()),
-        if ($playerCardValue > 21) then (replace value of node $p/won with fn:false()) else ()
+        let $numberOfCards := fn:count($p/currentHand/card)
+        let $playerCardValue := player:calculateCardValuePlayers($gameID, $p/id/text())
+        return (
+            if (($playerCardValue = 21) or ($numberOfCards = 2)) then (
+                replace node $p/won with (
+                    <won bj="true">{fn:true()}</won>
+                )
+            ) else if (($playerCardValue) > 21 or ($dealerCardsValue <= $playerCardValue))
+                then ( replace value of node $p/won with fn:false())
+            else (
+                replace value of node $p/won with fn:true()
+            )
+        )
+    )
+};
+
+declare
+%updating
+function game:evaluateRound($gameID as xs:string) {
+    let $players := $game:games/game[id = $gameID]/players
+    let $insurancePossible := $game:games/game[id = $gameID]/dealer/isInsurance
+
+    for $p in $players
+    return (
+        let $playerWon := $p/won
+        return (if ($playerWon/@bj = "true") then (
+                player:payoutBJ($gameID, $p/id/text())
+            ) else if ($playerWon) then (
+                player:payoutBalanceNormal($gameID, $p/id/text())
+            ) else if (($insurancePossible) and ($p/insurance)) then (
+                player:payoutInsurance($gameID, $p/id/text())
+            ) else ()
+        )
     )
 };
