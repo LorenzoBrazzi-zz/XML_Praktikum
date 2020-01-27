@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xml-stylesheet href="trafo.xsl" type="text/xsl" ?>
+<card>
+    <value>K</value>
+    <color>Spade</color>
+    <hidden>false</hidden>
+</card>

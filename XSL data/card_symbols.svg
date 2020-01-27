@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<svg width="100%" height="auto" viewBox="0 0 2000 1200" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    
+    <!-- LOGO -->
+    <image xlink:href="https://cdn.imgbin.com/1/7/0/imgbin-baccarat-game-blackjack-logo-telephone-poker-chips-LRwKRTbEWwrFsjD4irsaj25ug.jpg" x="120" y="50" height="100" width="1175" />
+    
+    <!-- SCHWARZE ZAHLEN AB HIER -->
+    <!-- Schwarze Zahl: 1 -->
+    <defs>
+        <g id="schwarz_1">
+            <!-- obere Zahl -->
+            <text id="schwarze_zahl_2" x="80" y="70" font-size="45" fill="black">1</text>
+            <!-- untere Zahl -->
+            <use xlink:href="#schwarze_zahl_1" x="200" y="290" transform="rotate(180, 268, 330)" />
+        </g>
+    </defs>
+
+    <!-- Schwarze Zahl: 2 -->
+    <defs>
+        <g id="schwarz_2">
+            <!-- obere Zahl -->
+            <text id="schwarze_zahl_2" x="80" y="70" font-size="45" fill="black">2</text>
+            <!-- untere Zahl -->
+            <use xlink:href="#schwarze_zahl_2" x="200" y="290" transform="rotate(180, 268, 330)" />
+        </g>
+    </defs>
+
+    <!-- Schwarze Zahl: 3 -->
+    <defs>
+        <g id="schwarz_3">
+            <!-- obere Zahl -->
+            <text id="schwarze_zahl_3" x="80" y="70" font-size="45" fill="black">3</text>
+            <!-- untere Zahl -->
+            <use xlink:href="#schwarze_zahl_3" x="200" y="290" transform="rotate(180, 268, 330)" />
+        </g>
+    </defs>
+    
+    <!-- Schwarze Zahl: 4 -->
+    <defs>
+        <g id="schwarz_4">
+            <!-- obere Zahl -->
+            <text id="schwarze_zahl_4" x="80" y="70" font-size="45" fill="black">4</text>
+            <!-- untere Zahl -->
+            <use xlink:href="#schwarze_zahl_4" x="200" y="290" transform="rotate(180, 268, 330)" />
+        </g>
+    </defs>
+
+    <!-- Schwarze Zahl: 5 -->
+    <defs>
+        <g id="schwarz_5">
+            <!-- obere Zahl -->
+            <text id="schwarze_zahl_5" x="80" y="70" font-size="45" fill="black">5</text>
+            <!-- untere Zahl -->
+            <use xlink:href="#schwarze_zahl_3" x="200" y="290" transform="rotate(180, 268, 330)" />
+        </g>
+    </defs>
+
+    <!-- Schwarze Zahl: 6 -->
+    <defs>
+        <g id="schwarz_6">
+            <!-- obere Zahl -->
+            <text id="schwarze_zahl_6" x="80" y="70" font-size="45" fill="black">6</text>
+            <!-- untere Zahl -->
+            <use xlink:href="#schwarze_zahl_6" x="200" y="290" transform="rotate(180, 268, 330)" />
+        </g>
+    </defs>
+
+    <!-- Schwarze Zahl: 7 -->
+    <defs>
+        <g id="schwarz_7">
+            <!-- obere Zahl -->
+            <text id="schwarze_zahl_7" x="80" y="70" font-size="45" fill="black">7</text>
+            <!-- untere Zahl -->
+            <use xlink:href="#schwarze_zahl_7" x="200" y="290" transform="rotate(180, 268, 330)" />
+        </g>
+    </defs>
+
+    <!-- Schwarze Zahl: 8 -->
+    <defs>
+        <g id="schwarz_8">
+            <!-- obere Zahl -->
+            <text id="schwarze_zahl_8" x="80" y="70" font-size="45" fill="black">8</text>
+            <!-- untere Zahl -->
+            <use xlink:href="#schwarze_zahl_8" x="200" y="290" transform="rotate(180, 268, 330)" />
+        </g>
+    </defs>
+
+    <!-- Schwarze Zahl: 9 -->
+    <defs>
+        <g id="schwarz_9">
+            <!-- obere Zahl -->
+            <text id="schwarze_zahl_9" x="80" y="70" font-size="45" fill="black">9</text>
+            <!-- untere Zahl -->
+            <use xlink:href="#schwarze_zahl_9" x="200" y="290" transform="rotate(180, 268, 330)" />
+        </g>
+    </defs>
+
+    <!-- Schwarze Zahl: 10 -->
+    <defs>
+        <g id="schwarz_10">
+            <!-- obere Zahl -->
+            <text id="schwarze_zahl_10" x="80" y="70" font-size="45" fill="black">10</text>
+            <!-- untere Zahl -->
+            <use xlink:href="#schwarze_zahl_10" x="200" y="290" transform="rotate(180, 268, 330)" />
+        </g>
+    </defs>
+
+    <!-- ENDE SCHWARZE ZAHLEN -->
+
+    <!-- ROTE ZAHLEN AB HIER -->
+    <!-- Rote Zahl: 1 -->
+    <defs>
+        <g id="rot_1">
+            <!-- obere Zahl -->
+            <text id="rote_zahl_1" x="80" y="70" font-size="45" fill="rgb(191, 48, 38)">1</text>
+            <!-- untere Zahl -->
+            <use xlink:href="#rote_zahl_1" x="200" y="290" transform="rotate(180, 268, 330)" />
+        </g>
+    </defs>
+
+    <!-- Rote Zahl: 2 -->
+    <defs>
+        <g id="rot_2">
+            <!-- obere Zahl -->
+            <text id="rote_zahl_2" x="80" y="70" font-size="45" fill="rgb(191, 48, 38)">2</text>
+            <!-- untere Zahl -->
+            <use xlink:href="#rote_zahl_2" x="200" y="290" transform="rotate(180, 268, 330)" />
+        </g>
+    </defs>
+
+    <!-- Rote Zahl: 3 -->
+    <defs>
+        <g id="rot_3">
+            <!-- obere Zahl -->
+            <text id="rote_zahl_3" x="80" y="70" font-size="45" fill="rgb(191, 48, 38)">3</text>
+            <!-- untere Zahl -->
+            <use xlink:href="#rote_zahl_3" x="200" y="290" transform="rotate(180, 268, 330)" />
+        </g>
+    </defs>
+
+    <!-- Rote Zahl: 4 -->
+    <defs>
+        <g id="rot_4">
+            <!-- obere Zahl -->
+            <text id="rote_zahl_4" x="80" y="70" font-size="45" fill="rgb(191, 48, 38)">4</text>
+            <!-- untere Zahl -->
+            <use xlink:href="#rote_zahl_4" x="200" y="290" transform="rotate(180, 268, 330)" />
+        </g>
+    </defs>
+
+    <!-- Rote Zahl: 5 -->
+    <defs>
+        <g id="rot_5">
+            <!-- obere Zahl -->
+            <text id="rote_zahl_5" x="80" y="70" font-size="45" fill="rgb(191, 48, 38)">5</text>
+            <!-- untere Zahl -->
+            <use xlink:href="#rote_zahl_5" x="200" y="290" transform="rotate(180, 268, 330)" />
+        </g>
+    </defs>
+
+    <!-- Rote Zahl: 6 -->
+    <defs>
+        <g id="rot_6">
+            <!-- obere Zahl -->
+            <text id="rote_zahl_6" x="80" y="70" font-size="45" fill="rgb(191, 48, 38)">6</text>
+            <!-- untere Zahl -->
+            <use xlink:href="#rote_zahl_6" x="200" y="290" transform="rotate(180, 268, 330)" />
+        </g>
+    </defs>
+
+    <!-- Rote Zahl: 7 -->
+    <defs>
+        <g id="rot_7">
+            <!-- obere Zahl -->
+            <text id="rote_zahl_7" x="80" y="70" font-size="45" fill="rgb(191, 48, 38)">7</text>
+            <!-- untere Zahl -->
+            <use xlink:href="#rote_zahl_7" x="200" y="290" transform="rotate(180, 268, 330)" />
+        </g>
+    </defs>
+
+    <!-- Rote Zahl: 8 -->
+    <defs>
+        <g id="rot_8">
+            <!-- obere Zahl -->
+            <text id="rote_zahl_8" x="80" y="70" font-size="45" fill="rgb(191, 48, 38)">8</text>
+            <!-- untere Zahl -->
+            <use xlink:href="#rote_zahl_8" x="200" y="290" transform="rotate(180, 268, 330)" />
+        </g>
+    </defs>
+
+    <!-- Rote Zahl: 9 -->
+    <defs>
+        <g id="rot_9">
+            <!-- obere Zahl -->
+            <text id="rote_zahl_9" x="80" y="70" font-size="45" fill="rgb(191, 48, 38)">9</text>
+            <!-- untere Zahl -->
+            <use xlink:href="#rote_zahl_9" x="200" y="290" transform="rotate(180, 268, 330)" />
+        </g>
+    </defs>
+
+    <!-- Rote Zahl: 10 -->
+    <defs>
+        <g id="rot_10">
+            <!-- obere Zahl -->
+            <text id="rote_zahl_10" x="80" y="70" font-size="45" fill="rgb(191, 48, 38)">10</text>
+            <!-- untere Zahl -->
+            <use xlink:href="#rote_zahl_10" x="200" y="290" transform="rotate(180, 268, 330)" />
+        </g>
+    </defs>
+
+    <!-- cardN MIT FIGUREN AB HIER -->
+    <!-- Diamond -->
+    <defs>
+        <g id="Diamond_koenig">
+            <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/1/1c/English_pattern_king_of_diamonds.svg" width="250" height="330" x="45" y="20" />
+        </g>
+    </defs>
+    
+    <defs>
+        <g id="Diamond_dame">
+            <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/4/4f/English_pattern_queen_of_diamonds.svg" width="250" height="330" x="45" y="20" />
+        </g>
+    </defs>
+    
+    <defs>
+        <g id="Diamond_bube">
+            <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/1/16/English_pattern_jack_of_diamonds.svg" width="250" height="330" x="45" y="20" />
+        </g>
+    </defs>
+
+    <!-- Heart -->
+    <defs>
+        <g id="Heart_koenig">
+            <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/1/14/English_pattern_king_of_hearts.svg" width="250" height="330" x="45" y="20" />
+        </g>
+    </defs>
+    
+    <defs>
+        <g id="Heart_dame">
+            <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/9/9d/English_pattern_queen_of_hearts.svg" width="250" height="330" x="45" y="20" />
+        </g>
+    </defs>
+    
+    <defs>
+        <g id="Heart_bube">
+            <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/5/56/English_pattern_jack_of_hearts.svg" width="250" height="330" x="45" y="20" />
+        </g>
+    </defs>
+    
+    <!-- Club -->
+    <defs>
+        <g id="Club_koenig">
+            <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/3/3e/English_pattern_king_of_clubs.svg" width="250" height="330" x="45" y="20" />
+        </g>
+    </defs>
+    
+    <defs>
+        <g id="Club_dame">
+            <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/b/b3/English_pattern_queen_of_clubs.svg" width="250" height="330" x="45" y="20" />
+        </g>
+    </defs>
+    
+    <defs>
+        <g id="Club_bube">
+            <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/8/80/English_pattern_jack_of_clubs.svg" width="250" height="330" x="45" y="20" />
+        </g>
+    </defs>
+    
+    <!-- Spade -->
+    <defs>
+        <g id="Spade_koenig">
+            <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/f/f1/English_pattern_king_of_spades.svg" width="250" height="330" x="45" y="20" />
+        </g>
+    </defs>
+    
+    <defs>
+        <g id="Spade_dame">
+            <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/c/ca/English_pattern_queen_of_spades.svg" width="250" height="330" x="45" y="20" />
+        </g>
+    </defs>
+    
+    <defs>
+        <g id="Spade_bube">
+            <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/4/4f/English_pattern_jack_of_spades.svg" width="250" height="330" x="45" y="20" />
+        </g>
+    </defs>
+
+
+    <defs>
+        <g id="Heart">
+            <polygon points="170,160 130,115 210,115" style="stroke:red;fill:red;stroke-width:1"/>
+            <circle cx="150" cy="159" r="20" style="stroke:red;fill:red"/>
+            <circle cx="190" cy="159" r="20" style="stroke:red;fill:red"/>
+        </g>
+    </defs>
+    <defs>
+        <g id="Diamond">
+            <polygon points="170,30 140,80 170,130 200,80" style="fill:red;stroke:red;stroke-width:1"/>
+            <polygon points="170,230 140,280 170,330 200,280" style="fill:red;stroke:red;stroke-width:1"/>
+        </g>
+    </defs>
+    <defs>
+        <g id="Club">
+            <circle cx="170" cy="152" r="27"/>
+            <circle cx="190" cy="195" r="25"/>
+            <circle cx="150" cy="195" r="25"/>
+            <line x1="170" y1="190" x2="170" y2="255" style="stroke:#000;fill:#000;stroke-width:10"/>
+
+        </g>
+    </defs>
+    <defs>
+        <g id="Spade">
+            <polygon points="170,130 130,180 210,180" style="stroke-width:1"/>
+            <circle cx="150" cy="201" r="29"/>
+            <circle cx="190" cy="201" r="29 "/>
+            <line x1="170" y1="190" x2="170" y2="255" style="stroke:#000;fill:#000;stroke-width:10"/>
+
+        </g>
+    </defs>
+
+    <!-- Example card Peak 7 -->
+    <g >
+        <rect height="350" width="250" x="45" y="10" rx="30" ry="30" style="fill:white;stroke:black;stroke-width:5;opacity:1.0" />
+        <!-- bottom right number -->
+        <use xlink:href="#schwarz_10" x="200" y="290" transform="rotate(180, 268, 330)" />        
+        <use xlink:href="#Spade"/>
+    </g>
+</svg>
