@@ -77,10 +77,12 @@ function game:setActivePlayer($gameID as xs:string){
     let $players := $game:games/game[id = $gameID]/players
     let $newPlayerID := $players/$oldPlayer/following::*[1]/id/text()
     return (
+        if(game:isRoundCompleted()) then (
         if (fn:empty($newPlayerID)) then (
             replace value of node $oldPlayerID with $players/player[1]/id/text()
         )
-        else (replace value of node $oldPlayerID with $newPlayerID)
+        else (replace value of node $oldPlayerID with $newPlayerID))
+        else(evaluateRound($gameID))
 
     )
 
@@ -169,4 +171,13 @@ function game:dealOutCards($gameID as xs:string){
     return player:drawCards($gameID, $p/id),
     dealer:drawCards($gameID)
 
+};
+
+declare function game:isRoundCompleted($gameID as xs:string) as xs:Boolean{
+    let $activeID := $game:games/game[id = $gameID]/activePlayer
+    let $activePlayer := $game:games/game[id = $gameID]/players/player[id = $activeID]
+    return (
+        if ($activePlayer/position = 5)
+        then (fn:true) else (fn:false)
+    )
 };
