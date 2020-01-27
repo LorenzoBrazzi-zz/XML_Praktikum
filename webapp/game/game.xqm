@@ -83,7 +83,6 @@ function game:setActivePlayer($gameID as xs:string){
             ) else (replace value of node $oldPlayerID with $newPlayerID))
         else(dealer:turnCard($gameID),
             game:evaluateRound($gameID))
-
     )
 
 (: WIR MÜSSEN NOCH DEN FALL ABCHECNKEN WENN KEIN SPIELER MEHR DA IST ALSO WENN activePlayer = ""
