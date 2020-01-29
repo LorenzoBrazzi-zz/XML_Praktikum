@@ -162,36 +162,32 @@ function game:popDeck($gameID as xs:string){
     return delete node $deck/card[1]
 };
 
-(: Kriegen alle die Selbe Karte!! Fehler muss behoben werden nächstes mal! :)
 declare
 %updating
 function game:dealOutCards($gameID as xs:string){
-    for $p in $game:games/game[id = $gameID]/players/player
-    return player:drawCards($gameID, $p/id),
-    dealer:drawCards($gameID)
-
-
-};
-
-(:
-declare
-%updating
-function game:dealOutOneRound($gameID as xs:string){
     let $g := $game:games/game[id = $gameID]
     return (
-        for $p in $game:games/game[id = $gameID]/players/player
+        let $dealer := $g/dealer
+        for $p in $g/players/player
         return (
             let $pos := xs:integer($p/position)
-            return ( insert node $game:games/game[id = $gameID]/cards/card[($pos * 2) - 1] into $p/currentHand/cards,
-            insert node $game:games/game[id = $gameID]/cards/card[($pos * 2)] into $p/currentHand/cards,
-            delete node $game:games/game[id = $gameID]/cards/card[($pos * 2) - 1],
-            delete node $game:games/game[id = $gameID]/cards/card[($pos * 2)])
+            return ( insert node $g/cards/card[($pos * 2) - 1] into $p/currentHand/cards,
+            insert node $g/cards/card[($pos * 2)] into $p/currentHand/cards,
+            delete node $g/cards/card[($pos * 2) - 1],
+            delete node $g/cards/card[($pos * 2)],
+            if ((xs:integer(fn:count($g/players))) = $pos) then (
+                insert node $g/cards/card[11] into $dealer/currentHand,
+                insert node $g/cards/card[12] into $dealer/currentHand,
+                delete node $g/cards/card[11],
+                delete node $g/cards/card[12]
+            ) else ()
+            )
         )
     )
 };
-:)
 
-declare function game:isRoundCompleted($gameID as xs:string) as xs:Boolean{
+
+declare function game:isRoundCompleted($gameID as xs:string) as xs:boolean{
     let $activeID := $game:games/game[id = $gameID]/activePlayer
     let $activePlayer := $game:games/game[id = $gameID]/players/player[id = $activeID]
     return (
@@ -217,10 +213,10 @@ function game:determineWinners($gameID as xs:string) {
                     <won bj="true">{fn:true()}</won>
                 )
             ) else if (($playerCardValue) > 21 or ($dealerCardsValue <= $playerCardValue))
-                then ( replace value of node $p/won with fn:false())
+            then ( replace value of node $p/won with fn:false())
             else (
-                replace value of node $p/won with fn:true()
-            )
+                    replace value of node $p/won with fn:true()
+                )
         )
     )
 };
@@ -235,12 +231,12 @@ function game:evaluateRound($gameID as xs:string) {
     return (
         let $playerWon := $p/won
         return (if ($playerWon/@bj = "true") then (
-                player:payoutBJ($gameID, $p/id/text())
-            ) else if ($playerWon) then (
-                player:payoutBalanceNormal($gameID, $p/id/text())
-            ) else if (($insurancePossible) and ($p/insurance)) then (
-                player:payoutInsurance($gameID, $p/id/text())
-            ) else ()
+            player:payoutBJ($gameID, $p/id/text())
+        ) else if ($playerWon) then (
+            player:payoutBalanceNormal($gameID, $p/id/text())
+        ) else if (($insurancePossible) and ($p/insurance)) then (
+            player:payoutInsurance($gameID, $p/id/text())
+        ) else ()
         )
     )
 };
