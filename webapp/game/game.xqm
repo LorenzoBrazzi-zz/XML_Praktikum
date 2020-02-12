@@ -105,7 +105,7 @@ declare function game:getPlayerNames($gameID as xs:string){
 declare
 %private
 function game:shuffleDeck() as element(cards){
-    let $cardSet := doc("./deck.xml")/cards/*
+    let $cardSet := fn:doc("./deck.xml")/cards/*
     let $deck := <cards>
         {$cardSet}
         {$cardSet}
