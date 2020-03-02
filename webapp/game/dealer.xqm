@@ -23,12 +23,49 @@ function dealer:drawCard($gameID as xs:string) {
     )
 };
 
-declare function dealer:calculateDealerValue($gameID as xs:string) as xs:integer{
-    let $hand := $dealer:games/game[id = $gameID]/dealer/currentHand
-    return fn:sum(
-            for $c in $hand/value
-            return $c
+declare
+%private
+function dealer:helperSum($acc as xs:integer, $x as xs:string) as xs:integer {
+    if($x = 'A') then (
+        if (($acc + 11) > 21) then (
+            let $res := $acc + 1
+            return $res
+        ) else(
+            let $res := $acc + 11
+            return $res
+        )
+    ) else if(($x = 'K') or ($x = 'D') or ($x = 'J')) then (
+        let $res := $acc + 10
+        return $res
+    ) else (
+        let $res := $acc + xs:integer($x)
+        return $res
     )
+};
+
+declare function dealer:calculateDealerValue($gameID as xs:string) as xs:string{
+    let $hand := $dealer:games/game[id = $gameID]/dealer/currentHand
+    let $acc := 0
+
+    let $sum := (
+        for $c in $hand
+        return (
+            if($c = 'A') then (
+                if (($acc + 11) > 21) then (
+                    $acc = $acc + 1
+                ) else(
+                    $acc = $acc + 11
+                )
+            ) else if(($c = 'K') or ($c = 'D') or ($c = 'J')) then (
+                $acc = $acc + 10
+            ) else (
+                $acc = $acc + xs:integer($c)
+            )
+        )
+    )
+    (:let $sum := fn:fold-left($hand, 0, function($a, $n) {dealer:helperSum($a,$n/value)}):)
+
+    return
 };
 
 declare

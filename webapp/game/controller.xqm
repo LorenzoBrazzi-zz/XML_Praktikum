@@ -169,5 +169,11 @@ function controller:testDealOut($gameID as xs:string){
     game:dealOutCards($gameID)
 };
 
+declare
+%rest:path("bj/dealerValueTest/{$gameID}")
+%rest:GET
+function controller:dealerValueTest($gameID as xs:string){
+    dealer:calculateDealerValue($gameID)
+};
 
 
