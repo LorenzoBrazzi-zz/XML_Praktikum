@@ -23,7 +23,7 @@ function dealer:drawCard($gameID as xs:string) {
     )
 };
 
-declare function dealer:calculateDealerValue($gameID as xs:string) as xs:string{
+declare function dealer:calculateDealerValue($gameID as xs:string) as xs:integer{
     let $hand := $dealer:games/game[id = $gameID]/dealer/currentHand
     return fn:sum(
             for $c in $hand/value
