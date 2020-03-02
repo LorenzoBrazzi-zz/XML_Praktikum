@@ -177,16 +177,25 @@ function game:dealOutCards($gameID as xs:string){
             delete node $g/cards/card[($pos * 2) - 1],
             delete node $g/cards/card[($pos * 2)],
             if ((xs:integer(fn:count($g/players))) = $pos) then (
+                (: Zweite Karte des Dealers ist die winzige Karte die verdeckt ist:)
+                let $second_card := $g/cards/card[12]
+                let $second_modified := (
+                    <card>
+                        <value>{$second_card/value}</value>
+                        <color>{$second_card/color}</color>
+                        <hidden>{fn:true()}</hidden>
+                    </card>
+                )
+                    return(
                 insert node $g/cards/card[11] into $dealer/currentHand,
                 insert node $g/cards/card[12] into $dealer/currentHand,
                 delete node $g/cards/card[11],
-                delete node $g/cards/card[12]
+                delete node $g/cards/card[12])
             ) else ()
             )
         )
     )
 };
-
 
 declare function game:isRoundCompleted($gameID as xs:string) as xs:boolean{
     let $activeID := $game:games/game[id = $gameID]/activePlayer
