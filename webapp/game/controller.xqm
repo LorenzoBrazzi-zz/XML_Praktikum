@@ -149,7 +149,9 @@ function controller:testWin($gameID as xs:string, $playerID as xs:string){
     player:payoutBalanceNormal($gameID, $playerID)
 };
 
-(:https://www.youtube.com/watch?v=dbxBJWQPqZY hat gute buttons zum kopieren, kartensummen auch ganz cooles feature:)
+(:https://www.youtube.com/watch?v=dbxBJWQPqZY hat gute buttons zum kopieren, kartensummen auch ganz cooles feature,
+win lose draw Symbole auch implementieren wie im Video,
+Status Text der das Spielgeschehen beschreibt:)
 declare
 %updating
 %rest:path("bj/testIns/{$gameID}")
