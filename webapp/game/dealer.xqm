@@ -4,6 +4,7 @@ xquery version "3.0";
 module namespace dealer = "bj/dealer";
 import module namespace player = "bj/player" at "player.xqm";
 import module namespace game = "bj/game" at "game.xqm";
+import module namespace helper = "bj/helper" at "helper.xqm";
 
 declare variable $dealer:games := db:open("games")/games;
 
@@ -23,27 +24,6 @@ function dealer:drawCard($gameID as xs:string) {
     )
 };
 
-(:Ass wird zunächst als 10 gewertet, solange bis der wert 21 überschreiter, dann zählt es als 1 weiter:)
-declare
-%private
-function dealer:helperSum($acc as xs:integer, $x as xs:string) as xs:integer {
-    if ($x= 'A') then (
-        if (($acc + 11) > 21) then (
-            let $res := $acc + 1
-            return $res
-        ) else (
-            let $res := $acc + 11
-            return $res
-        )
-    ) else if (($x = 'K') or ($x = 'D') or ($x = 'B')) then (
-        let $res := $acc + 10
-        return $res
-    ) else (
-        let $res := $acc + xs:integer($x)
-        return $res
-    )
-};
-
 declare function dealer:calculateDealerValue($gameID as xs:string) as xs:integer{
     let $hand := $dealer:games/game[id = $gameID]/dealer/currentHand
     (:Kopie des Elements um zu folden:)
@@ -51,7 +31,7 @@ declare function dealer:calculateDealerValue($gameID as xs:string) as xs:integer
     modify ()
     return $c)
     (:Fold auf alle Karten des Dealers mit der helperFunction:)
-    let $sum := fn:fold-left($h/card, 0, function($acc, $c) {dealer:helperSum($acc, $c/value)})
+    let $sum := fn:fold-left($h/card, 0, function($acc, $c) {helper:helperSum($acc, $c/value)})
 
     return $sum
 };
