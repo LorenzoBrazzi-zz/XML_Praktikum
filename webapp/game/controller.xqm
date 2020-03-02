@@ -175,5 +175,3 @@ declare
 function controller:dealerValueTest($gameID as xs:string){
     dealer:calculateDealerValue($gameID)
 };
-
-

@@ -4,6 +4,7 @@ xquery version "3.0";
 module namespace dealer = "bj/dealer";
 import module namespace player = "bj/player" at "player.xqm";
 import module namespace game = "bj/game" at "game.xqm";
+import module namespace helper = "bj/helper" at "helper.xqm";
 
 declare variable $dealer:games := db:open("games")/games;
 
@@ -23,49 +24,16 @@ function dealer:drawCard($gameID as xs:string) {
     )
 };
 
-declare
-%private
-function dealer:helperSum($acc as xs:integer, $x as xs:string) as xs:integer {
-    if($x = 'A') then (
-        if (($acc + 11) > 21) then (
-            let $res := $acc + 1
-            return $res
-        ) else(
-            let $res := $acc + 11
-            return $res
-        )
-    ) else if(($x = 'K') or ($x = 'D') or ($x = 'J')) then (
-        let $res := $acc + 10
-        return $res
-    ) else (
-        let $res := $acc + xs:integer($x)
-        return $res
-    )
-};
-
-declare function dealer:calculateDealerValue($gameID as xs:string) as xs:string{
+declare function dealer:calculateDealerValue($gameID as xs:string) as xs:integer{
     let $hand := $dealer:games/game[id = $gameID]/dealer/currentHand
-    let $acc := 0
+    (:Kopie des Elements um zu folden:)
+    let $h := ( copy $c := $hand
+    modify ()
+    return $c)
+    (:Fold auf alle Karten des Dealers mit der helperFunction:)
+    let $sum := fn:fold-left($h/card, 0, function($acc, $c) {helper:helperSum($acc, $c/value)})
 
-    let $sum := (
-        for $c in $hand
-        return (
-            if($c = 'A') then (
-                if (($acc + 11) > 21) then (
-                    $acc = $acc + 1
-                ) else(
-                    $acc = $acc + 11
-                )
-            ) else if(($c = 'K') or ($c = 'D') or ($c = 'J')) then (
-                $acc = $acc + 10
-            ) else (
-                $acc = $acc + xs:integer($c)
-            )
-        )
-    )
-    (:let $sum := fn:fold-left($hand, 0, function($a, $n) {dealer:helperSum($a,$n/value)}):)
-
-    return
+    return $sum
 };
 
 declare
@@ -96,18 +64,18 @@ function dealer:setInsurance($gameID as xs:string){
     let $hand := $dealer:games/game[id = $gameID]/dealer/currentHand
     let $cards := $hand/card
     return (
-        (:Aktiviere die Insurance Funktion, sobald die erste Karte ein Ass ist:)
-        if ($cards[1]/value = "A")
+    (:Aktiviere die Insurance Funktion, sobald die erste Karte ein Ass ist:)
+    if ($cards[1]/value = "A")
+    then (
+        replace value of node $dealer:games/game[id = $gameID]/dealer/isInsurance with true(),
+        (:Sollte die folgende Karte ein Zehner Value sein, hat der Dealer natürlich einen Blackjack:)
+        (if (($cards[2]/value = "K") or ($cards[2]/value = "Q") or ($cards[2]/value = "B") or ($cards[2]/value = "10"))
         then (
-            replace value of node $dealer:games/game[id = $gameID]/dealer/isInsurance with true(),
-            (:Sollte die folgende Karte ein Zehner Value sein, hat der Dealer natürlich einen Blackjack:)
-            (if (($cards[2]/value = "K") or ($cards[2]/value = "Q") or ($cards[2]/value = "B") or ($cards[2]/value = "10"))
-            then (
-                    replace value of node $dealer:games/game[id = $gameID]/dealer/bj with true()
-                ) else ())
-        )
-        else (
-            replace value of node $dealer:games/game[id = $gameID]/dealer/isInsurance with false()
-        )
+                replace value of node $dealer:games/game[id = $gameID]/dealer/bj with true()
+            ) else ())
+    )
+    else (
+        replace value of node $dealer:games/game[id = $gameID]/dealer/isInsurance with false()
+    )
     )
 };
