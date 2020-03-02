@@ -4,6 +4,7 @@ module namespace player = "bj/player";
 import module namespace chip = "bj/chip" at "chip.xqm";
 import module namespace card = "bj/card" at "card.xqm";
 import module namespace game = "bj/game" at "game.xqm";
+import module namespace helper = "bj/helper" at "helper.xqm";
 
 declare variable $player:games := db:open("games")/games;
 
@@ -149,12 +150,15 @@ declare function player:calculateCardValue($gameID as xs:string) as xs:integer{
 
 (:Berechnet den Blattscore des Spielers:)
 declare function player:calculateCardValuePlayers($gameID as xs:string, $playerID as xs:string) as xs:integer{
-    let $hand := $player:games/game[id = $gameID]/players/player[id = $playerID]/currentHand/cards/*
+    let $hand := $player:games/game[id = $gameID]/players/player[id = $playerID]/currentHand/cards
+    (:Kopie des Elements um zu folden:)
+    let $h := ( copy $c := $hand
+    modify ()
+    return $c)
+    (:Fold auf alle Karten des Spielers mit der helperFunction:)
+    let $sum := fn:fold-left($h/card, 0, function($acc, $c) {helper:helperSum($acc, $c/value)})
 
-    return fn:sum(
-            for $c in $hand/value
-            return $c
-    )
+    return $sum
 };
 
 (:Ziehen einer Karte und darauffolgendes entfernen eben dieser aus dem Stack:)
