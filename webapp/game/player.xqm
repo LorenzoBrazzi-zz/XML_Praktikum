@@ -20,7 +20,7 @@ declare function player:createPlayer($id as xs:string, $currentHand as element(c
         <currentBet>{$bet}</currentBet>
         <insurance>{$insurance}</insurance>
         <position>{$position}</position>
-        <won bj="false"></won>
+        <won bj="false" draw="false"></won>
     </player>
 };
 
@@ -210,6 +210,16 @@ declare
 function player:payoutInsurance($gameID as xs:string, $playerID as xs:string){
     let $player := $player:games/game[id = $gameID]/players/player[id = $playerID]
     let $newBalance := $player/balance + xs:integer($player/currentBet * 0.5)
+    return (
+        replace value of node $player/balance with $newBalance
+    )
+};
+
+declare
+%updating
+function player:payoutDraw($gameID as xs:string, $playerID as xs:string){
+    let $player := $player:games/game[id = $gameID]/players/player[id = $playerID]
+    let $newBalance := $player/balance + xs:integer($player/currentBet)
     return (
         replace value of node $player/balance with $newBalance
     )

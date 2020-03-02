@@ -58,12 +58,19 @@ declare
 function dealer:setInsurance($gameID as xs:string){
     let $hand := $dealer:games/game[id = $gameID]/dealer/currentHand
     let $cards := $hand/card
-    return ( if ($cards[1]/value = "A")
-    then (
-            if (($cards[2]/value = "K") or ($cards[2]/value = "Q") or ($cards[2]/value = "B") or ($cards[2]/value = "10"))
-            then (replace value of node $dealer:games/game[id = $gameID]/dealer/isInsurance with true())
-            else (replace value of node $dealer:games/game[id = $gameID]/dealer/isInsurance with false()))
-    else
-        replace value of node $dealer:games/game[id = $gameID]/dealer/isInsurance with false()
+    return (
+        (:Aktiviere die Insurance Funktion, sobald die erste Karte ein Ass ist:)
+        if ($cards[1]/value = "A")
+        then (
+            replace value of node $dealer:games/game[id = $gameID]/dealer/isInsurance with true(),
+            (:Sollte die folgende Karte ein Zehner Value sein, hat der Dealer natürlich einen Blackjack:)
+            (if (($cards[2]/value = "K") or ($cards[2]/value = "Q") or ($cards[2]/value = "B") or ($cards[2]/value = "10"))
+            then (
+                    replace value of node $dealer:games/game[id = $gameID]/dealer/bj with true()
+                ) else ())
+        )
+        else (
+            replace value of node $dealer:games/game[id = $gameID]/dealer/isInsurance with false()
+        )
     )
 };
