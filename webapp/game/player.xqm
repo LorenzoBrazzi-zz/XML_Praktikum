@@ -155,7 +155,7 @@ declare function player:calculateCardValuePlayers($gameID as xs:string, $playerI
     let $h := ( copy $c := $hand
     modify ()
     return $c)
-    (:Fold auf alle Karten des Dealers mit der helperFunction:)
+    (:Fold auf alle Karten des Spielers mit der helperFunction:)
     let $sum := fn:fold-left($h/card, 0, function($acc, $c) {helper:helperSum($acc, $c/value)})
 
     return $sum
