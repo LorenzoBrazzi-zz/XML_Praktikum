@@ -572,23 +572,26 @@
             <!-- allgemeine Variabeln einfügen -->
 
             <!-- Hintergrund -->
-            <rect id="hintergrund" fill="brown" width="100%" height="100%" />
+            <rect id="hintergrund" fill="brown" width="1000%" height="100%" x="-300" />
 
 
             <!-- Tischform -->
-            <circle cx="800" cy="0" r="900" fill="green" />
-            <circle cx="800" cy="0" r="900" style="fill:none;stroke:#54391A;stroke-width:50"/>
+            <circle cx="800" cy="0" r="900" fill="{$farbeTisch}" />
+            <circle cx="800" cy="0" r="900" style="fill:none;stroke:{$farbeTischRand};stroke-width:50"/>
 
 
             <!-- Dealer Platz -->
             <rect x="550" y="50" rx="20" ry="20" width="450" height="150" style="fill:none;stroke:#fff;stroke-width:4"/>
 
             <!-- Karten- und Einsatzpositionen-->
-            <circle cx="150" cy="350" r="75" style="fill:none;stroke:white;stroke-width:4"/>
-            <circle cx="425" cy="600" r="75" style="fill:none;stroke:white;stroke-width:4"/>
-            <circle cx="800" cy="750" r="75" style="fill:none;stroke:white;stroke-width:4"/>
-            <circle cx="1175" cy="600" r="75" style="fill:none;stroke:white;stroke-width:4"/>
-            <circle cx="1450" cy="350" r="75" style="fill:none;stroke:white;stroke-width:4"/>
+            <circle cx="{$player1x}" cy="{$player1y}" r="{$radiusPlayer}" style="fill:none;stroke:white;stroke-width:4"/>
+            <circle cx="{$player2x}" cy="{$player2y}" r="{$radiusPlayer}" style="fill:none;stroke:white;stroke-width:4"/>
+            <circle cx="{$player3x}" cy="{$player3y}" r="{$radiusPlayer}" style="fill:none;stroke:white;stroke-width:4"/>
+            <circle cx="{$player4x}" cy="{$player4y}" r="{$radiusPlayer}" style="fill:none;stroke:white;stroke-width:4"/>
+            <circle cx="{$player5x}" cy="{$player5y}" r="{$radiusPlayer}" style="fill:none;stroke:white;stroke-width:4"/>
+
+            <rect x="{$cardDealerx}" y="{$cardDealery}" rx="20" ry="20" width="100" height="150" style="fill:none;stroke:black;stroke-width:4"/>
+            <rect x="{$cardDealerx + 25}" y="{$cardDealery}" rx="20" ry="20" width="100" height="150" style="fill:none;stroke:blue;stroke-width:4"/>
 
             <!--Spielernamen-->
 
@@ -600,10 +603,18 @@
                 Insurance Pays 2 to 1
             </text>
 
+
+
+
             <!-- UI-->
-            <circle cx ="{$num}" cy="50" r="50" fill="red"/>
-            <circle cx="155" cy="50" r="50" fill="blue"/>
-            <circle cx="255" cy="50" r="50" fill="purple"/>
+            <circle cx ="{$button1x}" cy="{$buttonsy}" r="{$radiusButtons}" fill="{$farbeButton1}"/>
+            <circle cx="{$button2x}" cy="{$buttonsy}" r="{$radiusButtons}" fill="{$farbeButton2}"/>
+            <circle cx="{$button3x}" cy="{$buttonsy}" r="{$radiusButtons}" fill="{$farbeButton3}"/>
+            <circle cx="{$button4x}" cy="{$buttonsy}" r="{$radiusButtons}" fill="{$farbeButton4}"/>
+
+            <text x="{$button1x}" y="{$buttonsy + ($buttonTextSize div 2)}" font-family="Arial" font-size="30" fill="black" text-anchor="middle">
+                HIT
+            </text>
 
         </svg>
     </xsl:template>
