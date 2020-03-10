@@ -9,82 +9,110 @@
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
 </head>
 
-<body class="container second" background="blackjack.jpg">
-<h1 style="color:#fff !important">
-    Please Insert Name and Balance of the Players<br/><br/>
-</h1>
+<style>
+    body{
+        background-image: url("images/background.jpg");
+        background-repeat: no-repeat;
+        background-size: 120%;
+    }
+
+    .playerinputtexts {
+        color: white;
+        font-weight: bold;
+        margin-bottom: 0.2rem;
+        font-size: 24px;
+        text-shadow: 3px 3px black;
+    }
+
+    .playerinputs {
+        margin-bottom: 2rem;
+    }
+
+</style>
+
+<body class="container second">
+<div style="margin-top: 2rem">
+    <h1 style="color:white !important; text-shadow: 3px 3px darkgreen; font-size: 55px; margin-bottom: 0.1rem">
+        Welcome! Create your Blackjack Game here!
+    </h1>
+    <h2 style="color:white !important; text-shadow: 3px 3px black; font-size: 28px;">
+        Please Insert Name and Balance of the Players:<br><br>
+    </h2>
+</div>
+<div class="form-container">
 <form class="form-group" action="/bj/form" style="display:flex; flex-direction:column;">
     <div class="row">
         <div class="col">
-            <label for="inputname1">Name of Player 1</label>
-            <input type="text" class="form-control" placeholder="name" id="inputname1" name="inputname1"/>
+            <label for="inputname1" class="playerinputtexts">Name of Player 1</label>
+            <input type="text" class="form-control " placeholder="name" id="inputname1" name="inputname1"/>
         </div>
         <div class="col">
-            <label for="inputbalance1">Balance of Player 1</label>
-            <input type="number" class="form-control" placeholder="balance" id="inputbalance1"
+            <label for="inputbalance1" class="playerinputtexts">Balance of Player 1</label>
+            <input type="number" class="form-control playerinputs" placeholder="balance" id="inputbalance1"
                    name="inputbalance1"/>
         </div>
     </div>
     <div class="row">
         <div class="col">
-            <label for="inputname2">Name of Player 2</label>
+            <label for="inputname2" class="playerinputtexts">Name of Player 2</label>
             <input type="text" class="form-control" placeholder="name" id="inputname2" name="inputname2"/>
         </div>
         <div class="col">
-            <label for="inputbalance2">Balance of Player 2</label>
-            <input type="number" class="form-control" placeholder="balance" id="inputbalance2"
+            <label for="inputbalance2" class="playerinputtexts">Balance of Player 2</label>
+            <input type="number" class="form-control playerinputs" placeholder="balance" id="inputbalance2"
                    name="inputbalance2"/>
         </div>
         <br/>
     </div>
     <div class="row">
         <div class="col">
-            <label for="inputname3">Name of Player 3</label>
-            <input type="text" class="form-control" placeholder="name" id="inputname3" name="inputname3"/>
+            <label for="inputname3" class="playerinputtexts">Name of Player 3</label>
+            <input type="text" class="form-control " placeholder="name" id="inputname3" name="inputname3"/>
         </div>
         <div class="col">
-            <label for="inputbalance3">Balance of Player 3</label>
-            <input type="number" class="form-control" placeholder="balance" id="inputbalance3"
+            <label for="inputbalance3" class="playerinputtexts">Balance of Player 3</label>
+            <input type="number" class="form-control playerinputs" placeholder="balance" id="inputbalance3"
                    name="inputbalance3"/>
         </div>
         <br/>
     </div>
     <div class="row">
         <div class="col">
-            <label for="inputname4">Name of Player 4</label>
+            <label for="inputname4" class="playerinputtexts">Name of Player 4</label>
             <input type="text" class="form-control" placeholder="name" id="inputname4" name="inputname4"/>
         </div>
         <div class="col">
-            <label for="inputbalance4">Balance of Player 4</label>
-            <input type="number" class="form-control" placeholder="balance" id="inputbalance4"
+            <label for="inputbalance4" class="playerinputtexts">Balance of Player 4</label>
+            <input type="number" class="form-control playerinputs" placeholder="balance" id="inputbalance4"
                    name="inputbalance4"/>
         </div>
         <br/>
     </div>
     <div class="row">
         <div class="col">
-            <label for="inputname5">Name of Player 5</label>
+            <label for="inputname5" class="playerinputtexts">Name of Player 5</label>
             <input type="text" class="form-control" placeholder="name" id="inputname5" name="inputname5"/>
         </div>
         <div class="col">
-            <label for="inputbalance5">Balance of Player 5</label>
-            <input type="number" class="form-control" placeholder="balance" id="inputbalance5"
+            <label for="inputbalance5" class="playerinputtexts">Balance of Player 5</label>
+            <input type="number" class="form-control playerinputs" placeholder="balance" id="inputbalance5"
                    name="inputbalance5"/>
         </div>
         <br/><br/>
     </div>
-    <div class="row" style="flex-flow: column; align-items: flex-end;">
+    <div class="row" style="flex-flow: column; align-items: flex-end; margin-bottom: 1rem; margin-top: 1rem">
         <div class="col">
-    <label for="maxBet">Maximum Bet</label>
-    <input type="number" class="form-control" id="maxBet" placeholder="Maximum Bet" name="maxBet"/>
-</div>
-<div class="col">
-    <label for="minBet">Minimum Bet</label>
-    <input type="number" class="form-control" id="minBet" placeholder="Minimum Bet" name="minBet"/>
-</div>
-</div>
+            <label for="maxBet" class="playerinputtexts">Maximum Bet</label>
+            <input type="number" class="form-control" id="maxBet" placeholder="Maximum Bet" name="maxBet"/>
+        </div>
+        <br>
+        <div class="col">
+            <label for="minBet" class="playerinputtexts">Minimum Bet</label>
+            <input type="number" class="form-control" id="minBet" placeholder="Minimum Bet" name="minBet"/>
+        </div>
+    </div>
 
-<input class = "submit twoButtons leftFloat btn btn-primary btn-lg" type="submit" value="Start playing"/>
+    <input class = "submit twoButtons leftFloat btn btn-success btn-lg" type="submit" value="Start playing"/>
 
 <!-- JavaScript files required by Bootstrap -->
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
@@ -98,5 +126,6 @@
         crossorigin="anonymous"></script>
 
 </form>
+</div>
 </body>
 </html>
