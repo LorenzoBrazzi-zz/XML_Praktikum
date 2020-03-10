@@ -572,7 +572,7 @@
             <!-- allgemeine Variabeln einfügen -->
 
             <!-- Hintergrund -->
-            <rect id="hintergrund" fill="brown" width="1000%" height="100%" x="-300" />
+            <rect id="hintergrund" fill="brown" width="1000%" height="1000%" x="-3000" />
 
 
             <!-- Tischform -->
@@ -593,17 +593,47 @@
             <rect x="{$cardDealerx}" y="{$cardDealery}" rx="20" ry="20" width="100" height="150" style="fill:none;stroke:black;stroke-width:4"/>
             <rect x="{$cardDealerx + 25}" y="{$cardDealery}" rx="20" ry="20" width="100" height="150" style="fill:none;stroke:blue;stroke-width:4"/>
 
-            <!--Spielernamen-->
+            <!-- Spielernamen -->
+            <text x="{$player1x}" y="{$player1y + $radiusPlayer + $zeilenAbstand}" font-family="Arial" font-size="{$spielerNamenTextSize}" fill="white" text-anchor="middle">
+                Player 1
+            </text>
+            <text x="{$player2x}" y="{$player2y + $radiusPlayer + $zeilenAbstand}" font-family="Arial" font-size="{$spielerNamenTextSize}" fill="white" text-anchor="middle">
+                Player 2
+            </text>
+            <text x="{$player3x}" y="{$player3y + $radiusPlayer + $zeilenAbstand}" font-family="Arial" font-size="{$spielerNamenTextSize}" fill="white" text-anchor="middle">
+                Player 3
+            </text>
+            <text x="{$player4x}" y="{$player4y + $radiusPlayer + $zeilenAbstand}" font-family="Arial" font-size="{$spielerNamenTextSize}" fill="white" text-anchor="middle">
+                Player 4
+            </text>
+            <text x="{$player5x}" y="{$player5y + $radiusPlayer + $zeilenAbstand}" font-family="Arial" font-size="{$spielerNamenTextSize}" fill="white" text-anchor="middle">
+                Player 5
+            </text>
+
+            <!-- SpielerCash -->
+            <text x="{$player1x}" y="{$player1y + $radiusPlayer + ($zeilenAbstand * 2)}" font-family="Arial" font-size="{$spielerNamenTextSize}" fill="white" text-anchor="middle">
+                1548
+            </text>
+            <text x="{$player2x}" y="{$player2y + $radiusPlayer + ($zeilenAbstand * 2)}" font-family="Arial" font-size="{$spielerNamenTextSize}" fill="white" text-anchor="middle">
+                2564
+            </text>
+            <text x="{$player3x}" y="{$player3y + $radiusPlayer + ($zeilenAbstand * 2)}" font-family="Arial" font-size="{$spielerNamenTextSize}" fill="white" text-anchor="middle">
+                2634831
+            </text>
+            <text x="{$player4x}" y="{$player4y + $radiusPlayer + ($zeilenAbstand * 2)}" font-family="Arial" font-size="{$spielerNamenTextSize}" fill="white" text-anchor="middle">
+                14
+            </text>
+            <text x="{$player5x}" y="{$player5y + $radiusPlayer + ($zeilenAbstand * 2)}" font-family="Arial" font-size="{$spielerNamenTextSize}" fill="white" text-anchor="middle">
+                125
+            </text>
 
             <!-- Tischtexte -->
-            <text x="600" y="300" font-family="Algerian" font-size="30" fill="black">
+            <text x="600" y="300" font-family="Algerian" font-size="30" fill="black" stroke-opacity="80">
                 BLACKJACK PAYS 3 TO 2
             </text>
             <text x="700" y="350" font-family="Arial" font-size="15" fill="black">
                 Insurance Pays 2 to 1
             </text>
-
-
 
 
             <!-- UI-->
@@ -612,8 +642,36 @@
             <circle cx="{$button3x}" cy="{$buttonsy}" r="{$radiusButtons}" fill="{$farbeButton3}"/>
             <circle cx="{$button4x}" cy="{$buttonsy}" r="{$radiusButtons}" fill="{$farbeButton4}"/>
 
-            <text x="{$button1x}" y="{$buttonsy + ($buttonTextSize div 2)}" font-family="Arial" font-size="30" fill="black" text-anchor="middle">
-                HIT
+            <text x="{$button1x}" y="{$buttonsy + ($buttonTextSize div 2)}" font-family="Arial" font-size="{$buttonTextSize}" fill="black" text-anchor="middle">
+                Hit
+            </text>
+            <text x="{$button2x}" y="{$buttonsy + ($buttonTextSize div 2)}" font-family="Arial" font-size="{$buttonTextSize}" fill="black" text-anchor="middle">
+                Stand
+            </text>
+            <text x="{$button3x}" y="{$buttonsy + ($buttonTextSize div 2)}" font-family="Arial" font-size="{$buttonTextSize}" fill="black" text-anchor="middle">
+                Double
+            </text>
+            <text x="{$button4x}" y="{$buttonsy + ($buttonTextSize div 2)}" font-family="Arial" font-size="{$buttonTextSize}" fill="black" text-anchor="middle">
+                Insurance
+            </text>
+
+            <!-- Chips -->
+            <circle cx ="{$chip1x}" cy="{$chipsy}" r="{$radiusChips}" fill="{$farbeInaktiv}"/>
+            <circle cx="{$chip2x}" cy="{$chipsy}" r="{$radiusChips}" fill="{$farbeInaktiv}"/>
+            <circle cx="{$chip3x}" cy="{$chipsy}" r="{$radiusChips}" fill="{$farbeInaktiv}"/>
+            <circle cx="{$chip4x}" cy="{$chipsy}" r="{$radiusChips}" fill="{$farbeInaktiv}"/>
+
+            <text x="{$chip1x}" y="{$chipsy + ($chipsTextSize div 2)}" font-family="Arial" font-size="{$chipsTextSize}" fill="black" text-anchor="middle">
+                1
+            </text>
+            <text x="{$chip2x}" y="{$chipsy + ($chipsTextSize div 2)}" font-family="Arial" font-size="{$chipsTextSize}" fill="black" text-anchor="middle">
+                5
+            </text>
+            <text x="{$chip3x}" y="{$chipsy + ($chipsTextSize div 2)}" font-family="Arial" font-size="{$chipsTextSize}" fill="black" text-anchor="middle">
+                50
+            </text>
+            <text x="{$chip4x}" y="{$chipsy + ($chipsTextSize div 2)}" font-family="Arial" font-size="{$chipsTextSize}" fill="black" text-anchor="middle">
+                500
             </text>
 
         </svg>

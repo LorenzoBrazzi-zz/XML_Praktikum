@@ -5,7 +5,9 @@
                 version="2.0">
 
     <!-- Werte -->
-    <xsl:variable name="buttonTextSize" select="30" />
+    <xsl:variable name="buttonTextSize" select="20" />
+    <xsl:variable name="chipsTextSize" select="40" />
+
     <!-- Farben -->
     <xsl:variable name="farbeTisch" select="'#097111'" />
     <xsl:variable name="farbeTischRand" select="'#54391A'" />
@@ -14,6 +16,7 @@
     <xsl:variable name="farbeButton2" select="'#0065FF'" />
     <xsl:variable name="farbeButton3" select="'#A12CFF'" />
     <xsl:variable name="farbeButton4" select="'#FFEC00'" />
+    <xsl:variable name="farbeInaktiv" select="'#62696D'" />
 
 
     <!-- Spieler -->
@@ -28,6 +31,10 @@
     <xsl:variable name="player4y" select="600" />
     <xsl:variable name="player5x" select="1450" />
     <xsl:variable name="player5y" select="350" />
+
+    <!-- Spielernamen -->
+    <xsl:variable name="spielerNamenTextSize" select="15" />
+    <xsl:variable name="zeilenAbstand" select="$spielerNamenTextSize + 5" />
 
 
     <!-- Karten Positionen -->
@@ -56,8 +63,23 @@
     <xsl:variable name="button3x" select="$button2x + $radiusButtons + $radiusButtons + $abstandButtons"/>
     <xsl:variable name="button4x" select="$button3x + $radiusButtons + $radiusButtons + $abstandButtons"/>
 
-
     <xsl:variable name="buttonsy" select="50" />
+
+
+    <!-- Chips -->
+    <xsl:variable name="radiusChips" select="50" />
+    <xsl:variable name="abstandChips" select="5" />
+    <xsl:variable name="halbRadiusChip" select="$radiusChips div 2" />
+
+    <xsl:variable name="chip1x" select="1200"/>
+    <xsl:variable name="chip2x" select="$chip1x + $radiusChips + $radiusChips + $abstandChips"/>
+    <xsl:variable name="chip3x" select="$chip2x + $radiusChips + $radiusChips + $abstandChips"/>
+    <xsl:variable name="chip4x" select="$chip3x + $radiusChips + $radiusChips + $abstandChips"/>
+
+    <xsl:variable name="chipsy" select="50" />
+
+
+
 
 
 
