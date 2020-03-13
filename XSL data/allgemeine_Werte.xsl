@@ -53,6 +53,18 @@
     <xsl:variable name="cardPlayer5x" select="$player5x - $radiusPlayer" />
     <xsl:variable name="cardPlayer5y" select="$player5y - $radiusPlayer" />
 
+    <!-- Aktuelle Karte -->
+    <xsl:variable name="karteX" select="650"/>
+    <xsl:variable name="karteY" select="200"/>
+    <xsl:variable name="jetztX" select="$karteX +50"/>
+    <xsl:variable name="jetztY" select="$karteY +35"/>
+    <xsl:variable name="valueXMini" select="$karteX +10"/>
+    <xsl:variable name="valueYMini" select="$karteY +20"/>
+    <xsl:variable name="symbolXMini" select="$karteX +10"/>
+    <xsl:variable name="symbolYMini" select="$karteY +33"/>
+
+
+
     <!-- Buttons -->
     <xsl:variable name="radiusButtons" select="50" />
     <xsl:variable name="abstandButtons" select="5" />
