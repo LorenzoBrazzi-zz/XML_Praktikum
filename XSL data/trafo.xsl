@@ -19,7 +19,7 @@
 
         <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" xmlns:xlink="http://www.w3.org/1999/xlink">
             <g alignment-baseline="baseline" />
-            <rect height="150" width="100" x="{$karteX}" y="{$karteY}" rx="15" ry="15" style="fill:white;stroke:black;stroke-width:2.5;opacity:1.0" />
+            <rect height="{$cardHeight}" width="{$cardWidth}" x="{$karteX}" y="{$karteY}" rx="15" ry="15" style="fill:white;stroke:black;stroke-width:2.5;opacity:1.0" />
             <xsl:choose>
 
                 <!-- Spezial cardn Sonderfälle-->
@@ -91,38 +91,41 @@
                 </xsl:when>
                 <xsl:when test="$Color = 'Club'">
                     <g>
-                        <text id="kar" x="55" y="30" font-size="15" fill="black" text-anchor="middle">
+                        <text id="kar" x="{$valueXMini}" y="{$valueYMini}" font-size="15" fill="black" text-anchor="middle">
                             <xsl:value-of select="value"></xsl:value-of>
                         </text>
-                        <use xlink:href="#kar" x="55" y="30" transform="rotate(180, 123, 100)"/>
+                        <text id="kar_usd" transform="rotate(180,{$valueXMini - ($valueXMini div 2) + 40},{$valueYMini - ($valueYMini div 2)+55})" font-size="15" fill="black" text-anchor="middle">
+                            <xsl:value-of select="value"></xsl:value-of>
+                        </text>
                         <use xlink:href="#Club-{$value}" />
-                        <text id="Club_symbol" x="55" y="40" font-size="13" fill="black" text-anchor="middle">♣</text>
-
-                        <use xlink:href="#Club_symbol" x="55" y="40" transform="rotate(180, 123, 105)"/>
+                        <text id="Club_symbol" x="{$symbolXMini}" y="{$symbolYMini}" font-size="15" fill="black" text-anchor="middle">♣</text>
+                        <text id="Club_symbol_usd" transform="rotate(180,{$symbolXMini - ($symbolXMini div 2)+40},{$symbolYMini - ($symbolYMini div 2)+42})" font-size="15" fill="black" text-anchor="middle">♣</text>
                     </g>
                 </xsl:when>
                 <xsl:when test="$Color = 'Heart'">
                     <g>
-                        <text id="kar" x="55" y="30" font-size="15" fill="red" text-anchor="middle">
+                        <text id="kar" x="{$valueXMini}" y="{$valueYMini}" font-size="15" fill="red" text-anchor="middle">
                             <xsl:value-of select="value"></xsl:value-of>
                         </text>
-                        <use xlink:href="#kar" x="55" y="30" transform="rotate(180, 123, 100)"/>
+                        <text id="kar_usd" transform="rotate(180,{$valueXMini - ($valueXMini div 2) + 40},{$valueYMini - ($valueYMini div 2)+55})" font-size="15" fill="red" text-anchor="middle">
+                            <xsl:value-of select="value"></xsl:value-of>
+                        </text>
                         <use xlink:href="#Heart-{$value}" />
-                        <text id="Heart_symbol" x="55" y="40" font-size="13" fill="red" text-anchor="middle">♥</text>
-
-                        <use xlink:href="#Heart_symbol" x="55" y="40" transform="rotate(180, 123, 105)"/>
+                        <text id="Heart_symbol" x="{$symbolXMini}" y="{$symbolYMini}" font-size="15" fill="red" text-anchor="middle">♥</text>
+                        <text id="Heart_symbol_usd" transform="rotate(180,{$symbolXMini - ($symbolXMini div 2)+40},{$symbolYMini - ($symbolYMini div 2)+42})" font-size="15" fill="red" text-anchor="middle">♥</text>
                     </g>
                 </xsl:when>
                 <xsl:when test="$Color = 'Diamond'">
                             <g>
-                                <text id="kar" x="55" y="30" font-size="15" fill="red" text-anchor="middle">
+                                <text id="kar" x="{$valueXMini}" y="{$valueYMini}" font-size="15" fill="red" text-anchor="middle">
                                     <xsl:value-of select="value"></xsl:value-of>
                                 </text>
-                                <use xlink:href="#kar" x="55" y="30" transform="rotate(180, 123, 100)"/>
+                                <text id="kar_usd" transform="rotate(180,{$valueXMini - ($valueXMini div 2) + 40},{$valueYMini - ($valueYMini div 2)+55})" font-size="15" fill="red" text-anchor="middle">
+                                    <xsl:value-of select="value"></xsl:value-of>
+                                </text>
                                 <use xlink:href="#Diamond-{$value}" />
-                                <text id="Diamond_symbol" x="55" y="40" font-size="14" fill="red" text-anchor="middle">♦</text>
-
-                                <use xlink:href="#Diamond_symbol" x="55" y="40" transform="rotate(180, 123, 105)"/>
+                                <text id="Diamond_symbol" x="{$symbolXMini}" y="{$symbolYMini}" font-size="15" fill="red" text-anchor="middle">♦</text>
+                                <text id="Diamond_symbol_usd" transform="rotate(180,{$symbolXMini - ($symbolXMini div 2)+40},{$symbolYMini - ($symbolYMini div 2)+42})" font-size="15" fill="red" text-anchor="middle">♦</text>
                             </g>
                 </xsl:when>
             </xsl:choose>

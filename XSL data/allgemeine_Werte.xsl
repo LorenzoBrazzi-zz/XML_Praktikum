@@ -54,14 +54,28 @@
     <xsl:variable name="cardPlayer5y" select="$player5y - $radiusPlayer" />
 
     <!-- Aktuelle Karte -->
+    <xsl:variable name="cardWidth" select="100"/>
+    <xsl:variable name="cardHeight" select="150"/>
     <xsl:variable name="karteX" select="650"/>
-    <xsl:variable name="karteY" select="200"/>
-    <xsl:variable name="jetztX" select="$karteX +50"/>
-    <xsl:variable name="jetztY" select="$karteY +35"/>
-    <xsl:variable name="valueXMini" select="$karteX +10"/>
-    <xsl:variable name="valueYMini" select="$karteY +20"/>
-    <xsl:variable name="symbolXMini" select="$karteX +10"/>
-    <xsl:variable name="symbolYMini" select="$karteY +33"/>
+    <xsl:variable name="karteY" select="270"/>
+    <!-- <xsl:variable name="jetztX" select="$karteX +50"/>
+    <xsl:variable name="jetztY" select="$karteY +35"/> -->
+    <xsl:variable name="jetztX" select="$karteX +($cardWidth div 2)"/>
+    <xsl:variable name="jetztY" select="$karteY +($cardHeight div 4.25)"/>
+    <!--<xsl:variable name="valueXMini" select="$karteX +10"/>
+    <xsl:variable name="valueYMini" select="$karteY +20"/> -->
+    <xsl:variable name="valueXMini" select="$karteX + ($cardWidth div 10)"/>
+    <xsl:variable name="valueYMini" select="$karteY +($cardHeight div 7.5)"/>
+    <!--<xsl:variable name="symbolXMini" select="$karteX +10"/>
+    <xsl:variable name="symbolYMini" select="$karteY +33"/> -->
+    <xsl:variable name="symbolXMini" select="$karteX +($cardWidth div 10)"/>
+    <xsl:variable name="symbolYMini" select="$karteY +($cardHeight div 4.5)"/>
+    <xsl:variable name="sizeBigSymbol" select="($cardWidth div 2.5)"/>
+    <xsl:variable name="sizeSmallSymbol" select="(($cardWidth * 20) div 3)"/>
+    <xsl:variable name="sizeSmallNumber" select="(($cardWidth * 20) div 3)"/>
+    <xsl:variable name="sizeAceSymbol" select="($cardWidth * 1.3)"/>
+    <xsl:variable name="xAceSymbol" select="($karteX * 1.3)"/>
+    <xsl:variable name="yAceSymbol" select="($cardHeight - ($cardHeight div 100))"/>
 
 
 
