@@ -19,7 +19,7 @@
 
         <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" xmlns:xlink="http://www.w3.org/1999/xlink">
             <g alignment-baseline="baseline" />
-            <rect height="{$cardHeight}" width="{$cardWidth}" x="{$karteX}" y="{$karteY}" rx="15" ry="15" style="fill:white;stroke:black;stroke-width:2.5;opacity:1.0" />
+            <rect height="{$cardHeight}" width="{$cardWidth}" x="{$karteX}" y="{$karteY}" rx="5" ry="5" style="fill:white;stroke:black;stroke-width:2;opacity:1.0" />
             <xsl:choose>
 
                 <!-- Spezial cardn Sonderfälle-->
@@ -76,57 +76,56 @@
                 <xsl:when test="$Color = 'Spade'">
 
                     <g>
-                        <text id="kar" x="{$valueXMini}" y="{$valueYMini}" font-size="15" fill="black" text-anchor="middle">
+                        <text id="kar" x="{$valueXMini}" y="{$valueYMini}" font-size="{$sizeValue}" fill="black" text-anchor="middle">
                             <xsl:value-of select="value"></xsl:value-of>
                         </text>
-                        <text id="kar_usd" transform="rotate(180,{$valueXMini - ($valueXMini div 2) + 40},{$valueYMini - ($valueYMini div 2)+55})" font-size="15" fill="black" text-anchor="middle">
+                        <text id="kar_usd" transform="rotate(180,{$valueXMini - ($valueXMini div 2) + $xMiniAdd},{$valueYMini - ($valueYMini div 2)+$yMiniValueAddUsd})" font-size="{$sizeValue}" fill="black" text-anchor="middle">
                             <xsl:value-of select="value"></xsl:value-of>
                         </text>
                         <use xlink:href="#Spade-{$value}" />
-                        <text id="Spade_symbol" x="{$symbolXMini}" y="{$symbolYMini}" font-size="15" fill="black" text-anchor="middle">♠</text>
-                        <text id="Spade_symbol_usd" transform="rotate(180,{$symbolXMini - ($symbolXMini div 2)+40},{$symbolYMini - ($symbolYMini div 2)+42})" font-size="15" fill="black" text-anchor="middle">♠</text>
-                        <!-- <use xlink:href="#Spade_symbol" x="{$karteX+10}" y="{$karteY+30}" transform="rotate(180, 123, 105)"/> -->
+                        <text id="Spade_symbol" x="{$symbolXMini}" y="{$symbolYMini}" font-size="{$sizeSmallSymbol}" fill="black" text-anchor="middle">♠</text>
+                        <text id="Spade_symbol_usd" transform="rotate(180,{$symbolXMini - ($symbolXMini div 2)+ $xMiniAdd},{$symbolYMini - ($symbolYMini div 2)+$yMiniSymbolAddUsd})" font-size="{$sizeSmallSymbol}" fill="black" text-anchor="middle">♠</text>
                     </g>
 
                 </xsl:when>
                 <xsl:when test="$Color = 'Club'">
                     <g>
-                        <text id="kar" x="{$valueXMini}" y="{$valueYMini}" font-size="15" fill="black" text-anchor="middle">
+                        <text id="kar" x="{$valueXMini}" y="{$valueYMini}" font-size="{$sizeValue}" fill="black" text-anchor="middle">
                             <xsl:value-of select="value"></xsl:value-of>
                         </text>
-                        <text id="kar_usd" transform="rotate(180,{$valueXMini - ($valueXMini div 2) + 40},{$valueYMini - ($valueYMini div 2)+55})" font-size="15" fill="black" text-anchor="middle">
+                        <text id="kar_usd" transform="rotate(180,{$valueXMini - ($valueXMini div 2) + $xMiniAdd},{$valueYMini - ($valueYMini div 2)+$yMiniValueAddUsd})" font-size="{$sizeValue}" fill="black" text-anchor="middle">
                             <xsl:value-of select="value"></xsl:value-of>
                         </text>
                         <use xlink:href="#Club-{$value}" />
-                        <text id="Club_symbol" x="{$symbolXMini}" y="{$symbolYMini}" font-size="15" fill="black" text-anchor="middle">♣</text>
-                        <text id="Club_symbol_usd" transform="rotate(180,{$symbolXMini - ($symbolXMini div 2)+40},{$symbolYMini - ($symbolYMini div 2)+42})" font-size="15" fill="black" text-anchor="middle">♣</text>
+                        <text id="Club_symbol" x="{$symbolXMini}" y="{$symbolYMini}" font-size="{$sizeSmallSymbol}" fill="black" text-anchor="middle">♣</text>
+                        <text id="Club_symbol_usd" transform="rotate(180,{$symbolXMini - ($symbolXMini div 2)+ $xMiniAdd},{$symbolYMini - ($symbolYMini div 2)+$yMiniSymbolAddUsd})" font-size="{$sizeSmallSymbol}" fill="black" text-anchor="middle">♣</text>
                     </g>
                 </xsl:when>
                 <xsl:when test="$Color = 'Heart'">
                     <g>
-                        <text id="kar" x="{$valueXMini}" y="{$valueYMini}" font-size="15" fill="red" text-anchor="middle">
+                        <text id="kar" x="{$valueXMini}" y="{$valueYMini}" font-size="{$sizeValue}" fill="red" text-anchor="middle">
                             <xsl:value-of select="value"></xsl:value-of>
                         </text>
-                        <text id="kar_usd" transform="rotate(180,{$valueXMini - ($valueXMini div 2) + 40},{$valueYMini - ($valueYMini div 2)+55})" font-size="15" fill="red" text-anchor="middle">
+                        <text id="kar_usd" transform="rotate(180,{$valueXMini - ($valueXMini div 2) + $xMiniAdd},{$valueYMini - ($valueYMini div 2)+$yMiniValueAddUsd})" font-size="{$sizeValue}" fill="red" text-anchor="middle">
                             <xsl:value-of select="value"></xsl:value-of>
                         </text>
                         <use xlink:href="#Heart-{$value}" />
-                        <text id="Heart_symbol" x="{$symbolXMini}" y="{$symbolYMini}" font-size="15" fill="red" text-anchor="middle">♥</text>
-                        <text id="Heart_symbol_usd" transform="rotate(180,{$symbolXMini - ($symbolXMini div 2)+40},{$symbolYMini - ($symbolYMini div 2)+42})" font-size="15" fill="red" text-anchor="middle">♥</text>
+                        <text id="Heart_symbol" x="{$symbolXMini}" y="{$symbolYMini}" font-size="{$sizeSmallSymbol}" fill="red" text-anchor="middle">♥</text>
+                        <text id="Heart_symbol_usd" transform="rotate(180,{$symbolXMini - ($symbolXMini div 2)+ $xMiniAdd},{$symbolYMini - ($symbolYMini div 2)+$yMiniSymbolAddUsd})" font-size="{$sizeSmallSymbol}" fill="red" text-anchor="middle">♥</text>
                     </g>
                 </xsl:when>
                 <xsl:when test="$Color = 'Diamond'">
-                            <g>
-                                <text id="kar" x="{$valueXMini}" y="{$valueYMini}" font-size="15" fill="red" text-anchor="middle">
-                                    <xsl:value-of select="value"></xsl:value-of>
-                                </text>
-                                <text id="kar_usd" transform="rotate(180,{$valueXMini - ($valueXMini div 2) + 40},{$valueYMini - ($valueYMini div 2)+55})" font-size="15" fill="red" text-anchor="middle">
-                                    <xsl:value-of select="value"></xsl:value-of>
-                                </text>
-                                <use xlink:href="#Diamond-{$value}" />
-                                <text id="Diamond_symbol" x="{$symbolXMini}" y="{$symbolYMini}" font-size="15" fill="red" text-anchor="middle">♦</text>
-                                <text id="Diamond_symbol_usd" transform="rotate(180,{$symbolXMini - ($symbolXMini div 2)+40},{$symbolYMini - ($symbolYMini div 2)+42})" font-size="15" fill="red" text-anchor="middle">♦</text>
-                            </g>
+                    <g>
+                        <text id="kar" x="{$valueXMini}" y="{$valueYMini}" font-size="{$sizeValue}" fill="red" text-anchor="middle">
+                            <xsl:value-of select="value"></xsl:value-of>
+                        </text>
+                        <text id="kar_usd" transform="rotate(180,{$valueXMini - ($valueXMini div 2) + $xMiniAdd},{$valueYMini - ($valueYMini div 2)+$yMiniValueAddUsd})" font-size="{$sizeValue}" fill="red" text-anchor="middle">
+                            <xsl:value-of select="value"></xsl:value-of>
+                        </text>
+                        <use xlink:href="#Diamond-{$value}" />
+                        <text id="Diamond_symbol" x="{$symbolXMini}" y="{$symbolYMini}" font-size="{$sizeSmallSymbol}" fill="red" text-anchor="middle">♦</text>
+                        <text id="Diamond_symbol_usd" transform="rotate(180,{$symbolXMini - ($symbolXMini div 2)+ $xMiniAdd},{$symbolYMini - ($symbolYMini div 2)+$yMiniSymbolAddUsd})" font-size="{$sizeSmallSymbol}" fill="red" text-anchor="middle">♦</text>
+                    </g>
                 </xsl:when>
             </xsl:choose>
 
@@ -134,92 +133,91 @@
             <!-- SVG Definitionen um Redundanz zu vermeiden -->
             <defs>
                 <g id="CardTemplate">
-                    <rect height="350" width="250" x="45" y="10" rx="30" ry="30" style="fill:white;stroke:black;stroke-width:5;opacity:1.0" />
+                    <rect height="{$cardHeight}" width="{$cardWidth}" x="{$karteX}" y="{$karteY}" rx="5" ry="5" style="fill:white;stroke:black;stroke-width:2;opacity:1.0" />
                 </g>
             </defs>
             <defs>
                 <g id="Diamond-K">
-                    <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/0/06/KD.svg" width="250" height="330" x="45" y="20" />
+                    <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/0/06/KD.svg" width="{$cardWidth}" height="{$cardHeight}" x="{$karteX}" y="{$karteY}" />
                 </g>
             </defs>
 
             <defs>
                 <g id="Diamond-Q">
 
-                    <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/6/63/QD.svg" width="250" height="330" x="45" y="20" />
+                    <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/6/63/QD.svg" width="{$cardWidth}" height="{$cardHeight}" x="{$karteX}" y="{$karteY}" />
                 </g>
             </defs>
             <defs>
                 <g id="Diamond-B">
-                    <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/3/33/JD.svg" width="250" height="330" x="45" y="20" />
+                    <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/3/33/JD.svg" width="{$cardWidth}" height="{$cardHeight}" x="{$karteX}" y="{$karteY}" />
                 </g>
             </defs>
             <defs>
                 <g id="Heart-K">
-                    <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/e/e5/KH.svg" width="250" height="330" x="45" y="20" />
+                    <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/e/e5/KH.svg" width="{$cardWidth}" height="{$cardHeight}" x="{$karteX}" y="{$karteY}" />
                 </g>
             </defs>
 
             <defs>
                 <g id="Heart-Q">
-                    <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/d/d2/QH.svg" width="250" height="330" x="45" y="20" />
+                    <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/d/d2/QH.svg" width="{$cardWidth}" height="{$cardHeight}" x="{$karteX}" y="{$karteY}" />
                 </g>
             </defs>
 
             <defs>
                 <g id="Heart-B">
-                    <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/1/15/JH.svg" width="250" height="330" x="45" y="20" />
+                    <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/1/15/JH.svg" width="{$cardWidth}" height="{$cardHeight}" x="{$karteX}" y="{$karteY}" />
                 </g>
             </defs>
             <defs>
                 <g id="Club-K">
-                    <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/e/e1/KC.svg" width="250" height="330" x="45" y="20" />
+                    <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/e/e1/KC.svg" width="{$cardWidth}" height="{$cardHeight}" x="{$karteX}" y="{$karteY}" />
                 </g>
             </defs>
 
             <defs>
                 <g id="Club-Q">
-                    <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/9/9e/QC.svg" width="250" height="330" x="45" y="20" />
+                    <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/9/9e/QC.svg" width="{$cardWidth}" height="{$cardHeight}" x="{$karteX}" y="{$karteY}" />
                 </g>
             </defs>
 
             <defs>
                 <g id="Club-B">
-                    <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/1/11/JC.svg" width="250" height="330" x="45" y="20" />
+                    <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/1/11/JC.svg" width="{$cardWidth}" height="{$cardHeight}" x="{$karteX}" y="{$karteY}" />
                 </g>
             </defs>
             <defs>
                 <g id="Spade-K">
-                    <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/5/5c/KS.svg" width="100" height="150" x="45" y="20" />
+                    <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/5/5c/KS.svg" width="{$cardWidth}" height="{$cardHeight}" x="{$karteX}" y="{$karteY}" />
                 </g>
             </defs>
 
             <defs>
                 <g id="Spade-Q">
-                    <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/3/35/QS.svg" width="250" height="330" x="45" y="20" />
+                    <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/3/35/QS.svg" width="{$cardWidth}" height="{$cardHeight}" x="{$karteX}" y="{$karteY}" />
                 </g>
             </defs>
 
             <defs>
                 <g id="Spade-B">
-                    <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/d/d9/JS.svg" width="250" height="330" x="45" y="20" />
+                    <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/d/d9/JS.svg" width="{$cardWidth}" height="{$cardHeight}" x="{$karteX}" y="{$karteY}" />
                 </g>
             </defs>
 
             <!-- alle Spades -->
             <defs>
                 <g id="Spade-A">
-                    <text x="{$karteX+15}" y="{$karteY+110}" font-size="130" fill="black">♠</text>
+                    <text x="{$xCardMid}" y="{$yAceSymbol}" font-size="{$sizeAceSymbol}" fill="black" text-anchor="middle">♠</text>
                 </g>
 
             </defs>
 
             <defs>
                 <g id="Spade-2">
-                    <text id="Spade_symbol_big" x="{$jetztX}" y="{$jetztY}" font-size="40" fill="black" text-anchor="middle">♠</text>
+                    <text id="Spade_symbol_big" x="{$xCardMid}" y="{$yBigSymbolTop}" font-size="{$sizeBigSymbol}" fill="black" text-anchor="middle">♠</text>
                     <!-- Das Symbol an der Y achse spiegeln -->
-                    <text id="Spade_symbol_big_usd" transform="rotate(180,{$jetztX - ($jetztX div 2)},{$jetztY - ($jetztY div 2)+40})" font-size="40" fill="black" text-anchor="middle">♠</text>
-                 <!--   <use xlink:href="#Spade_symbol_big" x="{$karteX+37}" y="{$karteY+35}" transform="rotate(180, {$karteX+89}, {$karteY+97})" /> -->
+                    <text id="Spade_symbol_big_usd" transform="rotate(180,{$jetztX - ($jetztX div 2)},{$jetztY - ($jetztY div 2)+$yBigSymbolUsdBotAdd})" font-size="{$sizeBigSymbol}" fill="black" text-anchor="middle">♠</text>
                 </g>
 
             </defs>
@@ -227,39 +225,39 @@
             <defs>
                 <g id="Spade-3">
                     <use xlink:href="#Spade-2" />
-                    <use xlink:href="#Spade_symbol_big" x="0" y="50"/>
+                    <use xlink:href="#Spade_symbol_big" x="0" y="{$yBigSymbolTopToMid}"/>
                 </g>
             </defs>
 
             <defs>
                 <g id="Spade-4">
-                    <use xlink:href="#Spade-2" transform="translate(-22, 0)" />
-                    <use xlink:href="#Spade-2" transform="translate(22, 0)" />
+                    <use xlink:href="#Spade-2" transform="translate(-{$xBigSymbolMidToEdge}, 0)" />
+                    <use xlink:href="#Spade-2" transform="translate({$xBigSymbolMidToEdge}, 0)" />
                 </g>
             </defs>
 
             <defs>
                 <g id="Spade-5">
                     <use xlink:href="#Spade-4" />
-                    <use xlink:href="#Spade_symbol_big" x="0" y="51"/>
+                    <use xlink:href="#Spade_symbol_big" x="0" y="{$yBigSymbolTopToMid}"/>
                 </g>
             </defs>
             <defs>
                 <g id="Spade-6">
-                    <use xlink:href="#Spade-3" transform="translate(-22,0)" />
-                    <use xlink:href="#Spade-3" transform="translate(22,0)" />
+                    <use xlink:href="#Spade-3" transform="translate(-{$xBigSymbolMidToEdge},0)" />
+                    <use xlink:href="#Spade-3" transform="translate({$xBigSymbolMidToEdge},0)" />
                 </g>
             </defs>
             <defs>
                 <g id="Spade-7">
                     <use xlink:href="#Spade-6" />
-                    <use xlink:href="#Spade_symbol_big" x="0" y="25" />
+                    <use xlink:href="#Spade_symbol_big" x="0" y="{$yBigSymbolTopToMid div 2}" />
                 </g>
             </defs>
             <defs>
                 <g id="Spade-8">
                     <use xlink:href="#Spade-7" />
-                    <use xlink:href="#Spade_symbol_big_usd" x="0" y="-25"/>
+                    <use xlink:href="#Spade_symbol_big_usd" x="0" y="-{$yBigSymbolTopToMid div 2}"/>
                 </g>
             </defs>
             <defs>
@@ -267,10 +265,10 @@
                     <use xlink:href="#Spade-5" />
                     <g id="Spade_Doppel">
                         <g id="Spade_Einzel">
-                            <use xlink:href="#Spade_symbol_big" x="-22" y="33" />
-                            <use xlink:href="#Spade_symbol_big_usd" x="-22" y="-33"/>
+                            <use xlink:href="#Spade_symbol_big" x="-{$xBigSymbolMidToEdge}" y="{$yBigSymbolNineSide}" />
+                            <use xlink:href="#Spade_symbol_big_usd" x="-{$xBigSymbolMidToEdge}" y="-{$yBigSymbolNineSide}"/>
                         </g>
-                        <use xlink:href="#Spade_Einzel" transform="translate(44,0)"/>
+                        <use xlink:href="#Spade_Einzel" transform="translate({($xBigSymbolMidToEdge *2)},0)"/>
                     </g>
                 </g>
             </defs>
@@ -278,24 +276,23 @@
                 <g id="Spade-10">
                     <use xlink:href="#Spade-4" />
                     <use xlink:href="#Spade_Doppel"/>
-                    <use xlink:href="#Spade_symbol_big" x="0" y="22"/>
-                    <use xlink:href="#Spade_symbol_big_usd" x="0" y="-22"/>
+                    <use xlink:href="#Spade_symbol_big" x="0" y="{$yBigSymbolTenMid}"/>
+                    <use xlink:href="#Spade_symbol_big_usd" x="0" y="-{$yBigSymbolTenMid}"/>
                 </g>
             </defs>
 
             <!-- alle Clube -->
             <defs>
                 <g id="Club-A">
-                    <text x="110" y="240" font-size="180" fill="black">♣</text>
+                    <text x="{$xCardMid}" y="{$yAceSymbol}" font-size="{$sizeAceSymbol}" fill="black" text-anchor="middle">♣</text>
                 </g>
 
             </defs>
             <defs>
                 <g id="Club-2">
-                    <text id="Club_symbol" x="140" y="110" font-size="80" fill="black">♣</text>
-                    <!-- Das Symbol an der X-Achse spiegeln -->
-
-                    <use xlink:href="#Club_symbol" x="135" y="200" transform="rotate(180, 233, 290)" />
+                    <text id="Club_symbol_big" x="{$xCardMid}" y="{$yBigSymbolTop}" font-size="{$sizeBigSymbol}" fill="black" text-anchor="middle">♣</text>
+                    <!-- Das Symbol an der Y achse spiegeln -->
+                    <text id="Club_symbol_big_usd" transform="rotate(180,{$jetztX - ($jetztX div 2)},{$jetztY - ($jetztY div 2)+$yBigSymbolUsdBotAdd})" font-size="{$sizeBigSymbol}" fill="black" text-anchor="middle">♣</text>
                 </g>
 
             </defs>
@@ -303,56 +300,59 @@
             <defs>
                 <g id="Club-3">
                     <use xlink:href="#Club-2" />
-                    <text x="135" y="215" font-size="80" fill="black">♣</text>
+                    <use xlink:href="#Club_symbol_big" x="0" y="{$yBigSymbolTopToMid}"/>
                 </g>
             </defs>
 
             <defs>
                 <g id="Club-4">
-                    <use xlink:href="#Club-2" transform="translate(-40, 0)" />
-                    <use xlink:href="#Club-2" transform="translate(40, 0)" />
+                    <use xlink:href="#Club-2" transform="translate(-{$xBigSymbolMidToEdge}, 0)" />
+                    <use xlink:href="#Club-2" transform="translate({$xBigSymbolMidToEdge}, 0)" />
                 </g>
             </defs>
 
             <defs>
                 <g id="Club-5">
                     <use xlink:href="#Club-4" />
-                    <text x="140" y="215" font-size="80" fill="black">♣</text>
+                    <use xlink:href="#Club_symbol_big" x="0" y="{$yBigSymbolTopToMid}"/>
                 </g>
             </defs>
             <defs>
                 <g id="Club-6">
-                    <use xlink:href="#Club-3" transform="translate(-40,0)" />
-                    <use xlink:href="#Club-3" transform="translate(40,0)" />
+                    <use xlink:href="#Club-3" transform="translate(-{$xBigSymbolMidToEdge},0)" />
+                    <use xlink:href="#Club-3" transform="translate({$xBigSymbolMidToEdge},0)" />
                 </g>
             </defs>
             <defs>
                 <g id="Club-7">
                     <use xlink:href="#Club-6" />
-                    <text x="140" y="170" font-size="80" fill="black">♣</text>
+                    <use xlink:href="#Club_symbol_big" x="0" y="{$yBigSymbolTopToMid div 2}" />
                 </g>
             </defs>
             <defs>
                 <g id="Club-8">
-                    <use xlink:href="#Club-4" />
-                    <g id="Club-Zweier">
-                        <text x="100" y="173" font-size="80" fill="black">♣</text>
-                        <text x="180" y="173" font-size="80" fill="black">♣</text>
-                    </g>
-                    <use xlink:href="#Club-Zweier" transform="rotate(180, 166, 183)" />
+                    <use xlink:href="#Club-7" />
+                    <use xlink:href="#Club_symbol_big_usd" x="0" y="-{$yBigSymbolTopToMid div 2}"/>
                 </g>
             </defs>
             <defs>
                 <g id="Club-9">
-                    <use xlink:href="#Club-8" />
-                    <text x="140" y="215" font-size="80" fill="black">♣</text>
+                    <use xlink:href="#Club-5" />
+                    <g id="Club_Doppel">
+                        <g id="Club_Einzel">
+                            <use xlink:href="#Club_symbol_big" x="-{$xBigSymbolMidToEdge}" y="{$yBigSymbolNineSide}" />
+                            <use xlink:href="#Club_symbol_big_usd" x="-{$xBigSymbolMidToEdge}" y="-{$yBigSymbolNineSide}"/>
+                        </g>
+                        <use xlink:href="#Club_Einzel" transform="translate({($xBigSymbolMidToEdge *2)},0)"/>
+                    </g>
                 </g>
             </defs>
             <defs>
                 <g id="Club-10">
-                    <use xlink:href="#Club-8" />
-                    <text id="Club_Einser" x="140" y="150" font-size="80" fill="black">♣</text>
-                    <use xlink:href="#Club_Einser" transform="rotate(180, 167, 196)" />
+                    <use xlink:href="#Club-4" />
+                    <use xlink:href="#Club_Doppel"/>
+                    <use xlink:href="#Club_symbol_big" x="0" y="{$yBigSymbolTenMid}"/>
+                    <use xlink:href="#Club_symbol_big_usd" x="0" y="-{$yBigSymbolTenMid}"/>
                 </g>
             </defs>
 
@@ -360,16 +360,15 @@
 
             <defs>
                 <g id="Heart-A">
-                    <text x="120" y="240" font-size="180" fill="red">♥</text>
+                    <text x="{$xCardMid}" y="{$yAceSymbol}" font-size="{$sizeAceSymbol}" fill="red" text-anchor="middle">♥</text>
                 </g>
 
             </defs>
             <defs>
                 <g id="Heart-2">
-                    <text id="Heart_symbol" x="140" y="110" font-size="80" fill="red">♥</text>
-                    <!-- Das Symbol an der X-Achse spiegeln -->
-
-                    <use xlink:href="#Heart_symbol" x="145" y="200" transform="rotate(180, 235, 290)" />
+                    <text id="Heart_symbol_big" x="{$xCardMid}" y="{$yBigSymbolTop}" font-size="{$sizeBigSymbol}" fill="red" text-anchor="middle">♥</text>
+                    <!-- Das Symbol an der Y achse spiegeln -->
+                    <text id="Heart_symbol_big_usd" transform="rotate(180,{$jetztX - ($jetztX div 2)},{$jetztY - ($jetztY div 2)+$yBigSymbolUsdBotAdd})" font-size="{$sizeBigSymbol}" fill="red" text-anchor="middle">♥</text>
                 </g>
 
             </defs>
@@ -377,72 +376,74 @@
             <defs>
                 <g id="Heart-3">
                     <use xlink:href="#Heart-2" />
-                    <text x="140" y="215" font-size="80" fill="red">♥</text>
+                    <use xlink:href="#Heart_symbol_big" x="0" y="{$yBigSymbolTopToMid}"/>
                 </g>
             </defs>
 
             <defs>
                 <g id="Heart-4">
-                    <use xlink:href="#Heart-2" transform="translate(-40, 0)" />
-                    <use xlink:href="#Heart-2" transform="translate(40, 0)" />
+                    <use xlink:href="#Heart-2" transform="translate(-{$xBigSymbolMidToEdge}, 0)" />
+                    <use xlink:href="#Heart-2" transform="translate({$xBigSymbolMidToEdge}, 0)" />
                 </g>
             </defs>
 
             <defs>
                 <g id="Heart-5">
                     <use xlink:href="#Heart-4" />
-                    <text x="140" y="215" font-size="80" fill="red">♥</text>
+                    <use xlink:href="#Heart_symbol_big" x="0" y="{$yBigSymbolTopToMid}"/>
                 </g>
             </defs>
             <defs>
                 <g id="Heart-6">
-                    <use xlink:href="#Heart-3" transform="translate(-40,0)" />
-                    <use xlink:href="#Heart-3" transform="translate(40,0)" />
+                    <use xlink:href="#Heart-3" transform="translate(-{$xBigSymbolMidToEdge},0)" />
+                    <use xlink:href="#Heart-3" transform="translate({$xBigSymbolMidToEdge},0)" />
                 </g>
             </defs>
             <defs>
                 <g id="Heart-7">
                     <use xlink:href="#Heart-6" />
-                    <text x="140" y="170" font-size="80" fill="red">♥</text>
+                    <use xlink:href="#Heart_symbol_big" x="0" y="{$yBigSymbolTopToMid div 2}" />
                 </g>
             </defs>
             <defs>
                 <g id="Heart-8">
-                    <use xlink:href="#Heart-4" />
-                    <g id="Heart-Zweier">
-                        <text x="99" y="173" font-size="80" fill="red">♥</text>
-                        <text x="180" y="173" font-size="80" fill="red">♥</text>
-                    </g>
-                    <use xlink:href="#Heart-Zweier" transform="rotate(180, 162, 190)" />
+                    <use xlink:href="#Heart-7" />
+                    <use xlink:href="#Heart_symbol_big_usd" x="0" y="-{$yBigSymbolTopToMid div 2}"/>
                 </g>
             </defs>
             <defs>
                 <g id="Heart-9">
-                    <use xlink:href="#Heart-8" />
-                    <text x="140" y="215" font-size="80" fill="red">♥</text>
+                    <use xlink:href="#Heart-5" />
+                    <g id="Heart_Doppel">
+                        <g id="Heart_Einzel">
+                            <use xlink:href="#Heart_symbol_big" x="-{$xBigSymbolMidToEdge}" y="{$yBigSymbolNineSide}" />
+                            <use xlink:href="#Heart_symbol_big_usd" x="-{$xBigSymbolMidToEdge}" y="-{$yBigSymbolNineSide}"/>
+                        </g>
+                        <use xlink:href="#Heart_Einzel" transform="translate({($xBigSymbolMidToEdge *2)},0)"/>
+                    </g>
                 </g>
             </defs>
             <defs>
                 <g id="Heart-10">
-                    <use xlink:href="#Heart-8" />
-                    <text id="Heart_Einser" x="140" y="150" font-size="80" fill="red">♥</text>
-                    <use xlink:href="#Heart_Einser" transform="rotate(180, 162, 190)" />
+                    <use xlink:href="#Heart-4" />
+                    <use xlink:href="#Heart_Doppel"/>
+                    <use xlink:href="#Heart_symbol_big" x="0" y="{$yBigSymbolTenMid}"/>
+                    <use xlink:href="#Heart_symbol_big_usd" x="0" y="-{$yBigSymbolTenMid}"/>
                 </g>
             </defs>
 
             <!-- alle Diamond -->
             <defs>
                 <g id="Diamond-A">
-                    <text x="120" y="240" font-size="180" fill="red">♦</text>
+                    <text x="{$xCardMid}" y="{$yAceSymbol}" font-size="{$sizeAceSymbol}" fill="red" text-anchor="middle">♦</text>
                 </g>
 
             </defs>
             <defs>
                 <g id="Diamond-2">
-                    <text id="Diamond_symbol" x="140" y="110" font-size="80" fill="red">♦</text>
-                    <!-- Das Symbol an der X-Achse spiegeln -->
-
-                    <use xlink:href="#Diamond_symbol" transform="rotate(180, 160, 190)" />
+                    <text id="Diamond_symbol_big" x="{$xCardMid}" y="{$yBigSymbolTop}" font-size="{$sizeBigSymbol}" fill="red" text-anchor="middle">♦</text>
+                    <!-- Das Symbol an der Y achse spiegeln -->
+                    <text id="Diamond_symbol_big_usd" transform="rotate(180,{$jetztX - ($jetztX div 2)},{$jetztY - ($jetztY div 2)+$yBigSymbolUsdBotAdd})" font-size="{$sizeBigSymbol}" fill="red" text-anchor="middle">♦</text>
                 </g>
 
             </defs>
@@ -450,56 +451,59 @@
             <defs>
                 <g id="Diamond-3">
                     <use xlink:href="#Diamond-2" />
-                    <text x="140" y="215" font-size="80" fill="red">♦</text>
+                    <use xlink:href="#Diamond_symbol_big" x="0" y="{$yBigSymbolTopToMid}"/>
                 </g>
             </defs>
 
             <defs>
                 <g id="Diamond-4">
-                    <use xlink:href="#Diamond-2" transform="translate(-40, 0)" />
-                    <use xlink:href="#Diamond-2" transform="translate(40, 0)" />
+                    <use xlink:href="#Diamond-2" transform="translate(-{$xBigSymbolMidToEdge}, 0)" />
+                    <use xlink:href="#Diamond-2" transform="translate({$xBigSymbolMidToEdge}, 0)" />
                 </g>
             </defs>
 
             <defs>
                 <g id="Diamond-5">
                     <use xlink:href="#Diamond-4" />
-                    <text x="140" y="215" font-size="80" fill="red">♦</text>
+                    <use xlink:href="#Diamond_symbol_big" x="0" y="{$yBigSymbolTopToMid}"/>
                 </g>
             </defs>
             <defs>
                 <g id="Diamond-6">
-                    <use xlink:href="#Diamond-3" transform="translate(-40,0)" />
-                    <use xlink:href="#Diamond-3" transform="translate(40,0)" />
+                    <use xlink:href="#Diamond-3" transform="translate(-{$xBigSymbolMidToEdge},0)" />
+                    <use xlink:href="#Diamond-3" transform="translate({$xBigSymbolMidToEdge},0)" />
                 </g>
             </defs>
             <defs>
                 <g id="Diamond-7">
                     <use xlink:href="#Diamond-6" />
-                    <text x="140" y="170" font-size="80" fill="red">♦</text>
+                    <use xlink:href="#Diamond_symbol_big" x="0" y="{$yBigSymbolTopToMid div 2}" />
                 </g>
             </defs>
             <defs>
                 <g id="Diamond-8">
-                    <use xlink:href="#Diamond-4" />
-                    <g id="Diamond-Zweier">
-                        <text x="100" y="173" font-size="80" fill="red">♦</text>
-                        <text x="180" y="173" font-size="80" fill="red">♦</text>
-                    </g>
-                    <use xlink:href="#Diamond-Zweier" transform="rotate(180, 160, 190)" />
+                    <use xlink:href="#Diamond-7" />
+                    <use xlink:href="#Diamond_symbol_big_usd" x="0" y="-{$yBigSymbolTopToMid div 2}"/>
                 </g>
             </defs>
             <defs>
                 <g id="Diamond-9">
-                    <use xlink:href="#Diamond-8" />
-                    <text x="140" y="215" font-size="80" fill="red">♦</text>
+                    <use xlink:href="#Diamond-5" />
+                    <g id="Diamond_Doppel">
+                        <g id="Diamond_Einzel">
+                            <use xlink:href="#Diamond_symbol_big" x="-{$xBigSymbolMidToEdge}" y="{$yBigSymbolNineSide}" />
+                            <use xlink:href="#Diamond_symbol_big_usd" x="-{$xBigSymbolMidToEdge}" y="-{$yBigSymbolNineSide}"/>
+                        </g>
+                        <use xlink:href="#Diamond_Einzel" transform="translate({($xBigSymbolMidToEdge *2)},0)"/>
+                    </g>
                 </g>
             </defs>
             <defs>
                 <g id="Diamond-10">
-                    <use xlink:href="#Diamond-8" />
-                    <text id="Diamond_Einser" x="140" y="150" font-size="80" fill="red">♦</text>
-                    <use xlink:href="#Diamond_Einser" transform="rotate(180, 160, 190)" />
+                    <use xlink:href="#Diamond-4" />
+                    <use xlink:href="#Diamond_Doppel"/>
+                    <use xlink:href="#Diamond_symbol_big" x="0" y="{$yBigSymbolTenMid}"/>
+                    <use xlink:href="#Diamond_symbol_big_usd" x="0" y="-{$yBigSymbolTenMid}"/>
                 </g>
             </defs>
         </svg>
