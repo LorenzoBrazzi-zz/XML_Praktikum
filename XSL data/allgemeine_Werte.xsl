@@ -56,8 +56,8 @@
     <!-- Aktuelle Karte -->
     <xsl:variable name="cardWidth" select="100"/>
     <xsl:variable name="cardHeight" select="($cardWidth * 1.5)"/>
-    <xsl:variable name="karteX" select="300"/>
-    <xsl:variable name="karteY" select="250"/>
+    <xsl:variable name="karteX" select="75"/>
+    <xsl:variable name="karteY" select="275"/>
     <!-- <xsl:variable name="jetztX" select="$karteX +50"/>
     <xsl:variable name="jetztY" select="$karteY +35"/> -->
     <xsl:variable name="jetztX" select="$karteX +($cardWidth div 2)"/>

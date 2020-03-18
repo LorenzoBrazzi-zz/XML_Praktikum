@@ -1,3 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <?xml-stylesheet href="trafo.xsl" type="text/xsl" ?>
-<table></table>
+<game>
+    <card>
+        <value>10</value>
+        <color>Club</color>
+        <hidden>false</hidden>
+    </card>
+    <card>
+        <value>7</value>
+        <color>Club</color>
+        <hidden>false</hidden>
+    </card>
+</game>
