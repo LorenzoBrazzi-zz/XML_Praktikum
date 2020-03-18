@@ -759,10 +759,10 @@
 
                         <g>
                             <text id="kar" x="{$valueXMini}" y="{$valueYMini}" font-size="{$sizeValue}" fill="black" text-anchor="middle">
-                                <xsl:value-of select="value"></xsl:value-of>
+                                <xsl:value-of select="card/value"></xsl:value-of>
                             </text>
                             <text id="kar_usd" transform="rotate(180,{$valueXMini - ($valueXMini div 2) + $xMiniAdd},{$valueYMini - ($valueYMini div 2)+$yMiniValueAddUsd})" font-size="{$sizeValue}" fill="black" text-anchor="middle">
-                                <xsl:value-of select="value"></xsl:value-of>
+                                <xsl:value-of select="card/value"></xsl:value-of>
                             </text>
                             <use xlink:href="#Spade-{$value}" />
                             <text id="Spade_symbol" x="{$symbolXMini}" y="{$symbolYMini}" font-size="{$sizeSmallSymbol}" fill="black" text-anchor="middle">♠</text>
@@ -786,10 +786,10 @@
                     <xsl:when test="$Color = 'Heart'">
                         <g>
                             <text id="kar" x="{$valueXMini}" y="{$valueYMini}" font-size="{$sizeValue}" fill="red" text-anchor="middle">
-                                <xsl:value-of select="value"></xsl:value-of>
+                                <xsl:value-of select="card/value"></xsl:value-of>
                             </text>
                             <text id="kar_usd" transform="rotate(180,{$valueXMini - ($valueXMini div 2) + $xMiniAdd},{$valueYMini - ($valueYMini div 2)+$yMiniValueAddUsd})" font-size="{$sizeValue}" fill="red" text-anchor="middle">
-                                <xsl:value-of select="value"></xsl:value-of>
+                                <xsl:value-of select="card/value"></xsl:value-of>
                             </text>
                             <use xlink:href="#Heart-{$value}" />
                             <text id="Heart_symbol" x="{$symbolXMini}" y="{$symbolYMini}" font-size="{$sizeSmallSymbol}" fill="red" text-anchor="middle">♥</text>
@@ -799,10 +799,10 @@
                     <xsl:when test="$Color = 'Diamond'">
                         <g>
                             <text id="kar" x="{$valueXMini}" y="{$valueYMini}" font-size="{$sizeValue}" fill="red" text-anchor="middle">
-                                <xsl:value-of select="value"></xsl:value-of>
+                                <xsl:value-of select="card/value"></xsl:value-of>
                             </text>
                             <text id="kar_usd" transform="rotate(180,{$valueXMini - ($valueXMini div 2) + $xMiniAdd},{$valueYMini - ($valueYMini div 2)+$yMiniValueAddUsd})" font-size="{$sizeValue}" fill="red" text-anchor="middle">
-                                <xsl:value-of select="value"></xsl:value-of>
+                                <xsl:value-of select="card/value"></xsl:value-of>
                             </text>
                             <use xlink:href="#Diamond-{$value}" />
                             <text id="Diamond_symbol" x="{$symbolXMini}" y="{$symbolYMini}" font-size="{$sizeSmallSymbol}" fill="red" text-anchor="middle">♦</text>
