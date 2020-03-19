@@ -11,4 +11,14 @@
         <color>Club</color>
         <hidden>false</hidden>
     </card>
+    <card>
+        <value>3</value>
+        <color>Club</color>
+        <hidden>false</hidden>
+    </card>
+    <card>
+        <value>A</value>
+        <color>Club</color>
+        <hidden>false</hidden>
+    </card>
 </game>
