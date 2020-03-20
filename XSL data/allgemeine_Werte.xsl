@@ -64,25 +64,25 @@
     <xsl:variable name="karteY" select="0"/>
     <!-- <xsl:variable name="jetztX" select="$karteX +50"/>
     <xsl:variable name="jetztY" select="$karteY +35"/> -->
-    <xsl:variable name="jetztX" select="$karteX +($cardWidth div 2)"/>
-    <xsl:variable name="jetztY" select="$karteY +($cardHeight div 4.25)"/>
+    <xsl:variable name="jetztX" select="($cardWidth div 2)"/>
+    <xsl:variable name="jetztY" select="($cardHeight div 4.25)"/>
     <!--<xsl:variable name="valueXMini" select="$karteX +10"/>
     <xsl:variable name="valueYMini" select="$karteY +20"/> -->
-    <xsl:variable name="valueXMini" select="$karteX + ($cardWidth div 10)"/>
-    <xsl:variable name="valueYMini" select="$karteY +($cardHeight div 7.5)"/>
+    <xsl:variable name="valueXMini" select="($cardWidth div 10)"/>
+    <xsl:variable name="valueYMini" select="($cardHeight div 7.5)"/>
     <!--<xsl:variable name="symbolXMini" select="$karteX +10"/>
     <xsl:variable name="symbolYMini" select="$karteY +33"/> -->
-    <xsl:variable name="symbolXMini" select="$karteX +($cardWidth div 10)"/>
-    <xsl:variable name="symbolYMini" select="$karteY +($cardHeight div 4.5)"/>
+    <xsl:variable name="symbolXMini" select="($cardWidth div 10)"/>
+    <xsl:variable name="symbolYMini" select="($cardHeight div 4.5)"/>
     <xsl:variable name="sizeBigSymbol" select="($cardWidth * 0.4)"/>
     <xsl:variable name="sizeSmallSymbol" select="($cardWidth * 0.15)"/>
     <xsl:variable name="sizeValue" select="($cardWidth * 0.15)"/>
     <xsl:variable name="sizeAceSymbol" select="($cardWidth * 1.3)"/>
-    <xsl:variable name="yAceSymbol" select="$karteY +($cardHeight div 1.33)"/>
+    <xsl:variable name="yAceSymbol" select="($cardHeight div 1.33)"/>
 
-    <xsl:variable name="xCardMid" select="$karteX +($cardWidth div 2)"/>
-    <xsl:variable name="yCardMid" select="$karteY +($cardHeight div 2)"/>
-    <xsl:variable name="yBigSymbolTop" select="$karteY +($cardHeight div 4.25)"/>
+    <xsl:variable name="xCardMid" select="($cardWidth div 2)"/>
+    <xsl:variable name="yCardMid" select="($cardHeight div 2)"/>
+    <xsl:variable name="yBigSymbolTop" select="($cardHeight div 4.25)"/>
     <xsl:variable name="yBigSymbolTopToMid" select="($cardHeight div 3)"/>
     <xsl:variable name="xBigSymbolMidToEdge" select="($cardWidth div 5)"/>
     <xsl:variable name="yBigSymbolTenMid" select="($cardHeight div 7.55)"/>
