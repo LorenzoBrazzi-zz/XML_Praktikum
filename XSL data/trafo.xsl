@@ -161,6 +161,291 @@
                     <rect height="{$cardHeight}" width="{$cardWidth}" rx="5" ry="5"
                           style="fill:white;stroke:black;stroke-width:2;opacity:1.0"/>
                 </g>
+                <!-- Symbole für obere und untere Kartenecke -->
+
+                <g id = "Club_mini">
+                    <text id="Club_symbol" x="{$symbolXMini}" y="{$symbolYMini}" font-size="{$sizeSmallSymbol}"
+                          fill="black" text-anchor="middle">♣
+                    </text>
+                    <text id="Club_symbol_usd"
+                          transform="rotate(180,{$symbolXMini - ($symbolXMini div 2)+ $xMiniAdd},{$symbolYMini - ($symbolYMini div 2)+$yMiniSymbolAddUsd})"
+                          font-size="{$sizeSmallSymbol}" fill="black" text-anchor="middle">♣
+                    </text>
+                </g>
+
+                <g id = "Spade_mini">
+                    <text id="Spade_symbol" x="{$symbolXMini}" y="{$symbolYMini}" font-size="{$sizeSmallSymbol}"
+                          fill="black" text-anchor="middle">♠
+                    </text>
+                    <text id="Spade_symbol_usd"
+                          transform="rotate(180,{$symbolXMini - ($symbolXMini div 2)+ $xMiniAdd},{$symbolYMini - ($symbolYMini div 2)+$yMiniSymbolAddUsd})"
+                          font-size="{$sizeSmallSymbol}" fill="black" text-anchor="middle">♠
+                    </text>
+                </g>
+
+                <g id = "Heart_mini">
+                    <text id="Heart_symbol" x="{$symbolXMini}" y="{$symbolYMini}" font-size="{$sizeSmallSymbol}"
+                          fill="red" text-anchor="middle">♥
+                    </text>
+                    <text id="Heart_symbol_usd"
+                          transform="rotate(180,{$symbolXMini - ($symbolXMini div 2)+ $xMiniAdd},{$symbolYMini - ($symbolYMini div 2)+$yMiniSymbolAddUsd})"
+                          font-size="{$sizeSmallSymbol}" fill="red" text-anchor="middle">♥
+                    </text>
+                </g>
+
+                <g id = "Diamond_mini">
+                    <text id="Diamond_symbol" x="{$symbolXMini}" y="{$symbolYMini}" font-size="{$sizeSmallSymbol}"
+                          fill="red" text-anchor="middle">♦
+                    </text>
+                    <text id="Diamond_symbol_usd"
+                          transform="rotate(180,{$symbolXMini - ($symbolXMini div 2)+ $xMiniAdd},{$symbolYMini - ($symbolYMini div 2)+$yMiniSymbolAddUsd})"
+                          font-size="{$sizeSmallSymbol}" fill="red" text-anchor="middle">♦
+                    </text>
+                </g>
+
+
+                <!-- Zahlen für die obere und untere Kartenecke -->
+
+                <g id="red-A">
+                    <text id="kar" x="{$valueXMini}" y="{$valueYMini}" font-size="{$sizeValue}" fill="red"
+                          text-anchor="middle">
+                        A
+                    </text>
+                    <text id="kar_usd"
+                          transform="rotate(180,{$valueXMini - ($valueXMini div 2) + $xMiniAdd},{$valueYMini - ($valueYMini div 2)+$yMiniValueAddUsd})"
+                          font-size="{$sizeValue}" fill="red" text-anchor="middle">
+                        A
+                    </text>
+                </g>
+
+                <g id="red-2">
+                    <text id="kar" x="{$valueXMini}" y="{$valueYMini}" font-size="{$sizeValue}" fill="red"
+                          text-anchor="middle">
+                        2
+                    </text>
+                    <text id="kar_usd"
+                          transform="rotate(180,{$valueXMini - ($valueXMini div 2) + $xMiniAdd},{$valueYMini - ($valueYMini div 2)+$yMiniValueAddUsd})"
+                          font-size="{$sizeValue}" fill="red" text-anchor="middle">
+                        2
+                    </text>
+                </g>
+
+                <g id="red-3">
+                    <text id="kar" x="{$valueXMini}" y="{$valueYMini}" font-size="{$sizeValue}" fill="red"
+                          text-anchor="middle">
+                        3
+                    </text>
+                    <text id="kar_usd"
+                          transform="rotate(180,{$valueXMini - ($valueXMini div 2) + $xMiniAdd},{$valueYMini - ($valueYMini div 2)+$yMiniValueAddUsd})"
+                          font-size="{$sizeValue}" fill="red" text-anchor="middle">
+                        3
+                    </text>
+                </g>
+
+                <g id="red-4">
+                    <text id="kar" x="{$valueXMini}" y="{$valueYMini}" font-size="{$sizeValue}" fill="red"
+                          text-anchor="middle">
+                        4
+                    </text>
+                    <text id="kar_usd"
+                          transform="rotate(180,{$valueXMini - ($valueXMini div 2) + $xMiniAdd},{$valueYMini - ($valueYMini div 2)+$yMiniValueAddUsd})"
+                          font-size="{$sizeValue}" fill="red" text-anchor="middle">
+                        4
+                    </text>
+                </g>
+
+                <g id="red-5">
+                    <text id="kar" x="{$valueXMini}" y="{$valueYMini}" font-size="{$sizeValue}" fill="red"
+                          text-anchor="middle">
+                        5
+                    </text>
+                    <text id="kar_usd"
+                          transform="rotate(180,{$valueXMini - ($valueXMini div 2) + $xMiniAdd},{$valueYMini - ($valueYMini div 2)+$yMiniValueAddUsd})"
+                          font-size="{$sizeValue}" fill="red" text-anchor="middle">
+                        5
+                    </text>
+                </g>
+
+                <g id="red-6">
+                    <text id="kar" x="{$valueXMini}" y="{$valueYMini}" font-size="{$sizeValue}" fill="red"
+                          text-anchor="middle">
+                        6
+                    </text>
+                    <text id="kar_usd"
+                          transform="rotate(180,{$valueXMini - ($valueXMini div 2) + $xMiniAdd},{$valueYMini - ($valueYMini div 2)+$yMiniValueAddUsd})"
+                          font-size="{$sizeValue}" fill="red" text-anchor="middle">
+                        6
+                    </text>
+                </g>
+
+                <g id="red-7">
+                    <text id="kar" x="{$valueXMini}" y="{$valueYMini}" font-size="{$sizeValue}" fill="red"
+                          text-anchor="middle">
+                        7
+                    </text>
+                    <text id="kar_usd"
+                          transform="rotate(180,{$valueXMini - ($valueXMini div 2) + $xMiniAdd},{$valueYMini - ($valueYMini div 2)+$yMiniValueAddUsd})"
+                          font-size="{$sizeValue}" fill="red" text-anchor="middle">
+                        7
+                    </text>
+                </g>
+
+                <g id="red-8">
+                    <text id="kar" x="{$valueXMini}" y="{$valueYMini}" font-size="{$sizeValue}" fill="red"
+                          text-anchor="middle">
+                        8
+                    </text>
+                    <text id="kar_usd"
+                          transform="rotate(180,{$valueXMini - ($valueXMini div 2) + $xMiniAdd},{$valueYMini - ($valueYMini div 2)+$yMiniValueAddUsd})"
+                          font-size="{$sizeValue}" fill="red" text-anchor="middle">
+                        8
+                    </text>
+                </g>
+
+                <g id="red-9">
+                    <text id="kar" x="{$valueXMini}" y="{$valueYMini}" font-size="{$sizeValue}" fill="red"
+                          text-anchor="middle">
+                        9
+                    </text>
+                    <text id="kar_usd"
+                          transform="rotate(180,{$valueXMini - ($valueXMini div 2) + $xMiniAdd},{$valueYMini - ($valueYMini div 2)+$yMiniValueAddUsd})"
+                          font-size="{$sizeValue}" fill="red" text-anchor="middle">
+                        9
+                    </text>
+                </g>
+
+                <g id="red-10">
+                    <text id="kar" x="{$valueXMini}" y="{$valueYMini}" font-size="{$sizeValue}" fill="red"
+                          text-anchor="middle">
+                        10
+                    </text>
+                    <text id="kar_usd"
+                          transform="rotate(180,{$valueXMini - ($valueXMini div 2) + $xMiniAdd},{$valueYMini - ($valueYMini div 2)+$yMiniValueAddUsd})"
+                          font-size="{$sizeValue}" fill="red" text-anchor="middle">
+                        10
+                    </text>
+                </g>
+
+                <g id="black-A">
+                    <text id="kar" x="{$valueXMini}" y="{$valueYMini}" font-size="{$sizeValue}" fill="black"
+                          text-anchor="middle">
+                        A
+                    </text>
+                    <text id="kar_usd"
+                          transform="rotate(180,{$valueXMini - ($valueXMini div 2) + $xMiniAdd},{$valueYMini - ($valueYMini div 2)+$yMiniValueAddUsd})"
+                          font-size="{$sizeValue}" fill="black" text-anchor="middle">
+                        A
+                    </text>
+                </g>
+
+                <g id="black-2">
+                    <text id="kar" x="{$valueXMini}" y="{$valueYMini}" font-size="{$sizeValue}" fill="black"
+                          text-anchor="middle">
+                        2
+                    </text>
+                    <text id="kar_usd"
+                          transform="rotate(180,{$valueXMini - ($valueXMini div 2) + $xMiniAdd},{$valueYMini - ($valueYMini div 2)+$yMiniValueAddUsd})"
+                          font-size="{$sizeValue}" fill="black" text-anchor="middle">
+                        2
+                    </text>
+                </g>
+
+                <g id="black-3">
+                    <text id="kar" x="{$valueXMini}" y="{$valueYMini}" font-size="{$sizeValue}" fill="black"
+                          text-anchor="middle">
+                        3
+                    </text>
+                    <text id="kar_usd"
+                          transform="rotate(180,{$valueXMini - ($valueXMini div 2) + $xMiniAdd},{$valueYMini - ($valueYMini div 2)+$yMiniValueAddUsd})"
+                          font-size="{$sizeValue}" fill="black" text-anchor="middle">
+                        3
+                    </text>
+                </g>
+
+                <g id="black-4">
+                    <text id="kar" x="{$valueXMini}" y="{$valueYMini}" font-size="{$sizeValue}" fill="black"
+                          text-anchor="middle">
+                        4
+                    </text>
+                    <text id="kar_usd"
+                          transform="rotate(180,{$valueXMini - ($valueXMini div 2) + $xMiniAdd},{$valueYMini - ($valueYMini div 2)+$yMiniValueAddUsd})"
+                          font-size="{$sizeValue}" fill="black" text-anchor="middle">
+                        4
+                    </text>
+                </g>
+
+                <g id="black-5">
+                    <text id="kar" x="{$valueXMini}" y="{$valueYMini}" font-size="{$sizeValue}" fill="black"
+                          text-anchor="middle">
+                        5
+                    </text>
+                    <text id="kar_usd"
+                          transform="rotate(180,{$valueXMini - ($valueXMini div 2) + $xMiniAdd},{$valueYMini - ($valueYMini div 2)+$yMiniValueAddUsd})"
+                          font-size="{$sizeValue}" fill="black" text-anchor="middle">
+                        5
+                    </text>
+                </g>
+
+                <g id="black-6">
+                    <text id="kar" x="{$valueXMini}" y="{$valueYMini}" font-size="{$sizeValue}" fill="black"
+                          text-anchor="middle">
+                        6
+                    </text>
+                    <text id="kar_usd"
+                          transform="rotate(180,{$valueXMini - ($valueXMini div 2) + $xMiniAdd},{$valueYMini - ($valueYMini div 2)+$yMiniValueAddUsd})"
+                          font-size="{$sizeValue}" fill="black" text-anchor="middle">
+                        6
+                    </text>
+                </g>
+
+                <g id="black-7">
+                    <text id="kar" x="{$valueXMini}" y="{$valueYMini}" font-size="{$sizeValue}" fill="black"
+                          text-anchor="middle">
+                        7
+                    </text>
+                    <text id="kar_usd"
+                          transform="rotate(180,{$valueXMini - ($valueXMini div 2) + $xMiniAdd},{$valueYMini - ($valueYMini div 2)+$yMiniValueAddUsd})"
+                          font-size="{$sizeValue}" fill="black" text-anchor="middle">
+                        7
+                    </text>
+                </g>
+
+                <g id="black-8">
+                    <text id="kar" x="{$valueXMini}" y="{$valueYMini}" font-size="{$sizeValue}" fill="black"
+                          text-anchor="middle">
+                        8
+                    </text>
+                    <text id="kar_usd"
+                          transform="rotate(180,{$valueXMini - ($valueXMini div 2) + $xMiniAdd},{$valueYMini - ($valueYMini div 2)+$yMiniValueAddUsd})"
+                          font-size="{$sizeValue}" fill="black" text-anchor="middle">
+                        8
+                    </text>
+                </g>
+
+                <g id="black-9">
+                    <text id="kar" x="{$valueXMini}" y="{$valueYMini}" font-size="{$sizeValue}" fill="black"
+                          text-anchor="middle">
+                        9
+                    </text>
+                    <text id="kar_usd"
+                          transform="rotate(180,{$valueXMini - ($valueXMini div 2) + $xMiniAdd},{$valueYMini - ($valueYMini div 2)+$yMiniValueAddUsd})"
+                          font-size="{$sizeValue}" fill="black" text-anchor="middle">
+                        9
+                    </text>
+                </g>
+
+                <g id="black-10">
+                    <text id="kar" x="{$valueXMini}" y="{$valueYMini}" font-size="{$sizeValue}" fill="black"
+                          text-anchor="middle">
+                        10
+                    </text>
+                    <text id="kar_usd"
+                          transform="rotate(180,{$valueXMini - ($valueXMini div 2) + $xMiniAdd},{$valueYMini - ($valueYMini div 2)+$yMiniValueAddUsd})"
+                          font-size="{$sizeValue}" fill="black" text-anchor="middle">
+                        10
+                    </text>
+                </g>
+
                 <g id="Diamond-K">
                     <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/0/06/KD.svg" width="{$cardWidth}"
                            height="{$cardHeight}" x="{$karteX}" y="{$karteY}"/>
@@ -361,6 +646,16 @@
                     <use xlink:href="#Club_Doppel"/>
                     <use xlink:href="#Club_symbol_big" x="0" y="{$yBigSymbolTenMid}"/>
                     <use xlink:href="#Club_symbol_big_usd" x="0" y="-{$yBigSymbolTenMid}"/>
+                    <text id="kar" x="{$valueXMini}" y="{$valueYMini}" font-size="{$sizeValue}" fill="black"
+                          text-anchor="middle">
+                        10
+                    </text>
+                    <text id="kar_usd"
+                          transform="rotate(180,{$valueXMini - ($valueXMini div 2) + $xMiniAdd},{$valueYMini - ($valueYMini div 2)+$yMiniValueAddUsd})"
+                          font-size="{$sizeValue}" fill="black" text-anchor="middle">
+                        10
+                    </text>
+
                 </g>
 
                 <!-- alle Hearten -->
@@ -510,110 +805,185 @@
 
 
             </defs>
-
-            <xsl:for-each select="card">
-                <xsl:variable name="color" select="color"/>
+            <!--Spieler 1 -->
+            <xsl:for-each select="players/player[position=1]/currentHand/card">
                 <xsl:variable name="value" select="value"/>
+                <xsl:variable name="color" select="color"/>
                 <xsl:variable name="counter" select="position()-1"/>
-                <!-- Symboldefinition an dieser Stelle, weil die Parameter für die Koordinaten verschachtelt sind
-                     und deshalb alle von $karteX und Y abhängig sind. Am besten alles entkoppeln, sprich von allgemeine
-                     Werte ein bisschen zu stark abhängig.-->
-                <defs>
-                    <g id="Spade">
-                        <text id="kar" x="{$valueXMini}" y="{$valueYMini}" font-size="{$sizeValue}" fill="black"
-                              text-anchor="middle">
-                            <xsl:value-of select="$value"/>
-                        </text>
-                        <text id="kar_usd"
-                              transform="rotate(180,{$valueXMini - ($valueXMini div 2) + $xMiniAdd},{$valueYMini - ($valueYMini div 2)+$yMiniValueAddUsd})"
-                              font-size="{$sizeValue}" fill="black" text-anchor="middle">
-                            <xsl:value-of select="$value"/>
-                        </text>
-                        <use xlink:href="#Spade-{$value}"/>
-                        <text id="Spade_symbol" x="{$symbolXMini}" y="{$symbolYMini}" font-size="{$sizeSmallSymbol}"
-                              fill="black" text-anchor="middle">♠
-                        </text>
-                        <text id="Spade_symbol_usd"
-                              transform="rotate(180,{$symbolXMini - ($symbolXMini div 2)+ $xMiniAdd},{$symbolYMini - ($symbolYMini div 2)+$yMiniSymbolAddUsd})"
-                              font-size="{$sizeSmallSymbol}" fill="black" text-anchor="middle">♠
-                        </text>
-                    </g>
 
 
-                    <g id="Club">
-                        <text id="kar" x="{$valueXMini}" y="{$valueYMini}" font-size="{$sizeValue}" fill="black"
-                              text-anchor="middle">
-                            <xsl:value-of select="$value"/>
-                        </text>
-                        <text id="kar_usd"
-                              transform="rotate(180,{$valueXMini - ($valueXMini div 2) + $xMiniAdd},{$valueYMini - ($valueYMini div 2)+$yMiniValueAddUsd})"
-                              font-size="{$sizeValue}" fill="black" text-anchor="middle">
-                            <xsl:value-of select="$value"/>
-                        </text>
-                        <use xlink:href="#Club-{$value}"/>
-                        <text id="Club_symbol" x="{$symbolXMini}" y="{$symbolYMini}" font-size="{$sizeSmallSymbol}"
-                              fill="black" text-anchor="middle">♣
-                        </text>
-                        <text id="Club_symbol_usd"
-                              transform="rotate(180,{$symbolXMini - ($symbolXMini div 2)+ $xMiniAdd},{$symbolYMini - ($symbolYMini div 2)+$yMiniSymbolAddUsd})"
-                              font-size="{$sizeSmallSymbol}" fill="black" text-anchor="middle">♣
-                        </text>
-                    </g>
-
-                    <g id="Heart">
-                        <text id="kar" x="{$valueXMini}" y="{$valueYMini}" font-size="{$sizeValue}" fill="red"
-                              text-anchor="middle">
-                            <xsl:value-of select="$value"/>
-                        </text>
-                        <text id="kar_usd"
-                              transform="rotate(180,{$valueXMini - ($valueXMini div 2) + $xMiniAdd},{$valueYMini - ($valueYMini div 2)+$yMiniValueAddUsd})"
-                              font-size="{$sizeValue}" fill="red" text-anchor="middle">
-                            <xsl:value-of select="$value"/>
-                        </text>
-                        <use xlink:href="#Heart-{$value}"/>
-                        <text id="Heart_symbol" x="{$symbolXMini}" y="{$symbolYMini}" font-size="{$sizeSmallSymbol}"
-                              fill="red" text-anchor="middle">♥
-                        </text>
-                        <text id="Heart_symbol_usd"
-                              transform="rotate(180,{$symbolXMini - ($symbolXMini div 2)+ $xMiniAdd},{$symbolYMini - ($symbolYMini div 2)+$yMiniSymbolAddUsd})"
-                              font-size="{$sizeSmallSymbol}" fill="red" text-anchor="middle">♥
-                        </text>
-                    </g>
-
-                    <g id="Diamond">
-                        <text id="kar" x="{$valueXMini}" y="{$valueYMini}" font-size="{$sizeValue}" fill="red"
-                              text-anchor="middle">
-                            <xsl:value-of select="$value"/>
-                        </text>
-                        <text id="kar_usd"
-                              transform="rotate(180,{$valueXMini - ($valueXMini div 2) + $xMiniAdd},{$valueYMini - ($valueYMini div 2)+$yMiniValueAddUsd})"
-                              font-size="{$sizeValue}" fill="red" text-anchor="middle">
-                            <xsl:value-of select="$value"/>
-                        </text>
-                        <use xlink:href="#Diamond-{$value}"/>
-                        <text id="Diamond_symbol" x="{$symbolXMini}" y="{$symbolYMini}" font-size="{$sizeSmallSymbol}"
-                              fill="red" text-anchor="middle">♦
-                        </text>
-                        <text id="Diamond_symbol_usd"
-                              transform="rotate(180,{$symbolXMini - ($symbolXMini div 2)+ $xMiniAdd},{$symbolYMini - ($symbolYMini div 2)+$yMiniSymbolAddUsd})"
-                              font-size="{$sizeSmallSymbol}" fill="red" text-anchor="middle">♦
-                        </text>
-                    </g>
-                </defs>
-                <use x="{$karteX + $counter*50}" y="{$karteY}" xlink:href="#CardTemplate"/>
+                <use x="{$cardPlayer1x + $counter* $cardAbstand}" y="{$cardPlayer1y}" xlink:href="#CardTemplate"/>
                 <xsl:choose>
                     <xsl:when test="$value = 'K' or $value = 'Q' or $value = 'B'">
-                        <use x="{$karteX + $counter * 50}" y="{$karteY}" xlink:href="#{$color}-{$value}"/>
+                        <use x="{$cardPlayer1x + $counter * $cardAbstand}" y="{$cardPlayer1y}" xlink:href="#{$color}-{$value}"/>
                     </xsl:when>
-                    <xsl:otherwise>
-                        <!-- Man kann an dieser Stelle die x und y Koordinaten nicht einfach anpassen, weil alles von
-                             $karteX und $karteY, die in allgemeine Werte definiert sind, abhängt. -->
-                        <use xlink:href="#{$color}"/>
-                    </xsl:otherwise>
+                    <xsl:when test="$color = 'Spade'">
+                        <use x="{$cardPlayer1x + $counter * $cardAbstand}" y="{$cardPlayer1y}" xlink:href="#{$color}-{$value}"/>
+                        <use x="{$cardPlayer1x + $counter * $cardAbstand}" y="{$cardPlayer1y}" xlink:href="#black-{$value}"/>
+                        <use x="{$cardPlayer1x + $counter * $cardAbstand}" y="{$cardPlayer1y}" xlink:href="#Spade_mini"/>
+                    </xsl:when>
+                    <xsl:when test="$color = 'Club'">
+                        <use x="{$cardPlayer1x + $counter * $cardAbstand}" y="{$cardPlayer1y}" xlink:href="#{$color}-{$value}"/>
+                        <use x="{$cardPlayer1x + $counter * $cardAbstand}" y="{$cardPlayer1y}" xlink:href="#black-{$value}"/>
+                        <use x="{$cardPlayer1x + $counter * $cardAbstand}" y="{$cardPlayer1y}" xlink:href="#Club_mini"/>
+                    </xsl:when>
+                    <xsl:when test="$color = 'Heart'">
+                        <use x="{$cardPlayer1x + $counter * $cardAbstand}" y="{$cardPlayer1y}" xlink:href="#{$color}-{$value}"/>
+                        <use x="{$cardPlayer1x + $counter * $cardAbstand}" y="{$cardPlayer1y}" xlink:href="#red-{$value}"/>
+                        <use x="{$cardPlayer1x + $counter * $cardAbstand}" y="{$cardPlayer1y}" xlink:href="#Heart_mini"/>
+                    </xsl:when>
+                    <xsl:when test="$color = 'Diamond'">
+                        <use x="{$cardPlayer1x + $counter * $cardAbstand}" y="{$cardPlayer1y}" xlink:href="#{$color}-{$value}"/>
+                        <use x="{$cardPlayer1x + $counter * $cardAbstand}" y="{$cardPlayer1y}" xlink:href="#red-{$value}"/>
+                        <use x="{$cardPlayer1x + $counter * $cardAbstand}" y="{$cardPlayer1y}" xlink:href="#Diamond_mini"/>
+                    </xsl:when>
                 </xsl:choose>
 
             </xsl:for-each>
 
+            <!--Spieler 2 -->
+            <xsl:for-each select="players/player[position=2]/currentHand/card">
+                <xsl:variable name="value" select="value"/>
+                <xsl:variable name="color" select="color"/>
+                <xsl:variable name="counter" select="position()-1"/>
+
+
+                <use x="{$cardPlayer2x + $counter*$cardAbstand}" y="{$cardPlayer2y}" xlink:href="#CardTemplate"/>
+                <xsl:choose>
+                    <xsl:when test="$value = 'K' or $value = 'Q' or $value = 'B'">
+                        <use x="{$cardPlayer2x + $counter * $cardAbstand}" y="{$cardPlayer2y}" xlink:href="#{$color}-{$value}"/>
+                    </xsl:when>
+                    <xsl:when test="$color = 'Spade'">
+                        <use x="{$cardPlayer2x + $counter * $cardAbstand}" y="{$cardPlayer2y}" xlink:href="#{$color}-{$value}"/>
+                        <use x="{$cardPlayer2x + $counter * $cardAbstand}" y="{$cardPlayer2y}" xlink:href="#black-{$value}"/>
+                        <use x="{$cardPlayer2x + $counter * $cardAbstand}" y="{$cardPlayer2y}" xlink:href="#Spade_mini"/>
+                    </xsl:when>
+                    <xsl:when test="$color = 'Club'">
+                        <use x="{$cardPlayer2x + $counter * $cardAbstand}" y="{$cardPlayer2y}" xlink:href="#{$color}-{$value}"/>
+                        <use x="{$cardPlayer2x + $counter * $cardAbstand}" y="{$cardPlayer2y}" xlink:href="#black-{$value}"/>
+                        <use x="{$cardPlayer2x + $counter * $cardAbstand}" y="{$cardPlayer2y}" xlink:href="#Club_mini"/>
+                    </xsl:when>
+                    <xsl:when test="$color = 'Heart'">
+                        <use x="{$cardPlayer2x + $counter * $cardAbstand}" y="{$cardPlayer2y}" xlink:href="#{$color}-{$value}"/>
+                        <use x="{$cardPlayer2x + $counter * $cardAbstand}" y="{$cardPlayer2y}" xlink:href="#red-{$value}"/>
+                        <use x="{$cardPlayer2x + $counter * $cardAbstand}" y="{$cardPlayer2y}" xlink:href="#Heart_mini"/>
+                    </xsl:when>
+                    <xsl:when test="$color = 'Diamond'">
+                        <use x="{$cardPlayer2x + $counter * $cardAbstand}" y="{$cardPlayer2y}" xlink:href="#{$color}-{$value}"/>
+                        <use x="{$cardPlayer2x + $counter * $cardAbstand}" y="{$cardPlayer2y}" xlink:href="#red-{$value}"/>
+                        <use x="{$cardPlayer2x + $counter * $cardAbstand}" y="{$cardPlayer2y}" xlink:href="#Diamond_mini"/>
+                    </xsl:when>
+                </xsl:choose>
+
+            </xsl:for-each>
+
+            <!--Spieler 3 -->
+            <xsl:for-each select="players/player[position=3]/currentHand/card">
+                <xsl:variable name="value" select="value"/>
+                <xsl:variable name="color" select="color"/>
+                <xsl:variable name="counter" select="position()-1"/>
+
+
+                <use x="{$cardPlayer3x + $counter* $cardAbstand}" y="{$cardPlayer3y}" xlink:href="#CardTemplate"/>
+                <xsl:choose>
+                    <xsl:when test="$value = 'K' or $value = 'Q' or $value = 'B'">
+                        <use x="{$cardPlayer3x + $counter * $cardAbstand}" y="{$cardPlayer3y}" xlink:href="#{$color}-{$value}"/>
+                    </xsl:when>
+                    <xsl:when test="$color = 'Spade'">
+                        <use x="{$cardPlayer3x + $counter * $cardAbstand}" y="{$cardPlayer3y}" xlink:href="#{$color}-{$value}"/>
+                        <use x="{$cardPlayer3x + $counter * $cardAbstand}" y="{$cardPlayer3y}" xlink:href="#black-{$value}"/>
+                        <use x="{$cardPlayer3x + $counter * $cardAbstand}" y="{$cardPlayer3y}" xlink:href="#Spade_mini"/>
+                    </xsl:when>
+                    <xsl:when test="$color = 'Club'">
+                        <use x="{$cardPlayer3x + $counter * $cardAbstand}" y="{$cardPlayer3y}" xlink:href="#{$color}-{$value}"/>
+                        <use x="{$cardPlayer3x + $counter * $cardAbstand}" y="{$cardPlayer3y}" xlink:href="#black-{$value}"/>
+                        <use x="{$cardPlayer3x + $counter * $cardAbstand}" y="{$cardPlayer3y}" xlink:href="#Club_mini"/>
+                    </xsl:when>
+                    <xsl:when test="$color = 'Heart'">
+                        <use x="{$cardPlayer3x + $counter * $cardAbstand}" y="{$cardPlayer3y}" xlink:href="#{$color}-{$value}"/>
+                        <use x="{$cardPlayer3x + $counter * $cardAbstand}" y="{$cardPlayer3y}" xlink:href="#red-{$value}"/>
+                        <use x="{$cardPlayer3x + $counter * $cardAbstand}" y="{$cardPlayer3y}" xlink:href="#Heart_mini"/>
+                    </xsl:when>
+                    <xsl:when test="$color = 'Diamond'">
+                        <use x="{$cardPlayer3x + $counter * $cardAbstand}" y="{$cardPlayer3y}" xlink:href="#{$color}-{$value}"/>
+                        <use x="{$cardPlayer3x + $counter * $cardAbstand}" y="{$cardPlayer3y}" xlink:href="#red-{$value}"/>
+                        <use x="{$cardPlayer3x + $counter * $cardAbstand}" y="{$cardPlayer3y}" xlink:href="#Diamond_mini"/>
+                    </xsl:when>
+                </xsl:choose>
+
+            </xsl:for-each>
+
+            <!--Spieler 4 -->
+            <xsl:for-each select="players/player[position=4]/currentHand/card">
+                <xsl:variable name="value" select="value"/>
+                <xsl:variable name="color" select="color"/>
+                <xsl:variable name="counter" select="position()-1"/>
+
+
+                <use x="{$cardPlayer4x + $counter* $cardAbstand}" y="{$cardPlayer4y}" xlink:href="#CardTemplate"/>
+                <xsl:choose>
+                    <xsl:when test="$value = 'K' or $value = 'Q' or $value = 'B'">
+                        <use x="{$cardPlayer4x + $counter * $cardAbstand}" y="{$cardPlayer4y}" xlink:href="#{$color}-{$value}"/>
+                    </xsl:when>
+                    <xsl:when test="$color = 'Spade'">
+                        <use x="{$cardPlayer4x + $counter * $cardAbstand}" y="{$cardPlayer4y}" xlink:href="#{$color}-{$value}"/>
+                        <use x="{$cardPlayer4x + $counter * $cardAbstand}" y="{$cardPlayer4y}" xlink:href="#black-{$value}"/>
+                        <use x="{$cardPlayer4x + $counter * $cardAbstand}" y="{$cardPlayer4y}" xlink:href="#Spade_mini"/>
+                    </xsl:when>
+                    <xsl:when test="$color = 'Club'">
+                        <use x="{$cardPlayer4x + $counter * $cardAbstand}" y="{$cardPlayer4y}" xlink:href="#{$color}-{$value}"/>
+                        <use x="{$cardPlayer4x + $counter * $cardAbstand}" y="{$cardPlayer4y}" xlink:href="#black-{$value}"/>
+                        <use x="{$cardPlayer4x + $counter * $cardAbstand}" y="{$cardPlayer4y}" xlink:href="#Club_mini"/>
+                    </xsl:when>
+                    <xsl:when test="$color = 'Heart'">
+                        <use x="{$cardPlayer4x + $counter * $cardAbstand}" y="{$cardPlayer4y}" xlink:href="#{$color}-{$value}"/>
+                        <use x="{$cardPlayer4x + $counter * $cardAbstand}" y="{$cardPlayer4y}" xlink:href="#red-{$value}"/>
+                        <use x="{$cardPlayer4x + $counter * $cardAbstand}" y="{$cardPlayer4y}" xlink:href="#Heart_mini"/>
+                    </xsl:when>
+                    <xsl:when test="$color = 'Diamond'">
+                        <use x="{$cardPlayer4x + $counter * $cardAbstand}" y="{$cardPlayer4y}" xlink:href="#{$color}-{$value}"/>
+                        <use x="{$cardPlayer4x + $counter * $cardAbstand}" y="{$cardPlayer4y}" xlink:href="#red-{$value}"/>
+                        <use x="{$cardPlayer4x + $counter * $cardAbstand}" y="{$cardPlayer4y}" xlink:href="#Diamond_mini"/>
+                    </xsl:when>
+                </xsl:choose>
+
+            </xsl:for-each>
+
+            <!--Spieler 5 -->
+            <xsl:for-each select="players/player[position=5]/currentHand/card">
+                <xsl:variable name="value" select="value"/>
+                <xsl:variable name="color" select="color"/>
+                <xsl:variable name="counter" select="position()-1"/>
+
+
+                <use x="{$cardPlayer5x + $counter* $cardAbstand}" y="{$cardPlayer5y}" xlink:href="#CardTemplate"/>
+                <xsl:choose>
+                    <xsl:when test="$value = 'K' or $value = 'Q' or $value = 'B'">
+                        <use x="{$cardPlayer5x + $counter * $cardAbstand}" y="{$cardPlayer5y}" xlink:href="#{$color}-{$value}"/>
+                    </xsl:when>
+                    <xsl:when test="$color = 'Spade'">
+                        <use x="{$cardPlayer5x + $counter * $cardAbstand}" y="{$cardPlayer5y}" xlink:href="#{$color}-{$value}"/>
+                        <use x="{$cardPlayer5x + $counter * $cardAbstand}" y="{$cardPlayer5y}" xlink:href="#black-{$value}"/>
+                        <use x="{$cardPlayer5x + $counter * $cardAbstand}" y="{$cardPlayer5y}" xlink:href="#Spade_mini"/>
+                    </xsl:when>
+                    <xsl:when test="$color = 'Club'">
+                        <use x="{$cardPlayer5x + $counter * $cardAbstand}" y="{$cardPlayer5y}" xlink:href="#{$color}-{$value}"/>
+                        <use x="{$cardPlayer5x + $counter * $cardAbstand}" y="{$cardPlayer5y}" xlink:href="#black-{$value}"/>
+                        <use x="{$cardPlayer5x + $counter * $cardAbstand}" y="{$cardPlayer5y}" xlink:href="#Club_mini"/>
+                    </xsl:when>
+                    <xsl:when test="$color = 'Heart'">
+                        <use x="{$cardPlayer5x + $counter * $cardAbstand}" y="{$cardPlayer5y}" xlink:href="#{$color}-{$value}"/>
+                        <use x="{$cardPlayer5x + $counter * $cardAbstand}" y="{$cardPlayer5y}" xlink:href="#red-{$value}"/>
+                        <use x="{$cardPlayer5x + $counter * $cardAbstand}" y="{$cardPlayer5y}" xlink:href="#Heart_mini"/>
+                    </xsl:when>
+                    <xsl:when test="$color = 'Diamond'">
+                        <use x="{$cardPlayer5x + $counter * $cardAbstand}" y="{$cardPlayer5y}" xlink:href="#{$color}-{$value}"/>
+                        <use x="{$cardPlayer5x + $counter * $cardAbstand}" y="{$cardPlayer5y}" xlink:href="#red-{$value}"/>
+                        <use x="{$cardPlayer5x + $counter * $cardAbstand}" y="{$cardPlayer5y}" xlink:href="#Diamond_mini"/>
+                    </xsl:when>
+                </xsl:choose>
+
+            </xsl:for-each>
 
         </svg>
 

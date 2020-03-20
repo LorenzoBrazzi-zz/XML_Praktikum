@@ -3,22 +3,22 @@
 <game>
     <card>
         <value>10</value>
-        <color>Club</color>
+        <color>Spade</color>
         <hidden>false</hidden>
     </card>
     <card>
         <value>7</value>
+        <color>Heart</color>
+        <hidden>false</hidden>
+    </card>
+    <card>
+        <value>K</value>
         <color>Club</color>
         <hidden>false</hidden>
     </card>
     <card>
-        <value>3</value>
-        <color>Club</color>
-        <hidden>false</hidden>
-    </card>
-    <card>
-        <value>A</value>
-        <color>Club</color>
+        <value>5</value>
+        <color>Diamond</color>
         <hidden>false</hidden>
     </card>
 </game>

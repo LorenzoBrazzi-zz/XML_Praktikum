@@ -32,6 +32,10 @@
     <xsl:variable name="player5x" select="1450" />
     <xsl:variable name="player5y" select="350" />
 
+    <!-- zur Anpassung der Kartenpostionen: Abstände aller Spieler in Abhänigkeit von Spieler 1-->
+
+<xsl:variable name="player1zu2x"/>
+
     <!-- Spielernamen -->
     <xsl:variable name="spielerNamenTextSize" select="15" />
     <xsl:variable name="zeilenAbstand" select="$spielerNamenTextSize + 5" />
@@ -40,7 +44,7 @@
     <!-- Karten Positionen -->
     <xsl:variable name="cardDealerx" select="550" />
     <xsl:variable name="cardDealery" select="50" />
-    <xsl:variable name="cardAbstand" select="25" />
+    <xsl:variable name="cardAbstand" select="20" />
 
     <xsl:variable name="cardPlayer1x" select="$player1x - $radiusPlayer" />
     <xsl:variable name="cardPlayer1y" select="$player1y - $radiusPlayer" />
@@ -56,8 +60,8 @@
     <!-- Aktuelle Karte -->
     <xsl:variable name="cardWidth" select="100"/>
     <xsl:variable name="cardHeight" select="($cardWidth * 1.5)"/>
-    <xsl:variable name="karteX" select="75"/>
-    <xsl:variable name="karteY" select="275"/>
+    <xsl:variable name="karteX" select="0"/>
+    <xsl:variable name="karteY" select="0"/>
     <!-- <xsl:variable name="jetztX" select="$karteX +50"/>
     <xsl:variable name="jetztY" select="$karteY +35"/> -->
     <xsl:variable name="jetztX" select="$karteX +($cardWidth div 2)"/>
