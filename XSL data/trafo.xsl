@@ -16,26 +16,17 @@
 
 
     <xsl:template match="/">
-        <html>
-            <head>
-                <title>Black Jack - Casino</title>
-                <meta charset="utf-8"/>
-                <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-            </head>
-            <body>
-                <xsl:apply-templates/>
-            </body>
-        </html>
+        <xsl:apply-templates/>
     </xsl:template>
 
 
     <xsl:template match="game">
         <!-- Spielerknoten -->
-        <xsl:variable name="player1" select="/players/player[position = 1]"/>
-        <xsl:variable name="player2" select="/players/player[position = 2]"/>
-        <xsl:variable name="player3" select="/players/player[position = 3]"/>
-        <xsl:variable name="player4" select="/players/player[position = 4]"/>
-        <xsl:variable name="player5" select="/players/player[position = 5]"/>
+        <xsl:variable name="player1" select="players/player[position = 1]"/>
+        <xsl:variable name="player2" select="players/player[position = 2]"/>
+        <xsl:variable name="player3" select="players/player[position = 3]"/>
+        <xsl:variable name="player4" select="players/player[position = 4]"/>
+        <xsl:variable name="player5" select="players/player[position = 5]"/>
 
 
         <svg width="100%" height="100%" version="1.1" viewBox="0 0 1600 900"
@@ -850,7 +841,7 @@
             </xsl:for-each>
 
             <!--Spieler 2 -->
-            <xsl:for-each select="$player2/currentHand/card">
+            <xsl:for-each select="$player2/currentHand/cards/card">
                 <xsl:variable name="value" select="value"/>
                 <xsl:variable name="color" select="color"/>
                 <xsl:variable name="counter" select="position()-1"/>
@@ -886,7 +877,7 @@
             </xsl:for-each>
 
             <!--Spieler 3 -->
-            <xsl:for-each select="$player3/currentHand/card">
+            <xsl:for-each select="$player3/currentHand/cards/card">
                 <xsl:variable name="value" select="value"/>
                 <xsl:variable name="color" select="color"/>
                 <xsl:variable name="counter" select="position()-1"/>
@@ -922,7 +913,7 @@
             </xsl:for-each>
 
             <!--Spieler 4 -->
-            <xsl:for-each select="$player4/currentHand/card">
+            <xsl:for-each select="$player4/currentHand/cards/card">
                 <xsl:variable name="value" select="value"/>
                 <xsl:variable name="color" select="color"/>
                 <xsl:variable name="counter" select="position()-1"/>
@@ -958,7 +949,7 @@
             </xsl:for-each>
 
             <!--Spieler 5 -->
-            <xsl:for-each select="$player5/currentHand/card">
+            <xsl:for-each select="$player5/currentHand/cards/card">
                 <xsl:variable name="value" select="value"/>
                 <xsl:variable name="color" select="color"/>
                 <xsl:variable name="counter" select="position()-1"/>

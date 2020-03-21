@@ -9,7 +9,8 @@ import module namespace rq = "http://exquery.org/ns/request";
 
 declare variable $controller:landing := doc("../static/index.html");
 declare variable $controller:start := doc("../static/startGame.html");
-declare variable $controller:staticPath := "../static/XSL";
+declare variable $controller:staticPath := "../static/XSL/";
+declare variable $controller:drawLink := "/bj/draw";
 
 declare
 %rest:path("bj/setup")
@@ -53,43 +54,54 @@ declare
 %updating
 %rest:path("/bj/form")
 %rest:GET
-%output:method("html")
 function controller:startGame() {
     let $minBet := rq:parameter("minBet", 0)
     let $maxBet := rq:parameter("maxBet", 100)
 
     let $names := (for $i in (1, 2, 3, 4, 5)
     return (
-        rq:parameter(fn:concat("inputname", $i), "empty")
+        rq:parameter(fn:concat("inputname", $i), "")
+    ))
+
+
+    let $balances := (for $i in (1, 2, 3, 4, 5)
+    return (
+        rq:parameter(fn:concat("inputbalance", $i), "")
     ))
 
     (:Filter Balances raus, die mit einem leeren Namen assoziiert sind:)
-    let $balances := (for $i in (1, 2, 3, 4, 5)
-    return (
-        rq:parameter(fn:concat("inputbalance", $i), "empty")
-    ))
 
-    (:
     let $actualBalances := (for $i in (1, 2, 3, 4, 5)
-    where $balances[$i] != "empty" and $names[$i] != "empty"
+    where $balances[$i] != "" and $names[$i] != ""
     return $balances[$i])
 
     let $actualNames := (for $i in (1, 2, 3, 4, 5)
-    where $balances[$i] != "empty" and $names[$i] != "empty"
+    where $balances[$i] != "" and $names[$i] != ""
     return $names[$i])
-    :)
 
-    let $game := game:createGame($names, $balances, $minBet, $maxBet)
+
+    let $game := game:createGame($actualNames, $actualBalances, $minBet, $maxBet)
     return (
         game:insertGame($game),
-        controller:genereratePage($game, "trafo.xsl", "BlackJack XML")
+        update:output(web:redirect($controller:drawLink))
     )
 };
 
-declare function controller:genereratePage($game as element(game), $xslStylesheet as xs:string, $title as xs:string){
+declare
+%rest:GET
+%output:method("html")
+%rest:path("/bj/draw")
+function controller:draw(){
+    let $game := game:getGame()
+    let $xslStylesheet := "trafo.xsl"
+    let $title := "BlackJack XML"
+    return (controller:generatePage($game, $xslStylesheet, $title))
+};
+
+declare function controller:generatePage($game as element(game), $xslStylesheet as xs:string, $title as xs:string){
     let $stylesheet := doc(concat($controller:staticPath, $xslStylesheet))
     let $transformed := xslt:transform($game, $stylesheet)
-    return
+    return (
         <html>
             <head>
                 <title>{$title}</title>
@@ -98,6 +110,7 @@ declare function controller:genereratePage($game as element(game), $xslStyleshee
                 {$transformed}
             </body>
         </html>
+    )
 };
 
 (:Löscht das Spiel mit ID gameID:)
@@ -184,7 +197,8 @@ declare
 %rest:GET
 function controller:testDealOut($gameID as xs:string){
     controller:shuffle($gameID),
-    game:dealOutCards($gameID)
+    game:dealOutCards($gameID),
+    update:output(web:redirect($controller:drawLink))
 };
 
 declare

@@ -16,7 +16,7 @@ declare variable $game:games := db:open("games")/games;
 declare variable $game:d := game:shuffleDeck();
 
 declare function game:getGame() {
-    $game:games
+    $game:games/game
 };
 
 (:Zum testen der Datenbank:)
