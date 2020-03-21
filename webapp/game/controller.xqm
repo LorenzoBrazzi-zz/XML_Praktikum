@@ -9,6 +9,7 @@ import module namespace rq = "http://exquery.org/ns/request";
 
 declare variable $controller:landing := doc("../static/index.html");
 declare variable $controller:start := doc("../static/startGame.html");
+declare variable $controller:staticPath := "../static/XSL";
 
 declare
 %rest:path("bj/setup")
@@ -52,34 +53,51 @@ declare
 %updating
 %rest:path("/bj/form")
 %rest:GET
+%output:method("html")
 function controller:startGame() {
     let $minBet := rq:parameter("minBet", 0)
     let $maxBet := rq:parameter("maxBet", 100)
 
     let $names := (for $i in (1, 2, 3, 4, 5)
     return (
-        rq:parameter(fn:concat("inputname", $i), "")
+        rq:parameter(fn:concat("inputname", $i), "empty")
     ))
 
     (:Filter Balances raus, die mit einem leeren Namen assoziiert sind:)
     let $balances := (for $i in (1, 2, 3, 4, 5)
     return (
-        rq:parameter(fn:concat("inputbalance", $i), "")
+        rq:parameter(fn:concat("inputbalance", $i), "empty")
     ))
 
+    (:
     let $actualBalances := (for $i in (1, 2, 3, 4, 5)
-    where $balances[$i] != "" and $names[$i] != ""
+    where $balances[$i] != "empty" and $names[$i] != "empty"
     return $balances[$i])
 
     let $actualNames := (for $i in (1, 2, 3, 4, 5)
-    where $balances[$i] != "" and $names[$i] != ""
+    where $balances[$i] != "empty" and $names[$i] != "empty"
     return $names[$i])
+    :)
 
-
-    let $game := game:createGame($actualNames, $actualBalances, $minBet, $maxBet)
+    let $game := game:createGame($names, $balances, $minBet, $maxBet)
     return (
-        game:insertGame($game)
+        game:insertGame($game),
+        controller:genereratePage($game, "trafo.xsl", "BlackJack XML")
     )
+};
+
+declare function controller:genereratePage($game as element(game), $xslStylesheet as xs:string, $title as xs:string){
+    let $stylesheet := doc(concat($controller:staticPath, $xslStylesheet))
+    let $transformed := xslt:transform($game, $stylesheet)
+    return
+        <html>
+            <head>
+                <title>{$title}</title>
+            </head>
+            <body>
+                {$transformed}
+            </body>
+        </html>
 };
 
 (:Löscht das Spiel mit ID gameID:)
