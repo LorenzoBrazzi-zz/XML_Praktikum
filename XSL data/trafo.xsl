@@ -27,7 +27,7 @@
         <xsl:variable name="player3" select="players/player[position = 3]"/>
         <xsl:variable name="player4" select="players/player[position = 4]"/>
         <xsl:variable name="player5" select="players/player[position = 5]"/>
-
+        <xsl:variable name="activePlayer" select="activePlayer"/>
 
         <svg width="100%" height="100%" version="1.1" viewBox="0 0 1600 900"
              xmlns="http://www.w3.org/2000/svg">
@@ -57,32 +57,100 @@
                     style="fill:none;stroke:white;stroke-width:4"/>
 
 
-            <!-- Spielernamen -->
-            <text x="{$player1x}" y="{$player1y + $radiusPlayer + $zeilenAbstand}" font-family="Arial"
-                  font-size="{$spielerNamenTextSize}" fill="white" text-anchor="middle">
-                <xsl:value-of select="$player1/name"/>
-            </text>
-            <text x="{$player2x}" y="{$player2y + $radiusPlayer + $zeilenAbstand}" font-family="Arial"
-                  font-size="{$spielerNamenTextSize}" fill="white" text-anchor="middle">
-                <xsl:value-of select="$player2/name"/>
-            </text>
-            <text x="{$player3x}" y="{$player3y + $radiusPlayer + $zeilenAbstand}" font-family="Arial"
-                  font-size="{$spielerNamenTextSize}" fill="white" text-anchor="middle">
-                <xsl:value-of select="$player3/name"/>
-            </text>
-            <text x="{$player4x}" y="{$player4y + $radiusPlayer + $zeilenAbstand}" font-family="Arial"
-                  font-size="{$spielerNamenTextSize}" fill="white" text-anchor="middle">
-                <xsl:value-of select="$player4/name"/>
-            </text>
-            <text x="{$player5x}" y="{$player5y + $radiusPlayer + $zeilenAbstand}" font-family="Arial"
-                  font-size="{$spielerNamenTextSize}" fill="white" text-anchor="middle">
-                <xsl:value-of select="$player5/name"/>
-            </text>
+            <!-- Spielernamen, wenn aktiver Spieler, dann gelb hervorheben sonst normal
+            Aufgabe: du müsstest es so anpassen dass man merkt wer der aktive Spieler ist, entweder wie hier den textstyle
+            ändern oder z.b. einen gelben rahmen um den Spieler zeichenen-->
+
+            <xsl:choose> <!-- If Else , um zu schauen wer gerade der aktive Spieler ist-->
+                <xsl:when test="$player1/id = $activePlayer">
+                    <text x="{$player1x}" y="{$player1y + $radiusPlayer + $zeilenAbstand}" font-family="Arial" font-style="italic"
+                          font-size="{$spielerNamenTextSize + 10}" fill="yellow" text-anchor="middle">
+
+                            <xsl:value-of select="$player1/name"/>
+
+                    </text>
+                </xsl:when>
+                <xsl:otherwise>
+                    <text x="{$player1x}" y="{$player1y + $radiusPlayer + $zeilenAbstand}" font-family="Arial"
+                          font-size="{$spielerNamenTextSize}" fill="white" text-anchor="middle">
+                        <xsl:value-of select="$player1/name"/>
+                    </text>
+                </xsl:otherwise>
+            </xsl:choose>
+
+
+            <xsl:choose>
+                <xsl:when test="$player2/id = $activePlayer">
+                    <text x="{$player2x}" y="{$player2y + $radiusPlayer + $zeilenAbstand}" font-family="Arial"
+                          font-size="{$spielerNamenTextSize + 5}" fill="yellow" text-anchor="middle">
+                        <b>
+                            <xsl:value-of select="$player2/name"/>
+                        </b>
+                    </text>
+                </xsl:when>
+                <xsl:otherwise>
+                    <text x="{$player2x}" y="{$player2y + $radiusPlayer + $zeilenAbstand}" font-family="Arial"
+                          font-size="{$spielerNamenTextSize}" fill="white" text-anchor="middle">
+                        <xsl:value-of select="$player2/name"/>
+                    </text>
+                </xsl:otherwise>
+            </xsl:choose>
+
+            <xsl:choose>
+                <xsl:when test="$player3/id = $activePlayer">
+                    <text x="{$player3x}" y="{$player3y + $radiusPlayer + $zeilenAbstand}" font-family="Arial"
+                          font-size="{$spielerNamenTextSize + 5}" fill="yellow" text-anchor="middle">
+                        <b>
+                            <xsl:value-of select="$player3/name"/>
+                        </b>
+                    </text>
+                </xsl:when>
+                <xsl:otherwise>
+                    <text x="{$player3x}" y="{$player3y + $radiusPlayer + $zeilenAbstand}" font-family="Arial"
+                          font-size="{$spielerNamenTextSize}" fill="white" text-anchor="middle">
+                        <xsl:value-of select="$player3/name"/>
+                    </text>
+                </xsl:otherwise>
+            </xsl:choose>
+
+            <xsl:choose>
+                <xsl:when test="$player4/id = $activePlayer">
+                    <text x="{$player4x}" y="{$player4y + $radiusPlayer + $zeilenAbstand}" font-family="Arial"
+                          font-size="{$spielerNamenTextSize + 5}" fill="yellow" text-anchor="middle">
+                        <b>
+                            <xsl:value-of select="$player4/name"/>
+                        </b>
+                    </text>
+                </xsl:when>
+                <xsl:otherwise>
+                    <text x="{$player4x}" y="{$player4y + $radiusPlayer + $zeilenAbstand}" font-family="Arial"
+                          font-size="{$spielerNamenTextSize}" fill="white" text-anchor="middle">
+                        <xsl:value-of select="$player4/name"/>
+                    </text>
+                </xsl:otherwise>
+            </xsl:choose>
+
+            <xsl:choose>
+                <xsl:when test="$player5/id = $activePlayer">
+                    <text x="{$player5x}" y="{$player5y + $radiusPlayer + $zeilenAbstand}" font-family="Arial"
+                          font-size="{$spielerNamenTextSize + 5}" fill="yellow" text-anchor="middle">
+                        <b>
+                            <xsl:value-of select="$player5/name"/>
+                        </b>
+                    </text>
+                </xsl:when>
+                <xsl:otherwise>
+                    <text x="{$player5x}" y="{$player5y + $radiusPlayer + $zeilenAbstand}" font-family="Arial"
+                          font-size="{$spielerNamenTextSize}" fill="white" text-anchor="middle">
+                        <xsl:value-of select="$player5/name"/>
+                    </text>
+                </xsl:otherwise>
+            </xsl:choose>
 
             <!-- SpielerCash -->
             <text x="{$player1x}" y="{$player1y + $radiusPlayer + ($zeilenAbstand * 2)}" font-family="Arial"
                   font-size="{$spielerNamenTextSize}" fill="white" text-anchor="middle">
-                <xsl:value-of select="$player1/balance"/>
+                 <xsl:value-of select="$player1/balance"/>
             </text>
             <text x="{$player2x}" y="{$player2y + $radiusPlayer + ($zeilenAbstand * 2)}" font-family="Arial"
                   font-size="{$spielerNamenTextSize}" fill="white" text-anchor="middle">
@@ -162,7 +230,7 @@
                 </g>
                 <!-- Symbole für obere und untere Kartenecke -->
 
-                <g id = "Club_mini">
+                <g id="Club_mini">
                     <text id="Club_symbol" x="{$symbolXMini}" y="{$symbolYMini}" font-size="{$sizeSmallSymbol}"
                           fill="black" text-anchor="middle">♣
                     </text>
@@ -172,7 +240,7 @@
                     </text>
                 </g>
 
-                <g id = "Spade_mini">
+                <g id="Spade_mini">
                     <text id="Spade_symbol" x="{$symbolXMini}" y="{$symbolYMini}" font-size="{$sizeSmallSymbol}"
                           fill="black" text-anchor="middle">♠
                     </text>
@@ -182,7 +250,7 @@
                     </text>
                 </g>
 
-                <g id = "Heart_mini">
+                <g id="Heart_mini">
                     <text id="Heart_symbol" x="{$symbolXMini}" y="{$symbolYMini}" font-size="{$sizeSmallSymbol}"
                           fill="red" text-anchor="middle">♥
                     </text>
@@ -192,7 +260,7 @@
                     </text>
                 </g>
 
-                <g id = "Diamond_mini">
+                <g id="Diamond_mini">
                     <text id="Diamond_symbol" x="{$symbolXMini}" y="{$symbolYMini}" font-size="{$sizeSmallSymbol}"
                           fill="red" text-anchor="middle">♦
                     </text>
@@ -450,7 +518,7 @@
                            height="{$cardHeight}" x="{$karteX}" y="{$karteY}"/>
                 </g>
 
-                <g id="Diamond-Q">
+                <g id="Diamond-D">
 
                     <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/6/63/QD.svg" width="{$cardWidth}"
                            height="{$cardHeight}" x="{$karteX}" y="{$karteY}"/>
@@ -466,7 +534,7 @@
                            height="{$cardHeight}" x="{$karteX}" y="{$karteY}"/>
                 </g>
 
-                <g id="Heart-Q">
+                <g id="Heart-D">
                     <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/d/d2/QH.svg" width="{$cardWidth}"
                            height="{$cardHeight}" x="{$karteX}" y="{$karteY}"/>
                 </g>
@@ -481,7 +549,7 @@
                            height="{$cardHeight}" x="{$karteX}" y="{$karteY}"/>
                 </g>
 
-                <g id="Club-Q">
+                <g id="Club-D">
                     <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/9/9e/QC.svg" width="{$cardWidth}"
                            height="{$cardHeight}" x="{$karteX}" y="{$karteY}"/>
                 </g>
@@ -496,7 +564,7 @@
                            height="{$cardHeight}" x="{$karteX}" y="{$karteY}"/>
                 </g>
 
-                <g id="Spade-Q">
+                <g id="Spade-D">
                     <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/3/35/QS.svg" width="{$cardWidth}"
                            height="{$cardHeight}" x="{$karteX}" y="{$karteY}"/>
                 </g>
@@ -814,27 +882,39 @@
                 <use x="{$cardPlayer1x + $counter* $cardAbstand}" y="{$cardPlayer1y}" xlink:href="#CardTemplate"/>
                 <xsl:choose>
                     <xsl:when test="$value = 'K' or $value = 'Q' or $value = 'B'">
-                        <use x="{$cardPlayer1x + $counter * $cardAbstand}" y="{$cardPlayer1y}" xlink:href="#{$color}-{$value}"/>
+                        <use x="{$cardPlayer1x + $counter * $cardAbstand}" y="{$cardPlayer1y}"
+                             xlink:href="#{$color}-{$value}"/>
                     </xsl:when>
                     <xsl:when test="$color = 'Spade'">
-                        <use x="{$cardPlayer1x + $counter * $cardAbstand}" y="{$cardPlayer1y}" xlink:href="#{$color}-{$value}"/>
-                        <use x="{$cardPlayer1x + $counter * $cardAbstand}" y="{$cardPlayer1y}" xlink:href="#black-{$value}"/>
-                        <use x="{$cardPlayer1x + $counter * $cardAbstand}" y="{$cardPlayer1y}" xlink:href="#Spade_mini"/>
+                        <use x="{$cardPlayer1x + $counter * $cardAbstand}" y="{$cardPlayer1y}"
+                             xlink:href="#{$color}-{$value}"/>
+                        <use x="{$cardPlayer1x + $counter * $cardAbstand}" y="{$cardPlayer1y}"
+                             xlink:href="#black-{$value}"/>
+                        <use x="{$cardPlayer1x + $counter * $cardAbstand}" y="{$cardPlayer1y}"
+                             xlink:href="#Spade_mini"/>
                     </xsl:when>
                     <xsl:when test="$color = 'Club'">
-                        <use x="{$cardPlayer1x + $counter * $cardAbstand}" y="{$cardPlayer1y}" xlink:href="#{$color}-{$value}"/>
-                        <use x="{$cardPlayer1x + $counter * $cardAbstand}" y="{$cardPlayer1y}" xlink:href="#black-{$value}"/>
+                        <use x="{$cardPlayer1x + $counter * $cardAbstand}" y="{$cardPlayer1y}"
+                             xlink:href="#{$color}-{$value}"/>
+                        <use x="{$cardPlayer1x + $counter * $cardAbstand}" y="{$cardPlayer1y}"
+                             xlink:href="#black-{$value}"/>
                         <use x="{$cardPlayer1x + $counter * $cardAbstand}" y="{$cardPlayer1y}" xlink:href="#Club_mini"/>
                     </xsl:when>
                     <xsl:when test="$color = 'Heart'">
-                        <use x="{$cardPlayer1x + $counter * $cardAbstand}" y="{$cardPlayer1y}" xlink:href="#{$color}-{$value}"/>
-                        <use x="{$cardPlayer1x + $counter * $cardAbstand}" y="{$cardPlayer1y}" xlink:href="#red-{$value}"/>
-                        <use x="{$cardPlayer1x + $counter * $cardAbstand}" y="{$cardPlayer1y}" xlink:href="#Heart_mini"/>
+                        <use x="{$cardPlayer1x + $counter * $cardAbstand}" y="{$cardPlayer1y}"
+                             xlink:href="#{$color}-{$value}"/>
+                        <use x="{$cardPlayer1x + $counter * $cardAbstand}" y="{$cardPlayer1y}"
+                             xlink:href="#red-{$value}"/>
+                        <use x="{$cardPlayer1x + $counter * $cardAbstand}" y="{$cardPlayer1y}"
+                             xlink:href="#Heart_mini"/>
                     </xsl:when>
                     <xsl:when test="$color = 'Diamond'">
-                        <use x="{$cardPlayer1x + $counter * $cardAbstand}" y="{$cardPlayer1y}" xlink:href="#{$color}-{$value}"/>
-                        <use x="{$cardPlayer1x + $counter * $cardAbstand}" y="{$cardPlayer1y}" xlink:href="#red-{$value}"/>
-                        <use x="{$cardPlayer1x + $counter * $cardAbstand}" y="{$cardPlayer1y}" xlink:href="#Diamond_mini"/>
+                        <use x="{$cardPlayer1x + $counter * $cardAbstand}" y="{$cardPlayer1y}"
+                             xlink:href="#{$color}-{$value}"/>
+                        <use x="{$cardPlayer1x + $counter * $cardAbstand}" y="{$cardPlayer1y}"
+                             xlink:href="#red-{$value}"/>
+                        <use x="{$cardPlayer1x + $counter * $cardAbstand}" y="{$cardPlayer1y}"
+                             xlink:href="#Diamond_mini"/>
                     </xsl:when>
                 </xsl:choose>
 
@@ -850,27 +930,39 @@
                 <use x="{$cardPlayer2x + $counter*$cardAbstand}" y="{$cardPlayer2y}" xlink:href="#CardTemplate"/>
                 <xsl:choose>
                     <xsl:when test="$value = 'K' or $value = 'Q' or $value = 'B'">
-                        <use x="{$cardPlayer2x + $counter * $cardAbstand}" y="{$cardPlayer2y}" xlink:href="#{$color}-{$value}"/>
+                        <use x="{$cardPlayer2x + $counter * $cardAbstand}" y="{$cardPlayer2y}"
+                             xlink:href="#{$color}-{$value}"/>
                     </xsl:when>
                     <xsl:when test="$color = 'Spade'">
-                        <use x="{$cardPlayer2x + $counter * $cardAbstand}" y="{$cardPlayer2y}" xlink:href="#{$color}-{$value}"/>
-                        <use x="{$cardPlayer2x + $counter * $cardAbstand}" y="{$cardPlayer2y}" xlink:href="#black-{$value}"/>
-                        <use x="{$cardPlayer2x + $counter * $cardAbstand}" y="{$cardPlayer2y}" xlink:href="#Spade_mini"/>
+                        <use x="{$cardPlayer2x + $counter * $cardAbstand}" y="{$cardPlayer2y}"
+                             xlink:href="#{$color}-{$value}"/>
+                        <use x="{$cardPlayer2x + $counter * $cardAbstand}" y="{$cardPlayer2y}"
+                             xlink:href="#black-{$value}"/>
+                        <use x="{$cardPlayer2x + $counter * $cardAbstand}" y="{$cardPlayer2y}"
+                             xlink:href="#Spade_mini"/>
                     </xsl:when>
                     <xsl:when test="$color = 'Club'">
-                        <use x="{$cardPlayer2x + $counter * $cardAbstand}" y="{$cardPlayer2y}" xlink:href="#{$color}-{$value}"/>
-                        <use x="{$cardPlayer2x + $counter * $cardAbstand}" y="{$cardPlayer2y}" xlink:href="#black-{$value}"/>
+                        <use x="{$cardPlayer2x + $counter * $cardAbstand}" y="{$cardPlayer2y}"
+                             xlink:href="#{$color}-{$value}"/>
+                        <use x="{$cardPlayer2x + $counter * $cardAbstand}" y="{$cardPlayer2y}"
+                             xlink:href="#black-{$value}"/>
                         <use x="{$cardPlayer2x + $counter * $cardAbstand}" y="{$cardPlayer2y}" xlink:href="#Club_mini"/>
                     </xsl:when>
                     <xsl:when test="$color = 'Heart'">
-                        <use x="{$cardPlayer2x + $counter * $cardAbstand}" y="{$cardPlayer2y}" xlink:href="#{$color}-{$value}"/>
-                        <use x="{$cardPlayer2x + $counter * $cardAbstand}" y="{$cardPlayer2y}" xlink:href="#red-{$value}"/>
-                        <use x="{$cardPlayer2x + $counter * $cardAbstand}" y="{$cardPlayer2y}" xlink:href="#Heart_mini"/>
+                        <use x="{$cardPlayer2x + $counter * $cardAbstand}" y="{$cardPlayer2y}"
+                             xlink:href="#{$color}-{$value}"/>
+                        <use x="{$cardPlayer2x + $counter * $cardAbstand}" y="{$cardPlayer2y}"
+                             xlink:href="#red-{$value}"/>
+                        <use x="{$cardPlayer2x + $counter * $cardAbstand}" y="{$cardPlayer2y}"
+                             xlink:href="#Heart_mini"/>
                     </xsl:when>
                     <xsl:when test="$color = 'Diamond'">
-                        <use x="{$cardPlayer2x + $counter * $cardAbstand}" y="{$cardPlayer2y}" xlink:href="#{$color}-{$value}"/>
-                        <use x="{$cardPlayer2x + $counter * $cardAbstand}" y="{$cardPlayer2y}" xlink:href="#red-{$value}"/>
-                        <use x="{$cardPlayer2x + $counter * $cardAbstand}" y="{$cardPlayer2y}" xlink:href="#Diamond_mini"/>
+                        <use x="{$cardPlayer2x + $counter * $cardAbstand}" y="{$cardPlayer2y}"
+                             xlink:href="#{$color}-{$value}"/>
+                        <use x="{$cardPlayer2x + $counter * $cardAbstand}" y="{$cardPlayer2y}"
+                             xlink:href="#red-{$value}"/>
+                        <use x="{$cardPlayer2x + $counter * $cardAbstand}" y="{$cardPlayer2y}"
+                             xlink:href="#Diamond_mini"/>
                     </xsl:when>
                 </xsl:choose>
 
@@ -886,27 +978,39 @@
                 <use x="{$cardPlayer3x + $counter* $cardAbstand}" y="{$cardPlayer3y}" xlink:href="#CardTemplate"/>
                 <xsl:choose>
                     <xsl:when test="$value = 'K' or $value = 'Q' or $value = 'B'">
-                        <use x="{$cardPlayer3x + $counter * $cardAbstand}" y="{$cardPlayer3y}" xlink:href="#{$color}-{$value}"/>
+                        <use x="{$cardPlayer3x + $counter * $cardAbstand}" y="{$cardPlayer3y}"
+                             xlink:href="#{$color}-{$value}"/>
                     </xsl:when>
                     <xsl:when test="$color = 'Spade'">
-                        <use x="{$cardPlayer3x + $counter * $cardAbstand}" y="{$cardPlayer3y}" xlink:href="#{$color}-{$value}"/>
-                        <use x="{$cardPlayer3x + $counter * $cardAbstand}" y="{$cardPlayer3y}" xlink:href="#black-{$value}"/>
-                        <use x="{$cardPlayer3x + $counter * $cardAbstand}" y="{$cardPlayer3y}" xlink:href="#Spade_mini"/>
+                        <use x="{$cardPlayer3x + $counter * $cardAbstand}" y="{$cardPlayer3y}"
+                             xlink:href="#{$color}-{$value}"/>
+                        <use x="{$cardPlayer3x + $counter * $cardAbstand}" y="{$cardPlayer3y}"
+                             xlink:href="#black-{$value}"/>
+                        <use x="{$cardPlayer3x + $counter * $cardAbstand}" y="{$cardPlayer3y}"
+                             xlink:href="#Spade_mini"/>
                     </xsl:when>
                     <xsl:when test="$color = 'Club'">
-                        <use x="{$cardPlayer3x + $counter * $cardAbstand}" y="{$cardPlayer3y}" xlink:href="#{$color}-{$value}"/>
-                        <use x="{$cardPlayer3x + $counter * $cardAbstand}" y="{$cardPlayer3y}" xlink:href="#black-{$value}"/>
+                        <use x="{$cardPlayer3x + $counter * $cardAbstand}" y="{$cardPlayer3y}"
+                             xlink:href="#{$color}-{$value}"/>
+                        <use x="{$cardPlayer3x + $counter * $cardAbstand}" y="{$cardPlayer3y}"
+                             xlink:href="#black-{$value}"/>
                         <use x="{$cardPlayer3x + $counter * $cardAbstand}" y="{$cardPlayer3y}" xlink:href="#Club_mini"/>
                     </xsl:when>
                     <xsl:when test="$color = 'Heart'">
-                        <use x="{$cardPlayer3x + $counter * $cardAbstand}" y="{$cardPlayer3y}" xlink:href="#{$color}-{$value}"/>
-                        <use x="{$cardPlayer3x + $counter * $cardAbstand}" y="{$cardPlayer3y}" xlink:href="#red-{$value}"/>
-                        <use x="{$cardPlayer3x + $counter * $cardAbstand}" y="{$cardPlayer3y}" xlink:href="#Heart_mini"/>
+                        <use x="{$cardPlayer3x + $counter * $cardAbstand}" y="{$cardPlayer3y}"
+                             xlink:href="#{$color}-{$value}"/>
+                        <use x="{$cardPlayer3x + $counter * $cardAbstand}" y="{$cardPlayer3y}"
+                             xlink:href="#red-{$value}"/>
+                        <use x="{$cardPlayer3x + $counter * $cardAbstand}" y="{$cardPlayer3y}"
+                             xlink:href="#Heart_mini"/>
                     </xsl:when>
                     <xsl:when test="$color = 'Diamond'">
-                        <use x="{$cardPlayer3x + $counter * $cardAbstand}" y="{$cardPlayer3y}" xlink:href="#{$color}-{$value}"/>
-                        <use x="{$cardPlayer3x + $counter * $cardAbstand}" y="{$cardPlayer3y}" xlink:href="#red-{$value}"/>
-                        <use x="{$cardPlayer3x + $counter * $cardAbstand}" y="{$cardPlayer3y}" xlink:href="#Diamond_mini"/>
+                        <use x="{$cardPlayer3x + $counter * $cardAbstand}" y="{$cardPlayer3y}"
+                             xlink:href="#{$color}-{$value}"/>
+                        <use x="{$cardPlayer3x + $counter * $cardAbstand}" y="{$cardPlayer3y}"
+                             xlink:href="#red-{$value}"/>
+                        <use x="{$cardPlayer3x + $counter * $cardAbstand}" y="{$cardPlayer3y}"
+                             xlink:href="#Diamond_mini"/>
                     </xsl:when>
                 </xsl:choose>
 
@@ -922,27 +1026,39 @@
                 <use x="{$cardPlayer4x + $counter* $cardAbstand}" y="{$cardPlayer4y}" xlink:href="#CardTemplate"/>
                 <xsl:choose>
                     <xsl:when test="$value = 'K' or $value = 'Q' or $value = 'B'">
-                        <use x="{$cardPlayer4x + $counter * $cardAbstand}" y="{$cardPlayer4y}" xlink:href="#{$color}-{$value}"/>
+                        <use x="{$cardPlayer4x + $counter * $cardAbstand}" y="{$cardPlayer4y}"
+                             xlink:href="#{$color}-{$value}"/>
                     </xsl:when>
                     <xsl:when test="$color = 'Spade'">
-                        <use x="{$cardPlayer4x + $counter * $cardAbstand}" y="{$cardPlayer4y}" xlink:href="#{$color}-{$value}"/>
-                        <use x="{$cardPlayer4x + $counter * $cardAbstand}" y="{$cardPlayer4y}" xlink:href="#black-{$value}"/>
-                        <use x="{$cardPlayer4x + $counter * $cardAbstand}" y="{$cardPlayer4y}" xlink:href="#Spade_mini"/>
+                        <use x="{$cardPlayer4x + $counter * $cardAbstand}" y="{$cardPlayer4y}"
+                             xlink:href="#{$color}-{$value}"/>
+                        <use x="{$cardPlayer4x + $counter * $cardAbstand}" y="{$cardPlayer4y}"
+                             xlink:href="#black-{$value}"/>
+                        <use x="{$cardPlayer4x + $counter * $cardAbstand}" y="{$cardPlayer4y}"
+                             xlink:href="#Spade_mini"/>
                     </xsl:when>
                     <xsl:when test="$color = 'Club'">
-                        <use x="{$cardPlayer4x + $counter * $cardAbstand}" y="{$cardPlayer4y}" xlink:href="#{$color}-{$value}"/>
-                        <use x="{$cardPlayer4x + $counter * $cardAbstand}" y="{$cardPlayer4y}" xlink:href="#black-{$value}"/>
+                        <use x="{$cardPlayer4x + $counter * $cardAbstand}" y="{$cardPlayer4y}"
+                             xlink:href="#{$color}-{$value}"/>
+                        <use x="{$cardPlayer4x + $counter * $cardAbstand}" y="{$cardPlayer4y}"
+                             xlink:href="#black-{$value}"/>
                         <use x="{$cardPlayer4x + $counter * $cardAbstand}" y="{$cardPlayer4y}" xlink:href="#Club_mini"/>
                     </xsl:when>
                     <xsl:when test="$color = 'Heart'">
-                        <use x="{$cardPlayer4x + $counter * $cardAbstand}" y="{$cardPlayer4y}" xlink:href="#{$color}-{$value}"/>
-                        <use x="{$cardPlayer4x + $counter * $cardAbstand}" y="{$cardPlayer4y}" xlink:href="#red-{$value}"/>
-                        <use x="{$cardPlayer4x + $counter * $cardAbstand}" y="{$cardPlayer4y}" xlink:href="#Heart_mini"/>
+                        <use x="{$cardPlayer4x + $counter * $cardAbstand}" y="{$cardPlayer4y}"
+                             xlink:href="#{$color}-{$value}"/>
+                        <use x="{$cardPlayer4x + $counter * $cardAbstand}" y="{$cardPlayer4y}"
+                             xlink:href="#red-{$value}"/>
+                        <use x="{$cardPlayer4x + $counter * $cardAbstand}" y="{$cardPlayer4y}"
+                             xlink:href="#Heart_mini"/>
                     </xsl:when>
                     <xsl:when test="$color = 'Diamond'">
-                        <use x="{$cardPlayer4x + $counter * $cardAbstand}" y="{$cardPlayer4y}" xlink:href="#{$color}-{$value}"/>
-                        <use x="{$cardPlayer4x + $counter * $cardAbstand}" y="{$cardPlayer4y}" xlink:href="#red-{$value}"/>
-                        <use x="{$cardPlayer4x + $counter * $cardAbstand}" y="{$cardPlayer4y}" xlink:href="#Diamond_mini"/>
+                        <use x="{$cardPlayer4x + $counter * $cardAbstand}" y="{$cardPlayer4y}"
+                             xlink:href="#{$color}-{$value}"/>
+                        <use x="{$cardPlayer4x + $counter * $cardAbstand}" y="{$cardPlayer4y}"
+                             xlink:href="#red-{$value}"/>
+                        <use x="{$cardPlayer4x + $counter * $cardAbstand}" y="{$cardPlayer4y}"
+                             xlink:href="#Diamond_mini"/>
                     </xsl:when>
                 </xsl:choose>
 
@@ -958,27 +1074,39 @@
                 <use x="{$cardPlayer5x + $counter* $cardAbstand}" y="{$cardPlayer5y}" xlink:href="#CardTemplate"/>
                 <xsl:choose>
                     <xsl:when test="$value = 'K' or $value = 'Q' or $value = 'B'">
-                        <use x="{$cardPlayer5x + $counter * $cardAbstand}" y="{$cardPlayer5y}" xlink:href="#{$color}-{$value}"/>
+                        <use x="{$cardPlayer5x + $counter * $cardAbstand}" y="{$cardPlayer5y}"
+                             xlink:href="#{$color}-{$value}"/>
                     </xsl:when>
                     <xsl:when test="$color = 'Spade'">
-                        <use x="{$cardPlayer5x + $counter * $cardAbstand}" y="{$cardPlayer5y}" xlink:href="#{$color}-{$value}"/>
-                        <use x="{$cardPlayer5x + $counter * $cardAbstand}" y="{$cardPlayer5y}" xlink:href="#black-{$value}"/>
-                        <use x="{$cardPlayer5x + $counter * $cardAbstand}" y="{$cardPlayer5y}" xlink:href="#Spade_mini"/>
+                        <use x="{$cardPlayer5x + $counter * $cardAbstand}" y="{$cardPlayer5y}"
+                             xlink:href="#{$color}-{$value}"/>
+                        <use x="{$cardPlayer5x + $counter * $cardAbstand}" y="{$cardPlayer5y}"
+                             xlink:href="#black-{$value}"/>
+                        <use x="{$cardPlayer5x + $counter * $cardAbstand}" y="{$cardPlayer5y}"
+                             xlink:href="#Spade_mini"/>
                     </xsl:when>
                     <xsl:when test="$color = 'Club'">
-                        <use x="{$cardPlayer5x + $counter * $cardAbstand}" y="{$cardPlayer5y}" xlink:href="#{$color}-{$value}"/>
-                        <use x="{$cardPlayer5x + $counter * $cardAbstand}" y="{$cardPlayer5y}" xlink:href="#black-{$value}"/>
+                        <use x="{$cardPlayer5x + $counter * $cardAbstand}" y="{$cardPlayer5y}"
+                             xlink:href="#{$color}-{$value}"/>
+                        <use x="{$cardPlayer5x + $counter * $cardAbstand}" y="{$cardPlayer5y}"
+                             xlink:href="#black-{$value}"/>
                         <use x="{$cardPlayer5x + $counter * $cardAbstand}" y="{$cardPlayer5y}" xlink:href="#Club_mini"/>
                     </xsl:when>
                     <xsl:when test="$color = 'Heart'">
-                        <use x="{$cardPlayer5x + $counter * $cardAbstand}" y="{$cardPlayer5y}" xlink:href="#{$color}-{$value}"/>
-                        <use x="{$cardPlayer5x + $counter * $cardAbstand}" y="{$cardPlayer5y}" xlink:href="#red-{$value}"/>
-                        <use x="{$cardPlayer5x + $counter * $cardAbstand}" y="{$cardPlayer5y}" xlink:href="#Heart_mini"/>
+                        <use x="{$cardPlayer5x + $counter * $cardAbstand}" y="{$cardPlayer5y}"
+                             xlink:href="#{$color}-{$value}"/>
+                        <use x="{$cardPlayer5x + $counter * $cardAbstand}" y="{$cardPlayer5y}"
+                             xlink:href="#red-{$value}"/>
+                        <use x="{$cardPlayer5x + $counter * $cardAbstand}" y="{$cardPlayer5y}"
+                             xlink:href="#Heart_mini"/>
                     </xsl:when>
                     <xsl:when test="$color = 'Diamond'">
-                        <use x="{$cardPlayer5x + $counter * $cardAbstand}" y="{$cardPlayer5y}" xlink:href="#{$color}-{$value}"/>
-                        <use x="{$cardPlayer5x + $counter * $cardAbstand}" y="{$cardPlayer5y}" xlink:href="#red-{$value}"/>
-                        <use x="{$cardPlayer5x + $counter * $cardAbstand}" y="{$cardPlayer5y}" xlink:href="#Diamond_mini"/>
+                        <use x="{$cardPlayer5x + $counter * $cardAbstand}" y="{$cardPlayer5y}"
+                             xlink:href="#{$color}-{$value}"/>
+                        <use x="{$cardPlayer5x + $counter * $cardAbstand}" y="{$cardPlayer5y}"
+                             xlink:href="#red-{$value}"/>
+                        <use x="{$cardPlayer5x + $counter * $cardAbstand}" y="{$cardPlayer5y}"
+                             xlink:href="#Diamond_mini"/>
                     </xsl:when>
                 </xsl:choose>
 
