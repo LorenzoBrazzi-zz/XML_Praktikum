@@ -30,6 +30,14 @@
 
 
     <xsl:template match="game">
+        <!-- Spielerknoten -->
+        <xsl:variable name="player1" select="/players/player[position = 1]"/>
+        <xsl:variable name="player2" select="/players/player[position = 2]"/>
+        <xsl:variable name="player3" select="/players/player[position = 3]"/>
+        <xsl:variable name="player4" select="/players/player[position = 4]"/>
+        <xsl:variable name="player5" select="/players/player[position = 5]"/>
+
+
         <svg width="100%" height="100%" version="1.1" viewBox="0 0 1600 900"
              xmlns="http://www.w3.org/2000/svg">
 
@@ -61,45 +69,45 @@
             <!-- Spielernamen -->
             <text x="{$player1x}" y="{$player1y + $radiusPlayer + $zeilenAbstand}" font-family="Arial"
                   font-size="{$spielerNamenTextSize}" fill="white" text-anchor="middle">
-                Player 1
+                <xsl:value-of select="$player1/name"/>
             </text>
             <text x="{$player2x}" y="{$player2y + $radiusPlayer + $zeilenAbstand}" font-family="Arial"
                   font-size="{$spielerNamenTextSize}" fill="white" text-anchor="middle">
-                Player 2
+                <xsl:value-of select="$player2/name"/>
             </text>
             <text x="{$player3x}" y="{$player3y + $radiusPlayer + $zeilenAbstand}" font-family="Arial"
                   font-size="{$spielerNamenTextSize}" fill="white" text-anchor="middle">
-                Player 3
+                <xsl:value-of select="$player3/name"/>
             </text>
             <text x="{$player4x}" y="{$player4y + $radiusPlayer + $zeilenAbstand}" font-family="Arial"
                   font-size="{$spielerNamenTextSize}" fill="white" text-anchor="middle">
-                Player 4
+                <xsl:value-of select="$player4/name"/>
             </text>
             <text x="{$player5x}" y="{$player5y + $radiusPlayer + $zeilenAbstand}" font-family="Arial"
                   font-size="{$spielerNamenTextSize}" fill="white" text-anchor="middle">
-                Player 5
+                <xsl:value-of select="$player5/name"/>
             </text>
 
             <!-- SpielerCash -->
             <text x="{$player1x}" y="{$player1y + $radiusPlayer + ($zeilenAbstand * 2)}" font-family="Arial"
                   font-size="{$spielerNamenTextSize}" fill="white" text-anchor="middle">
-                1548
+                <xsl:value-of select="$player1/balance"/>
             </text>
             <text x="{$player2x}" y="{$player2y + $radiusPlayer + ($zeilenAbstand * 2)}" font-family="Arial"
                   font-size="{$spielerNamenTextSize}" fill="white" text-anchor="middle">
-                2564
+                <xsl:value-of select="$player2/balance"/>
             </text>
             <text x="{$player3x}" y="{$player3y + $radiusPlayer + ($zeilenAbstand * 2)}" font-family="Arial"
                   font-size="{$spielerNamenTextSize}" fill="white" text-anchor="middle">
-                2634831
+                <xsl:value-of select="$player3/balance"/>
             </text>
             <text x="{$player4x}" y="{$player4y + $radiusPlayer + ($zeilenAbstand * 2)}" font-family="Arial"
                   font-size="{$spielerNamenTextSize}" fill="white" text-anchor="middle">
-                14
+                <xsl:value-of select="$player4/balance"/>
             </text>
             <text x="{$player5x}" y="{$player5y + $radiusPlayer + ($zeilenAbstand * 2)}" font-family="Arial"
                   font-size="{$spielerNamenTextSize}" fill="white" text-anchor="middle">
-                125
+                <xsl:value-of select="$player5/balance"/>
             </text>
 
             <!-- Tischtexte -->
@@ -806,7 +814,7 @@
 
             </defs>
             <!--Spieler 1 -->
-            <xsl:for-each select="players/player[position=1]/currentHand/card">
+            <xsl:for-each select="players/player[position=1]/currentHand/cards/card">
                 <xsl:variable name="value" select="value"/>
                 <xsl:variable name="color" select="color"/>
                 <xsl:variable name="counter" select="position()-1"/>
