@@ -814,7 +814,7 @@
 
             </defs>
             <!--Spieler 1 -->
-            <xsl:for-each select="players/player[position=1]/currentHand/cards/card">
+            <xsl:for-each select="$player1/currentHand/cards/card">
                 <xsl:variable name="value" select="value"/>
                 <xsl:variable name="color" select="color"/>
                 <xsl:variable name="counter" select="position()-1"/>
@@ -850,7 +850,7 @@
             </xsl:for-each>
 
             <!--Spieler 2 -->
-            <xsl:for-each select="players/player[position=2]/currentHand/card">
+            <xsl:for-each select="$player2/currentHand/card">
                 <xsl:variable name="value" select="value"/>
                 <xsl:variable name="color" select="color"/>
                 <xsl:variable name="counter" select="position()-1"/>
@@ -886,7 +886,7 @@
             </xsl:for-each>
 
             <!--Spieler 3 -->
-            <xsl:for-each select="players/player[position=3]/currentHand/card">
+            <xsl:for-each select="$player3/currentHand/card">
                 <xsl:variable name="value" select="value"/>
                 <xsl:variable name="color" select="color"/>
                 <xsl:variable name="counter" select="position()-1"/>
@@ -922,7 +922,7 @@
             </xsl:for-each>
 
             <!--Spieler 4 -->
-            <xsl:for-each select="players/player[position=4]/currentHand/card">
+            <xsl:for-each select="$player4/currentHand/card">
                 <xsl:variable name="value" select="value"/>
                 <xsl:variable name="color" select="color"/>
                 <xsl:variable name="counter" select="position()-1"/>
@@ -958,7 +958,7 @@
             </xsl:for-each>
 
             <!--Spieler 5 -->
-            <xsl:for-each select="players/player[position=5]/currentHand/card">
+            <xsl:for-each select="$player5/currentHand/card">
                 <xsl:variable name="value" select="value"/>
                 <xsl:variable name="color" select="color"/>
                 <xsl:variable name="counter" select="position()-1"/>
