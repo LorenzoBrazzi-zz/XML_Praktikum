@@ -9,14 +9,16 @@
 
 2. Copy the "webapp" folder of this project into the BaseX webapp folder
 
-3.1 Open the BaseX GUI and create a new database by following the steps
+### Option 1
+Open the BaseX GUI and create a new database by following the steps
 	1. Database
 	2. New...
 	3. Input file or directory: [BaseX folder]/webapp/blackjack/db_init/casino.xml
 	4. Name of database: blackjack
 	5. "Ok"
 
-3.2 Run the 'basexhttp' script in the 'basex/bin'
+### Option 2
+Run the 'basexhttp' script in the 'basex/bin'
 
 ## Playing the Game
 
