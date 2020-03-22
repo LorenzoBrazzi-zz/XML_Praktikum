@@ -28,6 +28,7 @@
         <xsl:variable name="player4" select="players/player[position = 4]"/>
         <xsl:variable name="player5" select="players/player[position = 5]"/>
         <xsl:variable name="activePlayer" select="activePlayer"/>
+        <xsl:variable name="gameID" select="id/text()"/>
 
         <svg width="100%" height="100%" version="1.1" viewBox="0 0 1600 900"
              xmlns="http://www.w3.org/2000/svg">
@@ -63,10 +64,11 @@
 
             <xsl:choose> <!-- If Else , um zu schauen wer gerade der aktive Spieler ist-->
                 <xsl:when test="$player1/id = $activePlayer">
-                    <text x="{$player1x}" y="{$player1y + $radiusPlayer + $zeilenAbstand}" font-family="Arial" font-style="italic"
+                    <text x="{$player1x}" y="{$player1y + $radiusPlayer + $zeilenAbstand}" font-family="Arial"
+                          font-style="italic"
                           font-size="{$spielerNamenTextSize + 10}" fill="yellow" text-anchor="middle">
 
-                            <xsl:value-of select="$player1/name"/>
+                        <xsl:value-of select="$player1/name"/>
 
                     </text>
                 </xsl:when>
@@ -83,9 +85,7 @@
                 <xsl:when test="$player2/id = $activePlayer">
                     <text x="{$player2x}" y="{$player2y + $radiusPlayer + $zeilenAbstand}" font-family="Arial"
                           font-size="{$spielerNamenTextSize + 5}" fill="yellow" text-anchor="middle">
-                        <b>
-                            <xsl:value-of select="$player2/name"/>
-                        </b>
+                        <xsl:value-of select="$player2/name"/>
                     </text>
                 </xsl:when>
                 <xsl:otherwise>
@@ -100,9 +100,7 @@
                 <xsl:when test="$player3/id = $activePlayer">
                     <text x="{$player3x}" y="{$player3y + $radiusPlayer + $zeilenAbstand}" font-family="Arial"
                           font-size="{$spielerNamenTextSize + 5}" fill="yellow" text-anchor="middle">
-                        <b>
-                            <xsl:value-of select="$player3/name"/>
-                        </b>
+                        <xsl:value-of select="$player3/name"/>
                     </text>
                 </xsl:when>
                 <xsl:otherwise>
@@ -117,9 +115,7 @@
                 <xsl:when test="$player4/id = $activePlayer">
                     <text x="{$player4x}" y="{$player4y + $radiusPlayer + $zeilenAbstand}" font-family="Arial"
                           font-size="{$spielerNamenTextSize + 5}" fill="yellow" text-anchor="middle">
-                        <b>
-                            <xsl:value-of select="$player4/name"/>
-                        </b>
+                        <xsl:value-of select="$player4/name"/>
                     </text>
                 </xsl:when>
                 <xsl:otherwise>
@@ -134,9 +130,7 @@
                 <xsl:when test="$player5/id = $activePlayer">
                     <text x="{$player5x}" y="{$player5y + $radiusPlayer + $zeilenAbstand}" font-family="Arial"
                           font-size="{$spielerNamenTextSize + 5}" fill="yellow" text-anchor="middle">
-                        <b>
-                            <xsl:value-of select="$player5/name"/>
-                        </b>
+                        <xsl:value-of select="$player5/name"/>
                     </text>
                 </xsl:when>
                 <xsl:otherwise>
@@ -150,7 +144,7 @@
             <!-- SpielerCash -->
             <text x="{$player1x}" y="{$player1y + $radiusPlayer + ($zeilenAbstand * 2)}" font-family="Arial"
                   font-size="{$spielerNamenTextSize}" fill="white" text-anchor="middle">
-                 <xsl:value-of select="$player1/balance"/>
+                <xsl:value-of select="$player1/balance"/>
             </text>
             <text x="{$player2x}" y="{$player2y + $radiusPlayer + ($zeilenAbstand * 2)}" font-family="Arial"
                   font-size="{$spielerNamenTextSize}" fill="white" text-anchor="middle">
@@ -200,6 +194,15 @@
                   font-size="{$buttonTextSize}" fill="black" text-anchor="middle">
                 Insurance
             </text>
+
+            <foreignObject width="100%" height="100%" x="{$button1x}"
+                           y="{$buttonsy}">
+                <form xmlns="http://www.w3.org/1999/xhtml" action="/bj/hit/{$gameID}" id="formHit"
+                      target="_self">
+                    <button class="button" type="submit" form="formHit" value="Submit">HIT
+                    </button>
+                </form>
+            </foreignObject>
 
 
             <!-- Chips

@@ -17,7 +17,7 @@ function dealer:drawCard($gameID as xs:string) {
 
     return (
         if ($val < 17) then (
-            insert node $card as first into $hand,
+            insert node $card into $hand,
             game:popDeck($gameID)
         )
         else ()

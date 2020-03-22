@@ -105,6 +105,7 @@ declare function controller:generatePage($game as element(game), $xslStylesheet 
         <html>
             <head>
                 <title>{$title}</title>
+                <link rel="stylesheet" type="text/css" href="../static/stylesheet.css"/>
             </head>
             <body>
                 {$transformed}
@@ -127,7 +128,8 @@ declare
 %rest:path("bj/setActivePlayer/{$gameID}")
 %rest:GET
 function controller:setActivePlayer($gameID as xs:string) {
-    game:setActivePlayer($gameID)
+    game:setActivePlayer($gameID),
+    update:output(web:redirect($controller:drawLink))
 };
 
 declare
@@ -140,10 +142,11 @@ function controller:shuffle($gameID as xs:string){
 
 declare
 %updating
-%rest:path("bj/HIT/{$gameID}")
+%rest:path("bj/hit/{$gameID}")
 %rest:GET
 function controller:hit($gameID as xs:string){
-    player:hit($gameID)
+    player:hit($gameID),
+    update:output(web:redirect($controller:drawLink))
 };
 
 (:Wenn der Spieler auf den "double" Button klickt:)

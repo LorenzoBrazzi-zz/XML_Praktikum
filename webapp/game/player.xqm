@@ -106,11 +106,17 @@ declare
 %updating
 function player:hit($gameID as xs:string){
     let $playerID := $player:games/game[id = $gameID]/activePlayer
-    let $score := player:calculateCardValue($gameID)
+    let $name := $player:games/game[id = $gameID]/players/player[id = $playerID]/name/text()
+    let $score := player:calculateCardValuePlayers($gameID, $playerID)
     let $err := <event>
         <time>{helper:currentTime()}</time>
         <type>error</type>
         <text>An 21 leider vorbeigeschosse :((</text>
+    </event>
+    let $prot := <event>
+        <time>{helper:currentTime()}</time>
+        <type>protocol</type>
+        <text>{$name} hat gehittet!</text>
     </event>
     (:Wenn Aktiver Spieler mehr als 21 Scorerpunkte hat, dann kann er folglich keine weiteren Karten mehr ziehen, da
 er schließlich schon verloren hat. Demnach muss der nöchste activePlayer gesetted werden!:)
@@ -122,6 +128,7 @@ er schließlich schon verloren hat. Demnach muss der nöchste activePlayer geset
         (:Wenn er Hitted, dann erhält der aktiveSpieler ganz einfach ne neue Karte. Jetzt kann er wieder einen Knopf seiner
     Wahl drücken.:)
         else (
+            insert node $prot as first into $player:games/game[id = $gameID]/events,
             player:drawCard($gameID)
         )
 };
@@ -164,6 +171,8 @@ declare function player:calculateCardValue($gameID as xs:string) as xs:integer{
 };
 
 (:Berechnet den Blattscore des Spielers:)
+(:Werte zunächst ohne Ass berechnen und dann die richtige Ass Werte zuweisen
+  Anzahl der Ass Karten bestimmen und abschließend score anpassen!:)
 declare function player:calculateCardValuePlayers($gameID as xs:string, $playerID as xs:string) as xs:integer{
     let $hand := $player:games/game[id = $gameID]/players/player[id = $playerID]/currentHand/cards
     (:Kopie des Elements um zu folden:)
@@ -186,7 +195,7 @@ function player:drawCard($gameID as xs:string) {
     let $card := game:drawCard($gameID)
 
     return (
-        insert node $card as first into $hand,
+        insert node $card into $hand,
         game:popDeck($gameID)
     )
 };

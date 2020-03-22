@@ -1,0 +1,7 @@
+.button {
+    height: 100px;
+    width: 100px;
+    background-color: #bb2532;
+    border-radius: 50%;
+    display: inline-block;
+}
