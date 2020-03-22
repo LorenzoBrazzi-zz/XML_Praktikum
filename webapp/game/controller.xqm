@@ -158,6 +158,16 @@ function controller:double($gameID as xs:string){
     player:double($gameID)
 };
 
+(:Wenn der Spieler auf den "stand" Button klickt:)
+declare
+%updating
+%rest:path("bj/stand/{$gameID}")
+%rest:GET
+function controller:stand($gameID as xs:string){
+    player:stand($gameID)
+};
+
+
 
 (:Wenn der Spieler die zu einsetzenden Chips gewählt und anschließend auf den "einsetzen" Button geklickt hat:)
 declare
