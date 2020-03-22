@@ -5,7 +5,7 @@
 
 ## Install Game
 
-1. [Install] (http://basex.org/download/) the BaseX server
+1. [Install]:(http://basex.org/download/) the BaseX server
 
 Copy the "webapp" folder into the BaseX base folder
 
