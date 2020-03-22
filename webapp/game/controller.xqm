@@ -140,36 +140,39 @@ function controller:shuffle($gameID as xs:string){
 
 declare
 %updating
-%rest:path("bj/playerHIT/{$gameID}")
+%rest:path("bj/HIT/{$gameID}")
 %rest:GET
 function controller:hit($gameID as xs:string){
     player:hit($gameID)
 };
 
+(:Wenn der Spieler auf den "double" Button klickt:)
 declare
 %updating
-%rest:path("bj/playerDOUBLE/{$gameID}")
+%rest:path("bj/double/{$gameID}")
 %rest:GET
 function controller:double($gameID as xs:string){
     player:double($gameID)
 };
 
+
+(:Wenn der Spieler die zu einsetzenden Chips gewählt und anschließend auf den "einsetzen" Button geklickt hat:)
 declare
 %updating
-%rest:path("bj/setBet/{$gameID}")
+%rest:path("bj/setBet/{$gameID}/{$chips}")
 %rest:GET
-function controller:testSetBet($gameID as xs:string){
-    player:setBet($gameID, <chips>
-        <chip>
-            <value>100</value>
-            <color>Red</color>
-        </chip>
-        <chip>
-            <value>100</value>
-            <color>Red</color>
-        </chip>
-    </chips>
-    )
+function controller:testSetBet($gameID as xs:string, $chips){
+    player:setBet($gameID, $chips),
+    update:output(web:redirect($controller:drawLink))
+};
+
+(:Wenn der Aktive Spieler auf den Insurance Button klickt :)
+declare
+%updating
+%rest:path("bj/setInsurance/{$gameID}")
+%rest:GET
+function controller:setInsurance($gameID as xs:string){
+    player:setInsurance($gameID)
 };
 
 declare
@@ -183,17 +186,11 @@ function controller:testWin($gameID as xs:string, $playerID as xs:string){
 (:https://www.youtube.com/watch?v=dbxBJWQPqZY hat gute buttons zum kopieren, kartensummen auch ganz cooles feature,
 win lose draw Symbole auch implementieren wie im Video,
 Status Text der das Spielgeschehen beschreibt:)
-declare
-%updating
-%rest:path("bj/testIns/{$gameID}")
-%rest:GET
-function controller:testIns($gameID as xs:string){
-    player:setInsurance($gameID)
-};
 
+(:Wenn Spiel startet, werden Karten automatisch ausgeteilt:)
 declare
 %updating
-%rest:path("bj/testDealOut/{$gameID}")
+%rest:path("bj/dealOut/{$gameID}")
 %rest:GET
 function controller:testDealOut($gameID as xs:string){
     controller:shuffle($gameID),

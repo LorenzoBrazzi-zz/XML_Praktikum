@@ -42,16 +42,20 @@ function player:setBet($gameID as xs:string, $bet as element(chips)) {
     let $activePlayerNewBalance := $path/balance - $amount
     let $maxBet := $player:games/game[id = $gameID]/maxBet
     let $minBet := $player:games/game[id = $gameID]/minBet
+    let $err := <event>
+        <time>{helper:currentTime()}</time>
+        <type>error</type>
+        <text>Fehler beim Einsatz!!! Der Einsatz muss mindestens {$minBet}, darf maximal {$maxBet} oder
+            deinen aktuellen Kontostand nicht übersteigen!</text>
+    </event>
 
     return (
     (: Falls die Balance unter 5 geht dann wird der Spieler entfernt da er dann verloren hat :)
-    if ($amount > $path/balance) then (
+    if ($amount > $path/balance or $amount > $maxBet or $amount < $minBet) then (
     (: Error message und ggf neue eingabe :)
-    ) else if ($amount > $maxBet) then (
-    (: Error message und ggf neue eingabe :)
-    ) else if ($amount < $minBet) then (
-    (: Error message und ggf neue eingabe :)
-    ) else (
+    insert node $err as first into $player:games/game[id = $gameID]/events
+    )
+    else (
         if ($activePlayerNewBalance < 5) then ( delete node $path)
         else (
             replace value of node $path/currentBet with xs:integer($amount),
@@ -78,15 +82,21 @@ function player:double($gameID as xs:string) {
     let $currentBet := $player:games/game[id = $gameID]/players/player[id = $activePlayer]/currentBet
     let $newBet := $currentBet * 2
     let $maxBet := $player:games/game[id = $gameID]/maxBet
-
-    (: Vielleicht hier noch schauen das wenn es nicht geht dass ein Error_message irgendwie ausgegeben wird :)
+    let $err := <event>
+        <time>{helper:currentTime()}</time>
+        <type>error</type>
+        <text>Fehler beim Einsatz!!! Der Einsatz darf
+            deinen aktuellen Kontostand nicht übersteigen! Maximaleinsatz wird ausgewählt</text>
+    </event>
     return (
     (: Falls der vedoppelte Einsatz höher ist als maxBet dann setze einfach den Einsatz auf maxBet :)
     if ($newBet > $maxBet) then (
         replace value of node $currentBet with $maxBet,
         player:hit($gameID)
-    ) else (
+    )
+    else (
         replace value of node $currentBet with $newBet,
+        insert node $err as first into $player:games/game[id = $gameID]/events,
         player:hit($gameID)
     )
     )
@@ -97,15 +107,20 @@ declare
 function player:hit($gameID as xs:string){
     let $playerID := $player:games/game[id = $gameID]/activePlayer
     let $score := player:calculateCardValue($gameID)
+    let $err := <event>
+        <time>{helper:currentTime()}</time>
+        <type>error</type>
+        <text>An 21 leider vorbeigeschosse :((</text>
+    </event>
     (:Wenn Aktiver Spieler mehr als 21 Scorerpunkte hat, dann kann er folglich keine weiteren Karten mehr ziehen, da
 er schließlich schon verloren hat. Demnach muss der nöchste activePlayer gesetted werden!:)
     return
         if ($score > 21) then (
-        (:Fehlermeldung hinzufügen:)
-        game:setActivePlayer($gameID)
+            insert node $err as first into $player:games/game[id = $gameID]/events,
+            game:setActivePlayer($gameID)
         )
         (:Wenn er Hitted, dann erhält der aktiveSpieler ganz einfach ne neue Karte. Jetzt kann er wieder einen Knopf seiner
-    Wahlt drücken.:)
+    Wahl drücken.:)
         else (
             player:drawCard($gameID)
         )

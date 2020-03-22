@@ -20,3 +20,9 @@ declare function helper:helperSum($acc as xs:integer, $x as xs:string) as xs:int
         return $res
     )
 };
+
+(:Diese Funktion gibt einen Zeitstempel zurück:)
+declare function helper:currentTime() as xs:string{
+    let $time := fn:substring-before(fn:string(fn:current-time()), '.')
+    return $time
+};

@@ -6,6 +6,7 @@ import module namespace player = "bj/player" at "player.xqm";
 import module namespace dealer = "bj/dealer" at "dealer.xqm";
 import module namespace chip = "bj/chip" at "chip.xqm";
 import module namespace card = "bj/card" at "card.xqm";
+import module namespace helper = "bj/helper" at "helper.xqm";
 
 (: Hiermit generieren wir die IDs sowohl der Spiele als auch der Spieler :)
 declare namespace uuid = "java:java.util.UUID";
@@ -28,7 +29,9 @@ declare function game:createEmptyGame(){
     )
 };
 
-(: Spiel aus den Daten der Formulare instanzieren:)
+(: Spiel aus den Daten der Formulare instanzieren,
+   Evenets sind wichtig für diverse Dinge, wie Protokolle oder Error messages,
+   States sind wichtig um später bei der Transformation Knöpfe richtig ein und ausblenden zu können!:)
 declare function game:createGame($names as xs:string+, $balances as xs:integer+, $minBet as xs:integer,
         $maxBet as xs:integer) as element(game){
     let $gameId := xs:string(uuid:randomUUID())
@@ -40,6 +43,14 @@ declare function game:createGame($names as xs:string+, $balances as xs:integer+,
     return (
         <game>
             <id>{$gameId}</id>
+            <events>
+                <event>
+                    <time>{helper:currentTime()}</time>
+                    <type>protocol</type>
+                    <text>Neues Spiel eröffnet, Viel Spass beim Spielen!</text>
+                </event>
+            </events>
+            <state>bet</state>
             <maxBet>{$maxBet}</maxBet>
             <minBet>{$minBet}</minBet>
             <players>{$players}</players>
@@ -167,6 +178,11 @@ declare
 %updating
 function game:dealOutCards($gameID as xs:string){
     let $g := $game:games/game[id = $gameID]
+    let $prot := <event>
+        <time>{helper:currentTime()}</time>
+        <type>protocol</type>
+        <text>Karten wurden verteilt! Lasst die RUNDE BEGINNEN!</text>
+    </event>
     return (
         let $dealer := $g/dealer
         for $p in $g/players/player
@@ -177,23 +193,24 @@ function game:dealOutCards($gameID as xs:string){
             delete node $g/cards/card[($pos * 2) - 1],
             delete node $g/cards/card[($pos * 2)],
             if ((xs:integer(fn:count($g/players))) = $pos) then (
-                (: Zweite Karte des Dealers ist die winzige Karte die verdeckt ist:)
-                let $second_card := $g/cards/card[12]
-                let $second_modified := (
-                    <card>
-                        <value>{$second_card/value}</value>
-                        <color>{$second_card/color}</color>
-                        <hidden>{fn:true()}</hidden>
-                    </card>
-                )
-                    return(
+            (: Zweite Karte des Dealers ist die winzige Karte die verdeckt ist:)
+            let $second_card := $g/cards/card[12]
+            let $second_modified := (
+                <card>
+                    <value>{$second_card/value}</value>
+                    <color>{$second_card/color}</color>
+                    <hidden>{fn:true()}</hidden>
+                </card>
+            )
+            return (
                 insert node $g/cards/card[11] into $dealer/currentHand,
                 insert node $g/cards/card[12] into $dealer/currentHand,
                 delete node $g/cards/card[11],
                 delete node $g/cards/card[12])
             ) else ()
             )
-        )
+        ),
+        insert node $prot as first into $game:games/game[id = $gameID]/events
     )
 };
 
@@ -261,17 +278,17 @@ function game:evaluateRound($gameID as xs:string) {
     return (
         let $playerWon := $p/won
         return (
-            (:Bei Unentschieden wird gleich ausgezahlt:)
-            if ($playerWon/@draw = "true") then (
-                player:payoutDraw($gameID, $p/id/text())
-            ) else if ($playerWon) then (
-                player:payoutBalanceNormal($gameID, $p/id/text())
-            ) else if (($insurancePossible) and ($p/insurance)) then (
-                player:payoutInsurance($gameID, $p/id/text())
-                (:Da das erste if ein Unentschieden ausschließt, wird hier nur auf ein Sieg geachtet:)
-            ) else if ($playerWon/@bj = "true") then (
-                player:payoutBJ($gameID, $p/id/text())
-            ) else ()
+        (:Bei Unentschieden wird gleich ausgezahlt:)
+        if ($playerWon/@draw = "true") then (
+            player:payoutDraw($gameID, $p/id/text())
+        ) else if ($playerWon) then (
+            player:payoutBalanceNormal($gameID, $p/id/text())
+        ) else if (($insurancePossible) and ($p/insurance)) then (
+            player:payoutInsurance($gameID, $p/id/text())
+        (:Da das erste if ein Unentschieden ausschließt, wird hier nur auf ein Sieg geachtet:)
+        ) else if ($playerWon/@bj = "true") then (
+            player:payoutBJ($gameID, $p/id/text())
+        ) else ()
 
         )
     )
