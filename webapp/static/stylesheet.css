@@ -1,7 +1,35 @@
-.button {
+.buttonHit {
     height: 100px;
     width: 100px;
     background-color: #bb2532;
+    border-radius: 50%;
+    display: inline-block;
+}
+.buttonStand {
+    height: 100px;
+    width: 100px;
+    background-color: #4f5bbb;
+    border-radius: 50%;
+    display: inline-block;
+}
+.buttonDouble {
+    height: 100px;
+    width: 100px;
+    background-color: #bb9324;
+    border-radius: 50%;
+    display: inline-block;
+}
+.buttonInsurance {
+    height: 100px;
+    width: 100px;
+    background-color: #469185;
+    border-radius: 50%;
+    display: inline-block;
+}
+.buttonTestDealOut {
+    height: 100px;
+    width: 200px;
+    background-color: #ffffff;
     border-radius: 50%;
     display: inline-block;
 }

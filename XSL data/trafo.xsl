@@ -173,37 +173,47 @@
 
 
             <!-- UI-->
-            <circle cx="{$button1x}" cy="{$buttonsy}" r="{$radiusButtons}" fill="{$farbeButton1}"/>
-            <circle cx="{$button2x}" cy="{$buttonsy}" r="{$radiusButtons}" fill="{$farbeButton2}"/>
-            <circle cx="{$button3x}" cy="{$buttonsy}" r="{$radiusButtons}" fill="{$farbeButton3}"/>
-            <circle cx="{$button4x}" cy="{$buttonsy}" r="{$radiusButtons}" fill="{$farbeButton4}"/>
-
-            <text x="{$button1x}" y="{$buttonsy + ($buttonTextSize div 2)}" font-family="Arial"
-                  font-size="{$buttonTextSize}" fill="black" text-anchor="middle">
-                Hit
-            </text>
-            <text x="{$button2x}" y="{$buttonsy + ($buttonTextSize div 2)}" font-family="Arial"
-                  font-size="{$buttonTextSize}" fill="black" text-anchor="middle">
-                Stand
-            </text>
-            <text x="{$button3x}" y="{$buttonsy + ($buttonTextSize div 2)}" font-family="Arial"
-                  font-size="{$buttonTextSize}" fill="black" text-anchor="middle">
-                Double
-            </text>
-            <text x="{$button4x}" y="{$buttonsy + ($buttonTextSize div 2)}" font-family="Arial"
-                  font-size="{$buttonTextSize}" fill="black" text-anchor="middle">
-                Insurance
-            </text>
 
             <foreignObject width="100%" height="100%" x="{$button1x}"
                            y="{$buttonsy}">
                 <form xmlns="http://www.w3.org/1999/xhtml" action="/bj/hit/{$gameID}" id="formHit"
                       target="_self">
-                    <button class="button" type="submit" form="formHit" value="Submit">HIT
+                    <button class="buttonHit" type="submit" form="formHit" value="Submit">Hit
                     </button>
                 </form>
             </foreignObject>
-
+            <foreignObject width="100%" height="100%" x="{$button2x}"
+                           y="{$buttonsy}">
+                <form xmlns="http://www.w3.org/1999/xhtml" action="/bj/stand/{$gameID}" id="formStand"
+                      target="_self">
+                    <button class="buttonStand" type="submit" form="formStand" value="Submit">Stand
+                    </button>
+                </form>
+            </foreignObject>
+            <foreignObject width="100%" height="100%" x="{$button3x}"
+                           y="{$buttonsy}">
+                <form xmlns="http://www.w3.org/1999/xhtml" action="/bj/double/{$gameID}" id="formDouble"
+                      target="_self">
+                    <button class="buttonDouble" type="submit" form="formDouble" value="Submit">Double
+                    </button>
+                </form>
+            </foreignObject>
+            <foreignObject width="100%" height="100%" x="{$button4x}"
+                           y="{$buttonsy}">
+                <form xmlns="http://www.w3.org/1999/xhtml" action="/bj/insurance/{$gameID}" id="formInsurance"
+                      target="_self">
+                    <button class="buttonInsurance" type="submit" form="formInsurance" value="Submit">Insurance
+                    </button>
+                </form>
+            </foreignObject>
+            <foreignObject width="100%" height="100%" x="{$testButton1x}"
+                           y="{$testButton1y}">
+                <form xmlns="http://www.w3.org/1999/xhtml" action="/bj/dealOut/{$gameID}" id="formDealOut"
+                      target="_self">
+                    <button class="buttonTestDealOut" type="submit" form="formDealOut" value="Submit">Deal Out
+                    </button>
+                </form>
+            </foreignObject>
 
             <!-- Chips
             <circle cx ="{$chip1x}" cy="{$chipsy}" r="{$radiusChips}" fill="{$farbeInaktiv}"/>

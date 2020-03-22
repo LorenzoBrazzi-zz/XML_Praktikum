@@ -112,6 +112,10 @@
 
     <xsl:variable name="buttonsy" select="50" />
 
+    <xsl:variable name="testButton1x" select="20"/>
+    <xsl:variable name="testButton1y" select="750"/>
+    <xsl:variable name="testButton2x" select="250"/>
+    <xsl:variable name="testButton2y" select="200"/>
 
     <!-- Chips -->
     <xsl:variable name="radiusChips" select="50" />
