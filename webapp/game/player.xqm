@@ -107,7 +107,7 @@ declare
 function player:hit($gameID as xs:string){
     let $playerID := $player:games/game[id = $gameID]/activePlayer
     let $name := $player:games/game[id = $gameID]/players/player[id = $playerID]/name/text()
-    let $score := player:calculateCardValuePlayers($gameID, $playerID)
+    let $score := player:calculateCardValuePlayers($gameID, $playerID, 1)
     let $err := <event>
         <time>{helper:currentTime()}</time>
         <type>error</type>
@@ -173,7 +173,7 @@ declare function player:calculateCardValue($gameID as xs:string) as xs:integer{
 (:Berechnet den Blattscore des Spielers:)
 (:Werte zunächst ohne Ass berechnen und dann die richtige Ass Werte zuweisen
   Anzahl der Ass Karten bestimmen und abschließend score anpassen!:)
-declare function player:calculateCardValuePlayers($gameID as xs:string, $playerID as xs:string) as xs:integer{
+(:declare function player:calculateCardValuePlayers($gameID as xs:string, $playerID as xs:string) as xs:integer{
     let $hand := $player:games/game[id = $gameID]/players/player[id = $playerID]/currentHand/cards
     (:Kopie des Elements um zu folden:)
     let $h := ( copy $c := $hand
@@ -183,6 +183,81 @@ declare function player:calculateCardValuePlayers($gameID as xs:string, $playerI
     let $sum := fn:fold-left($h/card, 0, function($acc, $c) {helper:helperSum($acc, $c/value)})
 
     return $sum
+};:)
+
+declare function player:calculateCardValuePlayers($gameID as xs:string, $playerID as xs:string, $cardsDrawn as xs:integer) as xs:integer {
+    let $player := $player:games/game[id = $gameID]/players/player[id = $playerID]
+    let $game := $player:games/game[id = $gameID]
+
+    (: the amount of cards of the player's hand :)
+    let $amountOfCards := $cardsDrawn + fn:count($player/currentHand/cards/card)
+    (: number of A cards in the player's hand :)
+    let $amoutOfAces := (
+        fn:sum(
+            for $card at $pos in $game/cards/card
+            where (($card/value = 'A') and ($pos <= $cardsDrawn))
+            return 1
+        )
+        +
+        fn:sum(
+            for $card in $player/currentHand/cards/card
+            where $card/value = 'A'
+            return 1
+        )
+    )
+    let $amountOfNotAces := $amountOfCards - $amoutOfAces
+
+    let $valueOfCardsWitoutAces := (
+            fn:sum(
+                for $card at $pos in $game/cards/card
+                where $pos <= $cardsDrawn
+                return (
+                    if (($card/value = 'B') or ($card/value = 'Q') or ($card/value = 'K')) then 10
+                    else if ($card/value = 'A') then 0
+                    else ($card/value)
+                )
+            )
+            +
+            fn:sum(
+                for $card in $player/currentHand/cards/card
+                return (
+                    if (($card/value = 'B') or ($card/value = 'Q') or ($card/value = 'K')) then 10
+                    else if ($card/value = 'A') then 0
+                    else ($card/value)
+                )
+            ))
+
+    let $valueDifference := (21 - $valueOfCardsWitoutAces)
+
+    return (
+        (: ValueOfCardsWithoutAces is over 21, how much does not matter, therefore 22 :)
+        if ($valueDifference < 0) then 22
+        (: Dealer is over 21, how much does not matter, therefore 22 :)
+        else if (($valueDifference = 0) and ($amoutOfAces > 0)) then 22
+        (: Dealer has a BJ :)
+        else if (($valueDifference = 0) and ($amoutOfAces = 0)) then 21
+        (: Dealer has no aces and value of cards under 21 :)
+        else if (($valueDifference > 0) and ($amoutOfAces = 0)) then $valueOfCardsWitoutAces
+        (: In case of amountOfAces > 0 and difference > 0 :)
+        else (
+            (: Each A gets calculated as 1 :)
+            if ($amoutOfAces = $valueDifference) then 21
+            (: Dealer gets over 21 :)
+            else if ($valueDifference < $amoutOfAces) then 22
+            (: In case amountOfAces > difference :)
+            else (
+                (: Check which A has to count as 11 and which as 1 :)
+                if ($valueDifference < 11) then $amoutOfAces + $valueOfCardsWitoutAces
+                (: single As count as 1 :)
+                else if (($amoutOfAces = 1) and ($valueDifference = 11)) then 21
+                (: As can only counnt as 1 each :)
+                else if (($amoutOfAces > 1) and ($valueDifference = 11)) then $amoutOfAces + $valueOfCardsWitoutAces
+                (: In case that A > 0 and difference > 11 :)
+                else (
+                    (: More than 1 A can not be counted as 11 each, since we would be over 21 :)
+                    if (($valueOfCardsWitoutAces + 11 + ($amoutOfAces - 1)) <= 21) then $valueOfCardsWitoutAces + 11 + ($amoutOfAces - 1)
+                    else $valueOfCardsWitoutAces + $amoutOfAces
+    ))))
 };
 
 (:Ziehen einer Karte und darauffolgendes entfernen eben dieser aus dem Stack:)
