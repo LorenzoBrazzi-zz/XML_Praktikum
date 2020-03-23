@@ -236,7 +236,7 @@ function game:determineWinners($gameID as xs:string) {
     (: Falls der Dealer einen Blackjack hat, verlieren automatisch alle Spieler die keinen Blackjack haben:)
     if ($dealer/isInsurance) then (
         let $numberOfCards := fn:count($p/currentHand/card)
-        let $playerCardValue := player:calculateCardValuePlayers($gameID, $p/id/text(), 0)
+        let $playerCardValue := player:calculateCardValuePlayers($gameID, $p/id/text())
         return (
             if (not(($playerCardValue = 21) and ($numberOfCards = 2))) then (
                 replace value of node $p/won with fn:false()
@@ -249,7 +249,7 @@ function game:determineWinners($gameID as xs:string) {
     (:Falls der Dealer keinen Blackjack hat:)
     else (
         let $numberOfCards := fn:count($p/currentHand/card)
-        let $playerCardValue := player:calculateCardValuePlayers($gameID, $p/id/text(), 0)
+        let $playerCardValue := player:calculateCardValuePlayers($gameID, $p/id/text())
         return (
         (:Spieler hat einen Blackjack, Sieg weil die Funktionsstelle nur erreicht, wenn der Dealer kein Blackjack:)
         if (($playerCardValue = 21) and ($numberOfCards = 2)) then (
