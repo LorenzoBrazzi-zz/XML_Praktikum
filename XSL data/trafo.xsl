@@ -74,6 +74,28 @@
                 21
             </text>
 
+            <!-- Aktueller Einsatz Dummy -->
+            <circle cx="{$p1CurrentBetX}" cy="{$p1CurrentBetY}" r="{$radiusDummyChips}"
+                style="fill:none;stroke:purple;stroke-width:1">
+                <xsl:value-of select="$player1/currentBet"/>
+            </circle>
+            <circle cx="{$p2CurrentBetX}" cy="{$p2CurrentBetY}" r="{$radiusDummyChips}"
+                    style="fill:none;stroke:purple;stroke-width:1">
+                <xsl:value-of select="$player2/currentBet"/>
+            </circle>
+            <circle cx="{$p3CurrentBetX}" cy="{$p3CurrentBetY}" r="{$radiusDummyChips}"
+                    style="fill:none;stroke:purple;stroke-width:1">
+                <xsl:value-of select="$player3/currentBet"/>
+            </circle>
+            <circle cx="{$p4CurrentBetX}" cy="{$p4CurrentBetY}" r="{$radiusDummyChips}"
+                    style="fill:none;stroke:purple;stroke-width:1">
+                <xsl:value-of select="$player4/currentBet"/>
+            </circle>
+            <circle cx="{$p5CurrentBetX}" cy="{$p5CurrentBetY}" r="{$radiusDummyChips}"
+                    style="fill:none;stroke:purple;stroke-width:1">
+                <xsl:value-of select="$player5/currentBet"/>
+            </circle>
+
 
             <!-- Spielernamen, wenn aktiver Spieler, dann gelb hervorheben sonst normal
             Aufgabe: du müsstest es so anpassen dass man merkt wer der aktive Spieler ist, entweder wie hier den textstyle

@@ -32,21 +32,27 @@
     <xsl:variable name="player5x" select="1450" />
     <xsl:variable name="player5y" select="350" />
 
-    <!-- zur Anpassung der Kartenpostionen: Abstände aller Spieler in Abhänigkeit von Spieler 1-->
-
-<xsl:variable name="player1zu2x"/>
 
     <!-- Spielernamen -->
     <xsl:variable name="spielerNamenTextSize" select="15" />
     <xsl:variable name="zeilenAbstand" select="$spielerNamenTextSize + 5" />
 
     <!-- Aktueller Einsatz -->
-    <xsl:variable name="p1CurrentBety" select="$player1y + $cardHeight"/>
-    <xsl:variable name="p2CurrentBety" select="$player2y + $cardHeight"/>
-    <xsl:variable name="p3CurrentBety" select="$player3y + $cardHeight"/>
-    <xsl:variable name="p4CurrentBety" select="$player4y + $cardHeight"/>
-    <xsl:variable name="p5CurrentBety" select="$player5y + $cardHeight"/>
+    <xsl:variable name="radiusDummyChips" select="$radiusPlayer div 2"/>
 
+    <xsl:variable name="p1CurrentBetX" select="$player1x +($radiusPlayer * 2)"/>
+    <xsl:variable name="p2CurrentBetX" select="$player2x +($radiusPlayer)"/>
+    <xsl:variable name="p3CurrentBetX" select="$player3x + 0"/>
+    <xsl:variable name="p4CurrentBetX" select="$player4x - ($radiusPlayer)"/>
+    <xsl:variable name="p5CurrentBetX" select="$player5x -($radiusPlayer * 2)"/>
+
+    <xsl:variable name="p1CurrentBetY" select="$player1y - $radiusPlayer"/>
+    <xsl:variable name="p2CurrentBetY" select="$player2y - $cardHeight"/>
+    <xsl:variable name="p3CurrentBetY" select="$player3y - $cardHeight -$zeilenAbstand*2"/>
+    <xsl:variable name="p4CurrentBetY" select="$player4y - $cardHeight"/>
+    <xsl:variable name="p5CurrentBetY" select="$player5y - $radiusPlayer"/>
+
+    <!-- Aktuelle Handwerte -->
     <xsl:variable name="p1CurrentHandValueY" select="$player1y - $radiusPlayer - $zeilenAbstand"/>
     <xsl:variable name="p2CurrentHandValueY" select="$player2y - $radiusPlayer - $zeilenAbstand"/>
     <xsl:variable name="p3CurrentHandValueY" select="$player3y - $radiusPlayer - $zeilenAbstand"/>
