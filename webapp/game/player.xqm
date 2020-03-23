@@ -199,7 +199,7 @@ declare function player:calculateCardValuePlayers($gameID as xs:string, $playerI
         sum(
                 for $c in $player/currentHand/cards/card
                 return (
-                    if (($c/value = 'B') or ($c/value = 'Q') or ($c/value = 'K')) then 10
+                    if (($c/value = 'B') or ($c/value = 'D') or ($c/value = 'K')) then 10
                     else if ($c/value = 'A') then 0
                     else ($c/value)
                 )
