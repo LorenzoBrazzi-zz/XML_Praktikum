@@ -34,12 +34,11 @@ declare function player:createPlayer($id as xs:string, $currentHand as element(c
 :)
 declare
 %updating
-function player:setBet($gameID as xs:string, $bet as element(chips)) {
+function player:setBet($gameID as xs:string, $bet as xs:integer) {
 
-    let $amount := player:calculateChipsValue($bet)
     let $activePlayer := $player:games/game[id = $gameID]/activePlayer
     let $path := $player:games/game[id = $gameID]/players/player[id = $activePlayer]
-    let $activePlayerNewBalance := $path/balance - $amount
+    let $activePlayerNewBalance := $path/balance - $bet
     let $maxBet := $player:games/game[id = $gameID]/maxBet
     let $minBet := $player:games/game[id = $gameID]/minBet
     let $err := <event>
@@ -51,14 +50,14 @@ function player:setBet($gameID as xs:string, $bet as element(chips)) {
 
     return (
     (: Falls die Balance unter 5 geht dann wird der Spieler entfernt da er dann verloren hat :)
-    if ($amount > $path/balance or $amount > $maxBet or $amount < $minBet) then (
+    if ($bet > $path/balance or $bet > $maxBet or $bet < $minBet) then (
     (: Error message und ggf neue eingabe :)
     insert node $err as first into $player:games/game[id = $gameID]/events
     )
     else (
         if ($activePlayerNewBalance < 5) then ( delete node $path)
         else (
-            replace value of node $path/currentBet with xs:integer($amount),
+            replace value of node $path/currentBet with xs:integer($bet),
             replace value of node $path/balance with $activePlayerNewBalance
         ),
         game:setActivePlayer($gameID)

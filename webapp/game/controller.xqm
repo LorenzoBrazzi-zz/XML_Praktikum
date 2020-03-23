@@ -168,14 +168,13 @@ function controller:stand($gameID as xs:string){
 };
 
 
-
 (:Wenn der Spieler die zu einsetzenden Chips gewählt und anschließend auf den "einsetzen" Button geklickt hat:)
 declare
 %updating
-%rest:path("bj/setBet/{$gameID}/{$chips}")
+%rest:path("bj/setBet/{$gameID}/{$bet}")
 %rest:GET
-function controller:testSetBet($gameID as xs:string, $chips){
-    player:setBet($gameID, $chips),
+function controller:testSetBet($gameID as xs:string, $bet){
+    player:setBet($gameID, $bet),
     update:output(web:redirect($controller:drawLink))
 };
 
@@ -217,3 +216,13 @@ declare
 function controller:dealerValueTest($gameID as xs:string){
     dealer:calculateDealerValue($gameID)
 };
+
+declare
+%updating
+%rest:path("bj/evalRound/{$gameID}")
+%rest:GET
+function controller:evalRound($gameID){
+    game:closeRound($gameID),
+    update:output(web:redirect($controller:drawLink))
+};
+

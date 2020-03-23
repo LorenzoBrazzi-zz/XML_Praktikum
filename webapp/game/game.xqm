@@ -293,3 +293,26 @@ function game:evaluateRound($gameID as xs:string) {
         )
     )
 };
+
+declare
+%updating
+function game:resetTable($gameID){
+    let $game := $game:games/game[id = $gameID]
+    let $deck := game:shuffleDeck()
+    return (
+        for $p in $game/players/player
+        return (
+            replace node $p/currentHand/cards with <cards></cards>
+        ),
+        replace node $game/cards with $deck
+    )
+
+};
+
+declare
+%updating
+function game:closeRound($gameID){
+    game:determineWinners($gameID),
+    game:evaluateRound($gameID),
+    game:resetTable($gameID)
+};
