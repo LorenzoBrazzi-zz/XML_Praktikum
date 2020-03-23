@@ -40,6 +40,19 @@
     <xsl:variable name="spielerNamenTextSize" select="15" />
     <xsl:variable name="zeilenAbstand" select="$spielerNamenTextSize + 5" />
 
+    <!-- Aktueller Einsatz -->
+    <xsl:variable name="p1CurrentBety" select="$player1y + $cardHeight"/>
+    <xsl:variable name="p2CurrentBety" select="$player2y + $cardHeight"/>
+    <xsl:variable name="p3CurrentBety" select="$player3y + $cardHeight"/>
+    <xsl:variable name="p4CurrentBety" select="$player4y + $cardHeight"/>
+    <xsl:variable name="p5CurrentBety" select="$player5y + $cardHeight"/>
+
+    <xsl:variable name="p1CurrentHandValueY" select="$player1y - $radiusPlayer - $zeilenAbstand"/>
+    <xsl:variable name="p2CurrentHandValueY" select="$player2y - $radiusPlayer - $zeilenAbstand"/>
+    <xsl:variable name="p3CurrentHandValueY" select="$player3y - $radiusPlayer - $zeilenAbstand"/>
+    <xsl:variable name="p4CurrentHandValueY" select="$player4y - $radiusPlayer - $zeilenAbstand"/>
+    <xsl:variable name="p5CurrentHandValueY" select="$player5y - $radiusPlayer - $zeilenAbstand"/>
+
 
     <!-- Karten Positionen -->
     <xsl:variable name="cardDealerx" select="550" />
@@ -62,16 +75,13 @@
     <xsl:variable name="cardHeight" select="($cardWidth * 1.5)"/>
     <xsl:variable name="karteX" select="0"/>
     <xsl:variable name="karteY" select="0"/>
-    <!-- <xsl:variable name="jetztX" select="$karteX +50"/>
-    <xsl:variable name="jetztY" select="$karteY +35"/> -->
+
     <xsl:variable name="jetztX" select="($cardWidth div 2)"/>
     <xsl:variable name="jetztY" select="($cardHeight div 4.25)"/>
-    <!--<xsl:variable name="valueXMini" select="$karteX +10"/>
-    <xsl:variable name="valueYMini" select="$karteY +20"/> -->
+
     <xsl:variable name="valueXMini" select="($cardWidth div 10)"/>
     <xsl:variable name="valueYMini" select="($cardHeight div 7.5)"/>
-    <!--<xsl:variable name="symbolXMini" select="$karteX +10"/>
-    <xsl:variable name="symbolYMini" select="$karteY +33"/> -->
+
     <xsl:variable name="symbolXMini" select="($cardWidth div 10)"/>
     <xsl:variable name="symbolYMini" select="($cardHeight div 4.5)"/>
     <xsl:variable name="sizeBigSymbol" select="($cardWidth * 0.4)"/>
