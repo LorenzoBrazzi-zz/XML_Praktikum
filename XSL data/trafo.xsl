@@ -51,11 +51,28 @@
             <circle cx="{$player2x}" cy="{$player2y}" r="{$radiusPlayer}"
                     style="fill:none;stroke:white;stroke-width:4"/>
             <circle cx="{$player3x}" cy="{$player3y}" r="{$radiusPlayer}"
-                    style="fill:none;stroke:white;stroke-width:4"/>
+                    style="fill:none;stroke:white;stroke-width:2"/>
             <circle cx="{$player4x}" cy="{$player4y}" r="{$radiusPlayer}"
-                    style="fill:none;stroke:white;stroke-width:4"/>
+                    style="fill:none;stroke:white;stroke-width:2.5"/>
             <circle cx="{$player5x}" cy="{$player5y}" r="{$radiusPlayer}"
-                    style="fill:none;stroke:white;stroke-width:4"/>
+                    style="fill:none;stroke:white;stroke-width:3"/>
+
+            <!-- Aktuelle Handwerte -->
+            <text x="{$player1x}" y="{$p1CurrentHandValueY}" text-anchor="middle" font-family="Algerian" fill="white" >
+                21
+            </text>
+            <text x="{$player2x}" y="{$p2CurrentHandValueY}" text-anchor="middle" font-family="Algerian" fill="white" >
+                21
+            </text>
+            <text x="{$player3x}" y="{$p3CurrentHandValueY}" text-anchor="middle" font-family="Algerian" fill="white" >
+                21
+            </text>
+            <text x="{$player4x}" y="{$p4CurrentHandValueY}" text-anchor="middle" font-family="Algerian" fill="white" >
+                21
+            </text>
+            <text x="{$player5x}" y="{$p5CurrentHandValueY}" text-anchor="middle" font-family="Algerian" fill="white" >
+                21
+            </text>
 
 
             <!-- Spielernamen, wenn aktiver Spieler, dann gelb hervorheben sonst normal
@@ -74,7 +91,7 @@
                 </xsl:when>
                 <xsl:otherwise>
                     <text x="{$player1x}" y="{$player1y + $radiusPlayer + $zeilenAbstand}" font-family="Arial"
-                          font-size="{$spielerNamenTextSize}" fill="white" text-anchor="middle">
+                          font-size="{$spielerNamenTextSize}" fill="white" text-anchor="middle" fill-opacity="0.5">
                         <xsl:value-of select="$player1/name"/>
                     </text>
                 </xsl:otherwise>
@@ -90,7 +107,7 @@
                 </xsl:when>
                 <xsl:otherwise>
                     <text x="{$player2x}" y="{$player2y + $radiusPlayer + $zeilenAbstand}" font-family="Arial"
-                          font-size="{$spielerNamenTextSize}" fill="white" text-anchor="middle">
+                          font-size="{$spielerNamenTextSize}" fill="white" text-anchor="middle" fill-opacity="0.5">
                         <xsl:value-of select="$player2/name"/>
                     </text>
                 </xsl:otherwise>
@@ -105,7 +122,7 @@
                 </xsl:when>
                 <xsl:otherwise>
                     <text x="{$player3x}" y="{$player3y + $radiusPlayer + $zeilenAbstand}" font-family="Arial"
-                          font-size="{$spielerNamenTextSize}" fill="white" text-anchor="middle">
+                          font-size="{$spielerNamenTextSize}" fill="white" text-anchor="middle" fill-opacity="0.5">
                         <xsl:value-of select="$player3/name"/>
                     </text>
                 </xsl:otherwise>
@@ -120,7 +137,7 @@
                 </xsl:when>
                 <xsl:otherwise>
                     <text x="{$player4x}" y="{$player4y + $radiusPlayer + $zeilenAbstand}" font-family="Arial"
-                          font-size="{$spielerNamenTextSize}" fill="white" text-anchor="middle">
+                          font-size="{$spielerNamenTextSize}" fill="white" text-anchor="middle" fill-opacity="0.5">
                         <xsl:value-of select="$player4/name"/>
                     </text>
                 </xsl:otherwise>
@@ -135,7 +152,7 @@
                 </xsl:when>
                 <xsl:otherwise>
                     <text x="{$player5x}" y="{$player5y + $radiusPlayer + $zeilenAbstand}" font-family="Arial"
-                          font-size="{$spielerNamenTextSize}" fill="white" text-anchor="middle">
+                          font-size="{$spielerNamenTextSize}" fill="white" text-anchor="middle" fill-opacity="0.5">
                         <xsl:value-of select="$player5/name"/>
                     </text>
                 </xsl:otherwise>
@@ -143,31 +160,31 @@
 
             <!-- SpielerCash -->
             <text x="{$player1x}" y="{$player1y + $radiusPlayer + ($zeilenAbstand * 2)}" font-family="Arial"
-                  font-size="{$spielerNamenTextSize}" fill="white" text-anchor="middle">
+                  font-size="{$spielerNamenTextSize}" fill="white" text-anchor="middle" fill-opacity="0.5">
                 <xsl:value-of select="$player1/balance"/>
             </text>
             <text x="{$player2x}" y="{$player2y + $radiusPlayer + ($zeilenAbstand * 2)}" font-family="Arial"
-                  font-size="{$spielerNamenTextSize}" fill="white" text-anchor="middle">
+                  font-size="{$spielerNamenTextSize}" fill="white" text-anchor="middle" fill-opacity="0.5">
                 <xsl:value-of select="$player2/balance"/>
             </text>
             <text x="{$player3x}" y="{$player3y + $radiusPlayer + ($zeilenAbstand * 2)}" font-family="Arial"
-                  font-size="{$spielerNamenTextSize}" fill="white" text-anchor="middle">
+                  font-size="{$spielerNamenTextSize}" fill="white" text-anchor="middle" fill-opacity="0.5">
                 <xsl:value-of select="$player3/balance"/>
             </text>
             <text x="{$player4x}" y="{$player4y + $radiusPlayer + ($zeilenAbstand * 2)}" font-family="Arial"
-                  font-size="{$spielerNamenTextSize}" fill="white" text-anchor="middle">
+                  font-size="{$spielerNamenTextSize}" fill="white" text-anchor="middle" fill-opacity="0.5">
                 <xsl:value-of select="$player4/balance"/>
             </text>
             <text x="{$player5x}" y="{$player5y + $radiusPlayer + ($zeilenAbstand * 2)}" font-family="Arial"
-                  font-size="{$spielerNamenTextSize}" fill="white" text-anchor="middle">
+                  font-size="{$spielerNamenTextSize}" fill="white" text-anchor="middle" fill-opacity="0.5">
                 <xsl:value-of select="$player5/balance"/>
             </text>
 
             <!-- Tischtexte -->
-            <text x="600" y="300" font-family="Algerian" font-size="30" fill="black" stroke-opacity="80">
+            <text x="600" y="300" font-family="Algerian" font-size="30" fill="black" fill-opacity="80">
                 BLACKJACK PAYS 3 TO 2
             </text>
-            <text x="700" y="350" font-family="Arial" font-size="15" fill="black">
+            <text x="700" y="350" font-family="Arial" font-size="15" fill="black" fill-opacity="80">
                 Insurance Pays 2 to 1
             </text>
 
