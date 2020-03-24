@@ -218,9 +218,10 @@ function game:dealOutCards($gameID as xs:string){
 declare function game:isRoundCompleted($gameID as xs:string) as xs:boolean{
     let $activeID := $game:games/game[id = $gameID]/activePlayer
     let $activePlayer := $game:games/game[id = $gameID]/players/player[id = $activeID]
+    let $count := fn:count($game:games/game[id = $gameID]/players/player)
     return (
-        if ($activePlayer/position = 5)
-        then (fn:true) else (fn:false)
+        if ($activePlayer/position = $count)
+        then (fn:true()) else (fn:false())
     )
 };
 
@@ -230,7 +231,6 @@ function game:determineWinners($gameID as xs:string) {
     let $players := $game:games/game[id = $gameID]/players
     let $dealer := $game:games/game[id = $gameID]/dealer
     let $dealerCardsValue := dealer:calculateCardValue($gameID)
-
 
     for $p in $players
     return (

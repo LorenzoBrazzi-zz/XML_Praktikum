@@ -30,6 +30,7 @@
         <xsl:variable name="activePlayer" select="activePlayer"/>
         <xsl:variable name="dealer" select="dealer"/>
         <xsl:variable name="gameID" select="id/text()"/>
+        <xsl:variable name="state" select="state"/>
 
         <svg width="100%" height="100%" version="1.1" viewBox="0 0 1600 900"
              xmlns="http://www.w3.org/2000/svg">
@@ -57,23 +58,6 @@
                     style="fill:none;stroke:white;stroke-width:2.5"/>
             <circle cx="{$player5x}" cy="{$player5y}" r="{$radiusPlayer}"
                     style="fill:none;stroke:white;stroke-width:3"/>
-
-            <!-- Aktuelle Handwerte -->
-            <text x="{$player1x}" y="{$p1CurrentHandValueY}" text-anchor="middle" font-family="Algerian" fill="white">
-                21
-            </text>
-            <text x="{$player2x}" y="{$p2CurrentHandValueY}" text-anchor="middle" font-family="Algerian" fill="white">
-                21
-            </text>
-            <text x="{$player3x}" y="{$p3CurrentHandValueY}" text-anchor="middle" font-family="Algerian" fill="white">
-                21
-            </text>
-            <text x="{$player4x}" y="{$p4CurrentHandValueY}" text-anchor="middle" font-family="Algerian" fill="white">
-                21
-            </text>
-            <text x="{$player5x}" y="{$p5CurrentHandValueY}" text-anchor="middle" font-family="Algerian" fill="white">
-                21
-            </text>
 
             <!-- Aktueller Einsatz Dummy -->
             <circle cx="{$p1CurrentBetX}" cy="{$p1CurrentBetY}" r="{$radiusDummyChips}"
@@ -138,6 +122,17 @@
                           font-size="{$spielerNamenTextSize + 5}" fill="yellow" text-anchor="middle">
                         <xsl:value-of select="$player2/name"/>
                     </text>
+                    <xsl:choose>
+                        <xsl:when test="state = 'bet'">
+                            <foreignObject height="10%" width="10%" x="{$p2CurrentBetX - 50}"
+                                           y="{$p2CurrentBetY + $radiusDummyChips + 10}">
+                                <form xmlns="http://www.w3.org/1999/xhtml" action="/bj/setBet/{$gameID}">
+                                    <input type="number" id="bet" name="bet" placeHolder="set bet"/>
+                                    <input type="submit" value="Set Bet"></input>
+                                </form>
+                            </foreignObject>
+                        </xsl:when>
+                    </xsl:choose>
                 </xsl:when>
                 <xsl:otherwise>
                     <text x="{$player2x}" y="{$player2y + $radiusPlayer + $zeilenAbstand}" font-family="Arial"
@@ -153,6 +148,17 @@
                           font-size="{$spielerNamenTextSize + 5}" fill="yellow" text-anchor="middle">
                         <xsl:value-of select="$player3/name"/>
                     </text>
+                    <xsl:choose>
+                        <xsl:when test="state = 'bet'">
+                            <foreignObject height="10%" width="10%" x="{$p3CurrentBetX - 50}"
+                                           y="{$p3CurrentBetY + $radiusDummyChips + 10}">
+                                <form xmlns="http://www.w3.org/1999/xhtml" action="/bj/setBet/{$gameID}">
+                                    <input type="number" id="bet" name="bet" placeHolder="set bet"/>
+                                    <input type="submit" value="Set Bet"></input>
+                                </form>
+                            </foreignObject>
+                        </xsl:when>
+                    </xsl:choose>
                 </xsl:when>
                 <xsl:otherwise>
                     <text x="{$player3x}" y="{$player3y + $radiusPlayer + $zeilenAbstand}" font-family="Arial"
@@ -168,6 +174,17 @@
                           font-size="{$spielerNamenTextSize + 5}" fill="yellow" text-anchor="middle">
                         <xsl:value-of select="$player4/name"/>
                     </text>
+                    <xsl:choose>
+                        <xsl:when test="state = 'bet'">
+                            <foreignObject height="10%" width="10%" x="{$p4CurrentBetX - 50}"
+                                           y="{$p4CurrentBetY + $radiusDummyChips + 10}">
+                                <form xmlns="http://www.w3.org/1999/xhtml" action="/bj/setBet/{$gameID}">
+                                    <input type="number" id="bet" name="bet" placeHolder="set bet"/>
+                                    <input type="submit" value="Set Bet"></input>
+                                </form>
+                            </foreignObject>
+                        </xsl:when>
+                    </xsl:choose>
                 </xsl:when>
                 <xsl:otherwise>
                     <text x="{$player4x}" y="{$player4y + $radiusPlayer + $zeilenAbstand}" font-family="Arial"
@@ -183,6 +200,17 @@
                           font-size="{$spielerNamenTextSize + 5}" fill="yellow" text-anchor="middle">
                         <xsl:value-of select="$player5/name"/>
                     </text>
+                    <xsl:choose>
+                        <xsl:when test="state = 'bet'">
+                            <foreignObject height="10%" width="10%" x="{$p5CurrentBetX - 50}"
+                                           y="{$p5CurrentBetY + $radiusDummyChips + 10}">
+                                <form xmlns="http://www.w3.org/1999/xhtml" action="/bj/setBet/{$gameID}">
+                                    <input type="number" id="bet" name="bet" placeHolder="set bet"/>
+                                    <input type="submit" value="Set Bet"></input>
+                                </form>
+                            </foreignObject>
+                        </xsl:when>
+                    </xsl:choose>
                 </xsl:when>
                 <xsl:otherwise>
                     <text x="{$player5x}" y="{$player5y + $radiusPlayer + $zeilenAbstand}" font-family="Arial"
@@ -224,40 +252,49 @@
 
 
             <!-- UI-->
+            <xsl:choose>
+                <xsl:when test="$state='play' or $state='insurance'">
+                    <foreignObject width="7%" height="13%" x="{$button1x}"
+                                   y="{$buttonsy}">
+                        <form xmlns="http://www.w3.org/1999/xhtml" action="/bj/hit/{$gameID}" id="formHit"
+                              target="_self">
+                            <button class="buttonHit" type="submit" form="formHit" value="Submit">Hit
+                            </button>
+                        </form>
+                    </foreignObject>
+                    <foreignObject width="7%" height="13%" x="{$button2x}"
+                                   y="{$buttonsy}">
+                        <form xmlns="http://www.w3.org/1999/xhtml" action="/bj/stand/{$gameID}" id="formStand"
+                              target="_self">
+                            <button class="buttonStand" type="submit" form="formStand" value="Submit">Stand
+                            </button>
+                        </form>
+                    </foreignObject>
+                    <foreignObject width="7%" height="13%" x="{$button3x}"
+                                   y="{$buttonsy}">
+                        <form xmlns="http://www.w3.org/1999/xhtml" action="/bj/double/{$gameID}" id="formDouble"
+                              target="_self">
+                            <button class="buttonDouble" type="submit" form="formDouble" value="Submit">Double
+                            </button>
+                        </form>
+                    </foreignObject>
+                </xsl:when>
+            </xsl:choose>
+        <xsl:choose>
+            <xsl:when test="$state='insurance'">
+                <!-- wenn wir in der Insurance Phase sind ist dieser Knopf verfügbar -->
+                <foreignObject width="7%" height="13%" x="{$button4x}"
+                               y="{$buttonsy}">
+                    <form xmlns="http://www.w3.org/1999/xhtml" action="/bj/setInsurance/{$gameID}" id="formInsurance"
+                          target="_self">
+                        <button class="buttonInsurance" type="submit" form="formInsurance" value="Submit">Insurance
+                        </button>
+                    </form>
+                </foreignObject>
+            </xsl:when>
+        </xsl:choose>
 
-            <foreignObject width="7%" height="13%" x="{$button1x}"
-                           y="{$buttonsy}">
-                <form xmlns="http://www.w3.org/1999/xhtml" action="/bj/hit/{$gameID}" id="formHit"
-                      target="_self">
-                    <button class="buttonHit" type="submit" form="formHit" value="Submit">Hit
-                    </button>
-                </form>
-            </foreignObject>
-            <foreignObject width="7%" height="13%" x="{$button2x}"
-                           y="{$buttonsy}">
-                <form xmlns="http://www.w3.org/1999/xhtml" action="/bj/stand/{$gameID}" id="formStand"
-                      target="_self">
-                    <button class="buttonStand" type="submit" form="formStand" value="Submit">Stand
-                    </button>
-                </form>
-            </foreignObject>
-            <foreignObject width="7%" height="13%" x="{$button3x}"
-                           y="{$buttonsy}">
-                <form xmlns="http://www.w3.org/1999/xhtml" action="/bj/double/{$gameID}" id="formDouble"
-                      target="_self">
-                    <button class="buttonDouble" type="submit" form="formDouble" value="Submit">Double
-                    </button>
-                </form>
-            </foreignObject>
-            <foreignObject width="7%" height="13%" x="{$button4x}"
-                           y="{$buttonsy}">
-                <form xmlns="http://www.w3.org/1999/xhtml" action="/bj/insurance/{$gameID}" id="formInsurance"
-                      target="_self">
-                    <button class="buttonInsurance" type="submit" form="formInsurance" value="Submit">Insurance
-                    </button>
-                </form>
-            </foreignObject>
-            <foreignObject width="7%" height="13%" x="{$testButton1x}"
+        <foreignObject width="7%" height="13%" x="{$testButton1x}"
                            y="{$testButton1y}">
                 <form xmlns="http://www.w3.org/1999/xhtml" action="/bj/dealOut/{$gameID}" id="formDealOut"
                       target="_self">
