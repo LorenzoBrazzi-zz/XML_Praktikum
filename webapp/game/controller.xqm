@@ -155,7 +155,8 @@ declare
 %rest:path("bj/double/{$gameID}")
 %rest:GET
 function controller:double($gameID as xs:string){
-    player:double($gameID)
+    player:double($gameID),
+    update:output(web:redirect($controller:drawLink))
 };
 
 (:Wenn der Spieler auf den "stand" Button klickt:)
@@ -164,18 +165,22 @@ declare
 %rest:path("bj/stand/{$gameID}")
 %rest:GET
 function controller:stand($gameID as xs:string){
-    player:stand($gameID)
+    player:stand($gameID),
+    update:output(web:redirect($controller:drawLink))
 };
 
 
 (:Wenn der Spieler die zu einsetzenden Chips gewählt und anschließend auf den "einsetzen" Button geklickt hat:)
 declare
 %updating
-%rest:path("bj/setBet/{$gameID}/{$bet}")
+%rest:path("bj/setBet/{$gameID}")
 %rest:GET
-function controller:testSetBet($gameID as xs:string, $bet){
-    player:setBet($gameID, $bet),
-    update:output(web:redirect($controller:drawLink))
+function controller:testSetBet($gameID as xs:string){
+    let $bet := rq:parameter("bet", 0)
+    return (
+        player:setBet($gameID, $bet),
+        update:output(web:redirect($controller:drawLink))
+    )
 };
 
 (:Wenn der Aktive Spieler auf den Insurance Button klickt :)
@@ -214,7 +219,7 @@ declare
 %rest:path("bj/dealerValueTest/{$gameID}")
 %rest:GET
 function controller:dealerValueTest($gameID as xs:string){
-    dealer:calculateDealerValue($gameID)
+    dealer:calculateCardValue($gameID)
 };
 
 declare

@@ -13,7 +13,7 @@ declare
 function dealer:drawCard($gameID as xs:string) {
     let $hand := $dealer:games/game[id = $gameID]/dealer/currentHand
     let $card := game:drawCard($gameID)
-    let $val := dealer:calculateDealerValue($gameID)
+    let $val := dealer:calculateCardValue($gameID)
 
     return (
         if ($val < 17) then (
@@ -24,16 +24,33 @@ function dealer:drawCard($gameID as xs:string) {
     )
 };
 
-declare function dealer:calculateDealerValue($gameID as xs:string) as xs:integer{
-    let $hand := $dealer:games/game[id = $gameID]/dealer/currentHand
-    (:Kopie des Elements um zu folden:)
-    let $h := ( copy $c := $hand
-    modify ()
-    return $c)
-    (:Fold auf alle Karten des Dealers mit der helperFunction:)
-    let $sum := fn:fold-left($h/card, 0, function($acc, $c) {helper:helperSum($acc, $c/value)})
+declare function dealer:calculateCardValue($gameID as xs:string) as xs:integer {
+    let $dealer := $player:games/game[id = $gameID]/dealer
 
-    return $sum
+    let $amoutOfAces := (
+        sum(
+                for $c in $dealer/currentHand/card
+                return (
+                    if ($c/value = 'A') then 1 else 0
+                ))
+    )
+
+    let $valueOfCardsWitoutAces := (
+        sum(
+                for $c in $dealer/currentHand/card
+                return (
+                    if (($c/value = 'B') or ($c/value = 'D') or ($c/value = 'K')) then 10
+                    else if ($c/value = 'A') then 0
+                    else ($c/value)
+                )
+        ))
+
+    let $value := fn:fold-left((1 to $amoutOfAces), $valueOfCardsWitoutAces, function($acc, $c) {
+        if ($acc + 11 > 21) then ($acc + 1) else ($acc + 11)
+    })
+    return (
+        xs:integer($value)
+    )
 };
 
 declare

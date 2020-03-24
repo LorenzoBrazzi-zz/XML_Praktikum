@@ -56,7 +56,8 @@ declare function game:createGame($names as xs:string+, $balances as xs:integer+,
             <players>{$players}</players>
             <activePlayer>{$players[1]/id/text()}</activePlayer>
             <dealer>
-                <currentHand></currentHand>
+                <currentHand>
+                </currentHand>
                 <bj>{fn:false()}</bj>
                 <isInsurance>{fn:false()}</isInsurance>
             </dealer>
@@ -197,14 +198,14 @@ function game:dealOutCards($gameID as xs:string){
             let $second_card := $g/cards/card[12]
             let $second_modified := (
                 <card>
-                    <value>{$second_card/value}</value>
-                    <color>{$second_card/color}</color>
+                    <value>{$second_card/value/text()}</value>
+                    <color>{$second_card/color/text()}</color>
                     <hidden>{fn:true()}</hidden>
                 </card>
             )
             return (
                 insert node $g/cards/card[11] into $dealer/currentHand,
-                insert node $g/cards/card[12] into $dealer/currentHand,
+                insert node $second_modified into $dealer/currentHand,
                 delete node $g/cards/card[11],
                 delete node $g/cards/card[12])
             ) else ()
@@ -228,7 +229,7 @@ declare
 function game:determineWinners($gameID as xs:string) {
     let $players := $game:games/game[id = $gameID]/players
     let $dealer := $game:games/game[id = $gameID]/dealer
-    let $dealerCardsValue := dealer:calculateDealerValue($gameID)
+    let $dealerCardsValue := dealer:calculateCardValue($gameID)
 
 
     for $p in $players
@@ -316,3 +317,12 @@ function game:closeRound($gameID){
     game:evaluateRound($gameID),
     game:resetTable($gameID)
 };
+
+declare
+%updating
+function game:changeState($gameID as xs:string, $nextState as xs:string){
+    let $g := $game:games/game[id = $gameID]
+    return (
+        replace value of node $g/state with $nextState,
+        game:setActivePlayer($gameID)
+    )};

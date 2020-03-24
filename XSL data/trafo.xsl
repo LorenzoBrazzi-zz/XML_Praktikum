@@ -28,6 +28,7 @@
         <xsl:variable name="player4" select="players/player[position = 4]"/>
         <xsl:variable name="player5" select="players/player[position = 5]"/>
         <xsl:variable name="activePlayer" select="activePlayer"/>
+        <xsl:variable name="dealer" select="dealer"/>
         <xsl:variable name="gameID" select="id/text()"/>
 
         <svg width="100%" height="100%" version="1.1" viewBox="0 0 1600 900"
@@ -58,25 +59,25 @@
                     style="fill:none;stroke:white;stroke-width:3"/>
 
             <!-- Aktuelle Handwerte -->
-            <text x="{$player1x}" y="{$p1CurrentHandValueY}" text-anchor="middle" font-family="Algerian" fill="white" >
+            <text x="{$player1x}" y="{$p1CurrentHandValueY}" text-anchor="middle" font-family="Algerian" fill="white">
                 21
             </text>
-            <text x="{$player2x}" y="{$p2CurrentHandValueY}" text-anchor="middle" font-family="Algerian" fill="white" >
+            <text x="{$player2x}" y="{$p2CurrentHandValueY}" text-anchor="middle" font-family="Algerian" fill="white">
                 21
             </text>
-            <text x="{$player3x}" y="{$p3CurrentHandValueY}" text-anchor="middle" font-family="Algerian" fill="white" >
+            <text x="{$player3x}" y="{$p3CurrentHandValueY}" text-anchor="middle" font-family="Algerian" fill="white">
                 21
             </text>
-            <text x="{$player4x}" y="{$p4CurrentHandValueY}" text-anchor="middle" font-family="Algerian" fill="white" >
+            <text x="{$player4x}" y="{$p4CurrentHandValueY}" text-anchor="middle" font-family="Algerian" fill="white">
                 21
             </text>
-            <text x="{$player5x}" y="{$p5CurrentHandValueY}" text-anchor="middle" font-family="Algerian" fill="white" >
+            <text x="{$player5x}" y="{$p5CurrentHandValueY}" text-anchor="middle" font-family="Algerian" fill="white">
                 21
             </text>
 
             <!-- Aktueller Einsatz Dummy -->
             <circle cx="{$p1CurrentBetX}" cy="{$p1CurrentBetY}" r="{$radiusDummyChips}"
-                style="fill:none;stroke:purple;stroke-width:1">
+                    style="fill:none;stroke:purple;stroke-width:1">
                 <xsl:value-of select="$player1/currentBet"/>
             </circle>
             <circle cx="{$p2CurrentBetX}" cy="{$p2CurrentBetY}" r="{$radiusDummyChips}"
@@ -110,6 +111,17 @@
                         <xsl:value-of select="$player1/name"/>
 
                     </text>
+                    <xsl:choose>
+                        <xsl:when test="state = 'bet'">
+                            <foreignObject height="10%" width="10%" x="{$p1CurrentBetX - 50}"
+                                           y="{$p1CurrentBetY + $radiusDummyChips + 10}">
+                                <form xmlns="http://www.w3.org/1999/xhtml" action="/bj/setBet/{$gameID}">
+                                    <input type="number" id="bet" name="bet" placeHolder="set bet"/>
+                                    <input type="submit" value="Set Bet"></input>
+                                </form>
+                            </foreignObject>
+                        </xsl:when>
+                    </xsl:choose>
                 </xsl:when>
                 <xsl:otherwise>
                     <text x="{$player1x}" y="{$player1y + $radiusPlayer + $zeilenAbstand}" font-family="Arial"
@@ -213,7 +225,7 @@
 
             <!-- UI-->
 
-            <foreignObject width="100%" height="100%" x="{$button1x}"
+            <foreignObject width="7%" height="13%" x="{$button1x}"
                            y="{$buttonsy}">
                 <form xmlns="http://www.w3.org/1999/xhtml" action="/bj/hit/{$gameID}" id="formHit"
                       target="_self">
@@ -221,7 +233,7 @@
                     </button>
                 </form>
             </foreignObject>
-            <foreignObject width="100%" height="100%" x="{$button2x}"
+            <foreignObject width="7%" height="13%" x="{$button2x}"
                            y="{$buttonsy}">
                 <form xmlns="http://www.w3.org/1999/xhtml" action="/bj/stand/{$gameID}" id="formStand"
                       target="_self">
@@ -229,7 +241,7 @@
                     </button>
                 </form>
             </foreignObject>
-            <foreignObject width="100%" height="100%" x="{$button3x}"
+            <foreignObject width="7%" height="13%" x="{$button3x}"
                            y="{$buttonsy}">
                 <form xmlns="http://www.w3.org/1999/xhtml" action="/bj/double/{$gameID}" id="formDouble"
                       target="_self">
@@ -237,7 +249,7 @@
                     </button>
                 </form>
             </foreignObject>
-            <foreignObject width="100%" height="100%" x="{$button4x}"
+            <foreignObject width="7%" height="13%" x="{$button4x}"
                            y="{$buttonsy}">
                 <form xmlns="http://www.w3.org/1999/xhtml" action="/bj/insurance/{$gameID}" id="formInsurance"
                       target="_self">
@@ -245,7 +257,7 @@
                     </button>
                 </form>
             </foreignObject>
-            <foreignObject width="100%" height="100%" x="{$testButton1x}"
+            <foreignObject width="7%" height="13%" x="{$testButton1x}"
                            y="{$testButton1y}">
                 <form xmlns="http://www.w3.org/1999/xhtml" action="/bj/dealOut/{$gameID}" id="formDealOut"
                       target="_self">
@@ -279,6 +291,12 @@
                 <g id="CardTemplate">
                     <rect height="{$cardHeight}" width="{$cardWidth}" rx="5" ry="5"
                           style="fill:white;stroke:black;stroke-width:2;opacity:1.0"/>
+                </g>
+
+                <g id="cardBack">
+                    <image xlink:href="https://upload.wikimedia.org/wikipedia/commons/8/87/Card_back_05.svg"
+                           width="{$cardWidth}"
+                           height="{$cardHeight}" x="{$karteX}" y="{$karteY}"/>
                 </g>
                 <!-- Symbole für obere und untere Kartenecke -->
 
@@ -924,6 +942,67 @@
 
 
             </defs>
+
+            <!-- Kartenanzeige -->
+
+            <!-- Dealer -->
+
+            <xsl:for-each select="$dealer/currentHand/card">
+                <xsl:variable name="value" select="value"/>
+                <xsl:variable name="color" select="color"/>
+                <xsl:variable name="counter" select="position()-1"/>
+                <xsl:variable name="hidden" select="hidden"/>
+
+                <use x="{$cardDealerx + $counter* $cardAbstand}" y="{$cardDealery}" xlink:href="#CardTemplate"/>
+
+                <xsl:choose>
+                    <xsl:when test="$hidden = 'true'">
+                        <use x="{$cardDealerx + $counter * $cardAbstand}" y="{$cardDealery}" xlink:href="#cardBack"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:choose>
+                            <xsl:when test="$value = 'K' or $value = 'Q' or $value = 'B'">
+                                <use x="{$cardDealerx + $counter * $cardAbstand}" y="{$cardDealery}"
+                                     xlink:href="#{$color}-{$value}"/>
+                            </xsl:when>
+                            <xsl:when test="$color = 'Spade'">
+                                <use x="{$cardDealerx + $counter * $cardAbstand}" y="{$cardDealery}"
+                                     xlink:href="#{$color}-{$value}"/>
+                                <use x="{$cardDealerx + $counter * $cardAbstand}" y="{$cardDealery}"
+                                     xlink:href="#black-{$value}"/>
+                                <use x="{$cardDealerx + $counter * $cardAbstand}" y="{$cardDealery}"
+                                     xlink:href="#Spade_mini"/>
+                            </xsl:when>
+                            <xsl:when test="$color = 'Club'">
+                                <use x="{$cardDealerx + $counter * $cardAbstand}" y="{$cardDealery}"
+                                     xlink:href="#{$color}-{$value}"/>
+                                <use x="{$cardDealerx + $counter * $cardAbstand}" y="{$cardDealery}"
+                                     xlink:href="#black-{$value}"/>
+                                <use x="{$cardDealerx + $counter * $cardAbstand}" y="{$cardDealery}"
+                                     xlink:href="#Club_mini"/>
+                            </xsl:when>
+                            <xsl:when test="$color = 'Heart'">
+                                <use x="{$cardDealerx + $counter * $cardAbstand}" y="{$cardDealery}"
+                                     xlink:href="#{$color}-{$value}"/>
+                                <use x="{$cardDealerx + $counter * $cardAbstand}" y="{$cardDealery}"
+                                     xlink:href="#red-{$value}"/>
+                                <use x="{$cardDealerx + $counter * $cardAbstand}" y="{$cardDealery}"
+                                     xlink:href="#Heart_mini"/>
+                            </xsl:when>
+                            <xsl:when test="$color = 'Diamond'">
+                                <use x="{$cardDealerx + $counter * $cardAbstand}" y="{$cardDealery}"
+                                     xlink:href="#{$color}-{$value}"/>
+                                <use x="{$cardDealerx + $counter * $cardAbstand}" y="{$cardDealery}"
+                                     xlink:href="#red-{$value}"/>
+                                <use x="{$cardDealerx + $counter * $cardAbstand}" y="{$cardDealery}"
+                                     xlink:href="#Diamond_mini"/>
+                            </xsl:when>                        </xsl:choose>
+                    </xsl:otherwise>
+                </xsl:choose>
+
+
+            </xsl:for-each>
+
             <!--Spieler 1 -->
             <xsl:for-each select="$player1/currentHand/cards/card">
                 <xsl:variable name="value" select="value"/>

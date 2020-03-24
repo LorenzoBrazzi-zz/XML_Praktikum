@@ -55,12 +55,13 @@ function player:setBet($gameID as xs:string, $bet as xs:integer) {
     insert node $err as first into $player:games/game[id = $gameID]/events
     )
     else (
-        if ($activePlayerNewBalance < 5) then ( delete node $path)
+        if ($activePlayerNewBalance <= 0) then ( delete node $path)
         else (
             replace value of node $path/currentBet with xs:integer($bet),
             replace value of node $path/balance with $activePlayerNewBalance
         ),
-        game:setActivePlayer($gameID)
+        if (game:isRoundCompleted($gameID)) then (game:changeState($gameID, 'play')) else (
+            game:setActivePlayer($gameID))
     )
     )
 };
@@ -70,7 +71,8 @@ function player:setBet($gameID as xs:string, $bet as xs:integer) {
 declare
 %updating
 function player:stand($gameID as xs:string){
-    game:setActivePlayer($gameID)
+    if (game:isRoundCompleted($gameID)) then (game:changeState($gameID, 'evaluate')) else (
+        game:setActivePlayer($gameID))
 };
 
 declare
@@ -78,26 +80,35 @@ declare
 function player:double($gameID as xs:string) {
 
     let $activePlayer := $player:games/game[id = $gameID]/activePlayer
-    let $currentBet := $player:games/game[id = $gameID]/players/player[id = $activePlayer]/currentBet
+    let $p := $player:games/game[id = $gameID]/players/player[id = $activePlayer]
+    let $currentBet := $p/currentBet
     let $newBet := $currentBet * 2
     let $maxBet := $player:games/game[id = $gameID]/maxBet
     let $err := <event>
         <time>{helper:currentTime()}</time>
         <type>error</type>
         <text>Fehler beim Einsatz!!! Der Einsatz darf
-            deinen aktuellen Kontostand nicht übersteigen! Maximaleinsatz wird ausgewählt</text>
+            deinen aktuellen Kontostand/Maximaleinsatz nicht übersteigen! Maximaleinsatz/Kontomaximum wird ausgewählt</text>
     </event>
     return (
     (: Falls der vedoppelte Einsatz höher ist als maxBet dann setze einfach den Einsatz auf maxBet :)
-    if ($newBet > $maxBet) then (
+    if ($newBet > $p/balance) then (
+        insert node $err as first into $player:games/game[id = $gameID]/events,
+        replace value of node $currentBet with $p/balance + $currentBet,
+        replace value of node $p/balance with 0,
+        player:hit($gameID)
+    )
+    else if ($newBet > $maxBet) then (
+        insert node $err as first into $player:games/game[id = $gameID]/events,
         replace value of node $currentBet with $maxBet,
+        replace value of node $p/balance with $p/balance - $maxBet,
         player:hit($gameID)
     )
     else (
-        replace value of node $currentBet with $newBet,
-        insert node $err as first into $player:games/game[id = $gameID]/events,
-        player:hit($gameID)
-    )
+            replace value of node $currentBet with $newBet,
+            replace value of node $p/balance with $p/balance - $currentBet,
+            player:hit($gameID)
+        )
     )
 };
 
@@ -142,47 +153,6 @@ function player:setInsurance($gameID as xs:string){
         replace value of node $path/insurance with fn:true()
     )
 };
-
-(:
-Berechnet den Int Value der Chips Objekte um für die anderen Funktionen die Rechnung zu erleichtern.
-Der Spieler wählt sozusagen seine zu setzenden Chips einfach aus, und im Backend wird dies automatisch zu einem Int
-konvetiert und so auch dann angezeigt.
-:)
-declare
-%private
-function player:calculateChipsValue($chips as element(chips)){
-    let $result := fn:sum(
-            for $c in $chips/chip/value
-            return $c
-    )
-    return $result
-};
-
-(:Berechnet den Blattscore des Spielers:)
-declare function player:calculateCardValue($gameID as xs:string) as xs:integer{
-    let $playerID := $player:games/game[id = $gameID]/activePlayer
-    let $hand := $player:games/game[id = $gameID]/players/player[id = $playerID]/currentHand/cards/*
-
-    return fn:sum(
-            for $c in $hand/value
-            return $c
-    )
-};
-
-(:Berechnet den Blattscore des Spielers:)
-(:Werte zunächst ohne Ass berechnen und dann die richtige Ass Werte zuweisen
-  Anzahl der Ass Karten bestimmen und abschließend score anpassen!:)
-(:declare function player:calculateCardValuePlayers($gameID as xs:string, $playerID as xs:string) as xs:integer{
-    let $hand := $player:games/game[id = $gameID]/players/player[id = $playerID]/currentHand/cards
-    (:Kopie des Elements um zu folden:)
-    let $h := ( copy $c := $hand
-    modify ()
-    return $c)
-    (:Fold auf alle Karten des Spielers mit der helperFunction:)
-    let $sum := fn:fold-left($h/card, 0, function($acc, $c) {helper:helperSum($acc, $c/value)})
-
-    return $sum
-};:)
 
 declare function player:calculateCardValuePlayers($gameID as xs:string, $playerID as xs:string) as xs:integer {
     let $player := $player:games/game[id = $gameID]/players/player[id = $playerID]
