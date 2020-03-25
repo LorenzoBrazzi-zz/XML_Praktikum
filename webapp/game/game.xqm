@@ -98,8 +98,7 @@ function game:setActivePlayer($gameID as xs:string){
             if ($state = 'play') then (
                 game:changeState($gameID, 'evaluate'),
                 replace value of node $oldPlayerID with $players/player[1]/id/text(),
-                game:determineWinners($gameID),
-                game:evaluateRound($gameID)
+                game:determineWinners($gameID)
             ) else (replace value of node $oldPlayerID with $players/player[1]/id/text()))
     )
 
@@ -310,28 +309,24 @@ function game:playerHasInsurance($gameID as xs:string, $playerID as xs:string) a
 
 declare
 %updating
-function game:evaluateRound($gameID as xs:string) {
+function game:evaluateRound($gameID as xs:string, $playerID as xs:string) {
     let $players := $game:games/game[id = $gameID]/players
-    let $insurancePossible := $game:games/game[id = $gameID]/dealer/isInsurance
+    let $p := $players/player[id = $playerID]
+    let $playerWon := $p/won
 
-    for $p in $players/player
-        return (
-        if(game:playerWon($gameID, $p/id/text())) then (
-         player:payoutBalanceNormal($gameID, $p/id/text())) else ())
-        (:)let $playerWon := $p/won
-            return (
-            (:Bei Unentschieden wird gleich ausgezahlt:)
-            if ($playerWon/@draw = "true") then (
-                player:payoutDraw($gameID, $p/id/text())
-            ) else if (game:playerWon($gameID, $p/id/text())) then (
-                player:payoutBalanceNormal($gameID, $p/id/text)) else ()):)
-                (:)) else if ((game:isInsurancePossible($gameID)) and (game:playerHasInsurance($gameID, $p/id/text()))) then (
-                player:payoutInsurance($gameID, $p/id/text())
-            (:Da das erste if ein Unentschieden ausschließt, wird hier nur auf ein Sieg geachtet:)
-            ) else if ($playerWon/@bj = "true") then (
-                player:payoutBJ($gameID, $p/id/text())
-            ) else ()
-            )):)
+    return (
+    (:Bei Unentschieden wird gleich ausgezahlt:)
+
+    if ($playerWon/@draw = "true") then (
+        player:payoutDraw($gameID, $playerID)
+    ) else if (game:playerWon($gameID, $playerID)) then (
+        player:payoutBalanceNormal($gameID, $playerID)
+    ) else if ((game:isInsurancePossible($gameID)) and (game:playerHasInsurance($gameID, $playerID))) then (
+        player:payoutInsurance($gameID, $playerID)
+    (:Da das erste if ein Unentschieden ausschließt, wird hier nur auf ein Sieg geachtet:)
+    ) else if ($playerWon/@bj = "true") then (
+        player:payoutBJ($gameID, $playerID)) else ()
+    )
 };
 
 
@@ -354,7 +349,6 @@ declare
 %updating
 function game:closeRound($gameID){
     game:determineWinners($gameID),
-    game:evaluateRound($gameID),
     game:resetTable($gameID)
 };
 

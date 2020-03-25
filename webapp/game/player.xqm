@@ -217,6 +217,18 @@ function player:drawCards($gameID as xs:string, $playerID as xs:string) {
     delete node $deck/card[1])
 };
 
+declare
+%updating
+function player:setContinue($gameID as xs:string, $continue as xs:boolean){
+    let $activePlayerID := $player:games/game[id = $gameID]/activePlayer
+    let $player := $player:games/game[id = $gameID]/players/player[id = $activePlayerID]
+    return (
+        game:evaluateRound($gameID, $activePlayerID),
+        if ($continue) then () else (delete node $player),
+        game:setActivePlayer($gameID)
+    )
+
+};
 
 declare
 %updating

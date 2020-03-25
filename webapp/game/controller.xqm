@@ -200,8 +200,17 @@ function controller:testWin($gameID as xs:string){
     game:determineWinners($gameID)
 };
 
-
-
+declare
+%updating
+%rest:path("bj/evaluate/{$gameID}")
+%rest:GET
+function controller:testEvaluation($gameID as xs:string) {
+    (:Dummy weil es sonst nicht return:)let $x := 0
+    return (
+        player:setContinue($gameID, fn:true()),
+        update:output(web:redirect($controller:drawLink))
+    )
+};
 
 (:https://www.youtube.com/watch?v=dbxBJWQPqZY hat gute buttons zum kopieren, kartensummen auch ganz cooles feature,
 win lose draw Symbole auch implementieren wie im Video,
