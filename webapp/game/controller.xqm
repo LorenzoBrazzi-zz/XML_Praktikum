@@ -194,11 +194,14 @@ function controller:setInsurance($gameID as xs:string){
 
 declare
 %updating
-%rest:path("bj/win/{$gameID}/{$playerID}")
+%rest:path("bj/win/{$gameID}")
 %rest:GET
-function controller:testWin($gameID as xs:string, $playerID as xs:string){
-    player:payoutBalanceNormal($gameID, $playerID)
+function controller:testWin($gameID as xs:string){
+    game:determineWinners($gameID)
 };
+
+
+
 
 (:https://www.youtube.com/watch?v=dbxBJWQPqZY hat gute buttons zum kopieren, kartensummen auch ganz cooles feature,
 win lose draw Symbole auch implementieren wie im Video,
@@ -231,4 +234,3 @@ function controller:evalRound($gameID){
     game:closeRound($gameID),
     update:output(web:redirect($controller:drawLink))
 };
-

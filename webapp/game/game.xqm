@@ -7,6 +7,7 @@ import module namespace dealer = "bj/dealer" at "dealer.xqm";
 import module namespace chip = "bj/chip" at "chip.xqm";
 import module namespace card = "bj/card" at "card.xqm";
 import module namespace helper = "bj/helper" at "helper.xqm";
+import module namespace controller = "bj/controller" at "controller.xqm";
 
 (: Hiermit generieren wir die IDs sowohl der Spiele als auch der Spieler :)
 declare namespace uuid = "java:java.util.UUID";
@@ -86,21 +87,32 @@ declare
 %updating
 function game:setActivePlayer($gameID as xs:string){
     let $oldPlayerID := $game:games/game[id = $gameID]/activePlayer
+    let $state := $game:games/game[id = $gameID]/state
     let $oldPlayer := $game:games/game[id = $gameID]/players/player[id = $oldPlayerID]
     let $players := $game:games/game[id = $gameID]/players
+    let $count := fn:count($players/player)
     let $newPlayerID := $players/$oldPlayer/following::*[1]/id/text()
     return (
-        if (fn:not($oldPlayer/position = 5)) then (
-            if (fn:empty($newPlayerID)) then (
-                replace value of node $oldPlayerID with $players/player[1]/id/text()
-            ) else (replace value of node $oldPlayerID with $newPlayerID))
-        else (dealer:turnCard($gameID),
-        game:evaluateRound($gameID))
+        if (fn:not($oldPlayer/position = $count)) then (replace value of node $oldPlayerID with $newPlayerID)
+        else (
+            if ($state = 'play') then (
+                game:changeState($gameID, 'evaluate'),
+                replace value of node $oldPlayerID with $players/player[1]/id/text(),
+                game:determineWinners($gameID),
+                game:evaluateRound($gameID)
+            ) else (replace value of node $oldPlayerID with $players/player[1]/id/text()))
     )
 
 (: WIR MÜSSEN NOCH DEN FALL ABCHECNKEN WENN KEIN SPIELER MEHR DA IST ALSO WENN activePlayer = ""
     --> Wir haben doch die Position IDs mit Zahlen von 1 bis 5 gemacht, somit können wir einfach den Spieler dann
     aufrufen, der an Pos 1 sitzt:)
+};
+
+declare
+%updating
+function game:evaluate($gameID as xs:string) {
+    let $x := 0
+    return (game:determineWinners($gameID))
 };
 
 declare function game:getPlayerNames($gameID as xs:string){
@@ -232,41 +244,68 @@ function game:determineWinners($gameID as xs:string) {
     let $dealer := $game:games/game[id = $gameID]/dealer
     let $dealerCardsValue := dealer:calculateCardValue($gameID)
 
-    for $p in $players
+    for $p in $players/player
     return (
     (: Falls der Dealer einen Blackjack hat, verlieren automatisch alle Spieler die keinen Blackjack haben:)
-    if ($dealer/isInsurance) then (
-        let $numberOfCards := fn:count($p/currentHand/card)
+    if (game:dealerHasBJ($gameID)) then (
+        let $numberOfCards := fn:count($p/currentHand/cards/card)
         let $playerCardValue := player:calculateCardValuePlayers($gameID, $p/id/text())
         return (
-            if (not(($playerCardValue = 21) and ($numberOfCards = 2))) then (
+            if (fn:not(($playerCardValue = 21) and ($numberOfCards = 2))) then (
                 replace value of node $p/won with fn:false()
             )
             else (
                 replace node $p/won with (
                     <won bj="true" draw="true">{fn:true()}</won>
                 )
-            )))
+            ))
     (:Falls der Dealer keinen Blackjack hat:)
-    else (
-        let $numberOfCards := fn:count($p/currentHand/card)
+    ) else (
+      let $numberOfCards := fn:count($p/currentHand/cards/card)
         let $playerCardValue := player:calculateCardValuePlayers($gameID, $p/id/text())
         return (
         (:Spieler hat einen Blackjack, Sieg weil die Funktionsstelle nur erreicht, wenn der Dealer kein Blackjack:)
         if (($playerCardValue = 21) and ($numberOfCards = 2)) then (
             replace node $p/won with (
-                <won bj="true">{fn:true()}</won>
+                <won bj="true" draw="false">{fn:true()}</won>
             )
         (:Bedingungen bei dem der Spieler verliert:)
-        ) else if (($playerCardValue) > 21 or ($dealerCardsValue <= $playerCardValue))
+        ) else if (($playerCardValue) > 21 or ($dealerCardsValue >= $playerCardValue))
         then ( replace value of node $p/won with fn:false())
         else (
             (:Letzte möglicher Ausgang ist, dass der Spieler gewinnt ohne einen Blackjack zu haben:)
             replace value of node $p/won with fn:true()
             )
         )
-    )
-    )
+    ))
+};
+
+declare
+%private
+function game:dealerHasBJ($gameID as xs:string) as xs:boolean {
+    let $dealer := $game:games/game[id = $gameID]/dealer
+    return $dealer/bj
+};
+
+declare
+%private
+function game:isInsurancePossible($gameID as xs:string) as xs:boolean {
+    let $dealer := $game:games/game[id = $gameID]/dealer
+    return $dealer/isInsurance
+};
+
+declare
+%private
+function game:playerWon($gameID as xs:string, $playerID as xs:string) as xs:boolean {
+    let $player := $game:games/game[id = $gameID]/players/player[id = $playerID]
+    return $player/won
+};
+
+declare
+%private
+function game:playerHasInsurance($gameID as xs:string, $playerID as xs:string) as xs:boolean {
+    let $player := $game:games/game[id = $gameID]/players/player[id = $playerID]
+    return $player/insurance
 };
 
 declare
@@ -275,25 +314,26 @@ function game:evaluateRound($gameID as xs:string) {
     let $players := $game:games/game[id = $gameID]/players
     let $insurancePossible := $game:games/game[id = $gameID]/dealer/isInsurance
 
-    for $p in $players
-    return (
-        let $playerWon := $p/won
+    for $p in $players/player
         return (
-        (:Bei Unentschieden wird gleich ausgezahlt:)
-        if ($playerWon/@draw = "true") then (
-            player:payoutDraw($gameID, $p/id/text())
-        ) else if ($playerWon) then (
-            player:payoutBalanceNormal($gameID, $p/id/text())
-        ) else if (($insurancePossible) and ($p/insurance)) then (
-            player:payoutInsurance($gameID, $p/id/text())
-        (:Da das erste if ein Unentschieden ausschließt, wird hier nur auf ein Sieg geachtet:)
-        ) else if ($playerWon/@bj = "true") then (
-            player:payoutBJ($gameID, $p/id/text())
-        ) else ()
-
-        )
-    )
+        if(game:playerWon($gameID, $p/id/text())) then (
+         player:payoutBalanceNormal($gameID, $p/id/text())) else ())
+        (:)let $playerWon := $p/won
+            return (
+            (:Bei Unentschieden wird gleich ausgezahlt:)
+            if ($playerWon/@draw = "true") then (
+                player:payoutDraw($gameID, $p/id/text())
+            ) else if (game:playerWon($gameID, $p/id/text())) then (
+                player:payoutBalanceNormal($gameID, $p/id/text)) else ()):)
+                (:)) else if ((game:isInsurancePossible($gameID)) and (game:playerHasInsurance($gameID, $p/id/text()))) then (
+                player:payoutInsurance($gameID, $p/id/text())
+            (:Da das erste if ein Unentschieden ausschließt, wird hier nur auf ein Sieg geachtet:)
+            ) else if ($playerWon/@bj = "true") then (
+                player:payoutBJ($gameID, $p/id/text())
+            ) else ()
+            )):)
 };
+
 
 declare
 %updating
@@ -323,6 +363,5 @@ declare
 function game:changeState($gameID as xs:string, $nextState as xs:string){
     let $g := $game:games/game[id = $gameID]
     return (
-        replace value of node $g/state with $nextState,
-        game:setActivePlayer($gameID)
+        replace value of node $g/state with $nextState
     )};

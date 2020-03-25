@@ -32,6 +32,12 @@
         <xsl:variable name="gameID" select="id/text()"/>
         <xsl:variable name="state" select="state"/>
 
+        <xsl:choose>
+            <xsl:when test="$state = 'evaluate'">
+
+            </xsl:when>
+        </xsl:choose>
+
         <svg width="100%" height="100%" version="1.1" viewBox="0 0 1600 900"
              xmlns="http://www.w3.org/2000/svg">
 

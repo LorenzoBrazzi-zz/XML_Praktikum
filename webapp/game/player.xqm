@@ -22,7 +22,7 @@ declare function player:createPlayer($id as xs:string, $currentHand as element(c
         <currentBet>{$bet}</currentBet>
         <insurance>{$insurance}</insurance>
         <position>{$position}</position>
-        <won bj="false" draw="false"></won>
+        <won bj="false" draw="false">{fn:false()}</won>
     </player>
 };
 
@@ -71,8 +71,7 @@ function player:setBet($gameID as xs:string, $bet as xs:integer) {
 declare
 %updating
 function player:stand($gameID as xs:string){
-    if (game:isRoundCompleted($gameID)) then (game:changeState($gameID, 'evaluate')) else (
-        game:setActivePlayer($gameID))
+    game:setActivePlayer($gameID)
 };
 
 declare
@@ -128,12 +127,20 @@ function player:hit($gameID as xs:string){
         <type>protocol</type>
         <text>{$name} hat gehittet!</text>
     </event>
+    let $win := <event>
+        <time>{helper:currentTime()}</time>
+        <type>protocol</type>
+        <text>{$name} hat 21 erreicht!</text>
+    </event>
     (:Wenn Aktiver Spieler mehr als 21 Scorerpunkte hat, dann kann er folglich keine weiteren Karten mehr ziehen, da
 er schließlich schon verloren hat. Demnach muss der nöchste activePlayer gesetted werden!:)
     return(
         if ($score > 21) then (
             insert node $err as first into $player:games/game[id = $gameID]/events,
             game:setActivePlayer($gameID)
+        )
+        else if ($score = 21) then (
+            insert node $win as first into $player:games/game[id = $gameID]/events
         )
         (:Wenn er Hitted, dann erhält der aktiveSpieler ganz einfach ne neue Karte. Jetzt kann er wieder einen Knopf seiner
     Wahl drücken.:)
