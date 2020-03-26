@@ -5,6 +5,7 @@ import module namespace chip = "bj/chip" at "chip.xqm";
 import module namespace card = "bj/card" at "card.xqm";
 import module namespace game = "bj/game" at "game.xqm";
 import module namespace helper = "bj/helper" at "helper.xqm";
+import module namespace dealer = "bj/dealer" at "dealer.xqm";
 
 declare variable $player:games := db:open("games")/games;
 
@@ -61,7 +62,7 @@ function player:setBet($gameID as xs:string, $bet as xs:integer) {
             replace value of node $path/currentBet with xs:integer($bet),
             replace value of node $path/balance with $activePlayerNewBalance
         ),
-        if (game:isRoundCompleted($gameID)) then (game:changeState($gameID, 'play'),game:dealOutCards($gameID), game:setActivePlayer($gameID)) else (game:setActivePlayer($gameID))
+        if (game:isRoundCompleted($gameID)) then (game:changeState($gameID, 'play'), game:dealOutCards($gameID), game:setActivePlayer($gameID)) else (game:setActivePlayer($gameID))
     )
     )
 };
@@ -134,7 +135,7 @@ function player:hit($gameID as xs:string){
     </event>
     (:Wenn Aktiver Spieler mehr als 21 Scorerpunkte hat, dann kann er folglich keine weiteren Karten mehr ziehen, da
 er schließlich schon verloren hat. Demnach muss der nöchste activePlayer gesetted werden!:)
-    return(
+    return (
         if ($score > 21) then (
             insert node $err as first into $player:games/game[id = $gameID]/events,
             game:setActivePlayer($gameID)
@@ -145,9 +146,9 @@ er schließlich schon verloren hat. Demnach muss der nöchste activePlayer geset
         (:Wenn er Hitted, dann erhält der aktiveSpieler ganz einfach ne neue Karte. Jetzt kann er wieder einen Knopf seiner
     Wahl drücken.:)
         else (
-            insert node $prot as first into $player:games/game[id = $gameID]/events,
-            player:drawCard($gameID)
-        ))
+                insert node $prot as first into $player:games/game[id = $gameID]/events,
+                player:drawCard($gameID)
+            ))
 };
 
 declare
@@ -197,7 +198,7 @@ function player:drawCard($gameID as xs:string) {
     let $playerID := $player:games/game[id = $gameID]/activePlayer
     let $player := $player:games/game[id = $gameID]/players/player[id = $playerID]
     let $hand := $player/currentHand/cards
-    let $card := game:drawCard($gameID)
+    let $card := game:drawCard($gameID, 1)
 
     return (
         insert node $card into $hand,
@@ -267,5 +268,55 @@ function player:payoutDraw($gameID as xs:string, $playerID as xs:string){
     let $newBalance := $player/balance + xs:integer($player/currentBet)
     return (
         replace value of node $player/balance with $newBalance
+    )
+};
+
+declare
+%updating
+function player:setResult($gameID as xs:string) {
+    let $players := $game:games/game[id = $gameID]/players
+    let $activePlayer := $player:games/game[id = $gameID]/activePlayer
+    let $p := $player:games/game[id = $gameID]/players/player[id = $activePlayer]
+    let $dealerCardsValue := dealer:calculateCardValue($gameID)
+
+    return (
+        (: Falls der Dealer einen Blackjack hat, verlieren automatisch alle Spieler die keinen Blackjack haben:)
+        if (game:dealerHasBJ($gameID)) then (
+            let $numberOfCards := fn:count($p/currentHand/cards/card)
+            let $playerCardValue := player:calculateCardValuePlayers($gameID, $p/id/text())
+            return (
+                if (fn:not(($playerCardValue = 21) and ($numberOfCards = 2))) then (
+                    replace value of node $p/won with fn:false()
+                )
+                else (
+                    replace node $p/won with (
+                        <won bj="true" draw="true">{fn:true()}</won>
+                    )
+                ))
+        (:Falls der Dealer keinen Blackjack hat:)
+        ) else (
+            let $numberOfCards := fn:count($p/currentHand/cards/card)
+            let $playerCardValue := player:calculateCardValuePlayers($gameID, $p/id/text())
+            return (
+            (:Spieler hat einen Blackjack, Sieg weil die Funktionsstelle nur erreicht, wenn der Dealer kein Blackjack:)
+            if (($playerCardValue = 21) and ($numberOfCards = 2)) then (
+                replace node $p/won with (
+                    <won bj="true" draw="false">{fn:true()}</won>
+                )
+            )
+            (:Dealer hat über 21:)
+            else if ($dealerCardsValue > 21 and $playerCardValue <= 21) then (
+                replace value of node $p/won with fn:true()
+            )
+            (:Spieler verliert, über 21 oder weniger als Dealer:)
+            else if (($playerCardValue) > 21 or (($dealerCardsValue >= $playerCardValue) and ($dealerCardsValue <= 21)))
+                then ( replace value of node $p/won with fn:false())
+                else (
+                    (:Letzte möglicher Ausgang ist, dass der Spieler gewinnt ohne einen Blackjack zu haben:)
+                    replace value of node $p/won with fn:true()
+                    )
+            )
+        ),
+        game:setActivePlayer($gameID)
     )
 };

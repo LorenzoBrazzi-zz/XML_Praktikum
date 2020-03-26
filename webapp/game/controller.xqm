@@ -202,12 +202,24 @@ function controller:testWin($gameID as xs:string){
 
 declare
 %updating
-%rest:path("bj/evaluate/{$gameID}/{$continue}")
+%rest:path("bj/continue/{$gameID}/{$continue}")
 %rest:GET
-function controller:testEvaluation($gameID as xs:string, $continue as xs:boolean) {
+function controller:continue($gameID as xs:string, $continue as xs:boolean) {
     (:Dummy weil es sonst nicht return:)let $x := 0
     return (
         player:setContinue($gameID, $continue),
+        update:output(web:redirect($controller:drawLink))
+    )
+};
+
+declare
+%updating
+%rest:path("bj/evaluate/{$gameID}")
+%rest:GET
+function controller:evaluate($gameID as xs:string) {
+(:Dummy weil es sonst nicht return:)let $x := 0
+    return (
+        player:setResult($gameID),
         update:output(web:redirect($controller:drawLink))
     )
 };
@@ -242,4 +254,15 @@ declare
 function controller:evalRound($gameID){
     game:closeRound($gameID),
     update:output(web:redirect($controller:drawLink))
+};
+
+declare
+%rest:path("bj/dealerDrawTest/{$gameID}")
+%rest:GET
+function controller:dealerDrawTest($gameID){
+    <div>
+    <div>{dealer:newCardValue(game:getDeck($gameID)/card[1], dealer:calculateCardValue($gameID))}</div>
+    <div>{dealer:calculateCardValue($gameID)}</div>
+    <div>{dealer:numberofDrawingCard($gameID, dealer:calculateCardValue($gameID), 0)}</div>
+    </div>
 };

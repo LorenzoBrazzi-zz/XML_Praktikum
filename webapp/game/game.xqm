@@ -4,15 +4,12 @@ xquery version "3.0";
 module namespace game = "bj/game";
 import module namespace player = "bj/player" at "player.xqm";
 import module namespace dealer = "bj/dealer" at "dealer.xqm";
-import module namespace chip = "bj/chip" at "chip.xqm";
 import module namespace card = "bj/card" at "card.xqm";
 import module namespace helper = "bj/helper" at "helper.xqm";
-import module namespace controller = "bj/controller" at "controller.xqm";
 
 (: Hiermit generieren wir die IDs sowohl der Spiele als auch der Spieler :)
 declare namespace uuid = "java:java.util.UUID";
 declare namespace random = "http://basex.org/modules/random";
-declare namespace update = "http://basex.org/modules/update";
 
 declare variable $game:games := db:open("games")/games;
 declare variable $game:d := game:shuffleDeck();
@@ -96,10 +93,22 @@ function game:setActivePlayer($gameID as xs:string){
         if (fn:not($oldPlayer/position = $count)) then (replace value of node $oldPlayerID with $newPlayerID)
         else (
             if ($state = 'play') then (
+                dealer:play($gameID),
                 game:changeState($gameID, 'evaluate'),
-                replace value of node $oldPlayerID with $players/player[1]/id/text(),
-                game:determineWinners($gameID)
-            ) else (replace value of node $oldPlayerID with $players/player[1]/id/text()))
+                replace value of node $oldPlayerID with $players/player[1]/id/text()
+            )
+            else if ($state = "evaluate") then (
+                game:changeState($gameID, 'continue'),
+                replace value of node $oldPlayerID with $players/player[1]/id/text()
+            )
+            else if ($state = "continue") then (
+                    game:resetTable($gameID),
+                    game:changeState($gameID, 'bet'),
+                    replace value of node $oldPlayerID with $players/player[1]/id/text()
+                )
+
+            else (replace value of node $oldPlayerID with $players/player[1]/id/text())
+        )
     )
 
 (: WIR MÜSSEN NOCH DEN FALL ABCHECNKEN WENN KEIN SPIELER MEHR DA IST ALSO WENN activePlayer = ""
@@ -169,10 +178,10 @@ declare function game:getDeck($gameID as xs:string) as element(cards){
 };
 
 (:Funktion für Spieler und Dealer um eine Karte zu ziehen und zugleich die gezogene Karte aus dem Deck Stack
-zu entfernen:)
-declare function game:drawCard($gameID as xs:string) as element(card){
+zu entfernen, Der index ist für den Dealer, default = 1:)
+declare function game:drawCard($gameID as xs:string, $index as xs:integer) as element(card){
     let $deck := game:getDeck($gameID)
-    let $card := $deck/card[1]
+    let $card := $deck/card[$index]
 
     return $card
 };
@@ -241,8 +250,9 @@ declare
 function game:determineWinners($gameID as xs:string) {
     let $players := $game:games/game[id = $gameID]/players
     let $dealer := $game:games/game[id = $gameID]/dealer
-    let $dealerCardsValue := dealer:calculateCardValue($gameID)
 
+
+    let $dealerCardsValue := dealer:calculateCardValue($gameID)
     for $p in $players/player
     return (
     (: Falls der Dealer einen Blackjack hat, verlieren automatisch alle Spieler die keinen Blackjack haben:)
@@ -260,7 +270,7 @@ function game:determineWinners($gameID as xs:string) {
             ))
     (:Falls der Dealer keinen Blackjack hat:)
     ) else (
-      let $numberOfCards := fn:count($p/currentHand/cards/card)
+        let $numberOfCards := fn:count($p/currentHand/cards/card)
         let $playerCardValue := player:calculateCardValuePlayers($gameID, $p/id/text())
         return (
         (:Spieler hat einen Blackjack, Sieg weil die Funktionsstelle nur erreicht, wenn der Dealer kein Blackjack:)
@@ -268,20 +278,23 @@ function game:determineWinners($gameID as xs:string) {
             replace node $p/won with (
                 <won bj="true" draw="false">{fn:true()}</won>
             )
-        (:Bedingungen bei dem der Spieler verliert:)
-        ) else if (($playerCardValue) > 21 or ($dealerCardsValue >= $playerCardValue))
-        then ( replace value of node $p/won with fn:false())
-        else (
-            (:Letzte möglicher Ausgang ist, dass der Spieler gewinnt ohne einen Blackjack zu haben:)
+        )
+        (:Dealer hat über 21:)
+        else if ($dealerCardsValue > 21 and $playerCardValue <= 21) then (
             replace value of node $p/won with fn:true()
-            )
+        )
+        (:Spieler verliert, über 21 oder weniger als Dealer:)
+        else if (($playerCardValue) > 21 or (($dealerCardsValue >= $playerCardValue) and ($dealerCardsValue <= 21)))
+            then ( replace value of node $p/won with fn:false())
+            else (
+                (:Letzte möglicher Ausgang ist, dass der Spieler gewinnt ohne einen Blackjack zu haben:)
+                replace value of node $p/won with fn:true()
+                )
         )
     ))
 };
 
-declare
-%private
-function game:dealerHasBJ($gameID as xs:string) as xs:boolean {
+declare function game:dealerHasBJ($gameID as xs:string) as xs:boolean {
     let $dealer := $game:games/game[id = $gameID]/dealer
     return $dealer/bj
 };
@@ -335,11 +348,14 @@ declare
 function game:resetTable($gameID){
     let $game := $game:games/game[id = $gameID]
     let $deck := game:shuffleDeck()
+    let $dealer := $game:games/game[id = $gameID]/dealer
     return (
         for $p in $game/players/player
         return (
-            replace node $p/currentHand/cards with <cards></cards>
+            replace node $p/currentHand/cards with <cards></cards>,
+            replace node $p/won with <won bj="false" draw="false">{fn:false()}</won>
         ),
+        replace node $dealer/currentHand with <currentHand></currentHand>,
         replace node $game/cards with $deck
     )
 

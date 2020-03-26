@@ -8,19 +8,14 @@ import module namespace helper = "bj/helper" at "helper.xqm";
 
 declare variable $dealer:games := db:open("games")/games;
 
-declare
-%updating
-function dealer:drawCard($gameID as xs:string) {
-    let $hand := $dealer:games/game[id = $gameID]/dealer/currentHand
-    let $card := game:drawCard($gameID)
-    let $val := dealer:calculateCardValue($gameID)
-
+declare function dealer:numberofDrawingCard($gameID as xs:string, $currentVal as xs:integer, $result as xs:integer) as xs:integer{
+    let $card := game:drawCard($gameID, ($result + 1))
+    let $cardVal := dealer:newCardValue($card, $currentVal)
     return (
-        if ($val < 17) then (
-            insert node $card into $hand,
-            game:popDeck($gameID)
+        if ($currentVal >= 17) then ($result)
+        else (
+            dealer:numberofDrawingCard($gameID, ($currentVal + $cardVal), ($result + 1))
         )
-        else ()
     )
 };
 
@@ -53,18 +48,17 @@ declare function dealer:calculateCardValue($gameID as xs:string) as xs:integer {
     )
 };
 
-declare
-%updating
-function dealer:drawCards($gameID as xs:string) {
-    let $hand := $dealer:games/game[id = $gameID]/dealer/currentHand
-    let $deck := game:getDeck($gameID)
-
-    return
-        for $i in (1, 2)
-        return (insert node $deck/card[1] as first into $hand,
-        delete node $deck/card[1])
-
+declare function dealer:newCardValue($card as element(card), $val as xs:integer) as xs:integer{
+    let $dummy := 0
+    return (
+        if ($card/value = 'A') then (
+            if ($val + 11 > 21) then (1) else (11)
+        ) else (
+            if ($card/value = 'K' or $card/value = 'D' or $card/value = 'B') then (10) else ($card/value)
+        )
+    )
 };
+
 
 declare
 %updating
@@ -73,6 +67,34 @@ function dealer:turnCard($gameID as xs:string){
     let $cards := $hand/card
     for $i in $cards
     return replace value of node $i/hidden with false()
+};
+
+
+declare
+%updating
+function dealer:drawCard($gameID as xs:string) {
+    let $hand := $dealer:games/game[id = $gameID]/dealer/currentHand
+    let $val := dealer:calculateCardValue($gameID)
+    let $amount := dealer:numberofDrawingCard($gameID, $val, 0)
+    let $deck := game:getDeck($gameID)
+
+    return (
+        for $i in (1 to $amount)
+        return (
+            insert node $deck/card[$i] into $hand
+        ),
+        for $i in (1 to $amount)
+        return (
+            game:popDeck($gameID)
+        ))
+
+};
+
+declare
+%updating
+function dealer:play($gameID as xs:string){
+    dealer:turnCard($gameID),
+    dealer:drawCard($gameID)
 };
 
 declare
@@ -88,7 +110,7 @@ function dealer:setInsurance($gameID as xs:string){
         replace value of node $dealer:games/game[id = $gameID]/dealer/isInsurance with true(),
         (:Sollte die folgende Karte ein Zehner Value sein, hat der Dealer natürlich einen Blackjack:)
         replace value of node $state with "insurance",
-        (if (($cards[2]/value = "K") or ($cards[2]/value = "Q") or ($cards[2]/value = "B") or ($cards[2]/value = "10"))
+        ( if (($cards[2]/value = "K") or ($cards[2]/value = "Q") or ($cards[2]/value = "B") or ($cards[2]/value = "10"))
         then (
                 replace value of node $dealer:games/game[id = $gameID]/dealer/bj with true()
             ) else ())
