@@ -33,3 +33,9 @@
     border-radius: 50%;
     display: inline-block;
 }
+
+.invisibleButton {
+    background:transparent;
+    border:none;
+    color:transparent;
+}

@@ -202,12 +202,12 @@ function controller:testWin($gameID as xs:string){
 
 declare
 %updating
-%rest:path("bj/evaluate/{$gameID}")
+%rest:path("bj/evaluate/{$gameID}/{$continue}")
 %rest:GET
-function controller:testEvaluation($gameID as xs:string) {
+function controller:testEvaluation($gameID as xs:string, $continue as xs:boolean) {
     (:Dummy weil es sonst nicht return:)let $x := 0
     return (
-        player:setContinue($gameID, fn:true()),
+        player:setContinue($gameID, $continue),
         update:output(web:redirect($controller:drawLink))
     )
 };
