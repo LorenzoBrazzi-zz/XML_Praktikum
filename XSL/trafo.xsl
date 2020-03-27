@@ -31,6 +31,7 @@
         <xsl:variable name="dealer" select="dealer"/>
         <xsl:variable name="gameID" select="id/text()"/>
         <xsl:variable name="state" select="state"/>
+        <xsl:variable name="isInsurance" select="dealer/isInsurance"/>
 
 
         <svg width="100%" height="100%" version="1.1" viewBox="0 0 1600 900"
@@ -40,10 +41,10 @@
             <rect id="hintergrund" fill="#8a2c2c" width="1000%" height="1000%" x="-3000"/>
 
 
+
             <!-- Tischform -->
             <circle cx="800" cy="0" r="900" fill="{$farbeTisch}"/>
             <circle cx="800" cy="0" r="900" style="fill:none;stroke:{$farbeTischRand};stroke-width:50"/>
-
 
             <!-- Dealer Platz -->
             <rect x="550" y="50" rx="15" ry="15" width="450" height="150" style="fill:none;stroke:#fff;stroke-width:4"/>
@@ -100,9 +101,11 @@
                         <xsl:when test="$state = 'bet'">
                             <foreignObject height="10%" width="10%" x="{$p1CurrentBetX - 50}"
                                            y="{$p1CurrentBetY + $radiusDummyChips + 10}">
-                                <form xmlns="http://www.w3.org/1999/xhtml" action="/bj/setBet/{$gameID}">
-                                    <input type="number" id="bet" name="bet" placeHolder="set bet"/>
-                                    <input type="submit" value="Set Bet"></input>
+                                <form xmlns="http://www.w3.org/1999/xhtml" style="margin: 0; padding: 0" action="/bj/setBet/{$gameID}">
+                                    <span style="display: inline">
+                                        <input type="number" id="bet" name="bet" placeholder="Set a bet"/>
+                                        <button type="submit" class="submitBet" style="vertical-align:middle">Bet</button>
+                                    </span>
                                 </form>
                             </foreignObject>
                         </xsl:when>
@@ -170,9 +173,11 @@
                         <xsl:when test="state = 'bet'">
                             <foreignObject height="10%" width="10%" x="{$p2CurrentBetX - 50}"
                                            y="{$p2CurrentBetY + $radiusDummyChips + 10}">
-                                <form xmlns="http://www.w3.org/1999/xhtml" action="/bj/setBet/{$gameID}">
-                                    <input type="number" id="bet" name="bet" placeHolder="set bet"/>
-                                    <input type="submit" value="Set Bet"></input>
+                                <form xmlns="http://www.w3.org/1999/xhtml" style="margin: 0; padding: 0" action="/bj/setBet/{$gameID}">
+                                    <span style="display: inline">
+                                        <input type="number" id="bet" name="bet" placeholder="Set a bet"/>
+                                        <button type="submit" class="submitBet" style="vertical-align:middle">Bet</button>
+                                    </span>
                                 </form>
                             </foreignObject>
                         </xsl:when>
@@ -238,9 +243,11 @@
                         <xsl:when test="state = 'bet'">
                             <foreignObject height="10%" width="10%" x="{$p3CurrentBetX - 50}"
                                            y="{$p3CurrentBetY + $radiusDummyChips + 10}">
-                                <form xmlns="http://www.w3.org/1999/xhtml" action="/bj/setBet/{$gameID}">
-                                    <input type="number" id="bet" name="bet" placeHolder="set bet"/>
-                                    <input type="submit" value="Set Bet"></input>
+                                <form xmlns="http://www.w3.org/1999/xhtml" style="margin: 0; padding: 0" action="/bj/setBet/{$gameID}">
+                                    <span style="display: inline">
+                                        <input type="number" id="bet" name="bet" placeholder="Set a bet"/>
+                                        <button type="submit" class="submitBet" style="vertical-align:middle">Bet</button>
+                                    </span>
                                 </form>
                             </foreignObject>
                         </xsl:when>
@@ -265,6 +272,22 @@
                                             type="submit">
                                         <img src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Cross_red_circle.svg"
                                              width="80"/>
+                                    </button>
+                                </form>
+                            </foreignObject>
+
+                        </xsl:when>
+                        <xsl:when test="$state = 'evaluate'">
+                            <text x="{$testButton1x - 100}" y="{$testButton1y - 35}" style="
+                             font-weight: bold; font-size: 26pt" fill="white">Ergebnis anzeigen!
+                            </text>
+                            <foreignObject height="50%" width="50%" x="{$testButton1x}"
+                                           y="{$testButton1y}">
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/evaluate/{$gameID}">
+                                    <button style="background:transparent; border:none; color:transparent;"
+                                            type="submit">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Check_green_icon.svg"
+                                             width="100"/>
                                     </button>
                                 </form>
                             </foreignObject>
@@ -290,9 +313,11 @@
                         <xsl:when test="state = 'bet'">
                             <foreignObject height="10%" width="10%" x="{$p4CurrentBetX - 50}"
                                            y="{$p4CurrentBetY + $radiusDummyChips + 10}">
-                                <form xmlns="http://www.w3.org/1999/xhtml" action="/bj/setBet/{$gameID}">
-                                    <input type="number" id="bet" name="bet" placeHolder="set bet"/>
-                                    <input type="submit" value="Set Bet"></input>
+                                <form xmlns="http://www.w3.org/1999/xhtml" style="margin: 0; padding: 0" action="/bj/setBet/{$gameID}">
+                                    <span style="display: inline">
+                                        <input type="number" id="bet" name="bet" placeholder="Set a bet"/>
+                                        <button type="submit" class="submitBet" style="vertical-align:middle">Bet</button>
+                                    </span>
                                 </form>
                             </foreignObject>
                         </xsl:when>
@@ -317,6 +342,22 @@
                                             type="submit">
                                         <img src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Cross_red_circle.svg"
                                              width="80"/>
+                                    </button>
+                                </form>
+                            </foreignObject>
+
+                        </xsl:when>
+                        <xsl:when test="$state = 'evaluate'">
+                            <text x="{$testButton1x - 100}" y="{$testButton1y - 35}" style="
+                             font-weight: bold; font-size: 26pt" fill="white">Ergebnis anzeigen!
+                            </text>
+                            <foreignObject height="50%" width="50%" x="{$testButton1x}"
+                                           y="{$testButton1y}">
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/evaluate/{$gameID}">
+                                    <button style="background:transparent; border:none; color:transparent;"
+                                            type="submit">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Check_green_icon.svg"
+                                             width="100"/>
                                     </button>
                                 </form>
                             </foreignObject>
@@ -342,9 +383,11 @@
                         <xsl:when test="state = 'bet'">
                             <foreignObject height="10%" width="10%" x="{$p5CurrentBetX - 50}"
                                            y="{$p5CurrentBetY + $radiusDummyChips + 10}">
-                                <form xmlns="http://www.w3.org/1999/xhtml" action="/bj/setBet/{$gameID}">
-                                    <input type="number" id="bet" name="bet" placeHolder="set bet"/>
-                                    <input type="submit" value="Set Bet"></input>
+                                <form xmlns="http://www.w3.org/1999/xhtml" style="margin: 0; padding: 0" action="/bj/setBet/{$gameID}">
+                                    <span style="display: inline">
+                                        <input type="number" id="bet" name="bet" placeholder="Set a bet"/>
+                                        <button type="submit" class="submitBet" style="vertical-align:middle">Bet</button>
+                                    </span>
                                 </form>
                             </foreignObject>
                         </xsl:when>
@@ -369,6 +412,22 @@
                                             type="submit">
                                         <img src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Cross_red_circle.svg"
                                              width="80"/>
+                                    </button>
+                                </form>
+                            </foreignObject>
+
+                        </xsl:when>
+                        <xsl:when test="$state = 'evaluate'">
+                            <text x="{$testButton1x - 100}" y="{$testButton1y - 35}" style="
+                             font-weight: bold; font-size: 26pt" fill="white">Ergebnis anzeigen!
+                            </text>
+                            <foreignObject height="50%" width="50%" x="{$testButton1x}"
+                                           y="{$testButton1y}">
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/evaluate/{$gameID}">
+                                    <button style="background:transparent; border:none; color:transparent;"
+                                            type="submit">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Check_green_icon.svg"
+                                             width="100"/>
                                     </button>
                                 </form>
                             </foreignObject>
@@ -417,7 +476,7 @@
 
             <!-- UI-->
             <xsl:choose>
-                <xsl:when test="$state='play' or $state='insurance'">
+                <xsl:when test="$state='play'">
                     <foreignObject width="7%" height="13%" x="{$button1x}"
                                    y="{$buttonsy}">
                         <form xmlns="http://www.w3.org/1999/xhtml" action="/bj/hit/{$gameID}" id="formHit"
@@ -445,7 +504,7 @@
                 </xsl:when>
             </xsl:choose>
             <xsl:choose>
-                <xsl:when test="$state='insurance'">
+                <xsl:when test="$isInsurance='true' and $state='play'">
                     <!-- wenn wir in der Insurance Phase sind ist dieser Knopf verfügbar -->
                     <foreignObject width="7%" height="13%" x="{$button4x}"
                                    y="{$buttonsy}">
@@ -1437,6 +1496,19 @@
                 </xsl:choose>
 
             </xsl:for-each>
+
+            <div style="position:absolute;top:20;right:30;height:20%;width:30%;border:1px solid #ccc;font:16px/26px; overflow:auto;font-family:'Courier New',Verdana,sans-serif; background-color: white; border-radius: 15px; padding: 10px; padding-top: 3px; padding-left:3px">
+                <xsl:for-each select="events/event">
+                    <xsl:choose>
+                        <xsl:when test="type='error'">
+                            <div style="color:red !important; font-weight:bold">[<xsl:value-of select="time"/>] <xsl:value-of select="text"/></div>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <div>[<xsl:value-of select="time"/>] <xsl:value-of select="text"/></div>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:for-each>
+            </div>
 
         </svg>
 

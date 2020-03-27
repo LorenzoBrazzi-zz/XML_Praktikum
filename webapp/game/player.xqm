@@ -155,10 +155,17 @@ declare
 %updating
 function player:setInsurance($gameID as xs:string){
     let $playerID := $player:games/game[id = $gameID]/activePlayer
-    let $path := $player:games/game[id = $gameID]/players/player[id = $playerID]
+    let $player := $player:games/game[id = $gameID]/players/player[id = $playerID]
+    let $prot :=
+        <event>
+            <type>protocol</type>
+            <time>{helper:currentTime()}</time>
+            <text>{$player/name/text()} hat Insurance gekauft</text>
+        </event>
 
     return (
-        replace value of node $path/insurance with fn:true()
+        replace value of node $player/insurance with fn:true(),
+        insert node $prot as first into $player:games/game[id = $gameID]/events
     )
 };
 

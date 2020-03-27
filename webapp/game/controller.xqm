@@ -5,12 +5,14 @@ import module namespace game = "bj/game" at "game.xqm";
 import module namespace player = "bj/player" at "player.xqm";
 import module namespace dealer = "bj/dealer" at "dealer.xqm";
 import module namespace rq = "http://exquery.org/ns/request";
+import module namespace helper = "bj/helper" at "helper.xqm";
 
 
 declare variable $controller:landing := doc("../static/index.html");
 declare variable $controller:start := doc("../static/startGame.html");
 declare variable $controller:staticPath := "../static/XSL/";
 declare variable $controller:drawLink := "/bj/draw";
+declare variable $controller:games := db:open("games")/games;
 
 declare
 %rest:path("bj/setup")
@@ -101,16 +103,31 @@ function controller:draw(){
 declare function controller:generatePage($game as element(game), $xslStylesheet as xs:string, $title as xs:string){
     let $stylesheet := doc(concat($controller:staticPath, $xslStylesheet))
     let $transformed := xslt:transform($game, $stylesheet)
+    let $state := $game/state/text()
+    let $gameID := $game/id/text()
     return (
-        <html>
-            <head>
-                <title>{$title}</title>
-                <link rel="stylesheet" type="text/css" href="../static/stylesheet.css"/>
-            </head>
-            <body>
-                {$transformed}
-            </body>
-        </html>
+        if($state = 'evaluate') then (
+            <html>
+                <head>
+                    <title>{$title}</title>
+                    <link rel="stylesheet" type="text/css" href="../static/stylesheet.css"/>
+                    <meta http-equiv="Refresh" content="0; url=http://localhost:8984/bj/evaluate/{$gameID}" />
+                </head>
+                <body>
+                    {$transformed}
+                </body>
+            </html>
+        ) else (
+            <html>
+                <head>
+                    <title>{$title}</title>
+                    <link rel="stylesheet" type="text/css" href="../static/stylesheet.css"/>
+                </head>
+                <body>
+                    {$transformed}
+                </body>
+            </html>
+        )
     )
 };
 
@@ -175,11 +192,23 @@ declare
 %updating
 %rest:path("bj/setBet/{$gameID}")
 %rest:GET
-function controller:testSetBet($gameID as xs:string){
-    let $bet := rq:parameter("bet", 0)
+function controller:setBet($gameID as xs:string){
+    let $bet := rq:parameter("bet", "")
+    let $minBet := $controller:games/game[id = $gameID]/minBet
+    let $maxBet := $controller:games/game[id = $gameID]/maxBet
+    let $err := <event>
+        <time>{helper:currentTime()}</time>
+        <type>error</type>
+        <text>Fehler beim Einsatz!!! Der Einsatz muss mindestens {$minBet}, darf maximal {$maxBet} oder
+            deinen aktuellen Kontostand nicht übersteigen!</text>
+    </event>
     return (
+        if($bet="") then (
+            insert node $err as first into $controller:games/game[id = $gameID]/events,
+            update:output(web:redirect($controller:drawLink))
+        ) else (
         player:setBet($gameID, $bet),
-        update:output(web:redirect($controller:drawLink))
+        update:output(web:redirect($controller:drawLink)))
     )
 };
 
@@ -189,15 +218,10 @@ declare
 %rest:path("bj/setInsurance/{$gameID}")
 %rest:GET
 function controller:setInsurance($gameID as xs:string){
-    player:setInsurance($gameID)
-};
-
-declare
-%updating
-%rest:path("bj/win/{$gameID}")
-%rest:GET
-function controller:testWin($gameID as xs:string){
-    game:determineWinners($gameID)
+    let $dummy := 0
+    return (
+    player:setInsurance($gameID),
+    update:output(web:redirect($controller:drawLink)))
 };
 
 declare
@@ -247,14 +271,6 @@ function controller:dealerValueTest($gameID as xs:string){
     dealer:calculateCardValue($gameID)
 };
 
-declare
-%updating
-%rest:path("bj/evalRound/{$gameID}")
-%rest:GET
-function controller:evalRound($gameID){
-    game:closeRound($gameID),
-    update:output(web:redirect($controller:drawLink))
-};
 
 declare
 %rest:path("bj/dealerDrawTest/{$gameID}")
