@@ -17,9 +17,6 @@
             </form>
         </foreignObject>
 
-
-                <xsl:variable name="playerID" select ="generate-id()"/>
-
                 <div style="position:absolute;top:20;right:30;height:60%;width:30%;border:1px solid #ccc;font:16px/26px; overflow:auto;font-family:'Courier New',Verdana,sans-serif; background-color: white; border-radius: 15px; padding: 10px; padding-top: 3px; padding-left:3px">
                     <xsl:for-each select="games/game">
                         <xsl:variable name="gameID" select="id"/>
@@ -27,7 +24,7 @@
                         <xsl:choose>
                             <xsl:when test="available='true'">
                                 <div>
-                                    <form action="/bj/insertPlayer/{$gameID}/{$playerID}" id="joinForm">
+                                    <form action="/bj/insertPlayer/{$gameID}" id="joinForm">
                                         <input type="text" name="name" placeholder="Name"/>
                                         <div style="color:red !important; font-weight:bold"><xsl:value-of select="$players"/>/5 </div>
                                         <button form="joinForm" type="submit">Joinen</button>
