@@ -12,12 +12,14 @@
     gemacht werden.
     Der Insurance knopf soll grau sein bis Insurance möglich wird. Dann soll dieser Heller und farbig werden!
 -->
-
-    </xsl:template>
-    <xsl:template match="/chip">
+    <xsl:template match="/chips">
         <!-- Der Trafo code -->
 
+        <xsl:for-each select="chip">
 
+
+
+        </xsl:for-each>
         <!-- SVG Defintionen für Chips-->
         <!-- default chip, other chips have the same features -->
         <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -122,20 +124,20 @@
 <text id="chip-value-20" font-size="11.5" fill="black">20</text>
 
 <g id="chip-2">
-    <use xlink:href="#chip-coin" />
-    <use xlink:href="#chip-value-2" x="-2" y="5" />
+<use xlink:href="#chip-coin" />
+<use xlink:href="#chip-value-2" x="-2" y="5" />
 </g>
 <g id="chip-5">
-    <use xlink:href="#chip-coin" />
-    <use xlink:href="#chip-value-5" x="-2" y="5" />
+<use xlink:href="#chip-coin" />
+<use xlink:href="#chip-value-5" x="-2" y="5" />
 </g>
 <g id="chip-10">
-    <use xlink:href="#chip-coin" />
-    <use xlink:href="#chip-value-10" x="-2" y="5" />
+<use xlink:href="#chip-coin" />
+<use xlink:href="#chip-value-10" x="-2" y="5" />
 </g>
 <g id="chip-20">
-    <use xlink:href="#chip-coin" />
-    <use xlink:href="#chip-value-20" x="-2" y="5" />
+<use xlink:href="#chip-coin" />
+<use xlink:href="#chip-value-20" x="-2" y="5" />
 </g>
 <g id="chipP1">
     <use xlink:href="#chip-coin" x="{$xCoin1}" y="{$yCoin1}" />
