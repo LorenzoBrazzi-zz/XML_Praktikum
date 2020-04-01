@@ -112,17 +112,18 @@ function controller:startGame() {
 declare
 %rest:path("/bj/ready/{$gameID}")
 %updating
-%rest:GET
+%rest:POST
 function controller:ready($gameID as xs:string) {
-    replace value of node $game:games/game[id = $gameID]/available with fn:count($controller:games/game[id = $gameID]/players/player) < 5,
-    game:setActivePlayer($gameID)
+(:replace value of node $game:games/game[id = $gameID]/available with fn:count($controller:games/game[id = $gameID]/players/player) < 5,:)
+    game:setActivePlayer($gameID),
+    update:output(web:redirect(fn:concat("/bj/draw/", $gameID)))
 };
 
 declare
-%rest:path("/bj/insertPlayer/{$gameID}/{$playerID}")
+%rest:path("/bj/insertPlayer/{$gameID}")
 %updating
 %rest:GET
-function controller:insertPlayer($gameID as xs:string, $playerID as xs:string) {
+function controller:insertPlayer($gameID as xs:string) {
     let $game := $controller:games/game[id = $gameID]
     let $numPlayers := fn:count($game/players/player)
     let $name := rq:parameter("name", "")
@@ -131,7 +132,7 @@ function controller:insertPlayer($gameID as xs:string, $playerID as xs:string) {
     return (
         if (fn:count($game/players/player) = 0) then (replace value of node $game/activePlayer with $player/id/text()) else (),
         insert node $player into $game/players,
-        update:output(web:redirect(fn:concat("/bj/join/", $gameID, "/", $playerID)))
+        update:output(web:redirect(fn:concat("/bj/join/", $gameID, "/", $player/id)))
     )
 };
 
@@ -142,8 +143,8 @@ declare
 function controller:join($gameID as xs:string, $playerID as xs:string){
     let $hostname := rq:hostname()
     let $port := rq:port()
-    let $address := concat($hostname,":",$port)
-    let $websocketURL := concat("ws://",$address,"/ws/bj")
+    let $address := concat($hostname, ":", $port)
+    let $websocketURL := concat("ws://", $address, "/ws/bj")
     let $getURL := concat("http://", $address, "/bj/draw/", $gameID)
     let $subscription := concat("/bj/", $gameID, "/", $playerID)
     let $html :=
@@ -156,7 +157,7 @@ function controller:join($gameID as xs:string, $playerID as xs:string){
                 <link rel="stylesheet" type="text/css" href="/static/stylesheet.css"/>
             </head>
             <body>
-                <ws-stream id = "bj" url="{$websocketURL}" subscription = "{$subscription}" geturl = "{$getURL}"/>
+                <ws-stream id="bj" url="{$websocketURL}" subscription="{$subscription}" geturl="{$getURL}" oncloseurl="/bj/startingPage"/>
             </body>
         </html>
     return $html
@@ -167,18 +168,42 @@ declare
 %rest:path("/bj/draw/{$gameID}")
 function controller:draw($gameID as xs:string){
     let $game := game:getGame($gameID)
+    let $activePlayerID := $game/activePlayer/text()
     let $xslStylesheet := "trafo.xsl"
+    let $activeXslStylesheet := "trafo_active.xsl"
     let $title := "BlackJack XML"
     let $wsIDs := ws:getIDs()
     return (
         for $id in $wsIDs
         where ws:get($id, "applicationID") = "bj"
         let $playerID := ws:get($id, "playerID")
-        let $destinationPath := concat("/bj/", $gameID)
-        let $transformedGame := controller:generatePage($game, $xslStylesheet, $title)
+        let $destinationPath := concat("/bj/", $gameID, "/", $playerID)
+        let $transformedGame :=
+            (
+                if ($playerID = $activePlayerID)
+                then (controller:generatePage($game, $activeXslStylesheet, $title))
+                else (controller:generatePage($game, $xslStylesheet, $title))
+            )
         return (ws:send($transformedGame, $destinationPath))
     )
-    (:)return (controller:generatePage($game, $xslStylesheet, $title)):)
+(:)return (controller:generatePage($game, $xslStylesheet, $title)):)
+};
+
+declare
+%rest:GET
+%rest:path("/bj/clients")
+function controller:clients(){
+    let $wsIDs := ws:getIDs()
+    return (
+        for $id in $wsIDs
+        where ws:get($id, "applicationID") = "bj"
+        let $bjUrl := ws:get($id, "bjUrl")
+        let $gameID := ws:get($id, "gameID")
+        let $playerID := ws:get($id, "playerID")
+        return (
+            $playerID
+        )
+    )
 };
 
 declare function controller:generatePage($game as element(game), $xslStylesheet as xs:string, $title as xs:string){
@@ -186,30 +211,7 @@ declare function controller:generatePage($game as element(game), $xslStylesheet 
     let $transformed := xslt:transform($game, $stylesheet)
     let $state := $game/state/text()
     let $gameID := $game/id/text()
-    return (
-        if($state = 'evaluate') then (
-            <html>
-                <head>
-                    <title>{$title}</title>
-                    <link rel="stylesheet" type="text/css" href="../static/stylesheet.css"/>
-                    <meta http-equiv="Refresh" content="0; url=http://localhost:8984/bj/evaluate/{$gameID}" />
-                </head>
-                <body>
-                    {$transformed}
-                </body>
-            </html>
-        ) else (
-            <html>
-                <head>
-                    <title>{$title}</title>
-                    <link rel="stylesheet" type="text/css" href="../static/stylesheet.css"/>
-                </head>
-                <body>
-                    {$transformed}
-                </body>
-            </html>
-        )
-    )
+    return $transformed
 };
 
 (:Löscht das Spiel mit ID gameID:)
@@ -241,7 +243,7 @@ function controller:shuffle($gameID as xs:string){
 declare
 %updating
 %rest:path("bj/hit/{$gameID}")
-%rest:GET
+%rest:POST
 function controller:hit($gameID as xs:string){
     player:hit($gameID),
     update:output(web:redirect(fn:concat("/bj/draw/", $gameID)))
@@ -251,7 +253,7 @@ function controller:hit($gameID as xs:string){
 declare
 %updating
 %rest:path("bj/double/{$gameID}")
-%rest:GET
+%rest:POST
 function controller:double($gameID as xs:string){
     player:double($gameID),
     update:output(web:redirect(fn:concat("/bj/draw/", $gameID)))
@@ -261,7 +263,7 @@ function controller:double($gameID as xs:string){
 declare
 %updating
 %rest:path("bj/stand/{$gameID}")
-%rest:GET
+%rest:POST
 function controller:stand($gameID as xs:string){
     player:stand($gameID),
     update:output(web:redirect(fn:concat("/bj/draw/", $gameID)))
@@ -272,7 +274,7 @@ function controller:stand($gameID as xs:string){
 declare
 %updating
 %rest:path("bj/setBet/{$gameID}")
-%rest:GET
+%rest:POST
 function controller:setBet($gameID as xs:string){
     let $bet := rq:parameter("bet", "")
     let $minBet := $controller:games/game[id = $gameID]/minBet
@@ -284,12 +286,12 @@ function controller:setBet($gameID as xs:string){
             deinen aktuellen Kontostand nicht übersteigen!</text>
     </event>
     return (
-        if($bet="") then (
+        if ($bet = "") then (
             insert node $err as first into $controller:games/game[id = $gameID]/events,
             update:output(web:redirect(fn:concat("/bj/draw/", $gameID)))
         ) else (
-        player:setBet($gameID, $bet),
-        update:output(web:redirect(fn:concat("/bj/draw/", $gameID))))
+            player:setBet($gameID, $bet),
+            update:output(web:redirect(fn:concat("/bj/draw/", $gameID))))
     )
 };
 
@@ -297,20 +299,20 @@ function controller:setBet($gameID as xs:string){
 declare
 %updating
 %rest:path("bj/setInsurance/{$gameID}")
-%rest:GET
+%rest:POST
 function controller:setInsurance($gameID as xs:string){
     let $dummy := 0
     return (
-    player:setInsurance($gameID),
-    update:output(web:redirect(fn:concat("/bj/draw/", $gameID))))
+        player:setInsurance($gameID),
+        update:output(web:redirect(fn:concat("/bj/draw/", $gameID))))
 };
 
 declare
 %updating
 %rest:path("bj/continue/{$gameID}/{$continue}")
-%rest:GET
+%rest:POST
 function controller:continue($gameID as xs:string, $continue as xs:boolean) {
-    (:Dummy weil es sonst nicht return:)let $x := 0
+(:Dummy weil es sonst nicht return:)let $x := 0
     return (
         player:setContinue($gameID, $continue),
         update:output(web:redirect(fn:concat("/bj/draw/", $gameID)))
@@ -320,7 +322,7 @@ function controller:continue($gameID as xs:string, $continue as xs:boolean) {
 declare
 %updating
 %rest:path("bj/evaluate/{$gameID}")
-%rest:GET
+%rest:POST
 function controller:evaluate($gameID as xs:string) {
 (:Dummy weil es sonst nicht return:)let $x := 0
     return (
@@ -358,8 +360,8 @@ declare
 %rest:GET
 function controller:dealerDrawTest($gameID){
     <div>
-    <div>{dealer:newCardValue(game:getDeck($gameID)/card[1], dealer:calculateCardValue($gameID))}</div>
-    <div>{dealer:calculateCardValue($gameID)}</div>
-    <div>{dealer:numberofDrawingCard($gameID, dealer:calculateCardValue($gameID), 0)}</div>
+        <div>{dealer:newCardValue(game:getDeck($gameID)/card[1], dealer:calculateCardValue($gameID))}</div>
+        <div>{dealer:calculateCardValue($gameID)}</div>
+        <div>{dealer:numberofDrawingCard($gameID, dealer:calculateCardValue($gameID), 0)}</div>
     </div>
 };

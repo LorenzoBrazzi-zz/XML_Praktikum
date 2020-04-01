@@ -94,7 +94,8 @@ function game:setActivePlayer($gameID as xs:string){
         else (
             if ($state = 'ready') then (
                 game:changeState($gameID, 'bet'),
-                replace value of node $game:games/game[id = $gameID]/available with fn:false()
+                replace value of node $game:games/game[id = $gameID]/available with fn:false(),
+                replace value of node $oldPlayerID with $players/player[1]/id/text()
             ) else if ($state = 'play') then (
                 dealer:play($gameID),
                 game:changeState($gameID, 'evaluate'),

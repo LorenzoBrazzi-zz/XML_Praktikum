@@ -96,6 +96,105 @@
                         <xsl:value-of select="$player1/name"/>
 
                     </text>
+                    <xsl:choose>
+                        <xsl:when test="$state = 'ready'">
+                            <text x="{$testButton1x - 10}" y="{$testButton1y - 35}" style="
+                                 font-weight: bold; font-size: 26pt" fill="white">Bereit?
+                            </text>
+                            <foreignObject height="50%" width="50%" x="{$testButton1x}"
+                                           y="{$testButton1y}">
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/ready/{$gameID}" method="POST"
+                                      target="hiddenFrame">
+                                    <button style="background:transparent; border:none; color:transparent;"
+                                            type="submit">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Check_green_icon.svg"
+                                             width="80"/>
+                                    </button>
+                                </form>
+                            </foreignObject>
+
+                        </xsl:when>
+                        <xsl:when test="$state = 'continue'">
+                            <text x="{$testButton1x - 10}" y="{$testButton1y - 35}" style="
+                                 font-weight: bold; font-size: 26pt" fill="white">Weiterspielen?
+                            </text>
+                            <foreignObject height="50%" width="50%" x="{$testButton1x}"
+                                           y="{$testButton1y}">
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/continue/{$gameID}/true" method="POST" target="hiddenFrame">
+                                    <button style="background:transparent; border:none; color:transparent;"
+                                            type="submit">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Check_green_icon.svg"
+                                             width="80"/>
+                                    </button>
+                                </form>
+                            </foreignObject>
+                            <foreignObject height="10%" width="10%" x="{$testButton1x + 100}"
+                                           y="{$testButton1y}">
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/continue/{$gameID}/false" method="POST" target="hiddenFrame">
+                                    <button style="background:transparent; border:none; color:transparent;"
+                                            type="submit">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Cross_red_circle.svg"
+                                             width="80"/>
+                                    </button>
+                                </form>
+                            </foreignObject>
+                        </xsl:when>
+                        <xsl:when test="$state = 'bet'">
+                            <foreignObject height="10%" width="10%" x="{$p1CurrentBetX - 50}"
+                                           y="{$p1CurrentBetY + $radiusDummyChips + 10}">
+                                <form xmlns="http://www.w3.org/1999/xhtml" style="margin: 0; padding: 0"
+                                      action="/bj/setBet/{$gameID}" method="POST" target="hiddenFrame">
+                                    <span style="display: inline">
+                                        <input type="number" id="bet" name="bet" placeholder="Set a bet"/>
+                                        <button type="submit" class="submitBet" style="vertical-align:middle">Bet
+                                        </button>
+                                    </span>
+                                </form>
+                            </foreignObject>
+                        </xsl:when>
+                        <xsl:when test="$state = 'continue'">
+                            <text x="{$testButton1x - 10}" y="{$testButton1y - 35}" style="
+                             font-weight: bold; font-size: 26pt" fill="white">Weiterspielen?
+                            </text>
+                            <foreignObject height="50%" width="50%" x="{$testButton1x}"
+                                           y="{$testButton1y}">
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/continue/{$gameID}/true" method="POST" target="hiddenFrame">
+                                    <button style="background:transparent; border:none; color:transparent;"
+                                            type="submit">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Check_green_icon.svg"
+                                             width="80"/>
+                                    </button>
+                                </form>
+                            </foreignObject>
+                            <foreignObject height="10%" width="10%" x="{$testButton1x + 100}"
+                                           y="{$testButton1y}">
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/continue/{$gameID}/false" method="POST" target="hiddenFrame">
+                                    <button style="background:transparent; border:none; color:transparent;"
+                                            type="submit">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Cross_red_circle.svg"
+                                             width="80"/>
+                                    </button>
+                                </form>
+                            </foreignObject>
+
+                        </xsl:when>
+                        <xsl:when test="$state = 'evaluate'">
+                            <text x="{$testButton1x - 100}" y="{$testButton1y - 35}" style="
+                             font-weight: bold; font-size: 26pt" fill="white">Ergebnis anzeigen!
+                            </text>
+                            <foreignObject height="50%" width="50%" x="{$testButton1x}"
+                                           y="{$testButton1y}">
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/evaluate/{$gameID}" method="POST" target="hiddenFrame">
+                                    <button style="background:transparent; border:none; color:transparent;"
+                                            type="submit">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Check_green_icon.svg"
+                                             width="100"/>
+                                    </button>
+                                </form>
+                            </foreignObject>
+
+                        </xsl:when>
+                    </xsl:choose>
                 </xsl:when>
 
                 <xsl:otherwise>
@@ -113,7 +212,80 @@
                           font-size="{$spielerNamenTextSize + 5}" fill="yellow" text-anchor="middle">
                         <xsl:value-of select="$player2/name"/>
                     </text>
+                    <xsl:choose>
+                        <xsl:when test="$state = 'ready'">
+                            <text x="{$testButton1x - 10}" y="{$testButton1y - 35}" style="
+                                 font-weight: bold; font-size: 26pt" fill="white">Bereit?
+                            </text>
+                            <foreignObject height="50%" width="50%" x="{$testButton1x}"
+                                           y="{$testButton1y}">
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/ready/{$gameID}" method="POST"
+                                      target="hiddenFrame">
+                                    <button style="background:transparent; border:none; color:transparent;"
+                                            type="submit">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Check_green_icon.svg"
+                                             width="80"/>
+                                    </button>
+                                </form>
+                            </foreignObject>
+                        </xsl:when>
+                        <xsl:when test="state = 'bet'">
+                            <foreignObject height="10%" width="10%" x="{$p2CurrentBetX - 50}"
+                                           y="{$p2CurrentBetY + $radiusDummyChips + 10}">
+                                <form xmlns="http://www.w3.org/1999/xhtml" style="margin: 0; padding: 0"
+                                      action="/bj/setBet/{$gameID}" method="POST"
+                                      target="hiddenFrame">
+                                    <span style="display: inline">
+                                        <input type="number" id="bet" name="bet" placeholder="Set a bet"/>
+                                        <button type="submit" class="submitBet" style="vertical-align:middle">Bet
+                                        </button>
+                                    </span>
+                                </form>
+                            </foreignObject>
+                        </xsl:when>
+                        <xsl:when test="$state = 'continue'">
+                            <text x="{$testButton1x - 10}" y="{$testButton1y - 35}" style="
+                             font-weight: bold; font-size: 26pt" fill="white">Weiterspielen?
+                            </text>
+                            <foreignObject height="50%" width="50%" x="{$testButton1x}"
+                                           y="{$testButton1y}">
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/continue/{$gameID}/true" method="POST" target="hiddenFrame">
+                                    <button style="background:transparent; border:none; color:transparent;"
+                                            type="submit">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Check_green_icon.svg"
+                                             width="80"/>
+                                    </button>
+                                </form>
+                            </foreignObject>
+                            <foreignObject height="10%" width="10%" x="{$testButton1x + 100}"
+                                           y="{$testButton1y}">
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/continue/{$gameID}/false" method="POST" target="hiddenFrame">
+                                    <button style="background:transparent; border:none; color:transparent;"
+                                            type="submit">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Cross_red_circle.svg"
+                                             width="80"/>
+                                    </button>
+                                </form>
+                            </foreignObject>
 
+                        </xsl:when>
+                        <xsl:when test="$state = 'evaluate'">
+                            <text x="{$testButton1x - 100}" y="{$testButton1y - 35}" style="
+                             font-weight: bold; font-size: 26pt" fill="white">Ergebnis anzeigen!
+                            </text>
+                            <foreignObject height="50%" width="50%" x="{$testButton1x}"
+                                           y="{$testButton1y}">
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/evaluate/{$gameID}" method="POST" target="hiddenFrame">
+                                    <button style="background:transparent; border:none; color:transparent;"
+                                            type="submit">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Check_green_icon.svg"
+                                             width="100"/>
+                                    </button>
+                                </form>
+                            </foreignObject>
+
+                        </xsl:when>
+                    </xsl:choose>
                 </xsl:when>
                 <xsl:otherwise>
                     <text x="{$player2x}" y="{$player2y + $radiusPlayer + $zeilenAbstand}" font-family="Arial"
@@ -129,7 +301,79 @@
                           font-size="{$spielerNamenTextSize + 5}" fill="yellow" text-anchor="middle">
                         <xsl:value-of select="$player3/name"/>
                     </text>
+                    <xsl:choose>
+                        <xsl:when test="$state = 'ready'">
+                            <text x="{$testButton1x - 10}" y="{$testButton1y - 35}" style="
+                                 font-weight: bold; font-size: 26pt" fill="white">Bereit?
+                            </text>
+                            <foreignObject height="50%" width="50%" x="{$testButton1x}"
+                                           y="{$testButton1y}">
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/ready/{$gameID}" method="POST"
+                                      target="hiddenFrame">
+                                    <button style="background:transparent; border:none; color:transparent;"
+                                            type="submit">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Check_green_icon.svg"
+                                             width="80"/>
+                                    </button>
+                                </form>
+                            </foreignObject>
+                        </xsl:when>
+                        <xsl:when test="state = 'bet'">
+                            <foreignObject height="10%" width="10%" x="{$p3CurrentBetX - 50}"
+                                           y="{$p3CurrentBetY + $radiusDummyChips + 10}">
+                                <form xmlns="http://www.w3.org/1999/xhtml" style="margin: 0; padding: 0"
+                                      action="/bj/setBet/{$gameID}" method="POST" target="hiddenFrame">
+                                    <span style="display: inline">
+                                        <input type="number" id="bet" name="bet" placeholder="Set a bet"/>
+                                        <button type="submit" class="submitBet" style="vertical-align:middle">Bet
+                                        </button>
+                                    </span>
+                                </form>
+                            </foreignObject>
+                        </xsl:when>
+                        <xsl:when test="$state = 'continue'">
+                            <text x="{$testButton1x - 10}" y="{$testButton1y - 35}" style="
+                             font-weight: bold; font-size: 26pt" fill="white">Weiterspielen?
+                            </text>
+                            <foreignObject height="50%" width="50%" x="{$testButton1x}"
+                                           y="{$testButton1y}">
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/continue/{$gameID}/true" method="POST" target="hiddenFrame">
+                                    <button style="background:transparent; border:none; color:transparent;"
+                                            type="submit">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Check_green_icon.svg"
+                                             width="80"/>
+                                    </button>
+                                </form>
+                            </foreignObject>
+                            <foreignObject height="10%" width="10%" x="{$testButton1x + 100}"
+                                           y="{$testButton1y}">
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/continue/{$gameID}/false" method="POST" target="hiddenFrame">
+                                    <button style="background:transparent; border:none; color:transparent;"
+                                            type="submit">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Cross_red_circle.svg"
+                                             width="80"/>
+                                    </button>
+                                </form>
+                            </foreignObject>
 
+                        </xsl:when>
+                        <xsl:when test="$state = 'evaluate'">
+                            <text x="{$testButton1x - 100}" y="{$testButton1y - 35}" style="
+                             font-weight: bold; font-size: 26pt" fill="white">Ergebnis anzeigen!
+                            </text>
+                            <foreignObject height="50%" width="50%" x="{$testButton1x}"
+                                           y="{$testButton1y}">
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/evaluate/{$gameID}" method="POST" target="hiddenFrame">
+                                    <button style="background:transparent; border:none; color:transparent;"
+                                            type="submit">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Check_green_icon.svg"
+                                             width="100"/>
+                                    </button>
+                                </form>
+                            </foreignObject>
+
+                        </xsl:when>
+                    </xsl:choose>
                 </xsl:when>
                 <xsl:otherwise>
                     <text x="{$player3x}" y="{$player3y + $radiusPlayer + $zeilenAbstand}" font-family="Arial"
@@ -145,7 +389,79 @@
                           font-size="{$spielerNamenTextSize + 5}" fill="yellow" text-anchor="middle">
                         <xsl:value-of select="$player4/name"/>
                     </text>
+                    <xsl:choose>
+                        <xsl:when test="$state = 'ready'">
+                            <text x="{$testButton1x - 10}" y="{$testButton1y - 35}" style="
+                                 font-weight: bold; font-size: 26pt" fill="white">Bereit?
+                            </text>
+                            <foreignObject height="50%" width="50%" x="{$testButton1x}"
+                                           y="{$testButton1y}">
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/ready/{$gameID}" method="POST"
+                                      target="hiddenFrame">
+                                    <button style="background:transparent; border:none; color:transparent;"
+                                            type="submit">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Check_green_icon.svg"
+                                             width="80"/>
+                                    </button>
+                                </form>
+                            </foreignObject>
+                        </xsl:when>
+                        <xsl:when test="state = 'bet'">
+                            <foreignObject height="10%" width="10%" x="{$p4CurrentBetX - 50}"
+                                           y="{$p4CurrentBetY + $radiusDummyChips + 10}">
+                                <form xmlns="http://www.w3.org/1999/xhtml" style="margin: 0; padding: 0"
+                                      action="/bj/setBet/{$gameID}" method="POST" target="hiddenFrame">
+                                    <span style="display: inline">
+                                        <input type="number" id="bet" name="bet" placeholder="Set a bet"/>
+                                        <button type="submit" class="submitBet" style="vertical-align:middle">Bet
+                                        </button>
+                                    </span>
+                                </form>
+                            </foreignObject>
+                        </xsl:when>
+                        <xsl:when test="$state = 'continue'">
+                            <text x="{$testButton1x - 10}" y="{$testButton1y - 35}" style="
+                             font-weight: bold; font-size: 26pt" fill="white">Weiterspielen?
+                            </text>
+                            <foreignObject height="50%" width="50%" x="{$testButton1x}"
+                                           y="{$testButton1y}">
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/continue/{$gameID}/true" method="POST" target="hiddenFrame">
+                                    <button style="background:transparent; border:none; color:transparent;"
+                                            type="submit">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Check_green_icon.svg"
+                                             width="80"/>
+                                    </button>
+                                </form>
+                            </foreignObject>
+                            <foreignObject height="10%" width="10%" x="{$testButton1x + 100}"
+                                           y="{$testButton1y}">
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/continue/{$gameID}/false" method="POST" target="hiddenFrame">
+                                    <button style="background:transparent; border:none; color:transparent;"
+                                            type="submit">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Cross_red_circle.svg"
+                                             width="80"/>
+                                    </button>
+                                </form>
+                            </foreignObject>
 
+                        </xsl:when>
+                        <xsl:when test="$state = 'evaluate'">
+                            <text x="{$testButton1x - 100}" y="{$testButton1y - 35}" style="
+                             font-weight: bold; font-size: 26pt" fill="white">Ergebnis anzeigen!
+                            </text>
+                            <foreignObject height="50%" width="50%" x="{$testButton1x}"
+                                           y="{$testButton1y}">
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/evaluate/{$gameID}" method="POST" target="hiddenFrame">
+                                    <button style="background:transparent; border:none; color:transparent;"
+                                            type="submit">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Check_green_icon.svg"
+                                             width="100"/>
+                                    </button>
+                                </form>
+                            </foreignObject>
+
+                        </xsl:when>
+                    </xsl:choose>
                 </xsl:when>
                 <xsl:otherwise>
                     <text x="{$player4x}" y="{$player4y + $radiusPlayer + $zeilenAbstand}" font-family="Arial"
@@ -161,7 +477,79 @@
                           font-size="{$spielerNamenTextSize + 5}" fill="yellow" text-anchor="middle">
                         <xsl:value-of select="$player5/name"/>
                     </text>
+                    <xsl:choose>
+                        <xsl:when test="$state = 'ready'">
+                            <text x="{$testButton1x - 10}" y="{$testButton1y - 35}" style="
+                                 font-weight: bold; font-size: 26pt" fill="white">Bereit?
+                            </text>
+                            <foreignObject height="50%" width="50%" x="{$testButton1x}"
+                                           y="{$testButton1y}">
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/ready/{$gameID}" method="POST"
+                                      target="hiddenFrame">
+                                    <button style="background:transparent; border:none; color:transparent;"
+                                            type="submit">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Check_green_icon.svg"
+                                             width="80"/>
+                                    </button>
+                                </form>
+                            </foreignObject>
+                        </xsl:when>
+                        <xsl:when test="state = 'bet'">
+                            <foreignObject height="10%" width="10%" x="{$p5CurrentBetX - 50}"
+                                           y="{$p5CurrentBetY + $radiusDummyChips + 10}">
+                                <form xmlns="http://www.w3.org/1999/xhtml" style="margin: 0; padding: 0"
+                                      action="/bj/setBet/{$gameID}" method="POST" target="hiddenFrame">
+                                    <span style="display: inline">
+                                        <input type="number" id="bet" name="bet" placeholder="Set a bet"/>
+                                        <button type="submit" class="submitBet" style="vertical-align:middle">Bet
+                                        </button>
+                                    </span>
+                                </form>
+                            </foreignObject>
+                        </xsl:when>
+                        <xsl:when test="$state = 'continue'">
+                            <text x="{$testButton1x - 10}" y="{$testButton1y - 35}" style="
+                             font-weight: bold; font-size: 26pt" fill="white">Weiterspielen?
+                            </text>
+                            <foreignObject height="50%" width="50%" x="{$testButton1x}"
+                                           y="{$testButton1y}">
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/continue/{$gameID}/true" method="POST" target="hiddenFrame">
+                                    <button style="background:transparent; border:none; color:transparent;"
+                                            type="submit">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Check_green_icon.svg"
+                                             width="80"/>
+                                    </button>
+                                </form>
+                            </foreignObject>
+                            <foreignObject height="10%" width="10%" x="{$testButton1x + 100}"
+                                           y="{$testButton1y}">
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/continue/{$gameID}/false" method="POST" target="hiddenFrame">
+                                    <button style="background:transparent; border:none; color:transparent;"
+                                            type="submit">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Cross_red_circle.svg"
+                                             width="80"/>
+                                    </button>
+                                </form>
+                            </foreignObject>
 
+                        </xsl:when>
+                        <xsl:when test="$state = 'evaluate'">
+                            <text x="{$testButton1x - 100}" y="{$testButton1y - 35}" style="
+                             font-weight: bold; font-size: 26pt" fill="white">Ergebnis anzeigen!
+                            </text>
+                            <foreignObject height="50%" width="50%" x="{$testButton1x}"
+                                           y="{$testButton1y}">
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/evaluate/{$gameID}" method="POST" target="hiddenFrame">
+                                    <button style="background:transparent; border:none; color:transparent;"
+                                            type="submit">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Check_green_icon.svg"
+                                             width="100"/>
+                                    </button>
+                                </form>
+                            </foreignObject>
+
+                        </xsl:when>
+                    </xsl:choose>
                 </xsl:when>
                 <xsl:otherwise>
                     <text x="{$player5x}" y="{$player5y + $radiusPlayer + $zeilenAbstand}" font-family="Arial"
@@ -203,6 +591,47 @@
 
 
             <!-- UI-->
+            <xsl:choose>
+                <xsl:when test="$state='play'">
+                    <foreignObject width="7%" height="13%" x="{$button1x}"
+                                   y="{$buttonsy}">
+                        <form xmlns="http://www.w3.org/1999/xhtml" action="/bj/hit/{$gameID}" id="formHit" method="POST" target="hiddenFrame">
+                            <button class="buttonHit" type="submit" form="formHit" value="Submit">Hit
+                            </button>
+                        </form>
+                    </foreignObject>
+                    <foreignObject width="7%" height="13%" x="{$button2x}"
+                                   y="{$buttonsy}">
+                        <form xmlns="http://www.w3.org/1999/xhtml" action="/bj/stand/{$gameID}" id="formStand"
+                              method="POST" target="hiddenFrame">
+                            <button class="buttonStand" type="submit" form="formStand" value="Submit">Stand
+                            </button>
+                        </form>
+                    </foreignObject>
+                    <foreignObject width="7%" height="13%" x="{$button3x}"
+                                   y="{$buttonsy}">
+                        <form xmlns="http://www.w3.org/1999/xhtml" action="/bj/double/{$gameID}" id="formDouble"
+                              method="POST" target="hiddenFrame">
+                            <button class="buttonDouble" type="submit" form="formDouble" value="Submit">Double
+                            </button>
+                        </form>
+                    </foreignObject>
+                </xsl:when>
+            </xsl:choose>
+            <xsl:choose>
+                <xsl:when test="$isInsurance='true' and $state='play'">
+                    <!-- wenn wir in der Insurance Phase sind ist dieser Knopf verfügbar -->
+                    <foreignObject width="7%" height="13%" x="{$button4x}"
+                                   y="{$buttonsy}">
+                        <form xmlns="http://www.w3.org/1999/xhtml" action="/bj/setInsurance/{$gameID}"
+                              id="formInsurance"
+                              method="POST" target="hiddenFrame">
+                            <button class="buttonInsurance" type="submit" form="formInsurance" value="Submit">Insurance
+                            </button>
+                        </form>
+                    </foreignObject>
+                </xsl:when>
+            </xsl:choose>
 
 
             <!-- Chips
@@ -1199,6 +1628,11 @@
                     </xsl:choose>
                 </xsl:for-each>
             </div>
+
+
+            <foreignObject width="0" height="0">
+                <iframe class="hiddenFrame" xmlns="http://www.w3.org/1999/xhtml" name="hiddenFrame"></iframe>
+            </foreignObject>
 
         </svg>
 
