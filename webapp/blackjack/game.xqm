@@ -14,8 +14,8 @@ declare namespace random = "http://basex.org/modules/random";
 declare variable $game:games := db:open("games")/games;
 declare variable $game:d := game:shuffleDeck();
 
-declare function game:getGame() {
-    $game:games/game
+declare function game:getGame($gameID as xs:string) {
+    $game:games/game[id = $gameID]
 };
 
 (:Zum testen der Datenbank:)
@@ -30,14 +30,9 @@ declare function game:createEmptyGame(){
 (: Spiel aus den Daten der Formulare instanzieren,
    Evenets sind wichtig für diverse Dinge, wie Protokolle oder Error messages,
    States sind wichtig um später bei der Transformation Knöpfe richtig ein und ausblenden zu können!:)
-declare function game:createGame($names as xs:string+, $balances as xs:integer+, $minBet as xs:integer,
-        $maxBet as xs:integer) as element(game){
+declare function game:createGame($minBet as xs:integer, $maxBet as xs:integer) as element(game){
     let $gameId := xs:string(uuid:randomUUID())
-    let $players := (for $i in (1 to fn:count($balances))
-    return (
-        player:createPlayer(xs:string(uuid:randomUUID()), card:emptyHand(), $minBet, $balances[$i],
-                $names[$i], fn:false(), $i)
-    ))
+
     return (
         <game>
             <id>{$gameId}</id>
@@ -48,11 +43,12 @@ declare function game:createGame($names as xs:string+, $balances as xs:integer+,
                     <text>Neues Spiel eröffnet, Viel Spass beim Spielen!</text>
                 </event>
             </events>
-            <state>bet</state>
+            <state>ready</state>
             <maxBet>{$maxBet}</maxBet>
             <minBet>{$minBet}</minBet>
-            <players>{$players}</players>
-            <activePlayer>{$players[1]/id/text()}</activePlayer>
+            <players></players>
+            <activePlayer></activePlayer>
+            <available>{fn:true()}</available>
             <dealer>
                 <currentHand></currentHand>
                 <bj>{fn:false()}</bj>
@@ -96,7 +92,10 @@ function game:setActivePlayer($gameID as xs:string){
     return (
         if (fn:not($oldPlayer/position = $count)) then (replace value of node $oldPlayerID with $newPlayerID)
         else (
-            if ($state = 'play') then (
+            if ($state = 'ready') then (
+                game:changeState($gameID, 'bet'),
+                replace value of node $game:games/game[id = $gameID]/available with fn:false()
+            ) else if ($state = 'play') then (
                 dealer:play($gameID),
                 game:changeState($gameID, 'evaluate'),
                 replace value of node $oldPlayerID with $players/player[1]/id/text(),
@@ -108,7 +107,8 @@ function game:setActivePlayer($gameID as xs:string){
             )
             else if ($state = "continue") then (
                     game:resetTable($gameID),
-                    game:changeState($gameID, 'bet'),
+                    game:changeState($gameID, 'ready'),
+                    replace value of node $game:games/game[id = $gameID]/available with $count < 5,
                     replace value of node $oldPlayerID with $players/player[1]/id/text()
                 )
 

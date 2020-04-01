@@ -98,6 +98,21 @@
 
                     </text>
                     <xsl:choose>
+                        <xsl:when test="$state = 'continue'">
+                            <text x="{$testButton1x - 10}" y="{$testButton1y - 35}" style="
+                                 font-weight: bold; font-size: 26pt" fill="white">Bereit?
+                            </text>
+                            <foreignObject height="50%" width="50%" x="{$testButton1x}"
+                                           y="{$testButton1y}">
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/ready/{$gameID}">
+                                    <button style="background:transparent; border:none; color:transparent;"
+                                            type="submit">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Check_green_icon.svg"
+                                             width="80"/>
+                                    </button>
+                                </form>
+                            </foreignObject>
+                        </xsl:when>
                         <xsl:when test="$state = 'bet'">
                             <foreignObject height="10%" width="10%" x="{$p1CurrentBetX - 50}"
                                            y="{$p1CurrentBetY + $radiusDummyChips + 10}">

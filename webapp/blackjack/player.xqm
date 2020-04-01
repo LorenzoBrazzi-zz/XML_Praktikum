@@ -6,14 +6,15 @@ import module namespace card = "bj/card" at "card.xqm";
 import module namespace game = "bj/game" at "game.xqm";
 import module namespace helper = "bj/helper" at "helper.xqm";
 import module namespace dealer = "bj/dealer" at "dealer.xqm";
+declare namespace uuid = "java:java.util.UUID";
 
 declare variable $player:games := db:open("games")/games;
 
 (: WERTE NUR ZUM TESTEN GEÄNDERT :)
-declare function player:createPlayer($id as xs:string, $currentHand as element(cards), $bet as xs:integer,
+declare function player:createPlayer($bet as xs:integer,
         $balance as xs:integer, $name as xs:string, $insurance as xs:boolean, $position as xs:integer) as element(player){
     <player>
-        <id>{$id}</id>
+        <id>{xs:string(uuid:randomUUID())}</id>
         <name>{$name}</name>
         <balance>{$balance}</balance>
         <currentHand>
