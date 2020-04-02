@@ -137,6 +137,16 @@ function controller:insertPlayer($gameID as xs:string) {
 };
 
 declare
+%rest:path("/bj/deletePlayer/{$gameID}/{$playerID}")
+%updating
+%rest:GET
+function controller:deletePlayer($gameID as xs:string, $playerID as xs:string) {
+    player:deletePlayer($gameID, $playerID),
+    update:output(web:redirect("/bj/startingPage"))
+};
+
+
+declare
 %rest:GET
 %output:method("html")
 %rest:path("/bj/join/{$gameID}/{$playerID}")
@@ -157,7 +167,7 @@ function controller:join($gameID as xs:string, $playerID as xs:string){
                 <link rel="stylesheet" type="text/css" href="/static/stylesheet.css"/>
             </head>
             <body>
-                <ws-stream id="bj" url="{$websocketURL}" subscription="{$subscription}" geturl="{$getURL}" oncloseurl="/bj/startingPage"/>
+                <ws-stream id="bj" url="{$websocketURL}" subscription="{$subscription}" geturl="{$getURL}" />
             </body>
         </html>
     return $html

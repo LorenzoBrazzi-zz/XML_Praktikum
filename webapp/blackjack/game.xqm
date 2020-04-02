@@ -99,6 +99,7 @@ function game:setActivePlayer($gameID as xs:string){
             ) else if ($state = 'play') then (
                 dealer:play($gameID),
                 game:changeState($gameID, 'evaluate'),
+
                 replace value of node $oldPlayerID with $players/player[1]/id/text(),
                 insert node $prot as first into $game:games/game[id = $gameID]/events
             )

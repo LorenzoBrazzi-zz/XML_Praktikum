@@ -28,6 +28,12 @@ declare function player:createPlayer($bet as xs:integer,
     </player>
 };
 
+declare
+%updating
+function player:deletePlayer($gameID as xs:string, $playerID as xs:string) {
+    let $player := $player:games/game[id = $gameID]/players/player[id = $playerID]
+    return (delete node $player)
+};
 
 (:Der Spieler wählt die Chips im View aus, welche dann hier automatisch konvertiert werden,
  um die Rechnung zu erleichtern. Diese Funktion initialisiert den Bet. Darauffolgende bet funktionen arbeiten nur auf Integer!

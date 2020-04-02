@@ -2,6 +2,7 @@ xquery version "3.0";
 
 module namespace bj-ws = "bj/websocket";
 import module namespace websocket = "http://basex.org/modules/Ws";
+import module namespace player = "bj/player" at "player.xqm";
 
 declare
 %ws-stomp:subscribe("/bj")
@@ -40,6 +41,9 @@ declare
 %ws:close("/bj")
 %updating
 function bj-ws:stompdisconnect(){
-    update:output(trace(concat("WS client disconnected with id ", websocket:id())))
-};
+    let $playerID := websocket:get(websocket:id(), "playerID")
+    let $gameID := websocket:get(websocket:id(), "gameID")
+    return (player:deletePlayer($gameID, $playerID),
+    update:output(trace(concat("WS client disconnected with id ", websocket:id()))))
 
+};
