@@ -318,28 +318,32 @@ function controller:setInsurance($gameID as xs:string){
 };
 
 declare
+%rest:path("bj/test/{$gameID}")
+%rest:GET
+function controller:test($gameID as xs:string){
+    let $g := dealer:play($gameID)
+    let $gg := game:setResult($g)
+    let $result := game:evaluateRound($gg)
+    return $result
+};
+
+declare
 %updating
 %rest:path("bj/continue/{$gameID}/{$continue}")
 %rest:POST
 function controller:continue($gameID as xs:string, $continue as xs:boolean) {
 (:Dummy weil es sonst nicht return:)let $x := 0
     return (
+        if($continue) then (
+            player:setContinue($gameID, $continue),
+            update:output(web:redirect(fn:concat("/bj/draw/", $gameID)))
+        ) else (
         player:setContinue($gameID, $continue),
-        update:output(web:redirect(fn:concat("/bj/draw/", $gameID)))
+        update:output(web:redirect("/bj/startingPage"))
+    )
     )
 };
 
-declare
-%updating
-%rest:path("bj/evaluate/{$gameID}")
-%rest:POST
-function controller:evaluate($gameID as xs:string) {
-(:Dummy weil es sonst nicht return:)let $x := 0
-    return (
-        player:setResult($gameID),
-        update:output(web:redirect(fn:concat("/bj/draw/", $gameID)))
-    )
-};
 
 (:https://www.youtube.com/watch?v=dbxBJWQPqZY hat gute buttons zum kopieren, kartensummen auch ganz cooles feature,
 win lose draw Symbole auch implementieren wie im Video,

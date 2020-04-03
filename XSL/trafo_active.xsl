@@ -130,7 +130,7 @@
                             </foreignObject>
                             <foreignObject height="10%" width="10%" x="{$testButton1x + 100}"
                                            y="{$testButton1y}">
-                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/continue/{$gameID}/false" method="POST" target="hiddenFrame">
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/continue/{$gameID}/false" method="POST">
                                     <button style="background:transparent; border:none; color:transparent;"
                                             type="submit">
                                         <img src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Cross_red_circle.svg"
@@ -168,7 +168,7 @@
                             </foreignObject>
                             <foreignObject height="10%" width="10%" x="{$testButton1x + 100}"
                                            y="{$testButton1y}">
-                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/continue/{$gameID}/false" method="POST" target="hiddenFrame">
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/continue/{$gameID}/false" method="POST">
                                     <button style="background:transparent; border:none; color:transparent;"
                                             type="submit">
                                         <img src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Cross_red_circle.svg"
@@ -259,7 +259,7 @@
                             </foreignObject>
                             <foreignObject height="10%" width="10%" x="{$testButton1x + 100}"
                                            y="{$testButton1y}">
-                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/continue/{$gameID}/false" method="POST" target="hiddenFrame">
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/continue/{$gameID}/false" method="POST" >
                                     <button style="background:transparent; border:none; color:transparent;"
                                             type="submit">
                                         <img src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Cross_red_circle.svg"
@@ -347,7 +347,7 @@
                             </foreignObject>
                             <foreignObject height="10%" width="10%" x="{$testButton1x + 100}"
                                            y="{$testButton1y}">
-                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/continue/{$gameID}/false" method="POST" target="hiddenFrame">
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/continue/{$gameID}/false" method="POST">
                                     <button style="background:transparent; border:none; color:transparent;"
                                             type="submit">
                                         <img src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Cross_red_circle.svg"
@@ -435,7 +435,7 @@
                             </foreignObject>
                             <foreignObject height="10%" width="10%" x="{$testButton1x + 100}"
                                            y="{$testButton1y}">
-                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/continue/{$gameID}/false" method="POST" target="hiddenFrame">
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/continue/{$gameID}/false" method="POST" >
                                     <button style="background:transparent; border:none; color:transparent;"
                                             type="submit">
                                         <img src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Cross_red_circle.svg"
@@ -523,7 +523,7 @@
                             </foreignObject>
                             <foreignObject height="10%" width="10%" x="{$testButton1x + 100}"
                                            y="{$testButton1y}">
-                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/continue/{$gameID}/false" method="POST" target="hiddenFrame">
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/continue/{$gameID}/false" method="POST">
                                     <button style="background:transparent; border:none; color:transparent;"
                                             type="submit">
                                         <img src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Cross_red_circle.svg"
