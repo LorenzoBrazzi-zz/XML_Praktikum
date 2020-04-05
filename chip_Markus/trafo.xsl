@@ -19,8 +19,6 @@
 
                 </body>
             </html>
-
-
         </xsl:for-each>
         <!-- SVG Defintionen für Chips-->
         <!-- default chip, other chips have the same features -->
