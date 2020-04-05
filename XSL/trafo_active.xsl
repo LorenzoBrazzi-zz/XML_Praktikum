@@ -618,7 +618,7 @@
                 </xsl:when>
             </xsl:choose>
             <xsl:choose>
-                <xsl:when test="$isInsurance='true' and $state='play'">
+                <xsl:when test="$isInsurance='true' and $state='play' and players/player[id = $activePlayer]/insurance/text() = 'false'">
                     <!-- wenn wir in der Insurance Phase sind ist dieser Knopf verfügbar -->
                     <foreignObject width="7%" height="13%" x="{$button4x}"
                                    y="{$buttonsy}">

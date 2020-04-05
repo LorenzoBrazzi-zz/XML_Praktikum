@@ -324,7 +324,6 @@ declare
 function controller:testDealOut($gameID as xs:string){
     controller:shuffle($gameID),
     game:dealOutCards($gameID),
-    dealer:setInsurance($gameID),
     update:output(web:redirect(fn:concat("/bj/draw/", $gameID)))
 };
 

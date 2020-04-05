@@ -159,6 +159,8 @@ function player:setInsurance($gameID as xs:string){
         </event>
 
     return (
+        (:Balance - 0.5 currentBet:)
+        replace value of node $player/balance with $player/balance - xs:integer(0.5*$player/currentBet),
         replace value of node $player/insurance with fn:true(),
         insert node $prot as first into $player:games/game[id = $gameID]/events
     )
