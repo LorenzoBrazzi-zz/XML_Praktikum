@@ -41,9 +41,5 @@ declare
 %ws:close("/bj")
 %updating
 function bj-ws:stompdisconnect(){
-    let $playerID := websocket:get(websocket:id(), "playerID")
-    let $gameID := websocket:get(websocket:id(), "gameID")
-    return (player:deletePlayer($gameID, $playerID),
-    update:output(trace(concat("WS client disconnected with id ", websocket:id()))))
-
+    update:output(trace(concat("WS client disconnected with id ", websocket:id())))
 };

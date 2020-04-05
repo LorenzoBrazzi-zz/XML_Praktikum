@@ -37,6 +37,11 @@
         <svg width="100%" height="100%" version="1.1" viewBox="0 0 1600 900"
              xmlns="http://www.w3.org/2000/svg">
 
+            <xsl:choose>
+                <xsl:when test="$state = 'deleted'"><text style="font-size:30pt">Spiel ist beendet</text></xsl:when>
+                <xsl:otherwise></xsl:otherwise>
+            </xsl:choose>
+
             <!-- Hintergrund -->
             <rect id="hintergrund" fill="#8a2c2c" width="1000%" height="1000%" x="-3000"/>
 

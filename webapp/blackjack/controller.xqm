@@ -7,7 +7,7 @@ import module namespace dealer = "bj/dealer" at "dealer.xqm";
 import module namespace rq = "http://exquery.org/ns/request";
 import module namespace helper = "bj/helper" at "helper.xqm";
 import module namespace ws = "bj/websocket" at "websocket.xqm";
-
+import module namespace websocket = "http://basex.org/modules/Ws";
 declare variable $controller:games := db:open("games")/games;
 declare variable $controller:lobby := doc("../static/lobby.xsl");
 declare variable $controller:staticPath := "../static/XSL/";
@@ -137,16 +137,6 @@ function controller:insertPlayer($gameID as xs:string) {
 };
 
 declare
-%rest:path("/bj/deletePlayer/{$gameID}/{$playerID}")
-%updating
-%rest:GET
-function controller:deletePlayer($gameID as xs:string, $playerID as xs:string) {
-    player:deletePlayer($gameID, $playerID),
-    update:output(web:redirect("/bj/startingPage"))
-};
-
-
-declare
 %rest:GET
 %output:method("html")
 %rest:path("/bj/join/{$gameID}/{$playerID}")
@@ -167,7 +157,7 @@ function controller:join($gameID as xs:string, $playerID as xs:string){
                 <link rel="stylesheet" type="text/css" href="/static/stylesheet.css"/>
             </head>
             <body>
-                <ws-stream id="bj" url="{$websocketURL}" subscription="{$subscription}" geturl="{$getURL}" />
+                <ws-stream id="bj" url="{$websocketURL}" subscription="{$subscription}" geturl="{$getURL}"/>
             </body>
         </html>
     return $html
@@ -197,23 +187,6 @@ function controller:draw($gameID as xs:string){
         return (ws:send($transformedGame, $destinationPath))
     )
 (:)return (controller:generatePage($game, $xslStylesheet, $title)):)
-};
-
-declare
-%rest:GET
-%rest:path("/bj/clients")
-function controller:clients(){
-    let $wsIDs := ws:getIDs()
-    return (
-        for $id in $wsIDs
-        where ws:get($id, "applicationID") = "bj"
-        let $bjUrl := ws:get($id, "bjUrl")
-        let $gameID := ws:get($id, "gameID")
-        let $playerID := ws:get($id, "playerID")
-        return (
-            $playerID
-        )
-    )
 };
 
 declare function controller:generatePage($game as element(game), $xslStylesheet as xs:string, $title as xs:string){
@@ -289,12 +262,15 @@ function controller:setBet($gameID as xs:string){
     let $bet := rq:parameter("bet", "")
     let $minBet := $controller:games/game[id = $gameID]/minBet
     let $maxBet := $controller:games/game[id = $gameID]/maxBet
+    let $activePlayerID := $controller:games/game[id = $gameID]/activePlayer/text()
+    let $player := $controller:games/game[id = $gameID]/players/player[id = $activePlayerID]
     let $err := <event>
         <time>{helper:currentTime()}</time>
         <type>error</type>
         <text>Fehler beim Einsatz!!! Der Einsatz muss mindestens {$minBet}, darf maximal {$maxBet} oder
             deinen aktuellen Kontostand nicht übersteigen!</text>
     </event>
+
     return (
         if ($bet = "") then (
             insert node $err as first into $controller:games/game[id = $gameID]/events,
@@ -332,18 +308,9 @@ declare
 %rest:path("bj/continue/{$gameID}/{$continue}")
 %rest:POST
 function controller:continue($gameID as xs:string, $continue as xs:boolean) {
-(:Dummy weil es sonst nicht return:)let $x := 0
-    return (
-        if($continue) then (
-            player:setContinue($gameID, $continue),
-            update:output(web:redirect(fn:concat("/bj/draw/", $gameID)))
-        ) else (
-        player:setContinue($gameID, $continue),
-        update:output(web:redirect("/bj/startingPage"))
-    )
-    )
+    player:setContinue($gameID, $continue),
+    update:output(web:redirect(fn:concat("/bj/draw/", $gameID)))
 };
-
 
 (:https://www.youtube.com/watch?v=dbxBJWQPqZY hat gute buttons zum kopieren, kartensummen auch ganz cooles feature,
 win lose draw Symbole auch implementieren wie im Video,

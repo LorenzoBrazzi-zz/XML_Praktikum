@@ -217,6 +217,7 @@
                     text-align: center;
                     }
                 </style>
+
                 <foreignObject height="50%" width="50%" x="0"
                                y="100">
                     <form xmlns="http://www.w3.org/1999/xhtml" style="flex-direction: column; align-items: stretch; display:flex; flex-flow:column wrap; align-items: center;" action="/bj/form" id="form2" >
@@ -242,6 +243,7 @@
                                     </form>
                                 </div>
                             </xsl:when>
+                            <xsl:when test="state='deleted'"></xsl:when>
                             <xsl:otherwise>
                                 <div style="border: 1px solid black; border-radius: 25px; margin-bottom: 10px">
                                     <form action="/bj/insertPlayer/{$gameID}" style="margin-top: 2.5%; margin-left: 2%; flex-direction: column; align-items: stretch; display:flex; flex-flow:row wrap; align-items: center;" id="joinForm">

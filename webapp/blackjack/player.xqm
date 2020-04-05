@@ -13,7 +13,7 @@ declare variable $player:games := db:open("games")/games;
 (: WERTE NUR ZUM TESTEN GEÄNDERT :)
 declare function player:createPlayer($bet as xs:integer,
         $balance as xs:integer, $name as xs:string, $insurance as xs:boolean, $position as xs:integer) as element(player){
-    <player>
+    <player continues="true">
         <id>{xs:string(uuid:randomUUID())}</id>
         <name>{$name}</name>
         <balance>{$balance}</balance>
@@ -26,13 +26,6 @@ declare function player:createPlayer($bet as xs:integer,
         <position>{$position}</position>
         <won bj="false" draw="false">{fn:false()}</won>
     </player>
-};
-
-declare
-%updating
-function player:deletePlayer($gameID as xs:string, $playerID as xs:string) {
-    let $player := $player:games/game[id = $gameID]/players/player[id = $playerID]
-    return (delete node $player)
 };
 
 (:Der Spieler wählt die Chips im View aus, welche dann hier automatisch konvertiert werden,
@@ -50,6 +43,7 @@ function player:setBet($gameID as xs:string, $bet as xs:integer) {
     let $activePlayerNewBalance := $path/balance - $bet
     let $maxBet := $player:games/game[id = $gameID]/maxBet
     let $minBet := $player:games/game[id = $gameID]/minBet
+    let $balance := $path/balance
     let $err := <event>
         <time>{helper:currentTime()}</time>
         <type>error</type>
@@ -58,19 +52,13 @@ function player:setBet($gameID as xs:string, $bet as xs:integer) {
     </event>
 
     return (
-    (: Falls die Balance unter 5 geht dann wird der Spieler entfernt da er dann verloren hat :)
-    if ($bet > $path/balance or $bet > $maxBet or $bet < $minBet) then (
-    (: Error message und ggf neue eingabe :)
-    insert node $err as first into $player:games/game[id = $gameID]/events
-    )
-    else (
-        if ($activePlayerNewBalance <= 0) then ( delete node $path)
-        else (
+        if ($bet > $path/balance or $bet > $maxBet or $bet < $minBet) then (
+        insert node $err as first into $player:games/game[id = $gameID]/events
+    ) else (
             replace value of node $path/currentBet with xs:integer($bet),
-            replace value of node $path/balance with $activePlayerNewBalance
-        ),
+            replace value of node $path/balance with $activePlayerNewBalance,
         if (game:isRoundCompleted($gameID)) then (game:changeState($gameID, 'play'), game:dealOutCards($gameID), game:setActivePlayer($gameID)) else (game:setActivePlayer($gameID))
-    )
+        )
     )
 };
 
@@ -239,13 +227,11 @@ function player:setContinue($gameID as xs:string, $continue as xs:boolean){
     let $player := $player:games/game[id = $gameID]/players/player[id = $activePlayerID]
     let $count := fn:count($player:games/game[id = $gameID]/players/player)
     return (
-        if ($continue) then () else (
-            if ($count = 0) then (
-                replace value of node $player:games/game[id = $gameID]/available with fn:true(),
-                game:changeState($gameID, "ready")
-            ) else (),
-            delete node $player),
-        game:setActivePlayer($gameID)
+        if ($player/position = $count) then (game:finishRound($gameID, $continue))
+        else (
+            if ($continue or ($player/balance <= 0)) then () else (replace value of node $player/@continues with 'false'),
+            game:setActivePlayer($gameID)
+        )
     )
 
 };
