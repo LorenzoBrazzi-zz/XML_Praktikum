@@ -1,22 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet href="trafo.xsl" type="text/xsl" ?>
-
+<chip></chip>
 <chips>
     <chip>
-        <value>1</value>
+        <value>5</value>
         <color>white</color>
     </chip>
     <chip>
-        <value>5</value>
+        <value>10</value>
         <color>red</color>
     </chip>
     <chip>
-        <value>25</value>
+        <value>20</value>
         <color>green</color>
     </chip>
     <chip>
-        <value>100</value>
+        <value>50</value>
         <color>black</color>
+    </chip>
+    <chip>
+        <value>100</value>
+        <color>blue</color>
     </chip>
     <chip>
         <value>500</value>
