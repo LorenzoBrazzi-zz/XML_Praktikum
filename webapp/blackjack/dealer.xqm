@@ -8,19 +8,24 @@ import module namespace helper = "bj/helper" at "helper.xqm";
 
 declare variable $dealer:games := db:open("games")/games;
 
-declare function dealer:numberofDrawingCard($gameID as xs:string, $currentVal as xs:integer, $result as xs:integer) as xs:integer{
-    let $card := game:drawCard($gameID, ($result + 1))
+declare function dealer:numberofDrawingCard($game as element(game), $currentVal as xs:integer, $result as xs:integer) as xs:integer{
+    let $card := (
+        let $deck := $game/cards
+        let $c := $deck/card[$result + 1]
+
+        return $c
+    )
     let $cardVal := dealer:newCardValue($card, $currentVal)
     return (
         if ($currentVal >= 17) then ($result)
         else (
-            dealer:numberofDrawingCard($gameID, ($currentVal + $cardVal), ($result + 1))
+            dealer:numberofDrawingCard($game, ($currentVal + $cardVal), ($result + 1))
         )
     )
 };
 
-declare function dealer:calculateCardValue($gameID as xs:string) as xs:integer {
-    let $dealer := $player:games/game[id = $gameID]/dealer
+declare function dealer:calculateCardValue($game as element(game)) as xs:integer {
+    let $dealer := $game/dealer
 
     let $amoutOfAces := (
         sum(
@@ -60,41 +65,49 @@ declare function dealer:newCardValue($card as element(card), $val as xs:integer)
 };
 
 
-declare
-%updating
-function dealer:turnCard($gameID as xs:string){
-    let $hand := $dealer:games/game[id = $gameID]/dealer/currentHand
-    let $cards := $hand/card
-    for $i in $cards
-    return replace value of node $i/hidden with false()
-};
-
-
-declare
-%updating
-function dealer:drawCard($gameID as xs:string) {
-    let $hand := $dealer:games/game[id = $gameID]/dealer/currentHand
-    let $val := dealer:calculateCardValue($gameID)
-    let $amount := dealer:numberofDrawingCard($gameID, $val, 0)
-    let $deck := game:getDeck($gameID)
-
-    return (
-        for $i in (1 to $amount)
-        return (
-            insert node $deck/card[$i] into $hand
-        ),
-        for $i in (1 to $amount)
-        return (
-            game:popDeck($gameID)
-        ))
+declare function dealer:turnCard($gameID as xs:string) as element(game){
+    let $g := (
+        copy $c := game:getGame($gameID)
+        modify (
+            let $cards := $c/dealer/currentHand
+            for $i in $cards/card
+            return replace value of node $i/hidden with false()
+        )
+        return $c
+    )
+    return $g
 
 };
 
-declare
-%updating
-function dealer:play($gameID as xs:string){
-    dealer:turnCard($gameID),
-    dealer:drawCard($gameID)
+
+declare function dealer:drawCard($game as element(game)) as element(game) {
+    let $result :=(
+        copy $c := $game
+        modify (
+            let $hand := $c/dealer/currentHand
+            let $val := dealer:calculateCardValue($c)
+            let $amount := dealer:numberofDrawingCard($c, $val, 0)
+            let $deck := $c/cards
+
+            return (
+                for $i in (1 to $amount)
+                return (
+                    insert node $deck/card[$i] into $hand
+                ),
+                for $i in (1 to $amount)
+                return (
+                   delete node $deck/card[1]
+                ))
+        )
+        return $c
+    )
+    return $result
+
+
+};
+
+declare function dealer:play($gameID as xs:string) as element(game){
+    dealer:drawCard(dealer:turnCard($gameID))
 };
 
 declare

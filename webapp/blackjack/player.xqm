@@ -237,9 +237,14 @@ declare
 function player:setContinue($gameID as xs:string, $continue as xs:boolean){
     let $activePlayerID := $player:games/game[id = $gameID]/activePlayer
     let $player := $player:games/game[id = $gameID]/players/player[id = $activePlayerID]
+    let $count := fn:count($player:games/game[id = $gameID]/players/player)
     return (
-        game:evaluateRound($gameID, $activePlayerID),
-        if ($continue) then () else (delete node $player),
+        if ($continue) then () else (
+            if ($count = 0) then (
+                replace value of node $player:games/game[id = $gameID]/available with fn:true(),
+                game:changeState($gameID, "ready")
+            ) else (),
+            delete node $player),
         game:setActivePlayer($gameID)
     )
 
@@ -282,55 +287,5 @@ function player:payoutDraw($gameID as xs:string, $playerID as xs:string){
     let $newBalance := $player/balance + xs:integer($player/currentBet)
     return (
         replace value of node $player/balance with $newBalance
-    )
-};
-
-declare
-%updating
-function player:setResult($gameID as xs:string) {
-    let $players := $game:games/game[id = $gameID]/players
-    let $activePlayer := $player:games/game[id = $gameID]/activePlayer
-    let $p := $player:games/game[id = $gameID]/players/player[id = $activePlayer]
-    let $dealerCardsValue := dealer:calculateCardValue($gameID)
-
-    return (
-        (: Falls der Dealer einen Blackjack hat, verlieren automatisch alle Spieler die keinen Blackjack haben:)
-        if (game:dealerHasBJ($gameID)) then (
-            let $numberOfCards := fn:count($p/currentHand/cards/card)
-            let $playerCardValue := player:calculateCardValuePlayers($gameID, $p/id/text())
-            return (
-                if (fn:not(($playerCardValue = 21) and ($numberOfCards = 2))) then (
-                    replace value of node $p/won with fn:false()
-                )
-                else (
-                    replace node $p/won with (
-                        <won bj="true" draw="true">{fn:true()}</won>
-                    )
-                ))
-        (:Falls der Dealer keinen Blackjack hat:)
-        ) else (
-            let $numberOfCards := fn:count($p/currentHand/cards/card)
-            let $playerCardValue := player:calculateCardValuePlayers($gameID, $p/id/text())
-            return (
-            (:Spieler hat einen Blackjack, Sieg weil die Funktionsstelle nur erreicht, wenn der Dealer kein Blackjack:)
-            if (($playerCardValue = 21) and ($numberOfCards = 2)) then (
-                replace node $p/won with (
-                    <won bj="true" draw="false">{fn:true()}</won>
-                )
-            )
-            (:Dealer hat über 21:)
-            else if ($dealerCardsValue > 21 and $playerCardValue <= 21) then (
-                replace value of node $p/won with fn:true()
-            )
-            (:Spieler verliert, über 21 oder weniger als Dealer:)
-            else if (($playerCardValue) > 21 or (($dealerCardsValue >= $playerCardValue) and ($dealerCardsValue <= 21)))
-                then ( replace value of node $p/won with fn:false())
-                else (
-                    (:Letzte möglicher Ausgang ist, dass der Spieler gewinnt ohne einen Blackjack zu haben:)
-                    replace value of node $p/won with fn:true()
-                    )
-            )
-        ),
-        game:setActivePlayer($gameID)
     )
 };

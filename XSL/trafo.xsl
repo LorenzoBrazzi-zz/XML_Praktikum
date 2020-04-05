@@ -1192,8 +1192,7 @@
                             </div>
                         </xsl:when>
                         <xsl:otherwise>
-                            <div>
-                                [<xsl:value-of select="time"/>]
+                            <div>[<xsl:value-of select="time"/>]
                                 <xsl:value-of select="text"/>
                             </div>
                         </xsl:otherwise>
