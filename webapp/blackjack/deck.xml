@@ -64,7 +64,7 @@
 	<card>
 		<value>5</value>
 		<color>Spade</color>
-		<hidden>true</hidden>
+		<hidden>false</hidden>
 	</card>
 	<card>
 		<value>5</value>

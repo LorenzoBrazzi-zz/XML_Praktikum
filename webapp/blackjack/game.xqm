@@ -103,20 +103,18 @@ function game:setActivePlayer($gameID as xs:string){
                 let $result := game:evaluateRound($gg)
                 return replace node $game:games/game[id = $gameID] with $result
             )
-            else if ($state = "continue") then (
-                    game:resetTable($gameID),
-                    game:changeState($gameID, 'ready'),
-                    replace value of node $game:games/game[id = $gameID]/available with $count < 5,
-                    replace value of node $oldPlayerID with $players/player[1]/id/text()
-                )
-
-                else (replace value of node $oldPlayerID with $players/player[1]/id/text())
+            else (replace value of node $oldPlayerID with $players/player[1]/id/text())
         )
     )
+};
 
-(: WIR MÜSSEN NOCH DEN FALL ABCHECNKEN WENN KEIN SPIELER MEHR DA IST ALSO WENN activePlayer = ""
-    --> Wir haben doch die Position IDs mit Zahlen von 1 bis 5 gemacht, somit können wir einfach den Spieler dann
-    aufrufen, der an Pos 1 sitzt:)
+declare
+%updating
+function game:finishRound($gameID as xs:string, $continue as xs:boolean) {
+    let $g := game:resetTable($gameID, $continue)
+    let $gg := game:assignPositions($g)
+    let $result := game:prepareGame($gg)
+    return(replace node $game:games/game[id = $gameID] with $result)
 };
 
 declare function game:getPlayerNames($gameID as xs:string){
@@ -220,7 +218,15 @@ function game:dealOutCards($gameID as xs:string){
                     <hidden>{fn:true()}</hidden>
                 </card>
             )
+
             return (
+                if ($g/cards/card[11]/value = 'A') then (
+                    replace value of node $dealer/isInsurance with fn:true(),
+                    if (($second_modified/value = "K") or ($second_modified/value = "Q") or ($second_modified/value = "B") or ($second_modified/value = "10"))
+                    then (
+                        replace value of node $dealer:games/game[id = $gameID]/dealer/bj with fn:true()
+                    ) else ()
+                ) else (),
                 insert node $g/cards/card[11] into $dealer/currentHand,
                 insert node $second_modified into $dealer/currentHand,
                 delete node $g/cards/card[11],
@@ -249,9 +255,9 @@ declare function game:dealerHasBJ($game as element(game)) as xs:boolean {
 
 declare
 %private
-function game:isInsurancePossible($game as element(game)) as xs:boolean {
+function game:hasBJ($game as element(game)) as xs:boolean {
     let $dealer := $game/dealer
-    return $dealer/isInsurance
+    return $dealer/isInsurance and $dealer/bj
 };
 
 declare
@@ -283,8 +289,12 @@ declare function game:evaluateRound($game as element(game)) as element(game) {
             ) else if (game:playerWon($c, $p/id/text())) then (
                 let $newBalance := $p/balance + $p/currentBet * 2
                 return replace value of node $p/balance with $newBalance
-            ) else if ((game:isInsurancePossible($c)) and (game:playerHasInsurance($c, $p/id/text()))) then (
-                let $newBalance := $p/balance + xs:integer($p/currentBet * 0.5)
+            ) else if (game:playerHasInsurance($c, $p/id/text())) then (
+                let $newBalance := (
+                    if (game:isInsurancePossible($c)) then ($p/balance + xs:integer($p/currentBet * 0.5))
+                    else ()
+                    )
+
                 return replace value of node $p/balance with $newBalance
             (:Da das erste if ein Unentschieden ausschließt, wird hier nur auf ein Sieg geachtet:)
             ) else if ($playerWon/@bj/string() = "true") then (
@@ -302,22 +312,76 @@ declare function game:evaluateRound($game as element(game)) as element(game) {
 };
 
 
-declare
-%updating
-function game:resetTable($gameID){
+declare function game:resetTable($gameID as xs:string, $continue as xs:boolean) as element(game){
     let $game := $game:games/game[id = $gameID]
-    let $deck := game:shuffleDeck()
-    let $dealer := $game:games/game[id = $gameID]/dealer
-    return (
-        for $p in $game/players/player
-        return (
-            replace node $p/currentHand/cards with <cards></cards>,
-            replace node $p/won with <won bj="false" draw="false">{fn:false()}</won>
-        ),
-        replace node $dealer/currentHand with <currentHand></currentHand>,
-        replace node $game/cards with $deck
+    let $result := (
+        copy $c := $game
+        modify (
+            let $deck := game:shuffleDeck()
+            let $dealer := $c/dealer
+            return (
+                for $p in $c/players/player
+                let $err2 := <event>
+                    <time>{helper:currentTime()}</time>
+                    <type>error</type>
+                    <text>{$p/name/text()} hat nicht mehr genügend Geld! Pfiat di ;D</text>
+                </event>
+                return (
+                    if (xs:integer($p/balance) < $c/minBet) then (
+                        insert node $err2 as first into $c/events,
+                        delete node $p
+                    )
+                    else if ($p/@continues/string() ='true' and $continue) then (
+                        replace value of node $p/currentBet with 0,
+                        replace node $p/currentHand/cards with <cards></cards>,
+                        replace node $p/won with <won bj="false" draw="false">{fn:false()}</won>
+                    ) else (delete node $p)
+                ),
+                replace node $dealer/currentHand with <currentHand></currentHand>,
+                replace node $c/cards with $deck
+            )
+        )
+        return $c
     )
+    return $result
+};
 
+declare function game:assignPositions($game as element(game)) as element(game) {
+    let $result := (
+        copy $c := $game
+        modify (
+            let $count := count($c/players/player)
+            return (
+               for $i in (1 to $count)
+               return (
+                   replace value of node $c/players/player[$i]/position with $i
+               )
+            )
+        )
+        return $c
+    )
+    return $result
+};
+
+declare function game:prepareGame($game as element(game)) as element(game) {
+    let $result := (
+        copy $c := $game
+        modify(
+            let $count := fn:count($c/players/player)
+            let $oldPlayerID := $c/activePlayer
+                return (
+                    if ($count = 0) then (
+                        replace value of node $c/state with 'deleted'
+                    ) else (
+                        replace value of node $c/state with "ready",
+                        replace value of node $c/available with $count < 5,
+                        replace value of node $oldPlayerID with $c/players/player[1]/id/text()
+                    )
+                )
+            )
+        return $c
+    )
+    return $result
 };
 
 declare
