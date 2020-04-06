@@ -1,1 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%"><defs><h id="default-chip"><circle r="8" stroke="blue" stroke-width="3" fill="white"/></h></defs><defs><text id="chip-value-1" font-size="11.5" fill="black">1</text></defs><defs><text id="chip-value-5" font-size="11.5" fill="black">5</text></defs><defs><text id="chip-value-25" font-size="11.5" fill="black">25</text></defs><defs><text id="chip-value-100" font-size="11.5" fill="black">100</text></defs><defs><text id="chip-value-500" font-size="11.5" fill="black">500</text></defs><defs><text id="chip-value-1000" font-size="11.5" fill="black">1000</text></defs><defs><g id="chip-1"><use xlink:href="#default-chip"/><use xlink:href="#chip-value-1" x="-2" y="5"/></g></defs><defs><g id="chip-5"><use xlink:href="#default-chip"/><use xlink:href="#chip-value-5" x="-5" y="5"/></g></defs><defs><g id="chip-25"><use xlink:href="#default-chip"/><use xlink:href="#chip-value-25" x="-5" y="5"/></g></defs><defs><g id="chip-100"><use xlink:href="#default-chip"/><use xlink:href="#chip-value-100" x="-8.5" y="5"/></g></defs><defs><g id="chip-500"><use xlink:href="#default-chip"/><use xlink:href="#chip-value-500" x="-8.5" y="5"/></g></defs><defs><g id="chip-1000"><use xlink:href="#default-chip"/><use xlink:href="#chip-value-1000" x="-8.5" y="5"/></g></defs></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1000px" height="1000px">
+    <circle cx="500" cy="500" r="400" fill="black"/>
+    <circle cx="500" cy="500" r="290" fill="white"/>
+    <circle cx="500" cy="500" r="280" fill="black"/>
+    <path d="M500 100 V 180  C 600 180, 650 210 ,700 250 L 752 190" fill = "transparent" stroke="white"/>
+    <path d="M500 100 V 180  C 600 180, 650 210 ,700 250 L 752 190" fill = "transparent" stroke="white"/>
+</svg>
