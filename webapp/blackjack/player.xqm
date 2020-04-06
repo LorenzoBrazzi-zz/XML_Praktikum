@@ -116,7 +116,7 @@ function player:hit($gameID as xs:string){
     let $err := <event>
         <time>{helper:currentTime()}</time>
         <type>error</type>
-        <text>An 21 leider vorbeigeschosse :((</text>
+        <text>An 21 leider vorbeigeschossen :((</text>
     </event>
     let $prot := <event>
         <time>{helper:currentTime()}</time>
@@ -132,11 +132,11 @@ function player:hit($gameID as xs:string){
 er schließlich schon verloren hat. Demnach muss der nöchste activePlayer gesetted werden!:)
     return (
         if ($score > 21) then (
-            insert node $err as first into $player:games/game[id = $gameID]/events,
-            game:setActivePlayer($gameID)
+            insert node $err as first into $player:games/game[id = $gameID]/events
         )
         else if ($score = 21) then (
-            insert node $win as first into $player:games/game[id = $gameID]/events
+            insert node $win as first into $player:games/game[id = $gameID]/events,
+            game:setActivePlayer($gameID)
         )
         (:Wenn er Hitted, dann erhält der aktiveSpieler ganz einfach ne neue Karte. Jetzt kann er wieder einen Knopf seiner
     Wahl drücken.:)

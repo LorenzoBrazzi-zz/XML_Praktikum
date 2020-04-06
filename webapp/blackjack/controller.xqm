@@ -89,8 +89,18 @@ declare
 %rest:path("/bj/form")
 %rest:GET
 function controller:startGame() {
-    let $minBet := rq:parameter("minBet", 0)
-    let $maxBet := rq:parameter("maxBet", 100)
+    let $minBet := (
+        let $valueMinBet := rq:parameter("minBet", 0)
+        return(
+            if ($valueMinBet = "") then 10 else $valueMinBet
+        )
+    )
+    let $maxBet := (
+        let $valueMaxBet := rq:parameter("maxBet", 100)
+        return (
+            if ($valueMaxBet = "") then 100 else $valueMaxBet
+        )
+    )
 
     let $game := game:createGame($minBet, $maxBet)
     let $name := rq:parameter("name", "")
@@ -104,8 +114,11 @@ function controller:startGame() {
         return $g
     )
     return (
-        game:insertGame($endGame),
-        update:output(web:redirect(fn:concat("/bj/join/", $game/id/text(), "/", $player/id/text())))
+        if ($minBet > $maxBet) then (update:output(web:redirect("/bj/startingPage")))
+        else (
+            game:insertGame($endGame),
+            update:output(web:redirect(fn:concat("/bj/join/", $game/id/text(), "/", $player/id/text())))
+        )
     )
 };
 

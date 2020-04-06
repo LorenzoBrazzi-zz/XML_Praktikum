@@ -37,6 +37,46 @@
         <svg width="100%" height="100%" version="1.1" viewBox="0 0 1600 900"
              xmlns="http://www.w3.org/2000/svg">
 
+            <style>
+
+                .notifications {
+                    position:absolute;
+                    top:20;
+                    right:30;
+                    height:20%;
+                    width:30%;
+                    border:1px solid #ccc;
+                    font:16px/26px;
+                    overflow:auto;
+                    font-family:'Courier New',Verdana,sans-serif;
+                    background-color: white;
+                    border-radius: 15px;
+                    padding: 10px;
+                    padding-top: 3px;
+                    padding-left:3px;
+                    box-shadow: 1px 1px 25px #46464f
+                }
+
+
+                .glow {
+                font-size: 30px;
+                color: #fff;
+                text-align: center;
+                -webkit-animation: glow 1s ease-in-out infinite alternate;
+                -moz-animation: glow 1s ease-in-out infinite alternate;
+                animation: glow 1s ease-in-out infinite alternate;
+                }
+
+                @-webkit-keyframes glow {
+                from {
+                text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
+                }
+                to {
+                text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+                }
+                }
+            </style>
+
             <xsl:choose>
                 <xsl:when test="$state = 'deleted'"><text style="font-size:30pt">Spiel ist beendet</text></xsl:when>
                 <xsl:otherwise></xsl:otherwise>
@@ -55,15 +95,15 @@
 
             <!-- Karten- und Einsatzpositionen-->
             <circle cx="{$player1x}" cy="{$player1y}" r="{$radiusPlayer}"
-                    style="fill:none;stroke:white;stroke-width:4"/>
+                    style="fill:none;stroke:white;stroke-width:2.5"/>
             <circle cx="{$player2x}" cy="{$player2y}" r="{$radiusPlayer}"
-                    style="fill:none;stroke:white;stroke-width:4"/>
+                    style="fill:none;stroke:white;stroke-width:2.5"/>
             <circle cx="{$player3x}" cy="{$player3y}" r="{$radiusPlayer}"
-                    style="fill:none;stroke:white;stroke-width:2"/>
+                    style="fill:none;stroke:white;stroke-width:2.5"/>
             <circle cx="{$player4x}" cy="{$player4y}" r="{$radiusPlayer}"
                     style="fill:none;stroke:white;stroke-width:2.5"/>
             <circle cx="{$player5x}" cy="{$player5y}" r="{$radiusPlayer}"
-                    style="fill:none;stroke:white;stroke-width:3"/>
+                    style="fill:none;stroke:white;stroke-width:2.5"/>
 
             <!-- Aktueller Einsatz Dummy -->
             <circle cx="{$p1CurrentBetX}" cy="{$p1CurrentBetY}" r="{$radiusDummyChips}"
@@ -87,6 +127,7 @@
                 <xsl:value-of select="$player5/currentBet"/>
             </circle>
 
+            <text y="100" style="font-size: 25pt; text-shadow: 1px 1px 20px #00008b;" fill="#f08441" font-family="Arial"><xsl:value-of select="concat(players/player[id = $activePlayer]/name/text(), ' macht grade seinen Zug')"/> </text>
 
             <!-- Spielernamen, wenn aktiver Spieler, dann gelb hervorheben sonst normal
             Aufgabe: du müsstest es so anpassen dass man merkt wer der aktive Spieler ist, entweder wie hier den textstyle
@@ -96,7 +137,7 @@
                 <xsl:when test="$player1/id = $activePlayer">
                     <text x="{$player1x}" y="{$player1y + $radiusPlayer + $zeilenAbstand}" font-family="Arial"
                           font-style="italic"
-                          font-size="{$spielerNamenTextSize + 10}" fill="yellow" text-anchor="middle">
+                          class="glow" fill="yellow" text-anchor="middle">
 
                         <xsl:value-of select="$player1/name"/>
 
@@ -115,7 +156,7 @@
             <xsl:choose>
                 <xsl:when test="$player2/id = $activePlayer">
                     <text x="{$player2x}" y="{$player2y + $radiusPlayer + $zeilenAbstand}" font-family="Arial"
-                          font-size="{$spielerNamenTextSize + 5}" fill="yellow" text-anchor="middle">
+                          class="glow" fill="yellow" text-anchor="middle">
                         <xsl:value-of select="$player2/name"/>
                     </text>
 
@@ -131,7 +172,7 @@
             <xsl:choose>
                 <xsl:when test="$player3/id = $activePlayer">
                     <text x="{$player3x}" y="{$player3y + $radiusPlayer + $zeilenAbstand}" font-family="Arial"
-                          font-size="{$spielerNamenTextSize + 5}" fill="yellow" text-anchor="middle">
+                          class="glow" fill="yellow" text-anchor="middle">
                         <xsl:value-of select="$player3/name"/>
                     </text>
 
@@ -147,7 +188,7 @@
             <xsl:choose>
                 <xsl:when test="$player4/id = $activePlayer">
                     <text x="{$player4x}" y="{$player4y + $radiusPlayer + $zeilenAbstand}" font-family="Arial"
-                          font-size="{$spielerNamenTextSize + 5}" fill="yellow" text-anchor="middle">
+                          class="glow" fill="yellow" text-anchor="middle">
                         <xsl:value-of select="$player4/name"/>
                     </text>
 
@@ -163,7 +204,7 @@
             <xsl:choose>
                 <xsl:when test="$player5/id = $activePlayer">
                     <text x="{$player5x}" y="{$player5y + $radiusPlayer + $zeilenAbstand}" font-family="Arial"
-                          font-size="{$spielerNamenTextSize + 5}" fill="yellow" text-anchor="middle">
+                          class="glow" fill="yellow" text-anchor="middle">
                         <xsl:value-of select="$player5/name"/>
                     </text>
 
@@ -1188,7 +1229,7 @@
 
             </xsl:for-each>
 
-            <div style="position:absolute;top:20;right:30;height:20%;width:30%;border:1px solid #ccc;font:16px/26px; overflow:auto;font-family:'Courier New',Verdana,sans-serif; background-color: white; border-radius: 15px; padding: 10px; padding-top: 3px; padding-left:3px">
+            <div class="notifications">
                 <xsl:for-each select="events/event">
                     <xsl:choose>
                         <xsl:when test="type='error'">

@@ -42,6 +42,11 @@ declare function game:createGame($minBet as xs:integer, $maxBet as xs:integer) a
                     <type>protocol</type>
                     <text>Neues Spiel eröffnet, Viel Spass beim Spielen!</text>
                 </event>
+                <event>
+                    <time>{helper:currentTime()}</time>
+                    <type>protocol</type>
+                    <text>Jeder Spieler startet mit 10.000 balance</text>
+                </event>
             </events>
             <state>ready</state>
             <maxBet>{$maxBet}</maxBet>

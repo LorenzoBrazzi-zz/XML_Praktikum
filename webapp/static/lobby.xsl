@@ -218,17 +218,16 @@
                     }
                 </style>
 
-                <foreignObject height="50%" width="50%" x="0"
-                               y="100">
+                    <div style="position:absolute;top:400;left:100; height: 70%; width: 50%">
                     <form xmlns="http://www.w3.org/1999/xhtml" style="flex-direction: column; align-items: stretch; display:flex; flex-flow:column wrap; align-items: center;" action="/bj/form" id="form2" >
-                        <input type="text" style="height: 50px; width: 80%" name="name" placeholder="Name to start game with"/>
-                        <input type="number" style="height: 50px; width: 80%" name="minBet" placeholder="Minimum Bet"/>
-                        <input type="number" style="height: 50px; width: 80%" name="maxBet" placeholder="Maximum Bet"/>
-                        <button class="green button" style="margin-top: 15px" type="submit" form="form2" value="Submit" id="startGame">Create game</button>
+                        <input type="text" style="height: 60px; width: 80%" name="name" placeholder="Name to start game with"/>
+                        <input type="number" style="height: 60px; width: 80%" name="minBet" placeholder="Minimum Bet"/>
+                        <input type="number" style="height: 60px; width: 80%" name="maxBet" placeholder="Maximum Bet"/>
+                        <button class="button large green" style="margin-top: 15px" type="submit" form="form2">Create game</button>
                     </form>
-                </foreignObject>
+                    </div>
 
-                <div style="position:absolute;top:20;right:30;height:45%;width:30%;border:1px solid #ccc;font:16px/26px; overflow:auto; background-color: white; border-radius: 15px; padding: 10px; padding-top: 3px; padding-left:3px; margin-bottom: 20px">
+                <div style="position:absolute;top:20;right:30;height:80%;width:30%;border:1px solid #ccc;font:16px/26px; overflow:auto; background-color: white; border-radius: 15px; padding: 10px; padding-top: 3px; padding-left:3px; margin-bottom: 20px;">
                    <div style="width:100%; height:10%; text-align:center;"><p style="font-weight: bold; font-size: 20px">SELECT A GAME YOU WANT TO JOIN</p></div>
                     <xsl:for-each select="games/game">
                         <xsl:variable name="gameID" select="id"/>
@@ -244,32 +243,6 @@
                                 </div>
                             </xsl:when>
                             <xsl:when test="state='deleted'"></xsl:when>
-                            <xsl:otherwise>
-                                <div style="border: 1px solid black; border-radius: 25px; margin-bottom: 10px">
-                                    <form action="/bj/insertPlayer/{$gameID}" style="margin-top: 2.5%; margin-left: 2%; flex-direction: column; align-items: stretch; display:flex; flex-flow:row wrap; align-items: center;" id="joinForm">
-                                        <div style="color:black !important; margin-right: 10px">Game is full or being played</div>
-                                        <div style="color:red !important; font-weight:bold; margin-left:15px">Players: <xsl:value-of select="$players"/></div>
-                                        <button form="joinForm" class="small blue button" style="margin-left: auto; margin-right: 10px" type="submit" disabled="">Join</button>
-                                    </form>
-                                </div>
-                            </xsl:otherwise>
-                        </xsl:choose>
-                    </xsl:for-each>
-                </div>
-                <div style="position:absolute;bottom:20;right:30;height:45%;width:30%;border:1px solid #ccc;font:16px/26px; overflow:auto; background-color: white; border-radius: 15px; padding: 10px; padding-top: 3px; padding-left:3px">
-                    <xsl:for-each select="games/game">
-                        <xsl:variable name="gameID" select="id"/>
-                        <xsl:variable name="players" select="count(players/player)"/>
-                        <xsl:choose>
-                            <xsl:when test="available='true'">
-                                <div style="border: 1px solid black; border-radius: 25px; margin-bottom: 10px">
-                                    <form action="/bj/insertPlayer/{$gameID}" style="margin-top: 2.5%; margin-left: 2%; flex-direction: column; align-items: stretch; display:flex; flex-flow:row wrap; align-items: center;" id="joinForm">
-                                        <input type="text" style="margin-right: 15px; " name="name" placeholder="Name to join with"/>
-                                        <div style="color:#42f542 !important; font-weight:bold"><span style="color:black; font-weight:normal">Active players: </span> <span style="margin-left: 10px"><xsl:value-of select="$players"/>/5</span> </div>
-                                        <button form="joinForm" class="small blue button" style="margin-left: auto; margin-right: 10px" type="submit">Join</button>
-                                    </form>
-                                </div>
-                            </xsl:when>
                             <xsl:otherwise>
                                 <div style="border: 1px solid black; border-radius: 25px; margin-bottom: 10px">
                                     <form action="/bj/insertPlayer/{$gameID}" style="margin-top: 2.5%; margin-left: 2%; flex-direction: column; align-items: stretch; display:flex; flex-flow:row wrap; align-items: center;" id="joinForm">
