@@ -34,7 +34,7 @@
 
 
     <!-- Spielernamen -->
-    <xsl:variable name="spielerNamenTextSize" select="20" />
+    <xsl:variable name="spielerNamenTextSize" select="15" />
     <xsl:variable name="zeilenAbstand" select="$spielerNamenTextSize + 5" />
 
     <!-- Aktueller Einsatz -->
