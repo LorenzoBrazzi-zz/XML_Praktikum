@@ -115,6 +115,7 @@ function controller:startGame() {
     )
     return (
         if ($minBet > $maxBet) then (update:output(web:redirect("/bj/startingPage")))
+        else if ($minBet < 1 or $maxBet < 1) then (update:output(web:redirect("/bj/startingPage")))
         else (
             game:insertGame($endGame),
             update:output(web:redirect(fn:concat("/bj/join/", $game/id/text(), "/", $player/id/text())))

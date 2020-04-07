@@ -35,7 +35,7 @@
 
     <!-- Spielernamen -->
     <xsl:variable name="spielerNamenTextSize" select="15" />
-    <xsl:variable name="zeilenAbstand" select="$spielerNamenTextSize + 5" />
+    <xsl:variable name="zeilenAbstand" select="$spielerNamenTextSize + 15" />
 
     <!-- Aktueller Einsatz -->
     <xsl:variable name="radiusDummyChips" select="$radiusPlayer div 2"/>
