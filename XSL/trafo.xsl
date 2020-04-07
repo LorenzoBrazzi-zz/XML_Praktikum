@@ -1077,6 +1077,50 @@
                     <use xlink:href="#panel3" transform="rotate(72 500 500)"/>
                 </g>
 
+                <g id="Red Chip">
+                    <circle cx="500" cy="500" r="400" fill="darkred"/>
+                    <circle cx="500" cy="500" r="290" fill="white"/>
+                    <circle cx="500" cy="500" r="280" fill="darkred"/>
+                    <use xlink:href="#panel"/>
+                    <use xlink:href="#panel2"/>
+                    <use xlink:href="#panel3"/>
+                    <use xlink:href="#panel3" transform="rotate(144 500 500)"/>
+                    <use xlink:href="#panel3" transform="rotate(72 500 500)"/>
+                </g>
+
+                <g id="Green Chip">
+                    <circle cx="500" cy="500" r="400" fill="darkgreen"/>
+                    <circle cx="500" cy="500" r="290" fill="white"/>
+                    <circle cx="500" cy="500" r="280" fill="darkgreen"/>
+                    <use xlink:href="#panel"/>
+                    <use xlink:href="#panel2"/>
+                    <use xlink:href="#panel3"/>
+                    <use xlink:href="#panel3" transform="rotate(144 500 500)"/>
+                    <use xlink:href="#panel3" transform="rotate(72 500 500)"/>
+                </g>
+
+                <g id="Purple Chip">
+                    <circle cx="500" cy="500" r="400" fill="purple"/>
+                    <circle cx="500" cy="500" r="290" fill="white"/>
+                    <circle cx="500" cy="500" r="280" fill="purple"/>
+                    <use xlink:href="#panel"/>
+                    <use xlink:href="#panel2"/>
+                    <use xlink:href="#panel3"/>
+                    <use xlink:href="#panel3" transform="rotate(144 500 500)"/>
+                    <use xlink:href="#panel3" transform="rotate(72 500 500)"/>
+                </g>
+
+                <g id="Blue Chip">
+                    <circle cx="500" cy="500" r="400" fill="darkblue"/>
+                    <circle cx="500" cy="500" r="290" fill="white"/>
+                    <circle cx="500" cy="500" r="280" fill="darkblue"/>
+                    <use xlink:href="#panel"/>
+                    <use xlink:href="#panel2"/>
+                    <use xlink:href="#panel3"/>
+                    <use xlink:href="#panel3" transform="rotate(144 500 500)"/>
+                    <use xlink:href="#panel3" transform="rotate(72 500 500)"/>
+                </g>
+
 
 
             </defs>
