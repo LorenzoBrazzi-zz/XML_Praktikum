@@ -37,50 +37,141 @@
         <svg width="100%" height="100%" version="1.1" viewBox="0 0 1600 900"
              xmlns="http://www.w3.org/2000/svg">
 
-            <style>
-
-                .notifications {
-                    position:absolute;
-                    top:20;
-                    right:30;
-                    height:20%;
-                    width:30%;
-                    border:1px solid #ccc;
-                    font:16px/26px;
-                    overflow:auto;
-                    font-family:'Courier New',Verdana,sans-serif;
-                    background-color: white;
-                    border-radius: 15px;
-                    padding: 10px;
-                    padding-top: 3px;
-                    padding-left:3px;
-                    box-shadow: 1px 1px 25px #46464f
-                }
-
-
-                .glow {
-                font-size: 30px;
-                color: #fff;
-                text-align: center;
-                -webkit-animation: glow 1s ease-in-out infinite alternate;
-                -moz-animation: glow 1s ease-in-out infinite alternate;
-                animation: glow 1s ease-in-out infinite alternate;
-                }
-
-                @-webkit-keyframes glow {
-                from {
-                text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
-                }
-                to {
-                text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
-                }
-                }
-            </style>
-
             <xsl:choose>
                 <xsl:when test="$state = 'deleted'"><text style="font-size:30pt">Spiel ist beendet</text></xsl:when>
                 <xsl:otherwise></xsl:otherwise>
             </xsl:choose>
+
+
+            <!-- Chips -->
+
+            <xsl:choose>
+                <xsl:when test="$state='play'">
+                    <!-- Spieler 1 Chip -->
+                    <xsl:variable name="currentBet1" select="players/player[1]/currentBet"/>
+                    <xsl:choose>
+                        <xsl:when test="$currentBet1 &lt; 101">
+                            <use xlink:href="#Blue Chip"
+                                 transform="translate({$p1CurrentBetX - 45} {$p1CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                        </xsl:when>
+                        <xsl:when test="$currentBet1 &lt; 501">
+                            <use xlink:href="#Green Chip"
+                                 transform="translate({$p1CurrentBetX - 45} {$p1CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                        </xsl:when>
+                        <xsl:when test="$currentBet1 &lt; 1001">
+                            <use xlink:href="#Purple Chip"
+                                 transform="translate({$p1CurrentBetX - 45} {$p1CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                        </xsl:when>
+                        <xsl:when test="$currentBet1 &lt; 5001">
+                            <use xlink:href="#Red Chip"
+                                 transform="translate({$p1CurrentBetX - 45} {$p1CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <use xlink:href="#Black Chip"
+                                 transform="translate({$p1CurrentBetX - 45} {$p1CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                    <!-- Spieler 2 Chip -->
+                    <xsl:variable name="currentBet2" select="players/player[2]/currentBet"/>
+                    <xsl:choose>
+                        <xsl:when test="$currentBet2 &lt; 101">
+                            <use xlink:href="#Blue Chip"
+                                 transform="translate({$p2CurrentBetX - 45} {$p2CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                        </xsl:when>
+                        <xsl:when test="$currentBet2 &lt; 501">
+                            <use xlink:href="#Green Chip"
+                                 transform="translate({$p2CurrentBetX - 45} {$p2CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                        </xsl:when>
+                        <xsl:when test="$currentBet2 &lt; 1001">
+                            <use xlink:href="#Purple Chip"
+                                 transform="translate({$p2CurrentBetX - 45} {$p2CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                        </xsl:when>
+                        <xsl:when test="$currentBet2 &lt; 5001">
+                            <use xlink:href="#Red Chip"
+                                 transform="translate({$p2CurrentBetX - 45} {$p2CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <use xlink:href="#Black Chip"
+                                 transform="translate({$p2CurrentBetX - 45} {$p2CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                    <!-- Spieler 3 Chip -->
+                    <xsl:variable name="currentBet3" select="players/player[3]/currentBet"/>
+                    <xsl:choose>
+                        <xsl:when test="$currentBet3 &lt; 101">
+                            <use xlink:href="#Blue Chip"
+                                 transform="translate({$p3CurrentBetX - 45} {$p3CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                        </xsl:when>
+                        <xsl:when test="$currentBet3 &lt; 501">
+                            <use xlink:href="#Green Chip"
+                                 transform="translate({$p3CurrentBetX - 45} {$p3CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                        </xsl:when>
+                        <xsl:when test="$currentBet3 &lt; 1001">
+                            <use xlink:href="#Purple Chip"
+                                 transform="translate({$p3CurrentBetX - 45} {$p3CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                        </xsl:when>
+                        <xsl:when test="$currentBet3 &lt; 5001">
+                            <use xlink:href="#Red Chip"
+                                 transform="translate({$p3CurrentBetX - 45} {$p3CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <use xlink:href="#Black Chip"
+                                 transform="translate({$p3CurrentBetX - 45} {$p3CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                    <!-- Spieler 4 Chip -->
+                    <xsl:variable name="currentBet4" select="players/player[4]/currentBet"/>
+                    <xsl:choose>
+                        <xsl:when test="$currentBet4 &lt; 101">
+                            <use xlink:href="#Blue Chip"
+                                 transform="translate({$p4CurrentBetX - 45} {$p4CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                        </xsl:when>
+                        <xsl:when test="$currentBet4 &lt; 501">
+                            <use xlink:href="#Green Chip"
+                                 transform="translate({$p4CurrentBetX - 45} {$p4CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                        </xsl:when>
+                        <xsl:when test="$currentBet4 &lt; 1001">
+                            <use xlink:href="#Purple Chip"
+                                 transform="translate({$p4CurrentBetX - 45} {$p4CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                        </xsl:when>
+                        <xsl:when test="$currentBet4 &lt; 5001">
+                            <use xlink:href="#Red Chip"
+                                 transform="translate({$p4CurrentBetX - 45} {$p4CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <use xlink:href="#Black Chip"
+                                 transform="translate({$p4CurrentBetX - 45} {$p4CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+
+                    <!-- Spieler 5 Chip -->
+                    <xsl:variable name="currentBet5" select="players/player[5]/currentBet"/>
+                    <xsl:choose>
+                        <xsl:when test="$currentBet5 &lt; 101">
+                            <use xlink:href="#Blue Chip"
+                                 transform="translate({$p5CurrentBetX - 45} {$p5CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                        </xsl:when>
+                        <xsl:when test="$currentBet5 &lt; 501">
+                            <use xlink:href="#Green Chip"
+                                 transform="translate({$p5CurrentBetX - 45} {$p5CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                        </xsl:when>
+                        <xsl:when test="$currentBet5 &lt; 1001">
+                            <use xlink:href="#Purple Chip"
+                                 transform="translate({$p5CurrentBetX - 45} {$p5CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                        </xsl:when>
+                        <xsl:when test="$currentBet5 &lt; 5001">
+                            <use xlink:href="#Red Chip"
+                                 transform="translate({$p5CurrentBetX - 45} {$p5CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <use xlink:href="#Black Chip"
+                                 transform="translate({$p5CurrentBetX - 45} {$p5CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+
+                </xsl:when>
+            </xsl:choose>
+
 
             <!-- Hintergrund -->
             <rect id="hintergrund" fill="#8a2c2c" width="1000%" height="1000%" x="-3000"/>
@@ -95,39 +186,38 @@
 
             <!-- Karten- und Einsatzpositionen-->
             <circle cx="{$player1x}" cy="{$player1y}" r="{$radiusPlayer}"
-                    style="fill:none;stroke:white;stroke-width:2.5"/>
+                    style="fill:none;stroke:white;stroke-width:4"/>
             <circle cx="{$player2x}" cy="{$player2y}" r="{$radiusPlayer}"
-                    style="fill:none;stroke:white;stroke-width:2.5"/>
+                    style="fill:none;stroke:white;stroke-width:4"/>
             <circle cx="{$player3x}" cy="{$player3y}" r="{$radiusPlayer}"
-                    style="fill:none;stroke:white;stroke-width:2.5"/>
+                    style="fill:none;stroke:white;stroke-width:2"/>
             <circle cx="{$player4x}" cy="{$player4y}" r="{$radiusPlayer}"
                     style="fill:none;stroke:white;stroke-width:2.5"/>
             <circle cx="{$player5x}" cy="{$player5y}" r="{$radiusPlayer}"
-                    style="fill:none;stroke:white;stroke-width:2.5"/>
+                    style="fill:none;stroke:white;stroke-width:3"/>
 
             <!-- Aktueller Einsatz Dummy -->
             <circle cx="{$p1CurrentBetX}" cy="{$p1CurrentBetY}" r="{$radiusDummyChips}"
                     style="fill:none;stroke:purple;stroke-width:1">
-                <xsl:value-of select="$player1/currentBet"/>
-            </circle>
-            <circle cx="{$p2CurrentBetX}" cy="{$p2CurrentBetY}" r="{$radiusDummyChips}"
-                    style="fill:none;stroke:purple;stroke-width:1">
-                <xsl:value-of select="$player2/currentBet"/>
-            </circle>
-            <circle cx="{$p3CurrentBetX}" cy="{$p3CurrentBetY}" r="{$radiusDummyChips}"
-                    style="fill:none;stroke:purple;stroke-width:1">
-                <xsl:value-of select="$player3/currentBet"/>
-            </circle>
-            <circle cx="{$p4CurrentBetX}" cy="{$p4CurrentBetY}" r="{$radiusDummyChips}"
-                    style="fill:none;stroke:purple;stroke-width:1">
-                <xsl:value-of select="$player4/currentBet"/>
-            </circle>
-            <circle cx="{$p5CurrentBetX}" cy="{$p5CurrentBetY}" r="{$radiusDummyChips}"
-                    style="fill:none;stroke:purple;stroke-width:1">
-                <xsl:value-of select="$player5/currentBet"/>
             </circle>
 
-            <text y="100" style="font-size: 25pt; text-shadow: 1px 1px 20px #00008b;" fill="#f08441" font-family="Arial"><xsl:value-of select="concat(players/player[id = $activePlayer]/name/text(), ' macht grade seinen Zug')"/> </text>
+            <circle cx="{$p2CurrentBetX}" cy="{$p2CurrentBetY}" r="{$radiusDummyChips}"
+                    style="fill:none;stroke:purple;stroke-width:1">
+            </circle>
+
+            <circle cx="{$p3CurrentBetX}" cy="{$p3CurrentBetY}" r="{$radiusDummyChips}"
+                    style="fill:none;stroke:purple;stroke-width:1">
+            </circle>
+
+            <circle cx="{$p4CurrentBetX}" cy="{$p4CurrentBetY}" r="{$radiusDummyChips}"
+                    style="fill:none;stroke:purple;stroke-width:1">
+            </circle>
+
+            <circle cx="{$p5CurrentBetX}" cy="{$p5CurrentBetY}" r="{$radiusDummyChips}"
+                    style="fill:none;stroke:purple;stroke-width:1">
+            </circle>
+
+
 
             <!-- Spielernamen, wenn aktiver Spieler, dann gelb hervorheben sonst normal
             Aufgabe: du müsstest es so anpassen dass man merkt wer der aktive Spieler ist, entweder wie hier den textstyle
@@ -137,7 +227,7 @@
                 <xsl:when test="$player1/id = $activePlayer">
                     <text x="{$player1x}" y="{$player1y + $radiusPlayer + $zeilenAbstand}" font-family="Arial"
                           font-style="italic"
-                          class="glow" fill="yellow" text-anchor="middle">
+                          font-size="{$spielerNamenTextSize + 10}" fill="yellow" text-anchor="middle">
 
                         <xsl:value-of select="$player1/name"/>
 
@@ -156,7 +246,7 @@
             <xsl:choose>
                 <xsl:when test="$player2/id = $activePlayer">
                     <text x="{$player2x}" y="{$player2y + $radiusPlayer + $zeilenAbstand}" font-family="Arial"
-                          class="glow" fill="yellow" text-anchor="middle">
+                          font-size="{$spielerNamenTextSize + 5}" fill="yellow" text-anchor="middle">
                         <xsl:value-of select="$player2/name"/>
                     </text>
 
@@ -172,7 +262,7 @@
             <xsl:choose>
                 <xsl:when test="$player3/id = $activePlayer">
                     <text x="{$player3x}" y="{$player3y + $radiusPlayer + $zeilenAbstand}" font-family="Arial"
-                          class="glow" fill="yellow" text-anchor="middle">
+                          font-size="{$spielerNamenTextSize + 5}" fill="yellow" text-anchor="middle">
                         <xsl:value-of select="$player3/name"/>
                     </text>
 
@@ -188,7 +278,7 @@
             <xsl:choose>
                 <xsl:when test="$player4/id = $activePlayer">
                     <text x="{$player4x}" y="{$player4y + $radiusPlayer + $zeilenAbstand}" font-family="Arial"
-                          class="glow" fill="yellow" text-anchor="middle">
+                          font-size="{$spielerNamenTextSize + 5}" fill="yellow" text-anchor="middle">
                         <xsl:value-of select="$player4/name"/>
                     </text>
 
@@ -204,7 +294,7 @@
             <xsl:choose>
                 <xsl:when test="$player5/id = $activePlayer">
                     <text x="{$player5x}" y="{$player5y + $radiusPlayer + $zeilenAbstand}" font-family="Arial"
-                          class="glow" fill="yellow" text-anchor="middle">
+                          font-size="{$spielerNamenTextSize + 5}" fill="yellow" text-anchor="middle">
                         <xsl:value-of select="$player5/name"/>
                     </text>
 
@@ -926,6 +1016,31 @@
                 <!-- Symboldefinitionen -->
 
 
+                <!-- Chip Definition -->
+                <g id="panel">
+
+                    <path d="M500 100 V 180  C 600 180, 650 210 ,700 250 C 570 150, 610 180 , 752 190" fill="white"
+                          stroke="white"/>
+                </g>
+                <g id="panel2" transform="rotate(70 500 500)">
+                    <use xlink:href="#panel"/>
+                </g>
+
+                <g id="panel3" transform="rotate(140 500 500)">
+                    <use xlink:href="#panel"/>
+                </g>
+
+                <g id="Black Chip">
+                    <circle cx="500" cy="500" r="400" fill="black"/>
+                    <circle cx="500" cy="500" r="290" fill="white"/>
+                    <circle cx="500" cy="500" r="280" fill="black"/>
+                    <use xlink:href="#panel"/>
+                    <use xlink:href="#panel2"/>
+                    <use xlink:href="#panel3"/>
+                    <use xlink:href="#panel3" transform="rotate(144 500 500)"/>
+                    <use xlink:href="#panel3" transform="rotate(72 500 500)"/>
+                </g>
+
             </defs>
 
             <!-- Kartenanzeige -->
@@ -1229,7 +1344,7 @@
 
             </xsl:for-each>
 
-            <div class="notifications">
+            <div style="position:absolute;top:20;right:30;height:20%;width:30%;border:1px solid #ccc;font:16px/26px; overflow:auto;font-family:'Courier New',Verdana,sans-serif; background-color: white; border-radius: 15px; padding: 10px; padding-top: 3px; padding-left:3px">
                 <xsl:for-each select="events/event">
                     <xsl:choose>
                         <xsl:when test="type='error'">
