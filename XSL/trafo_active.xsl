@@ -40,21 +40,21 @@
             <style>
 
                 .notifications {
-                    position:absolute;
-                    top:20;
-                    right:30;
-                    height:20%;
-                    width:30%;
-                    border:1px solid #ccc;
-                    font:16px/26px;
-                    overflow:auto;
-                    font-family:'Courier New',Verdana,sans-serif;
-                    background-color: white;
-                    border-radius: 15px;
-                    padding: 10px;
-                    padding-top: 3px;
-                    padding-left:3px;
-                    box-shadow: 1px 1px 25px #46464f
+                position:absolute;
+                top:20;
+                right:30;
+                height:20%;
+                width:30%;
+                border:1px solid #ccc;
+                font:16px/26px;
+                overflow:auto;
+                font-family:'Courier New',Verdana,sans-serif;
+                background-color: white;
+                border-radius: 15px;
+                padding: 10px;
+                padding-top: 3px;
+                padding-left:3px;
+                box-shadow: 1px 1px 25px #46464f
                 }
 
                 .glow {
@@ -68,10 +68,12 @@
 
                 @-webkit-keyframes glow {
                 from {
-                text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
+                text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0
+                60px #e60073, 0 0 70px #e60073;
                 }
                 to {
-                text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+                text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0
+                70px #ff4da6, 0 0 80px #ff4da6;
                 }
                 }
 
@@ -113,14 +115,14 @@
                 }
 
                 @media (max-width: 800px) {
-                    .form-inline input {
-                    margin: 10px 0;
-                    }
+                .form-inline input {
+                margin: 10px 0;
+                }
 
-                    .form-inline {
-                    flex-direction: column;
-                    align-items: stretch;
-                    }
+                .form-inline {
+                flex-direction: column;
+                align-items: stretch;
+                }
                 }
             </style>
 
@@ -175,7 +177,8 @@
 
             <xsl:choose> <!-- If Else , um zu schauen wer gerade der aktive Spieler ist-->
                 <xsl:when test="$player1/id = $activePlayer">
-                    <text x="{$player1x}" y="{$player1y + $radiusPlayer + $zeilenAbstand}" class="glow" font-family="Arial"
+                    <text x="{$player1x}" y="{$player1y + $radiusPlayer + $zeilenAbstand}" class="glow"
+                          font-family="Arial"
                           font-style="italic" fill="yellow" text-anchor="middle">
 
                         <xsl:value-of select="$player1/name"/>
@@ -205,7 +208,8 @@
                             </text>
                             <foreignObject height="50%" width="50%" x="{$testButton1x + 65}"
                                            y="{$testButton1y + 15}">
-                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/continue/{$gameID}/true" method="POST" target="hiddenFrame">
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/continue/{$gameID}/true"
+                                      method="POST" target="hiddenFrame">
                                     <button style="background:transparent; border:none; color:transparent;"
                                             type="submit">
                                         <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Check_green_icon.svg"
@@ -215,7 +219,8 @@
                             </foreignObject>
                             <foreignObject height="10%" width="10%" x="{$testButton1x + 165}"
                                            y="{$testButton1y + 15}">
-                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/continue/{$gameID}/false" method="POST">
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/continue/{$gameID}/false"
+                                      method="POST">
                                     <button style="background:transparent; border:none; color:transparent;"
                                             type="submit">
                                         <img src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Cross_red_circle.svg"
@@ -228,10 +233,11 @@
                             <foreignObject height="5%" width="17%" x="{$p1CurrentBetX - 50}"
                                            y="{$p1CurrentBetY + $radiusDummyChips + 10}">
                                 <form xmlns="http://www.w3.org/1999/xhtml"
-                                      action="/bj/setBet/{$gameID}" method="POST" class="form-inline" target="hiddenFrame">
+                                      action="/bj/setBet/{$gameID}" method="POST" class="form-inline"
+                                      target="hiddenFrame">
                                     <span style="display: inline">
                                         <input type="number" id="bet" name="bet" placeholder="Set a bet"/>
-                                        <button type="submit" >Bet
+                                        <button type="submit">Bet
                                         </button>
                                     </span>
                                 </form>
@@ -269,7 +275,8 @@
                             </text>
                             <foreignObject height="50%" width="50%" x="{$testButton1x}"
                                            y="{$testButton1y}">
-                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/evaluate/{$gameID}" method="POST" target="hiddenFrame">
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/evaluate/{$gameID}" method="POST"
+                                      target="hiddenFrame">
                                     <button style="background:transparent; border:none; color:transparent;"
                                             type="submit">
                                         <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Check_green_icon.svg"
@@ -322,7 +329,7 @@
                                       target="hiddenFrame">
                                     <span style="display: inline">
                                         <input type="number" id="bet" name="bet" placeholder="Set a bet"/>
-                                        <button type="submit" >Bet
+                                        <button type="submit">Bet
                                         </button>
                                     </span>
                                 </form>
@@ -334,7 +341,8 @@
                             </text>
                             <foreignObject height="50%" width="50%" x="{$testButton1x + 65}"
                                            y="{$testButton1y + 15}">
-                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/continue/{$gameID}/true" method="POST" target="hiddenFrame">
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/continue/{$gameID}/true"
+                                      method="POST" target="hiddenFrame">
                                     <button style="background:transparent; border:none; color:transparent;"
                                             type="submit">
                                         <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Check_green_icon.svg"
@@ -344,7 +352,8 @@
                             </foreignObject>
                             <foreignObject height="10%" width="10%" x="{$testButton1x + 165}"
                                            y="{$testButton1y + 15}">
-                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/continue/{$gameID}/false" method="POST" target="hiddenFrame">
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/continue/{$gameID}/false"
+                                      method="POST" target="hiddenFrame">
                                     <button style="background:transparent; border:none; color:transparent;"
                                             type="submit">
                                         <img src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Cross_red_circle.svg"
@@ -360,7 +369,8 @@
                             </text>
                             <foreignObject height="50%" width="50%" x="{$testButton1x}"
                                            y="{$testButton1y}">
-                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/evaluate/{$gameID}" method="POST" target="hiddenFrame">
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/evaluate/{$gameID}" method="POST"
+                                      target="hiddenFrame">
                                     <button style="background:transparent; border:none; color:transparent;"
                                             type="submit">
                                         <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Check_green_icon.svg"
@@ -407,7 +417,8 @@
                             <foreignObject height="5%" width="17%" x="{$p3CurrentBetX - 50}"
                                            y="{$p3CurrentBetY + $radiusDummyChips + 10}">
                                 <form xmlns="http://www.w3.org/1999/xhtml" style="margin: 0; padding: 0"
-                                      action="/bj/setBet/{$gameID}" method="POST" class="form-inline" target="hiddenFrame">
+                                      action="/bj/setBet/{$gameID}" method="POST" class="form-inline"
+                                      target="hiddenFrame">
                                     <span style="display: inline">
                                         <input type="number" id="bet" name="bet" placeholder="Set a bet"/>
                                         <button type="submit">Bet
@@ -422,7 +433,8 @@
                             </text>
                             <foreignObject height="50%" width="50%" x="{$testButton1x + 65}"
                                            y="{$testButton1y + 15}">
-                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/continue/{$gameID}/true" method="POST" target="hiddenFrame">
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/continue/{$gameID}/true"
+                                      method="POST" target="hiddenFrame">
                                     <button style="background:transparent; border:none; color:transparent;"
                                             type="submit">
                                         <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Check_green_icon.svg"
@@ -432,7 +444,8 @@
                             </foreignObject>
                             <foreignObject height="10%" width="10%" x="{$testButton1x + 165}"
                                            y="{$testButton1y + 15}">
-                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/continue/{$gameID}/false" method="POST" target="hiddenFrame">
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/continue/{$gameID}/false"
+                                      method="POST" target="hiddenFrame">
                                     <button style="background:transparent; border:none; color:transparent;"
                                             type="submit">
                                         <img src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Cross_red_circle.svg"
@@ -448,7 +461,8 @@
                             </text>
                             <foreignObject height="50%" width="50%" x="{$testButton1x}"
                                            y="{$testButton1y}">
-                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/evaluate/{$gameID}" method="POST" target="hiddenFrame">
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/evaluate/{$gameID}" method="POST"
+                                      target="hiddenFrame">
                                     <button style="background:transparent; border:none; color:transparent;"
                                             type="submit">
                                         <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Check_green_icon.svg"
@@ -495,7 +509,8 @@
                             <foreignObject height="5%" width="17%" x="{$p4CurrentBetX - 50}"
                                            y="{$p4CurrentBetY + $radiusDummyChips + 10}">
                                 <form xmlns="http://www.w3.org/1999/xhtml" style="margin: 0; padding: 0"
-                                      action="/bj/setBet/{$gameID}" method="POST" class="form-inline" target="hiddenFrame">
+                                      action="/bj/setBet/{$gameID}" method="POST" class="form-inline"
+                                      target="hiddenFrame">
                                     <span style="display: inline">
                                         <input type="number" id="bet" name="bet" placeholder="Set a bet"/>
                                         <button type="submit">Bet
@@ -510,7 +525,8 @@
                             </text>
                             <foreignObject height="50%" width="50%" x="{$testButton1x + 65}"
                                            y="{$testButton1y + 15}">
-                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/continue/{$gameID}/true" method="POST" target="hiddenFrame">
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/continue/{$gameID}/true"
+                                      method="POST" target="hiddenFrame">
                                     <button style="background:transparent; border:none; color:transparent;"
                                             type="submit">
                                         <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Check_green_icon.svg"
@@ -520,7 +536,8 @@
                             </foreignObject>
                             <foreignObject height="10%" width="10%" x="{$testButton1x + 165}"
                                            y="{$testButton1y + 15}">
-                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/continue/{$gameID}/false" method="POST" target="hiddenFrame">
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/continue/{$gameID}/false"
+                                      method="POST" target="hiddenFrame">
                                     <button style="background:transparent; border:none; color:transparent;"
                                             type="submit">
                                         <img src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Cross_red_circle.svg"
@@ -536,7 +553,8 @@
                             </text>
                             <foreignObject height="50%" width="50%" x="{$testButton1x}"
                                            y="{$testButton1y}">
-                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/evaluate/{$gameID}" method="POST" target="hiddenFrame">
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/evaluate/{$gameID}" method="POST"
+                                      target="hiddenFrame">
                                     <button style="background:transparent; border:none; color:transparent;"
                                             type="submit">
                                         <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Check_green_icon.svg"
@@ -583,7 +601,8 @@
                             <foreignObject height="5%" width="17%" x="{$p5CurrentBetX - 50}"
                                            y="{$p5CurrentBetY + $radiusDummyChips + 10}">
                                 <form xmlns="http://www.w3.org/1999/xhtml" style="margin: 0; padding: 0"
-                                      action="/bj/setBet/{$gameID}" method="POST" class="form-inline" target="hiddenFrame">
+                                      action="/bj/setBet/{$gameID}" method="POST" class="form-inline"
+                                      target="hiddenFrame">
                                     <span style="display: inline">
                                         <input type="number" id="bet" name="bet" placeholder="Set a bet"/>
                                         <button type="submit">Bet
@@ -598,7 +617,8 @@
                             </text>
                             <foreignObject height="50%" width="50%" x="{$testButton1x + 65}"
                                            y="{$testButton1y + 15}">
-                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/continue/{$gameID}/true" method="POST" target="hiddenFrame">
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/continue/{$gameID}/true"
+                                      method="POST" target="hiddenFrame">
                                     <button style="background:transparent; border:none; color:transparent;"
                                             type="submit">
                                         <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Check_green_icon.svg"
@@ -608,7 +628,8 @@
                             </foreignObject>
                             <foreignObject height="10%" width="10%" x="{$testButton1x + 165}"
                                            y="{$testButton1y + 15}">
-                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/continue/{$gameID}/false" method="POST" target="hiddenFrame">
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/continue/{$gameID}/false"
+                                      method="POST" target="hiddenFrame">
                                     <button style="background:transparent; border:none; color:transparent;"
                                             type="submit">
                                         <img src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Cross_red_circle.svg"
@@ -624,7 +645,8 @@
                             </text>
                             <foreignObject height="50%" width="50%" x="{$testButton1x}"
                                            y="{$testButton1y}">
-                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/evaluate/{$gameID}" method="POST" target="hiddenFrame">
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/evaluate/{$gameID}" method="POST"
+                                      target="hiddenFrame">
                                     <button style="background:transparent; border:none; color:transparent;"
                                             type="submit">
                                         <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Check_green_icon.svg"
@@ -680,7 +702,8 @@
                 <xsl:when test="$state='play'">
                     <foreignObject width="7%" height="13%" x="{$button1x}"
                                    y="{$buttonsy}">
-                        <form xmlns="http://www.w3.org/1999/xhtml" action="/bj/hit/{$gameID}" id="formHit" method="POST" target="hiddenFrame">
+                        <form xmlns="http://www.w3.org/1999/xhtml" action="/bj/hit/{$gameID}" id="formHit" method="POST"
+                              target="hiddenFrame">
                             <button class="buttonHit" type="submit" form="formHit" value="Submit">Hit
                             </button>
                         </form>
@@ -703,8 +726,131 @@
                     </foreignObject>
                 </xsl:when>
             </xsl:choose>
+
+            <!-- Spieler 1 Chip -->
+            <xsl:variable name="currentBet1" select="players/player[1]/currentBet"/>
             <xsl:choose>
-                <xsl:when test="$isInsurance='true' and $state='play' and players/player[id = $activePlayer]/insurance/text() = 'false'">
+                <xsl:when test="$currentBet1 &lt; 101">
+                    <use xlink:href="#Blue Chip"
+                         transform="translate({$p1CurrentBetX - 45} {$p1CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                </xsl:when>
+                <xsl:when test="$currentBet1 &lt; 501">
+                    <use xlink:href="#Green Chip"
+                         transform="translate({$p1CurrentBetX - 45} {$p1CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                </xsl:when>
+                <xsl:when test="$currentBet1 &lt; 1001">
+                    <use xlink:href="#Purple Chip"
+                         transform="translate({$p1CurrentBetX - 45} {$p1CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                </xsl:when>
+                <xsl:when test="$currentBet1 &lt; 5001">
+                    <use xlink:href="#Red Chip"
+                         transform="translate({$p1CurrentBetX - 45} {$p1CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <use xlink:href="#Black Chip"
+                         transform="translate({$p1CurrentBetX - 45} {$p1CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                </xsl:otherwise>
+            </xsl:choose>
+            <!-- Spieler 2 Chip -->
+            <xsl:variable name="currentBet2" select="players/player[2]/currentBet"/>
+            <xsl:choose>
+                <xsl:when test="$currentBet2 &lt; 101">
+                    <use xlink:href="#Blue Chip"
+                         transform="translate({$p2CurrentBetX - 45} {$p2CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                </xsl:when>
+                <xsl:when test="$currentBet2 &lt; 501">
+                    <use xlink:href="#Green Chip"
+                         transform="translate({$p2CurrentBetX - 45} {$p2CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                </xsl:when>
+                <xsl:when test="$currentBet2 &lt; 1001">
+                    <use xlink:href="#Purple Chip"
+                         transform="translate({$p2CurrentBetX - 45} {$p2CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                </xsl:when>
+                <xsl:when test="$currentBet2 &lt; 5001">
+                    <use xlink:href="#Red Chip"
+                         transform="translate({$p2CurrentBetX - 45} {$p2CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <use xlink:href="#Black Chip"
+                         transform="translate({$p2CurrentBetX - 45} {$p2CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                </xsl:otherwise>
+            </xsl:choose>
+            <!-- Spieler 3 Chip -->
+            <xsl:variable name="currentBet3" select="players/player[3]/currentBet"/>
+            <xsl:choose>
+                <xsl:when test="$currentBet3 &lt; 101">
+                    <use xlink:href="#Blue Chip"
+                         transform="translate({$p3CurrentBetX - 45} {$p3CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                </xsl:when>
+                <xsl:when test="$currentBet3 &lt; 501">
+                    <use xlink:href="#Green Chip"
+                         transform="translate({$p3CurrentBetX - 45} {$p3CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                </xsl:when>
+                <xsl:when test="$currentBet3 &lt; 1001">
+                    <use xlink:href="#Purple Chip"
+                         transform="translate({$p3CurrentBetX - 45} {$p3CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                </xsl:when>
+                <xsl:when test="$currentBet3 &lt; 5001">
+                    <use xlink:href="#Red Chip"
+                         transform="translate({$p3CurrentBetX - 45} {$p3CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <use xlink:href="#Black Chip"
+                         transform="translate({$p3CurrentBetX - 45} {$p3CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                </xsl:otherwise>
+            </xsl:choose>
+            <!-- Spieler 4 Chip -->
+            <xsl:variable name="currentBet4" select="players/player[4]/currentBet"/>
+            <xsl:choose>
+                <xsl:when test="$currentBet4 &lt; 101">
+                    <use xlink:href="#Blue Chip"
+                         transform="translate({$p4CurrentBetX - 45} {$p4CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                </xsl:when>
+                <xsl:when test="$currentBet4 &lt; 501">
+                    <use xlink:href="#Green Chip"
+                         transform="translate({$p4CurrentBetX - 45} {$p4CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                </xsl:when>
+                <xsl:when test="$currentBet4 &lt; 1001">
+                    <use xlink:href="#Purple Chip"
+                         transform="translate({$p4CurrentBetX - 45} {$p4CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                </xsl:when>
+                <xsl:when test="$currentBet4 &lt; 5001">
+                    <use xlink:href="#Red Chip"
+                         transform="translate({$p4CurrentBetX - 45} {$p4CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <use xlink:href="#Black Chip"
+                         transform="translate({$p4CurrentBetX - 45} {$p4CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                </xsl:otherwise>
+            </xsl:choose>
+
+            <!-- Spieler 5 Chip -->
+            <xsl:variable name="currentBet5" select="players/player[5]/currentBet"/>
+            <xsl:choose>
+                <xsl:when test="$currentBet5 &lt; 101">
+                    <use xlink:href="#Blue Chip"
+                         transform="translate({$p5CurrentBetX - 45} {$p5CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                </xsl:when>
+                <xsl:when test="$currentBet5 &lt; 501">
+                    <use xlink:href="#Green Chip"
+                         transform="translate({$p5CurrentBetX - 45} {$p5CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                </xsl:when>
+                <xsl:when test="$currentBet5 &lt; 1001">
+                    <use xlink:href="#Purple Chip"
+                         transform="translate({$p5CurrentBetX - 45} {$p5CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                </xsl:when>
+                <xsl:when test="$currentBet5 &lt; 5001">
+                    <use xlink:href="#Red Chip"
+                         transform="translate({$p5CurrentBetX - 45} {$p5CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <use xlink:href="#Black Chip"
+                         transform="translate({$p5CurrentBetX - 45} {$p5CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                </xsl:otherwise>
+            </xsl:choose>
+            <xsl:choose>
+                <xsl:when
+                        test="$isInsurance='true' and $state='play' and players/player[id = $activePlayer]/insurance/text() = 'false'">
                     <!-- wenn wir in der Insurance Phase sind ist dieser Knopf verfügbar -->
                     <foreignObject width="7%" height="13%" x="{$button4x}"
                                    y="{$buttonsy}">
@@ -1393,6 +1539,31 @@
 
                 <!-- Symboldefinitionen -->
 
+                <!-- Chip Definition -->
+                <g id="panel">
+
+                    <path d="M500 100 V 180  C 600 180, 650 210 ,700 250 C 570 150, 610 180 , 752 190" fill="white"
+                          stroke="white"/>
+                </g>
+                <g id="panel2" transform="rotate(70 500 500)">
+                    <use xlink:href="#panel"/>
+                </g>
+
+                <g id="panel3" transform="rotate(140 500 500)">
+                    <use xlink:href="#panel"/>
+                </g>
+
+                <g id="Black Chip">
+                    <circle cx="500" cy="500" r="400" fill="black"/>
+                    <circle cx="500" cy="500" r="290" fill="white"/>
+                    <circle cx="500" cy="500" r="280" fill="black"/>
+                    <use xlink:href="#panel"/>
+                    <use xlink:href="#panel2"/>
+                    <use xlink:href="#panel3"/>
+                    <use xlink:href="#panel3" transform="rotate(144 500 500)"/>
+                    <use xlink:href="#panel3" transform="rotate(72 500 500)"/>
+                </g>
+
 
             </defs>
 
@@ -1716,7 +1887,8 @@
 
 
             <foreignObject width="0" height="0">
-                <iframe class="hiddenFrame" xmlns="http://www.w3.org/1999/xhtml" name="hiddenFrame" style="height: 0px;"></iframe>
+                <iframe class="hiddenFrame" xmlns="http://www.w3.org/1999/xhtml" name="hiddenFrame"
+                        style="height: 0px;"></iframe>
             </foreignObject>
 
         </svg>

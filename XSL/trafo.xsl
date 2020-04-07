@@ -82,6 +82,133 @@
                 <xsl:otherwise></xsl:otherwise>
             </xsl:choose>
 
+            <xsl:choose>
+                <xsl:when test="$state='play'">
+                    <!-- Spieler 1 Chip -->
+                    <xsl:variable name="currentBet1" select="players/player[1]/currentBet"/>
+                    <xsl:choose>
+                        <xsl:when test="$currentBet1 &lt; 101">
+                            <use xlink:href="#Blue Chip"
+                                 transform="translate({$p1CurrentBetX - 45} {$p1CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                        </xsl:when>
+                        <xsl:when test="$currentBet1 &lt; 501">
+                            <use xlink:href="#Green Chip"
+                                 transform="translate({$p1CurrentBetX - 45} {$p1CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                        </xsl:when>
+                        <xsl:when test="$currentBet1 &lt; 1001">
+                            <use xlink:href="#Purple Chip"
+                                 transform="translate({$p1CurrentBetX - 45} {$p1CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                        </xsl:when>
+                        <xsl:when test="$currentBet1 &lt; 5001">
+                            <use xlink:href="#Red Chip"
+                                 transform="translate({$p1CurrentBetX - 45} {$p1CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <use xlink:href="#Black Chip"
+                                 transform="translate({$p1CurrentBetX - 45} {$p1CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                    <!-- Spieler 2 Chip -->
+                    <xsl:variable name="currentBet2" select="players/player[2]/currentBet"/>
+                    <xsl:choose>
+                        <xsl:when test="$currentBet2 &lt; 101">
+                            <use xlink:href="#Blue Chip"
+                                 transform="translate({$p2CurrentBetX - 45} {$p2CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                        </xsl:when>
+                        <xsl:when test="$currentBet2 &lt; 501">
+                            <use xlink:href="#Green Chip"
+                                 transform="translate({$p2CurrentBetX - 45} {$p2CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                        </xsl:when>
+                        <xsl:when test="$currentBet2 &lt; 1001">
+                            <use xlink:href="#Purple Chip"
+                                 transform="translate({$p2CurrentBetX - 45} {$p2CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                        </xsl:when>
+                        <xsl:when test="$currentBet2 &lt; 5001">
+                            <use xlink:href="#Red Chip"
+                                 transform="translate({$p2CurrentBetX - 45} {$p2CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <use xlink:href="#Black Chip"
+                                 transform="translate({$p2CurrentBetX - 45} {$p2CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                    <!-- Spieler 3 Chip -->
+                    <xsl:variable name="currentBet3" select="players/player[3]/currentBet"/>
+                    <xsl:choose>
+                        <xsl:when test="$currentBet3 &lt; 101">
+                            <use xlink:href="#Blue Chip"
+                                 transform="translate({$p3CurrentBetX - 45} {$p3CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                        </xsl:when>
+                        <xsl:when test="$currentBet3 &lt; 501">
+                            <use xlink:href="#Green Chip"
+                                 transform="translate({$p3CurrentBetX - 45} {$p3CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                        </xsl:when>
+                        <xsl:when test="$currentBet3 &lt; 1001">
+                            <use xlink:href="#Purple Chip"
+                                 transform="translate({$p3CurrentBetX - 45} {$p3CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                        </xsl:when>
+                        <xsl:when test="$currentBet3 &lt; 5001">
+                            <use xlink:href="#Red Chip"
+                                 transform="translate({$p3CurrentBetX - 45} {$p3CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <use xlink:href="#Black Chip"
+                                 transform="translate({$p3CurrentBetX - 45} {$p3CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                    <!-- Spieler 4 Chip -->
+                    <xsl:variable name="currentBet4" select="players/player[4]/currentBet"/>
+                    <xsl:choose>
+                        <xsl:when test="$currentBet4 &lt; 101">
+                            <use xlink:href="#Blue Chip"
+                                 transform="translate({$p4CurrentBetX - 45} {$p4CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                        </xsl:when>
+                        <xsl:when test="$currentBet4 &lt; 501">
+                            <use xlink:href="#Green Chip"
+                                 transform="translate({$p4CurrentBetX - 45} {$p4CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                        </xsl:when>
+                        <xsl:when test="$currentBet4 &lt; 1001">
+                            <use xlink:href="#Purple Chip"
+                                 transform="translate({$p4CurrentBetX - 45} {$p4CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                        </xsl:when>
+                        <xsl:when test="$currentBet4 &lt; 5001">
+                            <use xlink:href="#Red Chip"
+                                 transform="translate({$p4CurrentBetX - 45} {$p4CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <use xlink:href="#Black Chip"
+                                 transform="translate({$p4CurrentBetX - 45} {$p4CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+
+                    <!-- Spieler 5 Chip -->
+                    <xsl:variable name="currentBet5" select="players/player[5]/currentBet"/>
+                    <xsl:choose>
+                        <xsl:when test="$currentBet5 &lt; 101">
+                            <use xlink:href="#Blue Chip"
+                                 transform="translate({$p5CurrentBetX - 45} {$p5CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                        </xsl:when>
+                        <xsl:when test="$currentBet5 &lt; 501">
+                            <use xlink:href="#Green Chip"
+                                 transform="translate({$p5CurrentBetX - 45} {$p5CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                        </xsl:when>
+                        <xsl:when test="$currentBet5 &lt; 1001">
+                            <use xlink:href="#Purple Chip"
+                                 transform="translate({$p5CurrentBetX - 45} {$p5CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                        </xsl:when>
+                        <xsl:when test="$currentBet5 &lt; 5001">
+                            <use xlink:href="#Red Chip"
+                                 transform="translate({$p5CurrentBetX - 45} {$p5CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <use xlink:href="#Black Chip"
+                                 transform="translate({$p5CurrentBetX - 45} {$p5CurrentBetY - 45}) scale(0.09, 0.09)"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+
+                </xsl:when>
+            </xsl:choose>
+
             <!-- Hintergrund -->
             <rect id="hintergrund" fill="#8a2c2c" width="1000%" height="1000%" x="-3000"/>
 
@@ -924,6 +1051,32 @@
 
 
                 <!-- Symboldefinitionen -->
+
+                <!-- Chip Definition -->
+                <g id="panel">
+
+                    <path d="M500 100 V 180  C 600 180, 650 210 ,700 250 C 570 150, 610 180 , 752 190" fill="white"
+                          stroke="white"/>
+                </g>
+                <g id="panel2" transform="rotate(70 500 500)">
+                    <use xlink:href="#panel"/>
+                </g>
+
+                <g id="panel3" transform="rotate(140 500 500)">
+                    <use xlink:href="#panel"/>
+                </g>
+
+                <g id="Black Chip">
+                    <circle cx="500" cy="500" r="400" fill="black"/>
+                    <circle cx="500" cy="500" r="290" fill="white"/>
+                    <circle cx="500" cy="500" r="280" fill="black"/>
+                    <use xlink:href="#panel"/>
+                    <use xlink:href="#panel2"/>
+                    <use xlink:href="#panel3"/>
+                    <use xlink:href="#panel3" transform="rotate(144 500 500)"/>
+                    <use xlink:href="#panel3" transform="rotate(72 500 500)"/>
+                </g>
+
 
 
             </defs>
