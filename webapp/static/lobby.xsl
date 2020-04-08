@@ -223,7 +223,7 @@
                         <input type="text" style="height: 60px; width: 80%" name="name" placeholder="Name to start game with"/>
                         <input type="number" style="height: 60px; width: 80%" name="minBet" placeholder="Minimum Bet"/>
                         <input type="number" style="height: 60px; width: 80%" name="maxBet" placeholder="Maximum Bet"/>
-                        <button class="button large green" style="margin-top: 15px" type="submit" form="form2">Create game</button>
+                        <button class="button large green" style="margin-top: 15px" type="submit" form="form2">Spiel erstellen</button>
                     </form>
                     </div>
 
@@ -237,7 +237,7 @@
                                 <div style="border: 1px solid black; border-radius: 25px; margin-bottom: 10px">
                                     <form action="/bj/insertPlayer/{$gameID}" style="margin-top: 2.5%; margin-left: 2%; flex-direction: column; align-items: stretch; display:flex; flex-flow:row wrap; align-items: center;" id="joinForm">
                                         <input type="text" style="margin-right: 15px; height: 10%" name="name" placeholder="Name to join with"/>
-                                        <div style="color:#42f542 !important; font-weight:bold"><span style="color:black; font-weight:normal">Active players: </span> <span style="margin-left: 10px"><xsl:value-of select="$players"/>/5</span> </div>
+                                        <div style="color:#42f542 !important; font-weight:bold"><span style="color:black; font-weight:normal">Aktive Spieler: </span> <span style="margin-left: 10px"><xsl:value-of select="$players"/>/5</span> </div>
                                         <button form="joinForm" class="small blue button" style="margin-left: auto; margin-right: 10px" type="submit">Join</button>
                                     </form>
                                 </div>
@@ -246,8 +246,8 @@
                             <xsl:otherwise>
                                 <div style="border: 1px solid black; border-radius: 25px; margin-bottom: 10px">
                                     <form action="/bj/insertPlayer/{$gameID}" style="margin-top: 2.5%; margin-left: 2%; flex-direction: column; align-items: stretch; display:flex; flex-flow:row wrap; align-items: center;" id="joinForm">
-                                        <div style="color:black !important; margin-right: 10px">Game is full or being played</div>
-                                        <div style="color:red !important; font-weight:bold; margin-left:15px">Players: <xsl:value-of select="$players"/></div>
+                                        <div style="color:black !important; margin-right: 10px">Spiel ist voll oder wird gespielt</div>
+                                        <div style="color:red !important; font-weight:bold; margin-left:15px">Spieler: <xsl:value-of select="$players"/></div>
                                         <button form="joinForm" class="small blue button" style="margin-left: auto; margin-right: 10px" type="submit" disabled="">Join</button>
                                     </form>
                                 </div>
