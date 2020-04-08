@@ -4,7 +4,6 @@ xquery version "3.0";
 module namespace game = "bj/game";
 import module namespace player = "bj/player" at "player.xqm";
 import module namespace dealer = "bj/dealer" at "dealer.xqm";
-import module namespace card = "bj/card" at "card.xqm";
 import module namespace helper = "bj/helper" at "helper.xqm";
 
 (: For generating the IDs for players and games :)
@@ -447,7 +446,7 @@ function game:changeState($gameID as xs:string, $nextState as xs:string){
     returns     Game, where all plays against the dealer have been evaluated
 :)
 declare function game:setResult($game as element(game)) as element(game) {
-    let $dealerCardsValue := dealer:calculateCardValue($game)
+    let $dealerCardsValue := dealer:cardValueOfDealer($game)
     let $result := (
         copy $c := $game
         modify (
@@ -456,7 +455,7 @@ declare function game:setResult($game as element(game)) as element(game) {
             (: If dealer has BJ, then all players who don´t have a BJ themselves lose, if they have, then it is a draw:)
             if (game:dealerHasBJ($c)) then (
                 let $numberOfCards := fn:count($p/currentHand/cards/card)
-                let $playerCardValue := player:calculateCardValuePlayers($c/id/text(), $p/id/text())
+                let $playerCardValue := player:cardValueOfPlayer($c/id/text(), $p/id/text())
                 return (
                     if (fn:not(($playerCardValue = 21) and ($numberOfCards = 2))) then (
                         replace value of node $p/won with fn:false()
@@ -469,7 +468,7 @@ declare function game:setResult($game as element(game)) as element(game) {
             (:Otherwise (dealer has no BJ):)
             ) else (
                 let $numberOfCards := fn:count($p/currentHand/cards/card)
-                let $playerCardValue := player:calculateCardValuePlayers($c/id/text(), $p/id/text())
+                let $playerCardValue := player:cardValueOfPlayer($c/id/text(), $p/id/text())
                 return (
                 (:Player has BJ --> Win, because this part of the code cannot be reached if the dealer has a BJ:)
                 if (($playerCardValue = 21) and ($numberOfCards = 2)) then (

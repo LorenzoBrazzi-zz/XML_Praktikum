@@ -35,7 +35,7 @@ declare function dealer:numberofDrawingCard($game as element(game), $currentVal 
     @game       current Game
     returns     hand Score of the dealer
 :)
-declare function dealer:calculateCardValue($game as element(game)) as xs:integer {
+declare function dealer:cardValueOfDealer($game as element(game)) as xs:integer {
     let $dealer := $game/dealer
 
     let $amoutOfAces := (
@@ -110,7 +110,7 @@ declare function dealer:drawCard($game as element(game)) as element(game) {
         copy $c := $game
         modify (
             let $hand := $c/dealer/currentHand
-            let $val := dealer:calculateCardValue($c)
+            let $val := dealer:cardValueOfDealer($c)
             let $amount := dealer:numberofDrawingCard($c, $val, 0)
             let $deck := $c/cards
 

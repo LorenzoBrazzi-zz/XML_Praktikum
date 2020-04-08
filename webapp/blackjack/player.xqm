@@ -23,7 +23,6 @@ declare function player:createPlayer($bet as xs:integer,
         <name>{$name}</name>
         <balance>{$balance}</balance>
         <currentHand>
-            <score></score>
             <cards></cards>
         </currentHand>
         <currentBet>{$bet}</currentBet>
@@ -133,7 +132,7 @@ declare
 function player:hit($gameID as xs:string){
     let $playerID := $player:games/game[id = $gameID]/activePlayer
     let $name := $player:games/game[id = $gameID]/players/player[id = $playerID]/name/text()
-    let $score := player:calculateCardValuePlayers($gameID, $playerID)
+    let $score := player:cardValueOfPlayer($gameID, $playerID)
     let $err := <event>
         <time>{helper:currentTime()}</time>
         <type>error</type>
@@ -200,7 +199,7 @@ function player:setInsurance($gameID as xs:string){
     @gameID     ID of the current Game
     @playerID   ID of the player
 :)
-declare function player:calculateCardValuePlayers($gameID as xs:string, $playerID as xs:string) as xs:integer {
+declare function player:cardValueOfPlayer($gameID as xs:string, $playerID as xs:string) as xs:integer {
     let $player := $player:games/game[id = $gameID]/players/player[id = $playerID]
 
     let $amoutOfAces := (

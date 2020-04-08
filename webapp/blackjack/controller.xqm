@@ -183,14 +183,14 @@ function controller:draw($gameID as xs:string){
             (
             (:Multiple stylesheets needed, because the inactive Players should not see the buttons on the screen:)
             if ($playerID = $activePlayerID)
-            then (controller:generatePage($game, $activeXslStylesheet, $title))
-            else (controller:generatePage($game, $xslStylesheet, $title))
+            then (controller:generatePage($game, $activeXslStylesheet))
+            else (controller:generatePage($game, $xslStylesheet))
             )
         return (ws:send($transformedGame, $destinationPath))
     )
 };
 
-declare function controller:generatePage($game as element(game), $xslStylesheet as xs:string, $title as xs:string){
+declare function controller:generatePage($game as element(game), $xslStylesheet as xs:string){
     let $stylesheet := doc(concat($controller:staticPath, $xslStylesheet))
     let $transformed := xslt:transform($game, $stylesheet)
     return $transformed
