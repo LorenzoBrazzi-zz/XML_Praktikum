@@ -7,7 +7,7 @@ import module namespace dealer = "bj/dealer" at "dealer.xqm";
 import module namespace card = "bj/card" at "card.xqm";
 import module namespace helper = "bj/helper" at "helper.xqm";
 
-(: Hiermit generieren wir die IDs sowohl der Spiele als auch der Spieler :)
+(: For generating the IDs for players and games :)
 declare namespace uuid = "java:java.util.UUID";
 declare namespace random = "http://basex.org/modules/random";
 
@@ -18,18 +18,11 @@ declare function game:getGame($gameID as xs:string) {
     $game:games/game[id = $gameID]
 };
 
-(:Zum testen der Datenbank:)
-declare function game:createEmptyGame(){
-    let $id := xs:string(uuid:randomUUID())
-    return (
-        <game id="{$id}">
-        </game>
-    )
-};
 
-(: Spiel aus den Daten der Formulare instanzieren,
-   Evenets sind wichtig für diverse Dinge, wie Protokolle oder Error messages,
-   States sind wichtig um später bei der Transformation Knöpfe richtig ein und ausblenden zu können!:)
+(:~ This function returns an empty Game with default values and events!
+    @minBet     Minimum Bet for this Game
+    @maxBet     Maximum Bet for this Game
+:)
 declare function game:createGame($minBet as xs:integer, $maxBet as xs:integer) as element(game){
     let $gameId := xs:string(uuid:randomUUID())
 
@@ -45,7 +38,7 @@ declare function game:createGame($minBet as xs:integer, $maxBet as xs:integer) a
                 <event>
                     <time>{helper:currentTime()}</time>
                     <type>protocol</type>
-                    <text>Jeder Spieler startet mit 10.000 balance</text>
+                    <text>Jeder Spieler startet mit einem Kontostand von 10.000!</text>
                 </event>
             </events>
             <state>ready</state>
@@ -77,8 +70,10 @@ function game:deleteGame($gameID as xs:string){
     delete node $game:games/game[id = $gameID]
 };
 
-(:Nächsten Spieler lokalisieren und festlegen als Aktiver Spieler
-  Falls letzter Spieler fertig ist, rufe evaluateRound() auf
+(:~ Sets the next Player as active while the round (player 1 up to the last player) is not completed, otherwise
+    looks at the current state and initiates the new one!
+
+    @gameID     ID of the current Game
 :)
 declare
 %updating
@@ -89,11 +84,6 @@ function game:setActivePlayer($gameID as xs:string){
     let $players := $game:games/game[id = $gameID]/players
     let $count := fn:count($players/player)
     let $newPlayerID := $players/$oldPlayer/following::*[1]/id/text()
-    let $prot := <event>
-        <time>{helper:currentTime()}</time>
-        <type>protocol</type>
-        <text>Berechne Spielausgang...</text>
-    </event>
     return (
         if (fn:not($oldPlayer/position = $count)) then (replace value of node $oldPlayerID with $newPlayerID)
         else (
@@ -113,6 +103,12 @@ function game:setActivePlayer($gameID as xs:string){
     )
 };
 
+(:~ This function first resets the table, then assigns the players to their new positions,
+    in case of someone left the game, and prepares the Game for the new Round! And is called within the player module
+    (Last player of Round calls this function to ultimately finish the round and start anew!)
+    @gameID     ID of the current Game
+    @continue   Bool Flag from the last player, to bypass the update constraints
+:)
 declare
 %updating
 function game:finishRound($gameID as xs:string, $continue as xs:boolean) {
@@ -122,18 +118,9 @@ function game:finishRound($gameID as xs:string, $continue as xs:boolean) {
     return (replace node $game:games/game[id = $gameID] with $result)
 };
 
-declare function game:getPlayerNames($gameID as xs:string){
-    let $players := $game:games/game[id = $gameID]/players
-    let $playerNames := (for $player in $players
-    return (
-        $player/name/text()
-    )
-    )
-    return $playerNames
-};
 
-
-(: Shuffle Function:)
+(:~ Imports the 6 deck of cards from the deck.xml Files, shuffles them and returns the sequence
+:)
 declare
 %private
 function game:shuffleDeck() as element(cards){
@@ -157,7 +144,9 @@ function game:shuffleDeck() as element(cards){
     </cards>
 };
 
-(:Public setter Function of shuffle():)
+(:~ Set Function of shuffleDeck(), that also insert the resulting deck into the correct Game
+    @gameID     ID of the current Game
+:)
 declare
 %updating
 function game:setShuffledDeck($gameID as xs:string){
@@ -170,14 +159,18 @@ function game:setShuffledDeck($gameID as xs:string){
     )
 };
 
-(:Erhatle Deck für diverse andere Funktionen:)
+(:~ Returns the deck of the Game
+    @gameID     ID of the current Game
+:)
 declare function game:getDeck($gameID as xs:string) as element(cards){
     let $deck := $game:games/game[id = $gameID]/cards
     return $deck
 };
 
-(:Funktion für Spieler und Dealer um eine Karte zu ziehen und zugleich die gezogene Karte aus dem Deck Stack
-zu entfernen, Der index ist für den Dealer, default = 1:)
+(:~ Returns the card with the given index
+    @gameID     ID of the current Game
+    @index      Index of the card
+:)
 declare function game:drawCard($gameID as xs:string, $index as xs:integer) as element(card){
     let $deck := game:getDeck($gameID)
     let $card := $deck/card[$index]
@@ -185,8 +178,8 @@ declare function game:drawCard($gameID as xs:string, $index as xs:integer) as el
     return $card
 };
 
-(:Nach ziehen einer Karte wird diese aus dem Stack entfernt, Controller muss diese hier bei jeder Draw funktion
-extern aufrufen:)
+(:~ Pops a card from the deck stack
+:)
 declare
 %updating
 function game:popDeck($gameID as xs:string){
@@ -195,6 +188,11 @@ function game:popDeck($gameID as xs:string){
 };
 
 
+(:~ Initial Deal out function. Gives each Player and the Dealer 2 Cards, based on the position in the deck. E.g.
+    since there are at max 5 players, the dealer simply gets the cards at index = 11 and index = 12!
+    It also checks, whether Insurance option is viable and if the dealer BJ element can be set to true!
+    @gameID     ID of the current Game
+:)
 declare
 %updating
 function game:dealOutCards($gameID as xs:string){
@@ -215,38 +213,38 @@ function game:dealOutCards($gameID as xs:string){
             delete node $g/cards/card[($pos * 2) - 1],
             delete node $g/cards/card[($pos * 2)],
             if ((xs:integer(fn:count($g/players))) = $pos) then (
-            (: Zweite Karte des Dealers ist die einzige Karte die verdeckt ist:)
-            let $first_card := $g/cards/card[11]
-            let $dealer_first_value := (
-                if ($first_card/value = 'A') then 11 else (
-                    if ($first_card/value = 'K' or $first_card/value = 'B' or $first_card/value = 'D') then 10 else $first_card/value
+                let $first_card := $g/cards/card[11]
+                let $dealer_first_value := (
+                    if ($first_card/value = 'A') then 11 else (
+                        if ($first_card/value = 'K' or $first_card/value = 'B' or $first_card/value = 'D') then 10 else $first_card/value
+                    )
                 )
-            )
-            let $second_card := $g/cards/card[12]
-            let $dealer_second_value := (
-                if ($second_card/value = 'A') then 11 else (
-                    if ($second_card/value = 'K' or $second_card/value = 'B' or $second_card/value = 'D') then 10 else $second_card/value
+                let $second_card := $g/cards/card[12]
+                let $dealer_second_value := (
+                    if ($second_card/value = 'A') then 11 else (
+                        if ($second_card/value = 'K' or $second_card/value = 'B' or $second_card/value = 'D') then 10 else $second_card/value
+                    )
                 )
-            )
-            let $second_modified := (
-                <card>
-                    <value>{$second_card/value/text()}</value>
-                    <color>{$second_card/color/text()}</color>
-                    <hidden>{fn:true()}</hidden>
-                </card>
-            )
+                (: The second card of the dealer is the only card in the whole game that is hidden:)
+                let $second_modified := (
+                    <card>
+                        <value>{$second_card/value/text()}</value>
+                        <color>{$second_card/color/text()}</color>
+                        <hidden>{fn:true()}</hidden>
+                    </card>
+                )
 
-            return (
-                if ($g/cards/card[11]/value = 'A') then (
-                    replace value of node $dealer/isInsurance with fn:true()
-                ) else (),
-                if ($dealer_first_value + $dealer_second_value = 21)
-                then (replace value of node $dealer:games/game[id = $gameID]/dealer/bj with fn:true())
-                else (),
-                insert node $g/cards/card[11] into $dealer/currentHand,
-                insert node $second_modified into $dealer/currentHand,
-                delete node $g/cards/card[11],
-                delete node $g/cards/card[12])
+                return (
+                    if ($g/cards/card[11]/value = 'A') then (
+                        replace value of node $dealer/isInsurance with fn:true()
+                    ) else (),
+                    if ($dealer_first_value + $dealer_second_value = 21)
+                    then (replace value of node $dealer:games/game[id = $gameID]/dealer/bj with fn:true())
+                    else (),
+                    insert node $g/cards/card[11] into $dealer/currentHand,
+                    insert node $second_modified into $dealer/currentHand,
+                    delete node $g/cards/card[11],
+                    delete node $g/cards/card[12])
             ) else ()
             )
         ),
@@ -255,6 +253,11 @@ function game:dealOutCards($gameID as xs:string){
 };
 
 
+(:~ Checks if the current Round of player actions is completed.
+    True, if the next activePlayer is the first player
+    False, otherwise
+    @gameID     ID of the current Game
+:)
 declare function game:isRoundCompleted($gameID as xs:string) as xs:boolean{
     let $activeID := $game:games/game[id = $gameID]/activePlayer
     let $activePlayer := $game:games/game[id = $gameID]/players/player[id = $activeID]
@@ -272,36 +275,35 @@ declare function game:dealerHasBJ($game as element(game)) as xs:boolean {
 
 declare
 %private
-function game:hasBJ($game as element(game)) as xs:boolean {
-    let $dealer := $game/dealer
-    return $dealer/isInsurance and $dealer/bj
-};
-
-declare
-%private
 function game:playerWon($game as element(game), $playerID as xs:string) as xs:boolean {
     let $player := $game/players/player[id = $playerID]
     return $player/won
 };
 
-declare
-%private
-function game:playerHasInsurance($game as element(game), $playerID as xs:string) as xs:boolean {
-    let $player := $game/players/player[id = $playerID]
-    return $player/insurance
-};
 
+(:~ This function gets a Game element as its parameter, evaluates the round by paying out each Player, setting the
+    state to continue and finally the first player as active
+    @game   current Game
+    returns evaluated Game
+:)
 declare function game:evaluateRound($game as element(game)) as element(game) {
+    let $prot :=
+        <event>
+            <time>{helper:currentTime()}</time>
+            <type>protocol</type>
+            <text>Payouts wurden jedem Spieler zugewiesen. Neues Spiel neues Glück! Aufgehts!</text>
+        </event>
     let $result := (
         copy $c := $game
         modify (
             for $p in $c/players/player
             let $playerWon := $p/won
+            (:If a player has not bought Insurance, this will become 0 and not relevant anymore for following computations:)
             let $ins := (
                 if ($c/dealer/bj/text() = 'true' and $p/insurance/text() = 'true') then 1 else 0
             )
             return (
-            (:Wenn Dealer BJ dann kriegt ein Spieler, falls er Insurance gekauft hat, 50% seines Bets zurück:)
+            (:Each Payout scenario, win, draw, BJ, (optional) Insurance:)
 
             if ($playerWon/@draw/string() = "true") then (
                 let $newBalance := $p/balance + xs:integer($p/currentBet) + ($ins * $p/currentBet)
@@ -314,9 +316,9 @@ declare function game:evaluateRound($game as element(game)) as element(game) {
                     let $newBalance := $p/balance + $p/currentBet * 2 + ($ins * $p/currentBet)
                     return replace value of node $p/balance with $newBalance
                 )
-                (:Da das erste if ein Unentschieden ausschließt, wird hier nur auf ein Sieg geachtet:)
                 else ()
             ),
+            insert node $prot into $c/events,
             replace value of node $c/activePlayer with $c/players/player[1]/id/text(),
             replace value of node $c/state with "continue"
         )
@@ -326,6 +328,17 @@ declare function game:evaluateRound($game as element(game)) as element(game) {
 };
 
 
+(:~ This function transforms its given Game element, by closing the Round, i.e. it
+        - deletes Players that choosed not to continue
+        - deletes Players that cannot afford to play a next Round (minBet too high)
+        - resets all Insurance Options to false
+        - resets all win elements to false
+        - resets the deck with a new shuffled one
+        - deletes player and dealer Hands
+    @gameID                 ID of the current Game
+    @lastPlayer_continue    Bool Flag for the continutation of the last Player (important because of update constraints)
+    returns                 the resetted Game status
+:)
 declare function game:resetTable($gameID as xs:string, $lastPlayer_continue as xs:boolean) as element(game){
     let $game := $game:games/game[id = $gameID]
     let $result := (
@@ -340,19 +353,26 @@ declare function game:resetTable($gameID as xs:string, $lastPlayer_continue as x
                     <type>error</type>
                     <text>{$p/name/text()} hat nicht mehr genügend Geld! Pfiat di ;D</text>
                 </event>
+                let $prot := <event>
+                    <time>{helper:currentTime()}</time>
+                    <type>protocol</type>
+                    <text>{$p/name/text()} hat das Spiel verlassen!</text>
+                </event>
+
                 return (
                     if (xs:integer($p/balance) < $c/minBet) then (
                         insert node $err2 as first into $c/events,
                         delete node $p
                     )
                     else if ($p/@continues/string() = 'true') then (
-                    (:Der letzte Spieler und sein Continue Click wird nochmal hier angepasst:)
-                    if (($c/players/player[last()] = $p) and fn:not($lastPlayer_continue)) then (delete node $p) else (),
+                    (:Last Player and their continutation are adjusted in this step:)
+                    if (($c/players/player[last()] = $p) and fn:not($lastPlayer_continue)) then (delete node $p,
+                    insert node $prot as first into $c/events) else (),
                     replace node $p/insurance with <insurance>{fn:false()}</insurance>,
                     replace value of node $p/currentBet with 0,
                     replace node $p/currentHand/cards with <cards></cards>,
                     replace node $p/won with <won bj="false" draw="false">{fn:false()}</won>
-                    ) else (delete node $p)
+                    ) else (delete node $p, insert node $prot as first into $c/events)
                 ),
                 replace value of node $dealer/isInsurance with fn:false(),
                 replace node $dealer/currentHand with <currentHand></currentHand>,
@@ -364,6 +384,12 @@ declare function game:resetTable($gameID as xs:string, $lastPlayer_continue as x
     return $result
 };
 
+(:~ This function correctly assigns the new Position after some Players left the Game, e.g.
+    There are 5 Players, number 3 has left, then this function fills the empty spot with player 4 and pulls player 5
+    into position 4, so other players can simply join as last player!
+    @game       current Game
+    returns     correctly adjusted Game
+:)
 declare function game:assignPositions($game as element(game)) as element(game) {
     let $result := (
         copy $c := $game
@@ -381,6 +407,12 @@ declare function game:assignPositions($game as element(game)) as element(game) {
     return $result
 };
 
+
+(:~ Prepares the Game for the new Round by setting its state to ready or checking if this game is still a valid game to
+    join into, by looking at the amount of players it has, deleted if there are no more players avaiable or sets
+    the join condition to unavailable if there are no free spots
+    @game       current Game
+:)
 declare function game:prepareGame($game as element(game)) as element(game) {
     let $result := (
         copy $c := $game
@@ -410,6 +442,10 @@ function game:changeState($gameID as xs:string, $nextState as xs:string){
         replace value of node $g/state with $nextState
     )};
 
+(:~ This function determines the winners and losers of the current Round.
+    @game       current Game
+    returns     Game, where all plays against the dealer have been evaluated
+:)
 declare function game:setResult($game as element(game)) as element(game) {
     let $dealerCardsValue := dealer:calculateCardValue($game)
     let $result := (
@@ -417,7 +453,7 @@ declare function game:setResult($game as element(game)) as element(game) {
         modify (
             for $p in $c/players/player
             return (
-            (: Falls der Dealer einen Blackjack hat, verlieren automatisch alle Spieler die keinen Blackjack haben:)
+            (: If dealer has BJ, then all players who don´t have a BJ themselves lose, if they have, then it is a draw:)
             if (game:dealerHasBJ($c)) then (
                 let $numberOfCards := fn:count($p/currentHand/cards/card)
                 let $playerCardValue := player:calculateCardValuePlayers($c/id/text(), $p/id/text())
@@ -430,30 +466,30 @@ declare function game:setResult($game as element(game)) as element(game) {
                             <won bj="true" draw="true">{fn:true()}</won>
                         )
                     ))
-            (:Falls der Dealer keinen Blackjack hat:)
+            (:Otherwise (dealer has no BJ):)
             ) else (
                 let $numberOfCards := fn:count($p/currentHand/cards/card)
                 let $playerCardValue := player:calculateCardValuePlayers($c/id/text(), $p/id/text())
                 return (
-                (:Spieler hat einen Blackjack, Sieg weil die Funktionsstelle nur erreicht, wenn der Dealer kein Blackjack:)
+                (:Player has BJ --> Win, because this part of the code cannot be reached if the dealer has a BJ:)
                 if (($playerCardValue = 21) and ($numberOfCards = 2)) then (
                     replace node $p/won with (
                         <won bj="true" draw="false">{fn:true()}</won>
                     )
                 )
-                (:Unentschieden:)
+                (:Draw:)
                 else if ($dealerCardsValue = $playerCardValue) then (
                     replace node $p/won with <won bj="false" draw="true">{fn:false()}</won>
                 )
-                (:Dealer hat über 21:)
+                (:Dealer has more than 21:)
                 else if ($dealerCardsValue > 21 and $playerCardValue <= 21) then (
                         replace value of node $p/won with fn:true()
                     )
-                    (:Spieler verliert, über 21 oder weniger als Dealer:)
+                    (:Player loses, either past 21 or less than dealer:)
                     else if (($playerCardValue) > 21 or (($dealerCardsValue >= $playerCardValue) and ($dealerCardsValue <= 21)))
                         then ( replace value of node $p/won with fn:false())
                         else (
-                            (:Letzte möglicher Ausgang ist, dass der Spieler gewinnt ohne einen Blackjack zu haben:)
+                            (:Final possible outcome is that the player wins, but without a BJ:)
                             replace value of node $p/won with fn:true()
                             )
                 )

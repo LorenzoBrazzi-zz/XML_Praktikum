@@ -1,16 +1,21 @@
 xquery version "3.0";
 
 module namespace player = "bj/player";
-import module namespace chip = "bj/chip" at "chip.xqm";
-import module namespace card = "bj/card" at "card.xqm";
 import module namespace game = "bj/game" at "game.xqm";
 import module namespace helper = "bj/helper" at "helper.xqm";
-import module namespace dealer = "bj/dealer" at "dealer.xqm";
+
 declare namespace uuid = "java:java.util.UUID";
 
 declare variable $player:games := db:open("games")/games;
 
-(: WERTE NUR ZUM TESTEN GEÄNDERT :)
+(:~ Creates a Player with empty Hand
+    @bet        Default 0 value given by the controller  function call
+    @balance    Default value 10.000 given by the controller function call
+    @name       Player name
+    @insurance  Default value false given by controller function call
+    @position   Seat Position of the player
+    returns     Player with default values and a name
+:)
 declare function player:createPlayer($bet as xs:integer,
         $balance as xs:integer, $name as xs:string, $insurance as xs:boolean, $position as xs:integer) as element(player){
     <player continues="true">
@@ -28,22 +33,22 @@ declare function player:createPlayer($bet as xs:integer,
     </player>
 };
 
-(:Der Spieler wählt die Chips im View aus, welche dann hier automatisch konvertiert werden,
- um die Rechnung zu erleichtern. Diese Funktion initialisiert den Bet. Darauffolgende bet funktionen arbeiten nur auf Integer!
-
- --> Für diese Funktion müssen wir die aus der View angeklickten CHips akkumulieren und hier als parameter eingeben <--
-        --> Gegebenfalls den Philip ne email schreiben und kurz fragen wie das zu implementieren wäre <--
+(:~ This functions takes the bet that is entered by the player in the Browser and assigns the currentBet element of them,
+    subtracts that particular amount from their balance and finally sets the next player as active. It also checks, whether
+    the bet that was entered is valid or not and sends error message, if false.
+    Finally, if the activePlayer is the last one, then the state is shifted towards 'play' and thus the cards are dealt out!
+    @gameID     ID of the current Game
+    @bet        Bet that was entered by the player
 :)
 declare
 %updating
 function player:setBet($gameID as xs:string, $bet as xs:integer) {
 
     let $activePlayer := $player:games/game[id = $gameID]/activePlayer
-    let $path := $player:games/game[id = $gameID]/players/player[id = $activePlayer]
-    let $activePlayerNewBalance := $path/balance - $bet
+    let $player := $player:games/game[id = $gameID]/players/player[id = $activePlayer]
+    let $activePlayerNewBalance := $player/balance - $bet
     let $maxBet := $player:games/game[id = $gameID]/maxBet
     let $minBet := $player:games/game[id = $gameID]/minBet
-    let $balance := $path/balance
     let $err := <event>
         <time>{helper:currentTime()}</time>
         <type>error</type>
@@ -52,23 +57,32 @@ function player:setBet($gameID as xs:string, $bet as xs:integer) {
     </event>
 
     return (
-        if ($bet > $path/balance or $bet > $maxBet or $bet < $minBet) then (
-        insert node $err as first into $player:games/game[id = $gameID]/events
-    ) else (
-            replace value of node $path/currentBet with xs:integer($bet),
-            replace value of node $path/balance with $activePlayerNewBalance,
-        if (game:isRoundCompleted($gameID)) then (game:changeState($gameID, 'play'), game:dealOutCards($gameID), game:setActivePlayer($gameID)) else (game:setActivePlayer($gameID))
+        if ($bet > $player/balance or $bet > $maxBet or $bet < $minBet) then (
+            insert node $err as first into $player:games/game[id = $gameID]/events
+        ) else (
+            replace value of node $player/currentBet with xs:integer($bet),
+            replace value of node $player/balance with $activePlayerNewBalance,
+            if (game:isRoundCompleted($gameID)) then (game:changeState($gameID, 'play'), game:dealOutCards($gameID), game:setActivePlayer($gameID)) else (game:setActivePlayer($gameID))
         )
     )
 };
 
 
-(:Stand heisst einfach, dass der aktiveSpieler seinen Zug beendet. Demnach wird einfach nur setActivePlayer aufgerufen:)
 declare
 %updating
 function player:stand($gameID as xs:string){
-    game:setActivePlayer($gameID)
-};
+    let $game := $player:games/game[id = $gameID]
+    let $activePlayerID := $game/activePlayer
+    let $prot :=
+        <event>
+            <time>{helper:currentTime()}</time>
+            <type>protocol</type>
+            <text>{$game/players/player[id = $activePlayerID]/name/text()} hat seinen Zug beendet!</text>
+        </event>
+    return (
+        insert node $prot into $game/events,
+        game:setActivePlayer($gameID)
+    )};
 
 declare
 %updating
@@ -82,11 +96,17 @@ function player:double($gameID as xs:string) {
     let $err := <event>
         <time>{helper:currentTime()}</time>
         <type>error</type>
-        <text>Fehler beim Einsatz!!! Der Einsatz darf
+        <text>Fehler beim Verdoppeln!!! Der Einsatz darf
             deinen aktuellen Kontostand/Maximaleinsatz nicht übersteigen! Maximaleinsatz/Kontomaximum wird ausgewählt</text>
     </event>
+    let $prot :=
+        <event>
+            <time>{helper:currentTime()}</time>
+            <type>protocol</type>
+            <text>{$p/name/text()} hat seinen Einsatz !!! VERDOPPELT !!!</text>
+        </event>
     return (
-    (: Falls der vedoppelte Einsatz höher ist als maxBet dann setze einfach den Einsatz auf maxBet :)
+    (: If the doubled value is higher than maxBet or the balance :)
     if ($newBet > $p/balance) then (
         insert node $err as first into $player:games/game[id = $gameID]/events,
         replace value of node $currentBet with $p/balance + $currentBet,
@@ -100,6 +120,7 @@ function player:double($gameID as xs:string) {
         player:hit($gameID)
     )
     else (
+            insert node $prot as first into $player:games/game[id = $gameID]/events,
             replace value of node $currentBet with $newBet,
             replace value of node $p/balance with $p/balance - $currentBet,
             player:hit($gameID)
@@ -126,25 +147,28 @@ function player:hit($gameID as xs:string){
     let $win := <event>
         <time>{helper:currentTime()}</time>
         <type>protocol</type>
-        <text>{$name} hat 21 erreicht!</text>
+        <text>Glückwunsch, {$name}! Du hast 21 erreicht!</text>
     </event>
-    (:Wenn Aktiver Spieler mehr als 21 Scorerpunkte hat, dann kann er folglich keine weiteren Karten mehr ziehen, da
-er schließlich schon verloren hat. Demnach muss der nöchste activePlayer gesetted werden!:)
+    (:If the active player is already beyond 21, then there is no need to hit anymore, thus an error message if they
+    still click on the button!:)
     return (
         if ($score > 21) then (
             insert node $err as first into $player:games/game[id = $gameID]/events
         )
+        (:Automatically redirect players, that have reached 21:)
         else if ($score = 21) then (
             insert node $win as first into $player:games/game[id = $gameID]/events,
             game:setActivePlayer($gameID)
         )
-        (:Wenn er Hitted, dann erhält der aktiveSpieler ganz einfach ne neue Karte. Jetzt kann er wieder einen Knopf seiner
-    Wahl drücken.:)
+        (:If the Hit was succesful and they do not reach 21 with their new card, they are free to chose their next action
+        of course, i.e. no setActivePlayer() call:)
         else (
                 insert node $prot as first into $player:games/game[id = $gameID]/events,
                 player:drawCard($gameID)
             ))
 };
+
+
 
 declare
 %updating
@@ -155,17 +179,27 @@ function player:setInsurance($gameID as xs:string){
         <event>
             <type>protocol</type>
             <time>{helper:currentTime()}</time>
-            <text>{$player/name/text()} hat Insurance gekauft</text>
+            <text>{$player/name/text()} hat sich für 50% seines Einsatzes versichern lassen!</text>
         </event>
 
     return (
-        (:Balance - 0.5 currentBet:)
-        replace value of node $player/balance with $player/balance - xs:integer(0.5*$player/currentBet),
-        replace value of node $player/insurance with fn:true(),
-        insert node $prot as first into $player:games/game[id = $gameID]/events
+    (:Balance - 0.5 currentBet, because the cost of buying Insurance is 50% of your current Bet,
+    later if the dealer happens to have a BJ this will be readded to their balance:)
+    replace value of node $player/balance with $player/balance - xs:integer(0.5 * $player/currentBet),
+    replace value of node $player/insurance with fn:true(),
+    insert node $prot as first into $player:games/game[id = $gameID]/events
     )
 };
 
+
+(:~ This function calculates the Score of the cards in the players´ hand. All cases besides the Ace are trivial, but since
+    A can be either 1 or 11, a more sophisticated approach was chosen. First, the function counts the number of Aces
+    in ones hand, followed by calculation the score of cards without aces.
+    Finally, by using a left fold, the function counts aces as 11, as long as the final score does not go beyond 21.
+    Since this function is called after each card drawn, the calculations always return a valid assignment for the Aces!
+    @gameID     ID of the current Game
+    @playerID   ID of the player
+:)
 declare function player:calculateCardValuePlayers($gameID as xs:string, $playerID as xs:string) as xs:integer {
     let $player := $player:games/game[id = $gameID]/players/player[id = $playerID]
 
@@ -195,7 +229,9 @@ declare function player:calculateCardValuePlayers($gameID as xs:string, $playerI
     )
 };
 
-(:Ziehen einer Karte und darauffolgendes entfernen eben dieser aus dem Stack:)
+(:~ Draws a card for the activePlayer and removes it from the deck stack!
+    @gameID     ID of the current Game
+:)
 declare
 %updating
 function player:drawCard($gameID as xs:string) {
@@ -210,18 +246,11 @@ function player:drawCard($gameID as xs:string) {
     )
 };
 
-declare
-%updating
-function player:drawCards($gameID as xs:string, $playerID as xs:string) {
-    let $p := $player:games/game[id = $gameID]/players/player[id = $playerID]
-    let $hand := $p/currentHand/cards
-    let $deck := game:getDeck($gameID)
-
-    for $i in (1, 2)
-    return (insert node $deck/card[1] as first into $hand,
-    delete node $deck/card[1])
-};
-
+(:~ Player continuation Confirmation function. Sets the continues attribute to false if the player has choosen to stop
+    playing further, or if the player is not able to continue due to having not enough money.
+    @game ID    ID of the current Game
+    @continue   Boolean  continuation flag
+:)
 declare
 %updating
 function player:setContinue($gameID as xs:string, $continue as xs:boolean){
@@ -236,44 +265,4 @@ function player:setContinue($gameID as xs:string, $continue as xs:boolean){
         )
     )
 
-};
-
-declare
-%updating
-function player:payoutBalanceNormal($gameID as xs:string, $playerID as xs:string){
-    let $player := $player:games/game[id = $gameID]/players/player[id = $playerID]
-    let $newBalance := $player/balance + $player/currentBet * 2
-    return (
-        replace value of node $player/balance with $newBalance
-    )
-};
-
-declare
-%updating
-function player:payoutBJ($gameID as xs:string, $playerID as xs:string){
-    let $player := $player:games/game[id = $gameID]/players/player[id = $playerID]
-    let $newBalance := $player/balance + $player/currentBet + xs:integer($player/currentBet * 1.5)
-    return (
-        replace value of node $player/balance with $newBalance
-    )
-};
-
-declare
-%updating
-function player:payoutInsurance($gameID as xs:string, $playerID as xs:string){
-    let $player := $player:games/game[id = $gameID]/players/player[id = $playerID]
-    let $newBalance := $player/balance + xs:integer($player/currentBet * 0.5)
-    return (
-        replace value of node $player/balance with $newBalance
-    )
-};
-
-declare
-%updating
-function player:payoutDraw($gameID as xs:string, $playerID as xs:string){
-    let $player := $player:games/game[id = $gameID]/players/player[id = $playerID]
-    let $newBalance := $player/balance + xs:integer($player/currentBet)
-    return (
-        replace value of node $player/balance with $newBalance
-    )
 };

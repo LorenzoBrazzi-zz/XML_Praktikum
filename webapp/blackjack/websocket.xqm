@@ -2,7 +2,6 @@ xquery version "3.0";
 
 module namespace bj-ws = "bj/websocket";
 import module namespace websocket = "http://basex.org/modules/Ws";
-import module namespace player = "bj/player" at "player.xqm";
 
 declare
 %ws-stomp:subscribe("/bj")

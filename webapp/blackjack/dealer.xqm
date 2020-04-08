@@ -2,12 +2,17 @@ xquery version "3.0";
 
 
 module namespace dealer = "bj/dealer";
-import module namespace player = "bj/player" at "player.xqm";
 import module namespace game = "bj/game" at "game.xqm";
-import module namespace helper = "bj/helper" at "helper.xqm";
 
 declare variable $dealer:games := db:open("games")/games;
 
+
+(:~ Tail Recursive Function that determines how many cards the dealer has to draw until the score is above 16!
+    @game       current Game
+    @currentVal current score of the dealers hand
+    @result     accumulated number of cards to draw
+    returns     number of cards to draw
+:)
 declare function dealer:numberofDrawingCard($game as element(game), $currentVal as xs:integer, $result as xs:integer) as xs:integer{
     let $card := (
         let $deck := $game/cards
@@ -24,6 +29,12 @@ declare function dealer:numberofDrawingCard($game as element(game), $currentVal 
     )
 };
 
+(:~ Calculates the Dealers Score, just as the function in the players module. But because of update constraints reasons,
+    this function takes a game element, a modified copy, and adjust the result for that particular. Besides that, everything
+    stays the same.
+    @game       current Game
+    returns     hand Score of the dealer
+:)
 declare function dealer:calculateCardValue($game as element(game)) as xs:integer {
     let $dealer := $game/dealer
 
@@ -53,6 +64,13 @@ declare function dealer:calculateCardValue($game as element(game)) as xs:integer
     )
 };
 
+(:~ This function is needed because the card Ace can be either 1 or 11. When this is called, the dealer has drawn a new
+    card, thus the score of the hand must be recalculated in order to correctly assign the value for the Ace, which is
+    11, if not beyond 21
+    1, otherwise
+    @game       current Game
+    returns     new Hand score
+:)
 declare function dealer:newCardValue($card as element(card), $val as xs:integer) as xs:integer{
     let $dummy := 0
     return (
@@ -65,6 +83,9 @@ declare function dealer:newCardValue($card as element(card), $val as xs:integer)
 };
 
 
+(:~ Turns the second card of the Dealer
+    @gameID     ID of the current Game
+:)
 declare function dealer:turnCard($gameID as xs:string) as element(game){
     let $g := (
         copy $c := game:getGame($gameID)
@@ -80,6 +101,10 @@ declare function dealer:turnCard($gameID as xs:string) as element(game){
 };
 
 
+(:~ Draws 0 or more cards for the dealer.
+    @game       current Game
+    returns     adjusted Game
+:)
 declare function dealer:drawCard($game as element(game)) as element(game) {
     let $result :=(
         copy $c := $game
@@ -106,6 +131,8 @@ declare function dealer:drawCard($game as element(game)) as element(game) {
 
 };
 
+(:~ Combines the actions of first turning the second card, and if necessary, draw some cards.
+:)
 declare function dealer:play($gameID as xs:string) as element(game){
     dealer:drawCard(dealer:turnCard($gameID))
 };
