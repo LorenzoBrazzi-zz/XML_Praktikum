@@ -1603,12 +1603,12 @@
                 <xsl:variable name="value" select="value"/>
                 <xsl:variable name="color" select="color"/>
                 <xsl:variable name="counter" select="position()-1"/>
-                <xsl:variable name="hidden" select="hidden"/>
+                <xsl:variable name="turned" select="turned"/>
 
                 <use x="{$cardDealerX + $counter* $cardSpacing}" y="{$cardDealerY}" xlink:href="#CardTemplate"/>
 
                 <xsl:choose>
-                    <xsl:when test="$hidden = 'true'">
+                    <xsl:when test="$turned = 'true'">
                         <use x="{$cardDealerX + $counter * $cardSpacing}" y="{$cardDealerY}" xlink:href="#cardBack"/>
                     </xsl:when>
                     <xsl:otherwise>

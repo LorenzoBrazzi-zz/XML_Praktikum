@@ -92,7 +92,7 @@ declare function dealer:turnCard($gameID as xs:string) as element(game){
         modify (
             let $cards := $c/dealer/currentHand
             for $i in $cards/card
-            return replace value of node $i/hidden with false()
+            return replace value of node $i/turned with false()
         )
         return $c
     )

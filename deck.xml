@@ -4,261 +4,261 @@
 	<card>
 		<value>2</value>
 		<color>Spade</color>
-		<hidden>false</hidden>
+		<turned>false</turned>
 	</card>
 	<card>
 		<value>2</value>
 		<color>Heart</color>
-		<hidden>false</hidden>
+		<turned>false</turned>
 	</card>
 	<card>
 		<value>2</value>
 		<color>Diamond</color>
-		<hidden>false</hidden>
+		<turned>false</turned>
 	</card>
 	<card>
 		<value>2</value>
 		<color>Club</color>
-		<hidden>false</hidden>
+		<turned>false</turned>
 	</card>
 	<card>
 		<value>3</value>
 		<color>Spade</color>
-		<hidden>false</hidden>
+		<turned>false</turned>
 	</card>
 	<card>
 		<value>3</value>
 		<color>Heart</color>
-		<hidden>false</hidden>
+		<turned>false</turned>
 	</card>
 	<card>
 		<value>3</value>
 		<color>Diamond</color>
-		<hidden>false</hidden>
+		<turned>false</turned>
 	</card>
 	<card>
 		<value>3</value>
 		<color>Club</color>
-		<hidden>false</hidden>
+		<turned>false</turned>
 	</card>
 	<card>
 		<value>4</value>
 		<color>Spade</color>
-		<hidden>false</hidden>
+		<turned>false</turned>
 	</card>
 	<card>
 		<value>4</value>
 		<color>Heart</color>
-		<hidden>false</hidden>
+		<turned>false</turned>
 	</card>
 	<card>
 		<value>4</value>
 		<color>Diamond</color>
-		<hidden>false</hidden>
+		<turned>false</turned>
 	</card>
 	<card>
 		<value>4</value>
 		<color>Club</color>
-		<hidden>false</hidden>
+		<turned>false</turned>
 	</card>
 	<card>
 		<value>5</value>
 		<color>Spade</color>
-		<hidden>true</hidden>
+		<turned>true</turned>
 	</card>
 	<card>
 		<value>5</value>
 		<color>Heart</color>
-		<hidden>false</hidden>
+		<turned>false</turned>
 	</card>
 	<card>
 		<value>5</value>
 		<color>Diamond</color>
-		<hidden>false</hidden>
+		<turned>false</turned>
 	</card>
 	<card>
 		<value>5</value>
 		<color>Club</color>
-		<hidden>false</hidden>
+		<turned>false</turned>
 	</card>
 	<card>
 		<value>6</value>
 		<color>Spade</color>
-		<hidden>false</hidden>
+		<turned>false</turned>
 	</card>
 	<card>
 		<value>6</value>
 		<color>Heart</color>
-		<hidden>false</hidden>
+		<turned>false</turned>
 	</card>
 	<card>
 		<value>6</value>
 		<color>Diamond</color>
-		<hidden>false</hidden>
+		<turned>false</turned>
 	</card>
 	<card>
 		<value>6</value>
 		<color>Club</color>
-		<hidden>false</hidden>
+		<turned>false</turned>
 	</card>
 	<card>
 		<value>7</value>
 		<color>Spade</color>
-		<hidden>false</hidden>
+		<turned>false</turned>
 	</card>
 	<card>
 		<value>7</value>
 		<color>Heart</color>
-		<hidden>false</hidden>
+		<turned>false</turned>
 	</card>
 	<card>
 		<value>7</value>
 		<color>Diamond</color>
-		<hidden>false</hidden>
+		<turned>false</turned>
 	</card>
 	<card>
 		<value>7</value>
 		<color>Club</color>
-		<hidden>false</hidden>
+		<turned>false</turned>
 	</card>
 	<card>
 		<value>8</value>
 		<color>Spade</color>
-		<hidden>false</hidden>
+		<turned>false</turned>
 	</card>
 	<card>
 		<value>8</value>
 		<color>Heart</color>
-		<hidden>false</hidden>
+		<turned>false</turned>
 	</card>
 	<card>
 		<value>8</value>
 		<color>Diamond</color>
-		<hidden>false</hidden>
+		<turned>false</turned>
 	</card>
 	<card>
 		<value>8</value>
 		<color>Club</color>
-		<hidden>false</hidden>
+		<turned>false</turned>
 	</card>
 	<card>
 		<value>9</value>
 		<color>Spade</color>
-		<hidden>false</hidden>
+		<turned>false</turned>
 	</card>
 	<card>
 		<value>9</value>
 		<color>Heart</color>
-		<hidden>false</hidden>
+		<turned>false</turned>
 	</card>
 	<card>
 		<value>9</value>
 		<color>Diamond</color>
-		<hidden>false</hidden>
+		<turned>false</turned>
 	</card>
 	<card>
 		<value>9</value>
 		<color>Club</color>
-		<hidden>false</hidden>
+		<turned>false</turned>
 	</card>
 	<card>
 		<value>10</value>
 		<color>Spade</color>
-		<hidden>false</hidden>
+		<turned>false</turned>
 	</card>
 	<card>
 		<value>10</value>
 		<color>Heart</color>
-		<hidden>false</hidden>
+		<turned>false</turned>
 	</card>
 	<card>
 		<value>10</value>
 		<color>Diamond</color>
-		<hidden>false</hidden>
+		<turned>false</turned>
 	</card>
 	<card>
 		<value>10</value>
 		<color>Club</color>
-		<hidden>false</hidden>
+		<turned>false</turned>
 	</card>
 	<card>
 		<value>B</value>
 		<color>Spade</color>
-		<hidden>false</hidden>
+		<turned>false</turned>
 	</card>
 	<card>
 		<value>B</value>
 		<color>Heart</color>
-		<hidden>false</hidden>
+		<turned>false</turned>
 	</card>
 	<card>
 		<value>B</value>
 		<color>Diamond</color>
-		<hidden>false</hidden>
+		<turned>false</turned>
 	</card>
 	<card>
 		<value>B</value>
 		<color>Club</color>
-		<hidden>false</hidden>
+		<turned>false</turned>
 	</card>
 	<card>
 		<value>D</value>
 		<color>Spade</color>
-		<hidden>false</hidden>
+		<turned>false</turned>
 	</card>
 	<card>
 		<value>D</value>
 		<color>Heart</color>
-		<hidden>false</hidden>
+		<turned>false</turned>
 	</card>
 	<card>
 		<value>D</value>
 		<color>Diamond</color>
-		<hidden>false</hidden>
+		<turned>false</turned>
 	</card>
 	<card>
 		<value>D</value>
 		<color>Club</color>
-		<hidden>false</hidden>
+		<turned>false</turned>
 	</card>
 	<card>
 		<value>K</value>
 		<color>Spade</color>
-		<hidden>false</hidden>
+		<turned>false</turned>
 	</card>
 	<card>
 		<value>K</value>
 		<color>Heart</color>
-		<hidden>false</hidden>
+		<turned>false</turned>
 	</card>
 	<card>
 		<value>K</value>
 		<color>Diamond</color>
-		<hidden>false</hidden>
+		<turned>false</turned>
 	</card>
 	<card>
 		<value>K</value>
 		<color>Club</color>
-		<hidden>false</hidden>
+		<turned>false</turned>
 	</card>
 	<card>
 		<value>A</value>
 		<color>Spade</color>
-		<hidden>false</hidden>
+		<turned>false</turned>
 	</card>
 	<card>
 		<value>A</value>
 		<color>Heart</color>
-		<hidden>false</hidden>
+		<turned>false</turned>
 	</card>
 	<card>
 		<value>A</value>
 		<color>Diamond</color>
-		<hidden>false</hidden>
+		<turned>false</turned>
 	</card>
 	<card>
 		<value>A</value>
 		<color>Club</color>
-		<hidden>false</hidden>
+		<turned>false</turned>
 	</card>
 </cards>

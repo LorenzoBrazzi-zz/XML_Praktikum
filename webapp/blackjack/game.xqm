@@ -224,12 +224,12 @@ function game:dealOutCards($gameID as xs:string){
                         if ($second_card/value = 'K' or $second_card/value = 'B' or $second_card/value = 'D') then 10 else $second_card/value
                     )
                 )
-                (: The second card of the dealer is the only card in the whole game that is hidden:)
+                (: The second card of the dealer is the only card in the whole game that is turned:)
                 let $second_modified := (
                     <card>
                         <value>{$second_card/value/text()}</value>
                         <color>{$second_card/color/text()}</color>
-                        <hidden>{fn:true()}</hidden>
+                        <turned>{fn:true()}</turned>
                     </card>
                 )
 

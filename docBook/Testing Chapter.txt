@@ -1,0 +1,15 @@
+Testing
+
+We tested our implementations by simulating specific requests and test urls that were defined in 
+the controller module. Through this, we could simply then insert the test url command in our browsers
+to see which results were yielded. In case of errors, the baseX compiler, most of the time, provided a
+convenient error message with the corresponding errorneos lines.
+
+Before we fully implemented our GUI, we either tested by simply returning  xml documents, which we then
+checked on their correctness regarding the expected behavior, or simply looked at the current state of the DB.
+
+Throughout this project, we made use of the classical software testing phases. I.e. we first did test the individual 
+functionality of the modules (unit testing), then tried to integrate them to other components in our system to see
+if they do not alter their behavior. Finally, after integrating, we always tested the system as a whole by trying to
+simulate a round of BJ until the next error shows itself, or to fully check if all changes work according to our
+expectations.
