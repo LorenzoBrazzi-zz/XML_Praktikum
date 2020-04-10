@@ -127,8 +127,6 @@ declare function dealer:drawCard($game as element(game)) as element(game) {
         return $c
     )
     return $result
-
-
 };
 
 (:~ Combines the actions of first turning the second card, and if necessary, draw some cards.
