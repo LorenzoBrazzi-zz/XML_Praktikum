@@ -191,7 +191,7 @@
             <title>Components</title>
             <itemizedlist>
                 <listitem>
-                    <title>Controller</title>
+                    <para>Controller</para>
                     <para>
                         The controller file is the first instance that the user encpunters when sending REST requests to our game. Each function in the controller file is mapped uniquely
                         to a url that triggeres the function call when entered. These functions mostly have no game logic implemented but just rederict to the actual instance's function call.
