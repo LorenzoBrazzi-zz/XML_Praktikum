@@ -185,8 +185,8 @@ function player:setInsurance($gameID as xs:string){
     (:Balance - 0.5 currentBet, because the cost of buying Insurance is 50% of your current Bet,
     later if the dealer happens to have a BJ this will be readded to their balance:)
     replace value of node $player/balance with $player/balance - xs:integer(0.5 * $player/currentBet),
-    replace value of node $player/insurance with fn:true(),
-    insert node $prot as first into $player:games/game[id = $gameID]/events
+replace value of node $player/insurance with fn:true(),
+insert node $prot as first into $player:games/game[id = $gameID]/events
     )
 };
 
