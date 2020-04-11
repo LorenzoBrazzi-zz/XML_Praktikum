@@ -652,5 +652,127 @@
             </para>
         </sect1>
     </chapter>
+
+    <chapter>
+        <title>Visual Playthrough</title>
+        <abstract>Description of the UI and flow of the Game with all its states.</abstract>
+        <mediaObject>
+            <imageObject>
+                <imagedata fileref="screenshots/1.png" format="PNG" align="center" scalefit="1"
+                           width="100%"></imagedata>
+            </imageObject>
+        </mediaObject>
+        <para>
+            (1) After inserting the url bj/setup, the DB is initialized and redirected to bj/startingPage which prints the lobby.
+            (2) If an User wants to, here they can create a game by inserting the needed values.
+            (3) Since no game has been created, yet, this section remains empty.
+        </para>
+        <mediaObject>
+            <imageObject>
+                <imagedata fileref="screenshots/2.png" format="PNG" align="center" scalefit="1"
+                           width="100%"></imagedata>
+            </imageObject>
+        </mediaObject>
+        <para>
+            Suppose Ikbal has created a game with minBet = 10 and maxBet = 10000. After he pressed on the Start button, following Screen appears:
+            (1) Join Url shows that the client has subscribed to the game with the specific ids. Now this browser will, as long as it stays
+                connected, receive updates on the view
+            (2) Ready Button to handle the ready state
+            (3) Notification Box, that logs all game related statements.
+        </para>
+        <mediaObject>
+            <imageObject>
+                <imagedata fileref="screenshots/3.png" format="PNG" align="center" scalefit="1"
+                           width="100%"></imagedata>
+            </imageObject>
+        </mediaObject>
+        <para>
+            Now if a second Player, let´s say Lorenzo, wants to join the created game, can simply click on Join in the lobby.
+            (1) The game is currently in the ready state and thus available with only one Player.
+        </para>
+        <mediaObject>
+            <imageObject>
+                <imagedata fileref="screenshots/4.png" format="PNG" align="center" scalefit="1"
+                           width="100%"></imagedata>
+            </imageObject>
+        </mediaObject>
+        <para>
+            After he Joined, this will be returned. Mark how he as the non-active player can see who plays actively at the moment.
+        </para>
+        <mediaObject>
+            <imageObject>
+                <imagedata fileref="screenshots/5.png" format="PNG" align="center" scalefit="1"
+                           width="100%"></imagedata>
+            </imageObject>
+        </mediaObject>
+        <para>
+            After the players Joined the table and clicked on the ready button, the betting stage is opened.
+            (1) Input Box for Bet
+            (2) Error Message if wrong Bet
+        </para>
+        <mediaObject>
+            <imageObject>
+                <imagedata fileref="screenshots/6.png" format="PNG" align="center" scalefit="1"
+                           width="100%"></imagedata>
+            </imageObject>
+        </mediaObject>
+        <para>
+            After everybody has placed their bets, the cards are dealt out and the playing state emerges.
+            The active Player has now multiple options to choose from. Hit, Stand and Double. In this Case however,
+            the Insurance Option could also be used, because the first card of the dealer is an Ace.
+            (1) Player Actions
+            (2) Chip with the bet amount and dynamically color adjustment
+        </para>
+        <mediaObject>
+            <imageObject>
+                <imagedata fileref="screenshots/7.png" format="PNG" align="center" scalefit="1"
+                           width="100%"></imagedata>
+            </imageObject>
+        </mediaObject>
+        <para>
+            Player Hits and gets a new card.
+        </para>
+        <mediaObject>
+            <imageObject>
+                <imagedata fileref="screenshots/8.png" format="PNG" align="center" scalefit="1"
+                           width="100%"></imagedata>
+            </imageObject>
+        </mediaObject>
+        <para>
+            Player presses on Stand and the active Player rights are passed on to the next player in line.
+        </para>
+        <mediaObject>
+            <imageObject>
+                <imagedata fileref="screenshots/9.png" format="PNG" align="center" scalefit="1"
+                           width="100%"></imagedata>
+            </imageObject>
+        </mediaObject>
+        <para>
+            After the last player plays their move, the round is automatically evaluated. Each balance is adjusted according to the evaluation
+            and we arrived at the "continue" state.
+            (1) Option to choose whether or not to continue playing
+        </para>
+        <mediaObject>
+            <imageObject>
+                <imagedata fileref="screenshots/10.png" format="PNG" align="center" scalefit="1"
+                           width="100%"></imagedata>
+            </imageObject>
+        </mediaObject>
+        <para>
+            Suppose Lorenzo and Patrick have left the game. Then the seats are rearranged that Markus` seat is now the next in line.
+            Also the cycle is finished and we are at the ready state again.
+        </para>
+        <mediaObject>
+            <imageObject>
+                <imagedata fileref="screenshots/11.png" format="PNG" align="center" scalefit="1"
+                           width="100%"></imagedata>
+            </imageObject>
+        </mediaObject>
+        <para>
+            Now that we are at the ready state again, the game becomes available again.
+            (1) Games that are full cannot be entered
+            (2) Games that are in a state other than ready cannot be entered
+        </para>
+    </chapter>
     
 </book>
