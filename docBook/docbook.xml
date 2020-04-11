@@ -115,7 +115,7 @@
                 The value of each ace is determined individually. Depending on the value of the other cards in each players or dealers hand an ace counts as either one or eleven, whichever benefits the play more.
                 "Turned" is a boolean flag determining whether a card is shown or not, and actually is only relevant for the second card the dealer draws at the start of every round, since its the sole card that is shown upside down. All the others are shown normally.
                 All card designs were put together manually (except for the court cards) and are automatically scaled by changing the width of the cards. This was achieved by first implementing the single symbol and then
-                from there on , e.g. simply build the "two" cards by doubling the single symbol and use that particular for the "four" cards symbols, which is then used for the "five" cards symbols, etc.
+                from there on transforming it to build the other numbers , e.g. simply build the "two" cards by doubling, scaling and positioning the single symbol and use that particular for the "four" cards symbols, which is then used for the "five" cards symbols, etc.
                 This also provides an abundance of redundancy, which was quite important, as we, every now and then, could therefore perform some slight tweaks to our designs very time efficiently.
                 Our deck of cards consists of six standardized decks, which is common for Blackjack. After each round the deck is shuffled, so new random cards can be dealt out.
             </para>
@@ -697,7 +697,7 @@
             </imageObject>
         </mediaObject>
         <para>
-            After he Joined, this will be returned. Mark how he as the non-active player can see who plays actively at the moment.
+            After he has joined, this will be returned. Note, how he as the non-active player can see who plays actively at the moment.
         </para>
         <mediaObject>
             <imageObject>
