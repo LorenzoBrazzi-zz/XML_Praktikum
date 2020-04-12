@@ -661,12 +661,15 @@
             </text>
 
             <!-- table text  -->
-            <text x="600" y="300" font-family="Algerian" font-size="30" fill="black" fill-opacity="80">
-                BLACKJACK PAYS 3 TO 2
-            </text>
-            <text x="700" y="350" font-family="Arial" font-size="15" fill="black" fill-opacity="80">
-                Insurance Pays 2 to 1
-            </text>
+            <text x="300"  y="250" font-family="Algerian" font-size="50" fill="white" fill-opacity="0.85">
+                <textPath xlink:href="#bjTextPath" >
+                    BLACKJACK PAYS 3 TO 2
+                </textPath>
+            </text> <text x="425"  y="250" font-family="Algerian" font-size="30" fill="white" fill-opacity="0.6">
+            <textPath xlink:href="#insuranceTextPath" >
+                Insurance pays 2 to 1
+            </textPath>
+        </text>
 
 
             <!-- Playing state UI, i.e. chips, hit, stand, double and insurance-->
@@ -873,6 +876,8 @@
 
             <!-- SVG definitions -->
             <defs>
+                <path id="bjTextPath" d="M400,0 a80,80 0 0,0 750,0"/>
+                <path id="insuranceTextPath" d="M400,50 a80,80 0 0,0 750,0"/>
                 <g id="CardTemplate">
                     <rect height="{$cardHeight}" width="{$cardWidth}" rx="5" ry="5"
                           style="fill:white;stroke:black;stroke-width:2;opacity:1.0"/>
