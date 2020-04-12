@@ -29,13 +29,12 @@ declare
 %rest:GET
 %output:method("html")
 function controller:startingPage() {
-    let $name := rq:parameter("name", "")
     let $transformed := xslt:transform($controller:games, $controller:lobby)
 
     let $html := (
         <html>
             <head>
-                <title>Name</title>
+                <title>Lobby</title>
                 <link rel="stylesheet" type="text/css" href="../static/stylesheet.css"/>
             </head>
             <body>

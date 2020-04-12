@@ -4,7 +4,7 @@
                 exclude-result-prefixes="xs"
                 version="2.0">
 
-    <xsl:include href="general_values.xsl"></xsl:include>
+    <xsl:include href="general_values.xsl"/>
    
 
 
@@ -14,7 +14,7 @@
 
 
     <xsl:template match="game">
-        <!-- Spielerknoten -->
+
         <xsl:variable name="player1" select="players/player[position = 1]"/>
         <xsl:variable name="player2" select="players/player[position = 2]"/>
         <xsl:variable name="player3" select="players/player[position = 3]"/>

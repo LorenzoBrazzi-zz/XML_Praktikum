@@ -101,8 +101,7 @@
                 usually in the form of XML, and the interaction between the world wide web and databases.
                 It was developed by the XML Query working group of the W3C and is closely
                 related to XSLT, which transforms the queried data. XPath, which is a subset of XQuery and XSLT, is used
-                for
-                querying and selecting nodes in XML formatted data.
+                for querying and selecting nodes in XML formatted data.
             </para>
             <para>
                 As far as our own project is concerned, the XQuery modules make up the most part of the game’s logic as
@@ -111,6 +110,32 @@
                 performed by XQuery.
                 All the XQuery modules are marked as .xqm files. Each of them store functions that insert/delete into or
                 modify data from the DB.
+            </para>
+        </sect1>
+        <sect1>
+            <title>SVG</title>
+            <para>
+                SVG is the abbreviation for Scalable vector graphics. It is the technical standard for two dimensional
+                vector graphics and is recommended by the W3C. SVG rendering is supported by all major internet
+                browsers, like chrome, firefox, safari etc.
+                In this project SVG was used for all visual game elements like cards and chips. SVG has a lot of useful
+                features like defining groups (&lt;g/>), where, by giving an name (id) to the group, all elements in
+                this
+                group can be transformed and scaled together. Or &lt;def/>, which doesn’t render elements instantly, but
+                stores them, to use them later with &lt;use/>. By combining these two we could evade a lot of
+                redundancy.
+                For example cards have a lot of figures or positions in common (twos and threes only differ by one
+                symbol and the cipher), so by storing the framework, we could easily create the next one.
+                Scaling is also very easy with SVG. We outsourced a lot of standard variables(e.g. player positions,
+                card dimensions) in „general variables“ and referred to them later, so they could be easily adjusted
+                everywhere, by just changing them in one place.
+                SVG makes it also possible to create complete individual graphical objects with &lt;path/>. In this
+                project an example would be the pattern of the chips.
+                With &lt;text/> text can be visualized for every user to see. It can be predefined or flexible,
+                which we made use of, by reading changing balances or bet-values off the data bank.
+                For the buttons we defined an external stylesheet. That made it possible to creat them individually(e.g.
+                color,size,etc.). Each of them has its own functionality and they are important tools for the players to
+                interact with the game. All in all SVG makes it possible to customize the entire GUI.
             </para>
         </sect1>
         <sect1>
@@ -154,8 +179,7 @@
                 ourselves.
                 Instead, we used XSLT to transform the XML database to HTML through a XSL file, every time when
                 changes happened to the database that need to be displayed to the user. The style in this case is given
-                by
-                applying both CSS-styling and XSL-styling.
+                by applying both CSS-styling and XSL-styling.
             </para>
         </sect1>
         <sect1>
@@ -353,8 +377,8 @@
                 backend. The MVC is mainly used for separating concerns and abstraction, which in our case would be
                 the main logic of the game (Model), the corresponding UI (View) and the handling of the requests
                 (Controller). As you can see in the class diagram below, the controller represents the interface between
-                the backend model and the user`s view (not an object per se, but included as the output of the draw
-                method in the controller). Especially the testing has been significantly made easier by a sophisticated
+                the backend model and the user`s view (client Browser). Especially the testing has been significantly
+                made easier by a sophisticated
                 usage of the controller.
             </para>
 
@@ -376,8 +400,7 @@
 
             <para>
                 We used the RestXQ API to facilitate XQuery as a server-side processing language, i.e. to interpret and
-                map the
-                HTTP Requests from the client (GET and POST) to the XQuery functions of the Server.
+                map the HTTP Requests from the client (GET and POST) to the XQuery functions of the Server.
                 To do so, we simply annotated the functions in the controller with %rest:path("somePath") and
                 %rest:HTTP-method.
                 E.g. %rest:path("bj/setup") and %rest:GET for interpreting the an incoming setup request from the
@@ -828,7 +851,8 @@
             <para>
                 Before we fully implemented our GUI, we either tested by simply returning XML documents, which we then
                 checked for their correctness regarding the expected behavior, or simply looked at the current state of
-                the DB, in case of updating methods.
+                the DB, in case of updating methods. Also to speed things up, we made use of automated tests via python
+                scripts.
             </para>
             <para>
                 Throughout this project, we made use of the classical software testing phases. I.e. we first did test
@@ -943,6 +967,7 @@
             </para>
         </sect1>
         <sect1>
+            <title>Reflection</title>
             <para>
                 Overall, the structure of the course was very thoughtfully organized, while also providing very
                 helpful coaching. Even with the current limitations caused by the corona virus, the instructors
@@ -986,8 +1011,7 @@
             Suppose Ikbal has created a game with minBet = 10 and maxBet = 10000. After he pressed on the Start button,
             following Screen appears:
             (1) Join Url shows that the client has subscribed to the game with the specific ids. Now this browser will,
-            as long as it stays
-            connected, receive updates on the view
+            as long as it stays connected, receive updates on the view
             (2) Ready Button to handle the ready state
             (3) Notification Box, that logs all game related statements.
         </para>
