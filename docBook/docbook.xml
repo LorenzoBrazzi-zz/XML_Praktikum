@@ -999,24 +999,24 @@
     <chapter>
         <title>Visual Playthrough</title>
         <abstract>Description of the UI and flow of the Game with all its states.</abstract>
-        <mediaObject>
+        <mediaobject>
             <imageObject>
                 <imagedata fileref="screenshots/1.png" format="PNG" align="center" scalefit="1"
                            width="100%"></imagedata>
             </imageObject>
-        </mediaObject>
+        </mediaobject>
         <para>
             (1) After inserting the url xLinkbj/setup, the DB is initialized and redirected to xLinkbj/startingPage which prints
             the lobby.
             (2) If an User wants to, here they can create a game by inserting the needed values.
             (3) Since no game has been created, yet, this section remains empty.
         </para>
-        <mediaObject>
+        <mediaobject>
             <imageObject>
                 <imagedata fileref="screenshots/2.png" format="PNG" align="center" scalefit="1"
                            width="100%"></imagedata>
             </imageObject>
-        </mediaObject>
+        </mediaobject>
         <para>
             Suppose Ikbal has created a game with minBet = 10 and maxBet = 10000. After he pressed on the Start button,
             following Screen appears:
@@ -1025,97 +1025,97 @@
             (2) Ready Button to handle the ready state
             (3) Notification Box, that logs all game related statements.
         </para>
-        <mediaObject>
+        <mediaobject>
             <imageObject>
                 <imagedata fileref="screenshots/3.png" format="PNG" align="center" scalefit="1"
                            width="100%"></imagedata>
             </imageObject>
-        </mediaObject>
+        </mediaobject>
         <para>
             Now if a second Player, let´s say Lorenzo, wants to join the created game, he can simply click on Join in the
             lobby.
             (1) The game is currently in the ready state and thus available, containing only one Player.
         </para>
-        <mediaObject>
+        <mediaobject>
             <imageObject>
                 <imagedata fileref="screenshots/4.png" format="PNG" align="center" scalefit="1"
                            width="100%"></imagedata>
             </imageObject>
-        </mediaObject>
+        </mediaobject>
         <para>
             After he has joined, this will be returned. Note, how he, as the non-active player, can see who plays actively
             at the moment.
         </para>
-        <mediaObject>
+        <mediaobject>
             <imageObject>
                 <imagedata fileref="screenshots/5.png" format="PNG" align="center" scalefit="1"
                            width="100%"></imagedata>
             </imageObject>
-        </mediaObject>
+        </mediaobject>
         <para>
             After the players Joined the table and clicked on the ready button, the betting stage is opened.
             (1) Input Box for Bet
             (2) Error Message if wrong Bet
         </para>
-        <mediaObject>
+        <mediaobject>
             <imageObject>
                 <imagedata fileref="screenshots/6.png" format="PNG" align="center" scalefit="1"
                            width="100%"></imagedata>
             </imageObject>
-        </mediaObject>
+        </mediaobject>
         <para>
             After everybody has placed their bets, the cards are dealt out and the playing state emerges.
             The active Player has now multiple options to choose from. Hit, Stand and Double.
             (1) Player Actions
             (2) Chip with the bet amount and dynamically color adjustment
         </para>
-        <mediaObject>
+        <mediaobject>
             <imageObject>
                 <imagedata fileref="screenshots/7.png" format="PNG" align="center" scalefit="1"
                            width="100%"></imagedata>
             </imageObject>
-        </mediaObject>
+        </mediaobject>
         <para>
             Player Hits and gets a new card.
         </para>
-        <mediaObject>
+        <mediaobject>
             <imageObject>
                 <imagedata fileref="screenshots/8.png" format="PNG" align="center" scalefit="1"
                            width="100%"></imagedata>
             </imageObject>
-        </mediaObject>
+        </mediaobject>
         <para>
             Player presses on Stand and the active Player rights are passed on to the next player in line.
         </para>
-        <mediaObject>
+        <mediaobject>
             <imageObject>
                 <imagedata fileref="screenshots/9.png" format="PNG" align="center" scalefit="1"
                            width="100%"></imagedata>
             </imageObject>
-        </mediaObject>
+        </mediaobject>
         <para>
             After the last player plays their move, the round is automatically evaluated. Each balance is adjusted
             according to the evaluation
             and we arrived at the "continue" state.
             (1) Option to choose whether or not to continue playing
         </para>
-        <mediaObject>
+        <mediaobject>
             <imageObject>
                 <imagedata fileref="screenshots/10.png" format="PNG" align="center" scalefit="1"
                            width="100%"></imagedata>
             </imageObject>
-        </mediaObject>
+        </mediaobject>
         <para>
             Suppose Lorenzo and Patrick have left the game. Then the seats are rearranged, such that Markus` seat is now the
             next in line.
             Also, the cycle is finished and we are at the ready state again.
         </para>
-        <mediaObject>
+        <mediaobject>
             <imageObject>
                 <imagedata fileref="screenshots/11.png" format="PNG" align="center" scalefit="1"
                            width="100%"></imagedata>
             </imageObject>
-        </mediaObject>
+        </mediaobject>
         <para>
             Now that we are at the ready state again, the game becomes available again.
             (1) Games that are full cannot be entered
