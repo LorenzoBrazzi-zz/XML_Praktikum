@@ -37,7 +37,7 @@
 10. Test if the server is running by navigating to localhost:8984 in your browser
 
 ## Playing the Game
-Supported browsers: Safari, Firefox.
+Supported browsers: Safari, Firefox, Chrome.
 
 Open the following URL in your Browser
 
