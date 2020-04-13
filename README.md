@@ -25,9 +25,8 @@
 	1. Copy: `/webapp/xLinkBlackjack` to `/basex-stomp/basex-api/src/main/webapp`
 	2. Copy: `/webapp/static/xLinkBlackjack` to `/basex-stomp/basex-api/src/main/webapp/static`
 	
-5. Start the 
-
-
+5. Start the Jetty server by navigating to the /basex-stomp/basex-api directory and typing in the following commands:
+`mvn jetty:run`
 
 ### Option 2: Eclipse
 1. Download and install Eclipse IDE for Java Developers
@@ -48,6 +47,6 @@ Supported browsers:
 
 Open the following URL in your Browser
 
-http://127.0.0.1:8984/bj
+http://localhost:8984/xLinkbj/setup
 
 IMPORTANT: No backslash '/' at the end of the URL
