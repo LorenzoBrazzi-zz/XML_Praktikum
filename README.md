@@ -12,6 +12,8 @@
 2. Copy the "webapp" folder of this project into the BaseX webapp folder
 
 ### Option 1: Maven (recommendet)
+#### Test
+
 
 ### Option 2: Eclipse
 1. Download and install Eclipse IDE for Java Developers
@@ -24,9 +26,6 @@
 8. In the basex-api project the BaseXHTTP.java can be started with a valid run configuration, so make sure that in “Run configurations” BaseXHTTP is selected as main class and basex-api as project
 9. Run the STOMP BaseX Server, the server starts and prints status information like the HTTP ports
 10. Test if the server is running by navigating to localhost:8984 in your browser
-
-### Option 2: Eclipse
-Run the 'basexhttp' script in the 'basex/bin'
 
 ## Playing the Game
 Supported browsers: 
