@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <?xml-stylesheet type="text/xsl" href="Test.xsl"?>
-<!--<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">-->
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
 
 
 <book>
@@ -868,7 +868,7 @@
         </sect1>
     </chapter>
 
-    <chaper>
+    <chapter>
         <title>Challenges</title>
         <abstract>Technical and Logical Challenges that we came across.</abstract>
 
@@ -943,7 +943,7 @@
             </para>
         </sect1>
 
-    </chaper>
+    </chapter>
 
     <chapter>
         <title>Development</title>
@@ -1000,10 +1000,10 @@
         <title>Visual Playthrough</title>
         <abstract>Description of the UI and flow of the Game with all its states.</abstract>
         <mediaobject>
-            <imageObject>
-                <imagedata fileref="screenshots/1.png" format="PNG" align="center" scalefit="1"
+            <imageobject>
+                <imagedata fileref="../screenshots/1.png" format="PNG" align="center" scalefit="1"
                            width="100%"></imagedata>
-            </imageObject>
+            </imageobject>
         </mediaobject>
         <para>
             (1) After inserting the url xLinkbj/setup, the DB is initialized and redirected to xLinkbj/startingPage which prints
@@ -1012,10 +1012,10 @@
             (3) Since no game has been created, yet, this section remains empty.
         </para>
         <mediaobject>
-            <imageObject>
-                <imagedata fileref="screenshots/2.png" format="PNG" align="center" scalefit="1"
+            <imageobject>
+                <imagedata fileref="../screenshots/2.png" format="PNG" align="center" scalefit="1"
                            width="100%"></imagedata>
-            </imageObject>
+            </imageobject>
         </mediaobject>
         <para>
             Suppose Ikbal has created a game with minBet = 10 and maxBet = 10000. After he pressed on the Start button,
@@ -1026,10 +1026,10 @@
             (3) Notification Box, that logs all game related statements.
         </para>
         <mediaobject>
-            <imageObject>
-                <imagedata fileref="screenshots/3.png" format="PNG" align="center" scalefit="1"
+            <imageobject>
+                <imagedata fileref="../screenshots/3.png" format="PNG" align="center" scalefit="1"
                            width="100%"></imagedata>
-            </imageObject>
+            </imageobject>
         </mediaobject>
         <para>
             Now if a second Player, let´s say Lorenzo, wants to join the created game, he can simply click on Join in the
@@ -1037,20 +1037,20 @@
             (1) The game is currently in the ready state and thus available, containing only one Player.
         </para>
         <mediaobject>
-            <imageObject>
-                <imagedata fileref="screenshots/4.png" format="PNG" align="center" scalefit="1"
+            <imageobject>
+                <imagedata fileref="../screenshots/4.png" format="PNG" align="center" scalefit="1"
                            width="100%"></imagedata>
-            </imageObject>
+            </imageobject>
         </mediaobject>
         <para>
             After he has joined, this will be returned. Note, how he, as the non-active player, can see who plays actively
             at the moment.
         </para>
         <mediaobject>
-            <imageObject>
-                <imagedata fileref="screenshots/5.png" format="PNG" align="center" scalefit="1"
+            <imageobject>
+                <imagedata fileref="../screenshots/5.png" format="PNG" align="center" scalefit="1"
                            width="100%"></imagedata>
-            </imageObject>
+            </imageobject>
         </mediaobject>
         <para>
             After the players Joined the table and clicked on the ready button, the betting stage is opened.
@@ -1058,10 +1058,10 @@
             (2) Error Message if wrong Bet
         </para>
         <mediaobject>
-            <imageObject>
-                <imagedata fileref="screenshots/6.png" format="PNG" align="center" scalefit="1"
+            <imageobject>
+                <imagedata fileref="../screenshots/6.png" format="PNG" align="center" scalefit="1"
                            width="100%"></imagedata>
-            </imageObject>
+            </imageobject>
         </mediaobject>
         <para>
             After everybody has placed their bets, the cards are dealt out and the playing state emerges.
@@ -1070,28 +1070,28 @@
             (2) Chip with the bet amount and dynamically color adjustment
         </para>
         <mediaobject>
-            <imageObject>
-                <imagedata fileref="screenshots/7.png" format="PNG" align="center" scalefit="1"
+            <imageobject>
+                <imagedata fileref="../screenshots/7.png" format="PNG" align="center" scalefit="1"
                            width="100%"></imagedata>
-            </imageObject>
+            </imageobject>
         </mediaobject>
         <para>
             Player Hits and gets a new card.
         </para>
         <mediaobject>
-            <imageObject>
-                <imagedata fileref="screenshots/8.png" format="PNG" align="center" scalefit="1"
+            <imageobject>
+                <imagedata fileref="../screenshots/8.png" format="PNG" align="center" scalefit="1"
                            width="100%"></imagedata>
-            </imageObject>
+            </imageobject>
         </mediaobject>
         <para>
             Player presses on Stand and the active Player rights are passed on to the next player in line.
         </para>
         <mediaobject>
-            <imageObject>
-                <imagedata fileref="screenshots/9.png" format="PNG" align="center" scalefit="1"
+            <imageobject>
+                <imagedata fileref="../screenshots/9.png" format="PNG" align="center" scalefit="1"
                            width="100%"></imagedata>
-            </imageObject>
+            </imageobject>
         </mediaobject>
         <para>
             After the last player plays their move, the round is automatically evaluated. Each balance is adjusted
@@ -1100,10 +1100,10 @@
             (1) Option to choose whether or not to continue playing
         </para>
         <mediaobject>
-            <imageObject>
-                <imagedata fileref="screenshots/10.png" format="PNG" align="center" scalefit="1"
+            <imageobject>
+                <imagedata fileref="../screenshots/10.png" format="PNG" align="center" scalefit="1"
                            width="100%"></imagedata>
-            </imageObject>
+            </imageobject>
         </mediaobject>
         <para>
             Suppose Lorenzo and Patrick have left the game. Then the seats are rearranged, such that Markus` seat is now the
@@ -1111,10 +1111,10 @@
             Also, the cycle is finished and we are at the ready state again.
         </para>
         <mediaobject>
-            <imageObject>
-                <imagedata fileref="screenshots/11.png" format="PNG" align="center" scalefit="1"
+            <imageobject>
+                <imagedata fileref="../screenshots/11.png" format="PNG" align="center" scalefit="1"
                            width="100%"></imagedata>
-            </imageObject>
+            </imageobject>
         </mediaobject>
         <para>
             Now that we are at the ready state again, the game becomes available again.
