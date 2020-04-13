@@ -7,10 +7,6 @@
 
 ## Start the server
 
-1. Install the BaseX server here : http://basex.org/download/
-
-2. Copy the "webapp" folder of this project into the BaseX webapp folder
-
 ### Option 1: Maven (recommendet)
 
 1. Open the pom.xml file that you can find on the first level of the /basex-stomp directory. Int pom.xml, at the repository with the ID 'central', change the URL to the following: "http://insecure.repo1.maven.org/maven2"
