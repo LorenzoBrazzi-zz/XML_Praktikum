@@ -147,10 +147,10 @@ function controller:join($gameID as xs:string, $playerID as xs:string){
         <html>
             <head>
                 <title>BlackJack</title>
-                <script src="/static/JS/jquery-3.2.1.min.js"></script>
-                <script src="/static/JS/stomp.js"></script>
-                <script src="/static/JS/ws-element.js"></script>
-                <link rel="stylesheet" type="text/css" href="/static/stylesheet.css"/>
+                <script src="/static/xLinkBlackjack/JS/jquery-3.2.1.min.js"></script>
+                <script src="/static/xLinkBlackjack/JS/stomp.js"></script>
+                <script src="/static/xLinkBlackjack/JS/ws-element.js"></script>
+                <link rel="stylesheet" type="text/css" href="/static/xLinkBlackjack/stylesheet.css"/>
             </head>
             <body>
                 <ws-stream id="xLinkbj" url="{$websocketURL}" subscription="{$subscription}" geturl="{$getURL}"/>
