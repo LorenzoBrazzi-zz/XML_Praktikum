@@ -15,7 +15,15 @@
 
 1. Open the pom.xml file that you can find on the first level of the /basex-stomp directory. Int pom.xml, at the repository with the ID 'central', change the URL to the following: "http://insecure.repo1.maven.org/maven2"
 
-2. In your command line navigate to the /basex-stomp directory and type in the following command: `mvn clean install -DskipTests`
+2. In your command line navigate to the /basex-stomp directory and type in the following command: 
+`mvn clean install -DskipTests`
+
+3. After that, type in the following command within the same directory:
+`mvn package -DskipTests`
+
+4. In the following copy the whole folders listed below
+	1. Copy: `/webapp/xLinkBlackjack` to `/basex-stomp/basex-api/src/main/webapp`
+	2. Copy: `/webapp/static/xLinkBlackjack` to `/basex-stomp/basex-api/src/main/webapp/static`
 
 
 
