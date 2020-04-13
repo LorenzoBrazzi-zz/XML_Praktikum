@@ -21,9 +21,11 @@
 3. After that, type in the following command within the same directory:
 `mvn package -DskipTests`
 
-4. In the following copy the whole folders listed below
+4. Copy the folders listed below (entire folders, not only content)
 	1. Copy: `/webapp/xLinkBlackjack` to `/basex-stomp/basex-api/src/main/webapp`
 	2. Copy: `/webapp/static/xLinkBlackjack` to `/basex-stomp/basex-api/src/main/webapp/static`
+	
+5. Start the 
 
 
 
