@@ -12,7 +12,11 @@
 2. Copy the "webapp" folder of this project into the BaseX webapp folder
 
 ### Option 1: Maven (recommendet)
-#### Test
+
+1. Open the pom.xml file that you can find on the first level of the /basex-stomp directory. Int pom.xml, at the repository with the ID 'central', change the URL to the following: "http://insecure.repo1.maven.org/maven2"
+
+2. In your command line navigate to the /basex-stomp directory and type in the following command: `mvn clean install -DskipTests`
+
 
 
 ### Option 2: Eclipse
