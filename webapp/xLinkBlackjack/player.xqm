@@ -61,7 +61,7 @@ function player:setBet($gameID as xs:string, $bet as xs:integer) {
         ) else (
             replace value of node $player/currentBet with xs:integer($bet),
             replace value of node $player/balance with $activePlayerNewBalance,
-            if (game:isRoundCompleted($gameID)) then (game:changeState($gameID, 'play'), game:dealOutCards($gameID), game:setActivePlayer($gameID)) else (game:setActivePlayer($gameID))
+            if (game:isRoundCompleted($gameID)) then (game:changeState($gameID, 'play'), game:dealOut($gameID), game:setActivePlayer($gameID)) else (game:setActivePlayer($gameID))
         )
     )
 };
@@ -180,13 +180,27 @@ function player:setInsurance($gameID as xs:string){
             <time>{helper:currentTime()}</time>
             <text>{$player/name/text()} hat sich für 50% seines Einsatzes versichern lassen!</text>
         </notification>
+    let $err :=
+        <notification>
+            <type>protocol</type>
+            <time>{helper:currentTime()}</time>
+            <text>Das Guthaben {$player/name/text()} reicht für eine Versicherung nicht aus! (50% des Einsatzes nötig)</text>
+        </notification>
 
     return (
-    (:Balance - 0.5 currentBet, because the cost of buying Insurance is 50% of your current Bet,
+        (:If player has not enough money to pay, simply do nothing:)
+        if($player/balance < xs:integer(0.5*$player/currentBet))
+        then (
+            insert node $err as first into $player:games/game[id = $gameID]/notifications
+        )
+        else (
+        (:Balance - 0.5 currentBet, because the cost of buying Insurance is 50% of your current Bet,
     later if the dealer happens to have a BJ this will be readded to their balance:)
-    replace value of node $player/balance with $player/balance - xs:integer(0.5 * $player/currentBet),
-replace value of node $player/insurance with fn:true(),
-insert node $prot as first into $player:games/game[id = $gameID]/notifications
+        replace value of node $player/balance with $player/balance - xs:integer(0.5 * $player/currentBet),
+        replace value of node $player/insurance with fn:true(),
+        insert node $prot as first into $player:games/game[id = $gameID]/notifications
+        )
+
     )
 };
 
@@ -202,7 +216,7 @@ insert node $prot as first into $player:games/game[id = $gameID]/notifications
 declare function player:cardValueOfPlayer($gameID as xs:string, $playerID as xs:string) as xs:integer {
     let $player := $player:games/game[id = $gameID]/players/player[id = $playerID]
 
-    let $amoutOfAces := (
+    let $aceCount := (
         sum(
                 for $c in $player/currentHand/cards/card
                 return (
@@ -210,7 +224,7 @@ declare function player:cardValueOfPlayer($gameID as xs:string, $playerID as xs:
                 ))
     )
 
-    let $valueOfCardsWitoutAces := (
+    let $noAcesValue := (
         sum(
                 for $c in $player/currentHand/cards/card
                 return (
@@ -220,7 +234,7 @@ declare function player:cardValueOfPlayer($gameID as xs:string, $playerID as xs:
                 )
         ))
 
-    let $value := fn:fold-left((1 to $amoutOfAces), $valueOfCardsWitoutAces, function($acc, $c) {
+    let $value := fn:fold-left((1 to $aceCount), $noAcesValue, function($acc, $c) {
         if ($acc + 11 > 21) then ($acc + 1) else ($acc + 11)
     })
     return (

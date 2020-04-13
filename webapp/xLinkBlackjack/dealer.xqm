@@ -38,7 +38,7 @@ declare function dealer:numberofDrawingCard($game as element(game), $currentVal 
 declare function dealer:cardValueOfDealer($game as element(game)) as xs:integer {
     let $dealer := $game/dealer
 
-    let $amoutOfAces := (
+    let $aceCount := (
         sum(
                 for $c in $dealer/currentHand/card
                 return (
@@ -46,7 +46,7 @@ declare function dealer:cardValueOfDealer($game as element(game)) as xs:integer 
                 ))
     )
 
-    let $valueOfCardsWitoutAces := (
+    let $noAcesValue := (
         sum(
                 for $c in $dealer/currentHand/card
                 return (
@@ -56,7 +56,7 @@ declare function dealer:cardValueOfDealer($game as element(game)) as xs:integer 
                 )
         ))
 
-    let $value := fn:fold-left((1 to $amoutOfAces), $valueOfCardsWitoutAces, function($acc, $c) {
+    let $value := fn:fold-left((1 to $aceCount), $noAcesValue, function($acc, $c) {
         if ($acc + 11 > 21) then ($acc + 1) else ($acc + 11)
     })
     return (

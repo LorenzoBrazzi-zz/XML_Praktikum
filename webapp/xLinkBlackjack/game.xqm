@@ -133,13 +133,13 @@ function game:shuffleDeck() as element(cards){
         {$cardSet}
     </cards>
 
-    let $shuffled :=
+    let $result :=
         for $c in $deck/card
         order by random:integer(52)
         return $c
 
     return <cards>
-        {$shuffled}
+        {$result}
     </cards>
 };
 
@@ -194,7 +194,7 @@ function game:popDeck($gameID as xs:string){
 :)
 declare
 %updating
-function game:dealOutCards($gameID as xs:string){
+function game:dealOut($gameID as xs:string){
     let $g := $game:games/game[id = $gameID]
     let $prot := <notification>
         <time>{helper:currentTime()}</time>
