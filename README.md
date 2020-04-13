@@ -5,22 +5,41 @@
 - [Maven](https://maven.apache.org/download.cgi) or [Eclipse](https://www.eclipse.org/downloads/) to start the webserver (for installation instructions see below)
 - [Java JDK 1.8](https://www.oracle.com/java/technologies/javase-jdk8-downloads.html) or greater
 
-## Install Game
+## Start the server
 
 1. Install the BaseX server here : http://basex.org/download/
 
 2. Copy the "webapp" folder of this project into the BaseX webapp folder
 
-### Option 1
-Open the BaseX GUI and create a new database by following the steps
-	1. Database
-	2. New...
-	3. Input file or directory: [BaseX folder]/webapp/blackjack/db_init/casino.xml
-	4. Name of database: blackjack
-	5. "Ok"
+### Option 1: Maven (recommendet)
 
-### Option 2
-Run the 'basexhttp' script in the 'basex/bin'
+1. Open the pom.xml file that you can find on the first level of the /basex-stomp directory. Int pom.xml, at the repository with the ID 'central', change the URL to the following: "http://insecure.repo1.maven.org/maven2"
+
+2. In your command line navigate to the /basex-stomp directory and type in the following command: 
+`mvn clean install -DskipTests`
+
+3. After that, type in the following command within the same directory:
+`mvn package -DskipTests`
+
+4. Copy the folders listed below (entire folders, not only content)
+	1. Copy: `/webapp/xLinkBlackjack` to `/basex-stomp/basex-api/src/main/webapp`
+	2. Copy: `/webapp/static/xLinkBlackjack` to `/basex-stomp/basex-api/src/main/webapp/static`
+	
+5. Start the 
+
+
+
+### Option 2: Eclipse
+1. Download and install Eclipse IDE for Java Developers
+2. In Eclipse "File" - "Open Projects from File System"
+3. Choose directory and navigate to the directory of the extracted STOMP BaseX server
+4. Make sure “Search for nested projects” is ticked as BaseX consists of four sub projects. It should find five projects (including the Maven project)
+5. Click finish to import the projects
+6. Make sure that your BaseX Home path is set to the newly downloaded BaseX servers webapp and db folder. For more information on BaseX's home directory visit http:// docs.basex.org/wiki/Configuration.
+7. BaseX consists of four main projects: basex-api, basex-core, basex-examples and basex-tests
+8. In the basex-api project the BaseXHTTP.java can be started with a valid run configuration, so make sure that in “Run configurations” BaseXHTTP is selected as main class and basex-api as project
+9. Run the STOMP BaseX Server, the server starts and prints status information like the HTTP ports
+10. Test if the server is running by navigating to localhost:8984 in your browser
 
 ## Playing the Game
 Supported browsers: 
