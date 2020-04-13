@@ -1,8 +1,8 @@
 # XML Blackjack WebApp
 
 ## Requirements
-- Running instance of BaseX database, and basexhttpserver
-- [Maven](https://maven.apache.org/download.cgi)
+- A downloaded and extracted instance of [Basex-stomp](https://github.com/BaseXdb/basex/tree/stomp)
+- [Maven](https://maven.apache.org/download.cgi) or [Eclipse](https://www.eclipse.org/downloads/) to start the webserver (for installation instructions see below)
 
 ## Install Game
 
@@ -22,6 +22,9 @@ Open the BaseX GUI and create a new database by following the steps
 Run the 'basexhttp' script in the 'basex/bin'
 
 ## Playing the Game
+Supported browsers: 
+	- Safari
+	- Firefox
 
 Open the following URL in your Browser
 
