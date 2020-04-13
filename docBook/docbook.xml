@@ -932,6 +932,16 @@
                 Logic wise, however, the procedures are correct and the connections are established or cut accordingly.
             </para>
         </sect1>
+	<sect1>
+            <title>Coronavirus Pandemic</title>
+            <para>
+                Because of the ongoing Coronavirus it was not possible for us, as a team, to physically meet in our
+		most urgent/final phase of the project. The communication via Zoom and Skype was a big help, but it
+		does not come close to the real thing. Our entire work environment being in our comfortable homes,
+		was holding us back more than we thought. Nonetheless, with current techincal advancement, it was still
+		feasible to implement our project in the scope, we intended to achieve. 
+            </para>
+        </sect1>
 
     </chaper>
 
@@ -996,7 +1006,7 @@
             </imageObject>
         </mediaObject>
         <para>
-            (1) After inserting the url bj/setup, the DB is initialized and redirected to bj/startingPage which prints
+            (1) After inserting the url xLinkbj/setup, the DB is initialized and redirected to xLinkbj/startingPage which prints
             the lobby.
             (2) If an User wants to, here they can create a game by inserting the needed values.
             (3) Since no game has been created, yet, this section remains empty.
@@ -1022,9 +1032,9 @@
             </imageObject>
         </mediaObject>
         <para>
-            Now if a second Player, let´s say Lorenzo, wants to join the created game, can simply click on Join in the
+            Now if a second Player, let´s say Lorenzo, wants to join the created game, he can simply click on Join in the
             lobby.
-            (1) The game is currently in the ready state and thus available with only one Player.
+            (1) The game is currently in the ready state and thus available, containing only one Player.
         </para>
         <mediaObject>
             <imageObject>
@@ -1033,7 +1043,7 @@
             </imageObject>
         </mediaObject>
         <para>
-            After he has joined, this will be returned. Note, how he as the non-active player can see who plays actively
+            After he has joined, this will be returned. Note, how he, as the non-active player, can see who plays actively
             at the moment.
         </para>
         <mediaObject>
@@ -1055,8 +1065,7 @@
         </mediaObject>
         <para>
             After everybody has placed their bets, the cards are dealt out and the playing state emerges.
-            The active Player has now multiple options to choose from. Hit, Stand and Double. In this Case however,
-            the Insurance Option could also be used, because the first card of the dealer is an Ace.
+            The active Player has now multiple options to choose from. Hit, Stand and Double.
             (1) Player Actions
             (2) Chip with the bet amount and dynamically color adjustment
         </para>
@@ -1097,9 +1106,9 @@
             </imageObject>
         </mediaObject>
         <para>
-            Suppose Lorenzo and Patrick have left the game. Then the seats are rearranged that Markus` seat is now the
+            Suppose Lorenzo and Patrick have left the game. Then the seats are rearranged, such that Markus` seat is now the
             next in line.
-            Also the cycle is finished and we are at the ready state again.
+            Also, the cycle is finished and we are at the ready state again.
         </para>
         <mediaObject>
             <imageObject>
