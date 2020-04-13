@@ -3,6 +3,7 @@
 ## Requirements
 - A downloaded and extracted instance of [Basex-stomp](https://github.com/BaseXdb/basex/tree/stomp)
 - [Maven](https://maven.apache.org/download.cgi) or [Eclipse](https://www.eclipse.org/downloads/) to start the webserver (for installation instructions see below)
+- [Java JDK 1.8](https://www.oracle.com/java/technologies/javase-jdk8-downloads.html) or greater
 
 ## Install Game
 
