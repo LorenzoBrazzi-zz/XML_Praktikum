@@ -12,17 +12,17 @@
 1. Open the pom.xml file that you can find on the first level of the /basex-stomp directory. Int pom.xml, at the repository with the ID 'central', change the URL to the following: "http://insecure.repo1.maven.org/maven2"
 
 2. In your command line navigate to the /basex-stomp directory and type in the following command: 
-`mvn clean install -DskipTests`
+	`mvn clean install -DskipTests`
 
 3. After that, type in the following command within the same directory:
-`mvn package -DskipTests`
+	`mvn package -DskipTests`
 
 4. Copy the folders listed below (entire folders, not only content)
 	1. Copy: `/webapp/xLinkBlackjack` to `/basex-stomp/basex-api/src/main/webapp`
 	2. Copy: `/webapp/static/xLinkBlackjack` to `/basex-stomp/basex-api/src/main/webapp/static`
 	
 5. Start the Jetty server by navigating to the /basex-stomp/basex-api directory and typing in the following commands:
-`mvn jetty:run`
+	`mvn jetty:run`
 
 ### Option 2: Eclipse
 1. Download and install Eclipse IDE for Java Developers
@@ -37,9 +37,7 @@
 10. Test if the server is running by navigating to localhost:8984 in your browser
 
 ## Playing the Game
-Supported browsers: 
-	- Safari
-	- Firefox
+Supported browsers: Safari, Firefox.
 
 Open the following URL in your Browser
 
