@@ -1,10 +1,10 @@
 xquery version "3.0";
 
 (: Nötige Module importieren:)
-module namespace game = "bj/game";
-import module namespace player = "bj/player" at "player.xqm";
-import module namespace dealer = "bj/dealer" at "dealer.xqm";
-import module namespace helper = "bj/helper" at "helper.xqm";
+module namespace game = "xLinkbj/game";
+import module namespace player = "xLinkbj/player" at "player.xqm";
+import module namespace dealer = "xLinkbj/dealer" at "dealer.xqm";
+import module namespace helper = "xLinkbj/helper" at "helper.xqm";
 
 (: For generating the IDs for players and games :)
 declare namespace uuid = "java:java.util.UUID";
@@ -18,7 +18,7 @@ declare function game:getGame($gameID as xs:string) {
 };
 
 
-(:~ This function returns an empty Game with default values and events!
+(:~ This function returns an empty Game with default values and notifications!
     @minBet     Minimum Bet for this Game
     @maxBet     Maximum Bet for this Game
 :)
@@ -28,18 +28,18 @@ declare function game:createGame($minBet as xs:integer, $maxBet as xs:integer) a
     return (
         <game>
             <id>{$gameId}</id>
-            <events>
-                <event>
+            <notifications>
+                <notification>
                     <time>{helper:currentTime()}</time>
                     <type>protocol</type>
                     <text>Neues Spiel eröffnet, Viel Spass beim Spielen!</text>
-                </event>
-                <event>
+                </notification>
+                <notification>
                     <time>{helper:currentTime()}</time>
                     <type>protocol</type>
                     <text>Jeder Spieler startet mit einem Kontostand von 10.000!</text>
-                </event>
-            </events>
+                </notification>
+            </notifications>
             <state>ready</state>
             <maxBet>{$maxBet}</maxBet>
             <minBet>{$minBet}</minBet>
@@ -196,11 +196,11 @@ declare
 %updating
 function game:dealOutCards($gameID as xs:string){
     let $g := $game:games/game[id = $gameID]
-    let $prot := <event>
+    let $prot := <notification>
         <time>{helper:currentTime()}</time>
         <type>protocol</type>
         <text>Karten wurden verteilt! Lasst die RUNDE BEGINNEN!</text>
-    </event>
+    </notification>
 
     return (
         let $dealer := $g/dealer
@@ -247,7 +247,7 @@ function game:dealOutCards($gameID as xs:string){
             ) else ()
             )
         ),
-        insert node $prot as first into $game:games/game[id = $gameID]/events
+        insert node $prot as first into $game:games/game[id = $gameID]/notifications
     )
 };
 
@@ -287,11 +287,11 @@ function game:playerWon($game as element(game), $playerID as xs:string) as xs:bo
 :)
 declare function game:evaluateRound($game as element(game)) as element(game) {
     let $prot :=
-        <event>
+        <notification>
             <time>{helper:currentTime()}</time>
             <type>protocol</type>
             <text>Payouts wurden jedem Spieler zugewiesen. Neues Spiel neues Glück! Aufgehts!</text>
-        </event>
+        </notification>
     let $result := (
         copy $c := $game
         modify (
@@ -299,7 +299,7 @@ declare function game:evaluateRound($game as element(game)) as element(game) {
             let $playerWon := $p/won
             (:If a player has not bought Insurance, this will become 0 and not relevant anymore for following computations:)
             let $ins := (
-                if ($c/dealer/bj/text() = 'true' and $p/insurance/text() = 'true') then 1 else 0
+                if ($c/dealer/xLinkbj/text() = 'true' and $p/insurance/text() = 'true') then 1 else 0
             )
             return (
             (:Each Payout scenario, win, draw, BJ, (optional) Insurance:)
@@ -307,7 +307,7 @@ declare function game:evaluateRound($game as element(game)) as element(game) {
             if ($playerWon/@draw/string() = "true") then (
                 let $newBalance := $p/balance + xs:integer($p/currentBet) + ($ins * $p/currentBet)
                 return replace value of node $p/balance with $newBalance
-            ) else if ($playerWon/@bj/string() = "true") then (
+            ) else if ($playerWon/@xLinkbj/string() = "true") then (
                 let $newBalance := $p/balance + $p/currentBet + xs:integer($p/currentBet * 1.5) + ($ins * $p/currentBet)
                 return replace value of node $p/balance with $newBalance
             )
@@ -317,7 +317,7 @@ declare function game:evaluateRound($game as element(game)) as element(game) {
                 )
                 else ()
             ),
-            insert node $prot into $c/events,
+            insert node $prot as first into $c/notifications,
             replace value of node $c/activePlayer with $c/players/player[1]/id/text(),
             replace value of node $c/state with "continue"
         )
@@ -347,31 +347,31 @@ declare function game:resetTable($gameID as xs:string, $lastPlayer_continue as x
             let $dealer := $c/dealer
             return (
                 for $p in $c/players/player
-                let $err2 := <event>
+                let $err2 := <notification>
                     <time>{helper:currentTime()}</time>
                     <type>error</type>
                     <text>{$p/name/text()} hat nicht mehr genügend Geld! Pfiat di ;D</text>
-                </event>
-                let $prot := <event>
+                </notification>
+                let $prot := <notification>
                     <time>{helper:currentTime()}</time>
                     <type>protocol</type>
                     <text>{$p/name/text()} hat das Spiel verlassen!</text>
-                </event>
+                </notification>
 
                 return (
                     if (xs:integer($p/balance) < $c/minBet) then (
-                        insert node $err2 as first into $c/events,
+                        insert node $err2 as first into $c/notifications,
                         delete node $p
                     )
                     else if ($p/@continues/string() = 'true') then (
                     (:Last Player and their continutation are adjusted in this step:)
                     if (($c/players/player[last()] = $p) and fn:not($lastPlayer_continue)) then (delete node $p,
-                    insert node $prot as first into $c/events) else (),
+                    insert node $prot as first into $c/notifications) else (),
                     replace node $p/insurance with <insurance>{fn:false()}</insurance>,
                     replace value of node $p/currentBet with 0,
                     replace node $p/currentHand/cards with <cards></cards>,
                     replace node $p/won with <won bj="false" draw="false">{fn:false()}</won>
-                    ) else (delete node $p, insert node $prot as first into $c/events)
+                    ) else (delete node $p, insert node $prot as first into $c/notifications)
                 ),
                 replace value of node $dealer/isInsurance with fn:false(),
                 replace node $dealer/currentHand with <currentHand></currentHand>,

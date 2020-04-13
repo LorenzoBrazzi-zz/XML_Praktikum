@@ -1,8 +1,8 @@
 xquery version "3.0";
 
 
-module namespace dealer = "bj/dealer";
-import module namespace game = "bj/game" at "game.xqm";
+module namespace dealer = "xLinkbj/dealer";
+import module namespace game = "xLinkbj/game" at "game.xqm";
 
 declare variable $dealer:games := db:open("games")/games;
 

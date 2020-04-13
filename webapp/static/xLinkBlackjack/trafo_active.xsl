@@ -183,7 +183,7 @@
                             </text>
                             <foreignObject height="50%" width="50%" x="{$testButton1x + 100}"
                                            y="{$testButton1y}">
-                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/ready/{$gameID}" method="POST"
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/xLinkbj/ready/{$gameID}" method="POST"
                                       target="hiddenFrame">
                                     <button style="background:transparent; border:none; color:transparent;"
                                             type="submit">
@@ -200,7 +200,7 @@
                             </text>
                             <foreignObject height="50%" width="50%" x="{$testButton1x + 65}"
                                            y="{$testButton1y + 15}">
-                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/continue/{$gameID}/true"
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/xLinkbj/continue/{$gameID}/true"
                                       method="POST" target="hiddenFrame">
                                     <button style="background:transparent; border:none; color:transparent;"
                                             type="submit">
@@ -211,7 +211,7 @@
                             </foreignObject>
                             <foreignObject height="10%" width="10%" x="{$testButton1x + 165}"
                                            y="{$testButton1y + 15}">
-                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/continue/{$gameID}/false"
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/xLinkbj/continue/{$gameID}/false"
                                       method="POST">
                                     <button style="background:transparent; border:none; color:transparent;"
                                             type="submit">
@@ -225,7 +225,7 @@
                             <foreignObject height="5%" width="17%" x="{$p1CurrentBetX - 50}"
                                            y="{$p1CurrentBetY + $radiusDummyChips + 10}">
                                 <form xmlns="http://www.w3.org/1999/xhtml"
-                                      action="/bj/setBet/{$gameID}" method="POST" class="form-inline"
+                                      action="/xLinkbj/setBet/{$gameID}" method="POST" class="form-inline"
                                       target="hiddenFrame">
                                     <span style="display: inline">
                                         <input type="number" id="bet" name="bet" placeholder="Set a bet"/>
@@ -241,7 +241,7 @@
                             </text>
                             <foreignObject height="50%" width="50%" x="{$testButton1x}"
                                            y="{$testButton1y}">
-                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/evaluate/{$gameID}" method="POST"
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/xLinkbj/evaluate/{$gameID}" method="POST"
                                       target="hiddenFrame">
                                     <button style="background:transparent; border:none; color:transparent;"
                                             type="submit">
@@ -278,7 +278,7 @@
                             </text>
                             <foreignObject height="50%" width="50%" x="{$testButton1x + 100}"
                                            y="{$testButton1y}">
-                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/ready/{$gameID}" method="POST"
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/xLinkbj/ready/{$gameID}" method="POST"
                                       target="hiddenFrame">
                                     <button style="background:transparent; border:none; color:transparent;"
                                             type="submit">
@@ -292,7 +292,7 @@
                             <foreignObject height="5%" width="17%" x="{$p2CurrentBetX - 50}"
                                            y="{$p2CurrentBetY + $radiusDummyChips + 10}">
                                 <form xmlns="http://www.w3.org/1999/xhtml" style="margin: 0; padding: 0"
-                                      action="/bj/setBet/{$gameID}" class="form-inline" method="POST"
+                                      action="/xLinkbj/setBet/{$gameID}" class="form-inline" method="POST"
                                       target="hiddenFrame">
                                     <span style="display: inline">
                                         <input type="number" id="bet" name="bet" placeholder="Set a bet"/>
@@ -308,7 +308,7 @@
                             </text>
                             <foreignObject height="50%" width="50%" x="{$testButton1x + 65}"
                                            y="{$testButton1y + 15}">
-                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/continue/{$gameID}/true"
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/xLinkbj/continue/{$gameID}/true"
                                       method="POST" target="hiddenFrame">
                                     <button style="background:transparent; border:none; color:transparent;"
                                             type="submit">
@@ -319,7 +319,7 @@
                             </foreignObject>
                             <foreignObject height="10%" width="10%" x="{$testButton1x + 165}"
                                            y="{$testButton1y + 15}">
-                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/continue/{$gameID}/false"
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/xLinkbj/continue/{$gameID}/false"
                                       method="POST" target="hiddenFrame">
                                     <button style="background:transparent; border:none; color:transparent;"
                                             type="submit">
@@ -336,7 +336,7 @@
                             </text>
                             <foreignObject height="50%" width="50%" x="{$testButton1x}"
                                            y="{$testButton1y}">
-                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/evaluate/{$gameID}" method="POST"
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/xLinkbj/evaluate/{$gameID}" method="POST"
                                       target="hiddenFrame">
                                     <button style="background:transparent; border:none; color:transparent;"
                                             type="submit">
@@ -371,7 +371,7 @@
                             </text>
                             <foreignObject height="50%" width="50%" x="{$testButton1x + 100}"
                                            y="{$testButton1y}">
-                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/ready/{$gameID}" method="POST"
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/xLinkbj/ready/{$gameID}" method="POST"
                                       target="hiddenFrame">
                                     <button style="background:transparent; border:none; color:transparent;"
                                             type="submit">
@@ -385,7 +385,7 @@
                             <foreignObject height="5%" width="17%" x="{$p3CurrentBetX - 50}"
                                            y="{$p3CurrentBetY + $radiusDummyChips + 10}">
                                 <form xmlns="http://www.w3.org/1999/xhtml" style="margin: 0; padding: 0"
-                                      action="/bj/setBet/{$gameID}" method="POST" class="form-inline"
+                                      action="/xLinkbj/setBet/{$gameID}" method="POST" class="form-inline"
                                       target="hiddenFrame">
                                     <span style="display: inline">
                                         <input type="number" id="bet" name="bet" placeholder="Set a bet"/>
@@ -401,7 +401,7 @@
                             </text>
                             <foreignObject height="50%" width="50%" x="{$testButton1x + 65}"
                                            y="{$testButton1y + 15}">
-                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/continue/{$gameID}/true"
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/xLinkbj/continue/{$gameID}/true"
                                       method="POST" target="hiddenFrame">
                                     <button style="background:transparent; border:none; color:transparent;"
                                             type="submit">
@@ -412,7 +412,7 @@
                             </foreignObject>
                             <foreignObject height="10%" width="10%" x="{$testButton1x + 165}"
                                            y="{$testButton1y + 15}">
-                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/continue/{$gameID}/false"
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/xLinkbj/continue/{$gameID}/false"
                                       method="POST" target="hiddenFrame">
                                     <button style="background:transparent; border:none; color:transparent;"
                                             type="submit">
@@ -429,7 +429,7 @@
                             </text>
                             <foreignObject height="50%" width="50%" x="{$testButton1x}"
                                            y="{$testButton1y}">
-                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/evaluate/{$gameID}" method="POST"
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/xLinkbj/evaluate/{$gameID}" method="POST"
                                       target="hiddenFrame">
                                     <button style="background:transparent; border:none; color:transparent;"
                                             type="submit">
@@ -465,7 +465,7 @@
                             </text>
                             <foreignObject height="50%" width="50%" x="{$testButton1x + 100}"
                                            y="{$testButton1y}">
-                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/ready/{$gameID}" method="POST"
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/xLinkbj/ready/{$gameID}" method="POST"
                                       target="hiddenFrame">
                                     <button style="background:transparent; border:none; color:transparent;"
                                             type="submit">
@@ -479,7 +479,7 @@
                             <foreignObject height="5%" width="17%" x="{$p4CurrentBetX - 50}"
                                            y="{$p4CurrentBetY + $radiusDummyChips + 10}">
                                 <form xmlns="http://www.w3.org/1999/xhtml" style="margin: 0; padding: 0"
-                                      action="/bj/setBet/{$gameID}" method="POST" class="form-inline"
+                                      action="/xLinkbj/setBet/{$gameID}" method="POST" class="form-inline"
                                       target="hiddenFrame">
                                     <span style="display: inline">
                                         <input type="number" id="bet" name="bet" placeholder="Set a bet"/>
@@ -495,7 +495,7 @@
                             </text>
                             <foreignObject height="50%" width="50%" x="{$testButton1x + 65}"
                                            y="{$testButton1y + 15}">
-                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/continue/{$gameID}/true"
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/xLinkbj/continue/{$gameID}/true"
                                       method="POST" target="hiddenFrame">
                                     <button style="background:transparent; border:none; color:transparent;"
                                             type="submit">
@@ -506,7 +506,7 @@
                             </foreignObject>
                             <foreignObject height="10%" width="10%" x="{$testButton1x + 165}"
                                            y="{$testButton1y + 15}">
-                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/continue/{$gameID}/false"
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/xLinkbj/continue/{$gameID}/false"
                                       method="POST" target="hiddenFrame">
                                     <button style="background:transparent; border:none; color:transparent;"
                                             type="submit">
@@ -523,7 +523,7 @@
                             </text>
                             <foreignObject height="50%" width="50%" x="{$testButton1x}"
                                            y="{$testButton1y}">
-                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/evaluate/{$gameID}" method="POST"
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/xLinkbj/evaluate/{$gameID}" method="POST"
                                       target="hiddenFrame">
                                     <button style="background:transparent; border:none; color:transparent;"
                                             type="submit">
@@ -559,7 +559,7 @@
                             </text>
                             <foreignObject height="50%" width="50%" x="{$testButton1x + 100}"
                                            y="{$testButton1y}">
-                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/ready/{$gameID}" method="POST"
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/xLinkbj/ready/{$gameID}" method="POST"
                                       target="hiddenFrame">
                                     <button style="background:transparent; border:none; color:transparent;"
                                             type="submit">
@@ -573,7 +573,7 @@
                             <foreignObject height="5%" width="17%" x="{$p5CurrentBetX - 50}"
                                            y="{$p5CurrentBetY + $radiusDummyChips + 10}">
                                 <form xmlns="http://www.w3.org/1999/xhtml" style="margin: 0; padding: 0"
-                                      action="/bj/setBet/{$gameID}" method="POST" class="form-inline"
+                                      action="/xLinkbj/setBet/{$gameID}" method="POST" class="form-inline"
                                       target="hiddenFrame">
                                     <span style="display: inline">
                                         <input type="number" id="bet" name="bet" placeholder="Set a bet"/>
@@ -589,7 +589,7 @@
                             </text>
                             <foreignObject height="50%" width="50%" x="{$testButton1x + 65}"
                                            y="{$testButton1y + 15}">
-                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/continue/{$gameID}/true"
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/xLinkbj/continue/{$gameID}/true"
                                       method="POST" target="hiddenFrame">
                                     <button style="background:transparent; border:none; color:transparent;"
                                             type="submit">
@@ -600,7 +600,7 @@
                             </foreignObject>
                             <foreignObject height="10%" width="10%" x="{$testButton1x + 165}"
                                            y="{$testButton1y + 15}">
-                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/continue/{$gameID}/false"
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/xLinkbj/continue/{$gameID}/false"
                                       method="POST" target="hiddenFrame">
                                     <button style="background:transparent; border:none; color:transparent;"
                                             type="submit">
@@ -617,7 +617,7 @@
                             </text>
                             <foreignObject height="50%" width="50%" x="{$testButton1x}"
                                            y="{$testButton1y}">
-                                <form xmls="http://www.w3.org/1999/xhtml" action="/bj/evaluate/{$gameID}" method="POST"
+                                <form xmls="http://www.w3.org/1999/xhtml" action="/xLinkbj/evaluate/{$gameID}" method="POST"
                                       target="hiddenFrame">
                                     <button style="background:transparent; border:none; color:transparent;"
                                             type="submit">
@@ -677,7 +677,7 @@
                 <xsl:when test="$state='play'">
                     <foreignObject width="7%" height="13%" x="{$button1x}"
                                    y="{$buttonsY}">
-                        <form xmlns="http://www.w3.org/1999/xhtml" action="/bj/hit/{$gameID}" id="formHit" method="POST"
+                        <form xmlns="http://www.w3.org/1999/xhtml" action="/xLinkbj/hit/{$gameID}" id="formHit" method="POST"
                               target="hiddenFrame">
                             <button class="buttonHit" type="submit" form="formHit" value="Submit">Hit
                             </button>
@@ -685,7 +685,7 @@
                     </foreignObject>
                     <foreignObject width="7%" height="13%" x="{$button2x}"
                                    y="{$buttonsY}">
-                        <form xmlns="http://www.w3.org/1999/xhtml" action="/bj/stand/{$gameID}" id="formStand"
+                        <form xmlns="http://www.w3.org/1999/xhtml" action="/xLinkbj/stand/{$gameID}" id="formStand"
                               method="POST" target="hiddenFrame">
                             <button class="buttonStand" type="submit" form="formStand" value="Submit">Stand
                             </button>
@@ -693,7 +693,7 @@
                     </foreignObject>
                     <foreignObject width="7%" height="13%" x="{$button3x}"
                                    y="{$buttonsY}">
-                        <form xmlns="http://www.w3.org/1999/xhtml" action="/bj/double/{$gameID}" id="formDouble"
+                        <form xmlns="http://www.w3.org/1999/xhtml" action="/xLinkbj/double/{$gameID}" id="formDouble"
                               method="POST" target="hiddenFrame">
                             <button class="buttonDouble" type="submit" form="formDouble" value="Submit">Double
                             </button>
@@ -861,7 +861,7 @@
                         <!-- Only for when the insurance flag is setted to true -->
                         <foreignObject width="7%" height="13%" x="{$button4x}"
                                        y="{$buttonsY}">
-                            <form xmlns="http://www.w3.org/1999/xhtml" action="/bj/setInsurance/{$gameID}"
+                            <form xmlns="http://www.w3.org/1999/xhtml" action="/xLinkbj/setInsurance/{$gameID}"
                                   id="formInsurance"
                                   method="POST" target="hiddenFrame">
                                 <button class="buttonInsurance" type="submit" form="formInsurance" value="Submit">Insurance
@@ -1902,7 +1902,7 @@
             </xsl:for-each>
 
             <div class="notifications">
-                <xsl:for-each select="events/event">
+                <xsl:for-each select="notifications/notification">
                     <xsl:choose>
                         <xsl:when test="type='error'">
                             <div style="color:red !important; font-weight:bold">[<xsl:value-of select="time"/>]

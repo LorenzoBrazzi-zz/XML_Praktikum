@@ -1431,7 +1431,7 @@
             </xsl:for-each>
 
             <div class="notifications">
-                <xsl:for-each select="events/event">
+                <xsl:for-each select="notifications/notification">
                     <xsl:choose>
                         <xsl:when test="type='error'">
                             <div style="color:red !important; font-weight:bold">[<xsl:value-of select="time"/>]

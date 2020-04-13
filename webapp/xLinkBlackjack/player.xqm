@@ -1,8 +1,8 @@
 xquery version "3.0";
 
-module namespace player = "bj/player";
-import module namespace game = "bj/game" at "game.xqm";
-import module namespace helper = "bj/helper" at "helper.xqm";
+module namespace player = "xLinkbj/player";
+import module namespace game = "xLinkbj/game" at "game.xqm";
+import module namespace helper = "xLinkbj/helper" at "helper.xqm";
 
 declare namespace uuid = "java:java.util.UUID";
 
@@ -48,16 +48,16 @@ function player:setBet($gameID as xs:string, $bet as xs:integer) {
     let $activePlayerNewBalance := $player/balance - $bet
     let $maxBet := $player:games/game[id = $gameID]/maxBet
     let $minBet := $player:games/game[id = $gameID]/minBet
-    let $err := <event>
+    let $err := <notification>
         <time>{helper:currentTime()}</time>
         <type>error</type>
         <text>Fehler beim Einsatz!!! Der Einsatz muss mindestens {$minBet}, darf maximal {$maxBet} oder
             deinen aktuellen Kontostand nicht übersteigen!</text>
-    </event>
+    </notification>
 
     return (
         if ($bet > $player/balance or $bet > $maxBet or $bet < $minBet) then (
-            insert node $err as first into $player:games/game[id = $gameID]/events
+            insert node $err as first into $player:games/game[id = $gameID]/notifications
         ) else (
             replace value of node $player/currentBet with xs:integer($bet),
             replace value of node $player/balance with $activePlayerNewBalance,
@@ -73,13 +73,13 @@ function player:stand($gameID as xs:string){
     let $game := $player:games/game[id = $gameID]
     let $activePlayerID := $game/activePlayer
     let $prot :=
-        <event>
+        <notification>
             <time>{helper:currentTime()}</time>
             <type>protocol</type>
             <text>{$game/players/player[id = $activePlayerID]/name/text()} hat seinen Zug beendet!</text>
-        </event>
+        </notification>
     return (
-        insert node $prot into $game/events,
+        insert node $prot as first into $game/notifications,
         game:setActivePlayer($gameID)
     )};
 
@@ -92,34 +92,34 @@ function player:double($gameID as xs:string) {
     let $currentBet := $p/currentBet
     let $newBet := $currentBet * 2
     let $maxBet := $player:games/game[id = $gameID]/maxBet
-    let $err := <event>
+    let $err := <notification>
         <time>{helper:currentTime()}</time>
         <type>error</type>
         <text>Fehler beim Verdoppeln!!! Der Einsatz darf
             deinen aktuellen Kontostand/Maximaleinsatz nicht übersteigen! Maximaleinsatz/Kontomaximum wird ausgewählt</text>
-    </event>
+    </notification>
     let $prot :=
-        <event>
+        <notification>
             <time>{helper:currentTime()}</time>
             <type>protocol</type>
             <text>{$p/name/text()} hat seinen Einsatz !!! VERDOPPELT !!!</text>
-        </event>
+        </notification>
     return (
     (: If the doubled value is higher than maxBet or the balance :)
     if ($newBet > $p/balance) then (
-        insert node $err as first into $player:games/game[id = $gameID]/events,
+        insert node $err as first into $player:games/game[id = $gameID]/notifications,
         replace value of node $currentBet with $p/balance + $currentBet,
         replace value of node $p/balance with 0,
         player:hit($gameID)
     )
     else if ($newBet > $maxBet) then (
-        insert node $err as first into $player:games/game[id = $gameID]/events,
+        insert node $err as first into $player:games/game[id = $gameID]/notifications,
         replace value of node $currentBet with $maxBet,
         replace value of node $p/balance with $p/balance - $maxBet,
         player:hit($gameID)
     )
     else (
-            insert node $prot as first into $player:games/game[id = $gameID]/events,
+            insert node $prot as first into $player:games/game[id = $gameID]/notifications,
             replace value of node $currentBet with $newBet,
             replace value of node $p/balance with $p/balance - $currentBet,
             player:hit($gameID)
@@ -133,36 +133,36 @@ function player:hit($gameID as xs:string){
     let $playerID := $player:games/game[id = $gameID]/activePlayer
     let $name := $player:games/game[id = $gameID]/players/player[id = $playerID]/name/text()
     let $score := player:cardValueOfPlayer($gameID, $playerID)
-    let $err := <event>
+    let $err := <notification>
         <time>{helper:currentTime()}</time>
         <type>error</type>
         <text>An 21 leider vorbeigeschossen :((</text>
-    </event>
-    let $prot := <event>
+    </notification>
+    let $prot := <notification>
         <time>{helper:currentTime()}</time>
         <type>protocol</type>
         <text>{$name} hat gehittet!</text>
-    </event>
-    let $win := <event>
+    </notification>
+    let $win := <notification>
         <time>{helper:currentTime()}</time>
         <type>protocol</type>
         <text>Glückwunsch, {$name}! Du hast 21 erreicht!</text>
-    </event>
+    </notification>
     (:If the active player is already beyond 21, then there is no need to hit anymore, thus an error message if they
     still click on the button!:)
     return (
         if ($score > 21) then (
-            insert node $err as first into $player:games/game[id = $gameID]/events
+            insert node $err as first into $player:games/game[id = $gameID]/notifications
         )
         (:Automatically redirect players, that have reached 21:)
         else if ($score = 21) then (
-            insert node $win as first into $player:games/game[id = $gameID]/events,
+            insert node $win as first into $player:games/game[id = $gameID]/notifications,
             game:setActivePlayer($gameID)
         )
         (:If the Hit was succesful and they do not reach 21 with their new card, they are free to chose their next action
         of course, i.e. no setActivePlayer() call:)
         else (
-                insert node $prot as first into $player:games/game[id = $gameID]/events,
+                insert node $prot as first into $player:games/game[id = $gameID]/notifications,
                 player:drawCard($gameID)
             ))
 };
@@ -175,18 +175,18 @@ function player:setInsurance($gameID as xs:string){
     let $playerID := $player:games/game[id = $gameID]/activePlayer
     let $player := $player:games/game[id = $gameID]/players/player[id = $playerID]
     let $prot :=
-        <event>
+        <notification>
             <type>protocol</type>
             <time>{helper:currentTime()}</time>
             <text>{$player/name/text()} hat sich für 50% seines Einsatzes versichern lassen!</text>
-        </event>
+        </notification>
 
     return (
     (:Balance - 0.5 currentBet, because the cost of buying Insurance is 50% of your current Bet,
     later if the dealer happens to have a BJ this will be readded to their balance:)
     replace value of node $player/balance with $player/balance - xs:integer(0.5 * $player/currentBet),
 replace value of node $player/insurance with fn:true(),
-insert node $prot as first into $player:games/game[id = $gameID]/events
+insert node $prot as first into $player:games/game[id = $gameID]/notifications
     )
 };
 

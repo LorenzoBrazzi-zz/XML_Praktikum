@@ -3,7 +3,7 @@ xquery version "3.0";
 (:~ This module contains helper functions!
 :)
 
-module namespace helper = "bj/helper";
+module namespace helper = "xLinkbj/helper";
 
 
 (:~ Returns the current Time stamp!
