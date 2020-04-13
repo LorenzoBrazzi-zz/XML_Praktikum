@@ -2,6 +2,7 @@
 
 ## Requirements
 - Running instance of BaseX database, and basexhttpserver
+- [Maven](https://maven.apache.org/download.cgi)
 
 ## Install Game
 
