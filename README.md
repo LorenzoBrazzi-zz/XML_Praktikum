@@ -5,13 +5,15 @@
 - [Maven](https://maven.apache.org/download.cgi) or [Eclipse](https://www.eclipse.org/downloads/) to start the webserver (for installation instructions see below)
 - [Java JDK 1.8](https://www.oracle.com/java/technologies/javase-jdk8-downloads.html) or greater
 
-## Install Game
+## Start the server
 
 1. Install the BaseX server here : http://basex.org/download/
 
 2. Copy the "webapp" folder of this project into the BaseX webapp folder
 
-### Option 1
+### Option 1: Maven (recommendet)
+	1. Download and install Eclipse IDE for Java Developers
+	
 Open the BaseX GUI and create a new database by following the steps
 	1. Database
 	2. New...
@@ -19,7 +21,7 @@ Open the BaseX GUI and create a new database by following the steps
 	4. Name of database: blackjack
 	5. "Ok"
 
-### Option 2
+### Option 2: Eclipse
 Run the 'basexhttp' script in the 'basex/bin'
 
 ## Playing the Game
