@@ -12,9 +12,9 @@
 2. Copy the "webapp" folder of this project into the BaseX webapp folder
 
 ### Option 1: Maven (recommendet)
-	1. Download and install Eclipse IDE for Java Developers
-	2. In Eclipse "File" - "Open Projects from File System"
-	3. Choose directory and navigate to the directory of the extracted STOMP BaseX server
+1. Download and install Eclipse IDE for Java Developers
+2. In Eclipse "File" - "Open Projects from File System"
+3. Choose directory and navigate to the directory of the extracted STOMP BaseX server
 	4. Make sure “Search for nested projects” is ticked as BaseX consists of four sub projects. It should find five projects (including the Maven project)
 	5. Click finish to import the projects
 	6. Make sure that your BaseX Home path is set to the newly downloaded BaseX servers webapp and db folder. For more information on BaseX's home directory visit http:// docs.basex.org/wiki/Configuration.
