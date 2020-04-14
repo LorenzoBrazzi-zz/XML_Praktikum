@@ -182,7 +182,7 @@ function player:setInsurance($gameID as xs:string){
         </notification>
     let $err :=
         <notification>
-            <type>protocol</type>
+            <type>error</type>
             <time>{helper:currentTime()}</time>
             <text>Das Guthaben {$player/name/text()} reicht für eine Versicherung nicht aus! (50% des Einsatzes nötig)</text>
         </notification>
