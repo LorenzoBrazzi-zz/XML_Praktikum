@@ -60,12 +60,12 @@
         <beginpage/>
         <abstract>
             This docbook describes and documents the design, implementation and testing of the BlackJack webapp game
-            written in the XDM programming languages. It specifies the decisions made regarding the architecture, user
+            written in the XML stack. It specifies the decisions made regarding the architecture, user
             requirements and their corresponding solutions, and thus
             captures anything that was relevant to understand and implement the web application, covering the game
-            mechanics and used architectural style through to even low-level essential functions and emerged challenges.
+            mechanics and used architectural style through to even low-level essential functions and emerging challenges.
             Furthermore, we will give an overall summary and reflection on the practical course and on the development
-            process itself, that came with it. Finally, a step-by-step run through of our blackjack program will be
+            process itself, that came with it. Finally, a step-by-step run through our blackjack program will be
             provided with detailed highlighting and explanations
             of the UI and Backend features.
         </abstract>
@@ -73,11 +73,10 @@
 
     <chapter>
         <title>Technologies</title>
-        <abstract>Following Languages and Tools that were used to build this Project.</abstract>
         <sect1>
             <title>XML</title>
             <para>
-                Since we are dealing with the development of an XML blackjack game, the Extensible Markup Language
+                Since we are dealing with the development of a XML blackjack game, the Extensible Markup Language
                 cannot be dismissed as a major component of our project.
                 It is a markup language that defines a set of rules for encoding documents in a clearly arranged way.
                 Due to its simplicity and generality, it finds its primary usage in the representation of documents as
@@ -119,23 +118,23 @@
                 vector graphics and is recommended by the W3C. SVG rendering is supported by all major internet
                 browsers, like chrome, firefox, safari etc.
                 In this project SVG was used for all visual game elements like cards and chips. SVG has a lot of useful
-                features like defining groups (&lt;g/>), where, by giving an name (id) to the group, all elements in
+                features like defining groups &lt;g/>, where, by giving a name (id) to the group, all elements in
                 this
                 group can be transformed and scaled together. Or &lt;def/>, which doesn’t render elements instantly, but
                 stores them, to use them later with &lt;use/>. By combining these two we could evade a lot of
                 redundancy.
                 For example cards have a lot of figures or positions in common (twos and threes only differ by one
-                symbol and the cipher), so by storing the framework, we could easily create the next one.
+                symbol and the cypher), so by storing the framework, we could easily create the next one.
                 Scaling is also very easy with SVG. We outsourced a lot of standard variables(e.g. player positions,
                 card dimensions) in „general variables“ and referred to them later, so they could be easily adjusted
                 everywhere, by just changing them in one place.
                 SVG makes it also possible to create complete individual graphical objects with &lt;path/>. In this
                 project an example would be the pattern of the chips.
                 With &lt;text/> text can be visualized for every user to see. It can be predefined or flexible,
-                which we made use of, by reading changing balances or bet-values off the data bank.
-                For the buttons we defined an external stylesheet. That made it possible to creat them individually(e.g.
+                which we made use of, by reading changing balances or bet-values off the database.
+                For the buttons we defined an external stylesheet. That made it possible to create them individually(e.g.
                 color,size,etc.). Each of them has its own functionality and they are important tools for the players to
-                interact with the game. All in all SVG makes it possible to customize the entire GUI.
+                interact with the game. All in all, SVG makes it possible to customize the entire GUI.
             </para>
         </sect1>
         <sect1>
@@ -145,13 +144,13 @@
                 It transforms XML documents into other XML documents as well as into other formats, of which HTML is the
                 widely spread use case.
                 It is part of the Extensible Stylesheet Language (XSL).
-                The XSLT processor, a piece of software, is responsible for performing the transformation instructions
+                The XSLT processor is a piece of software responsible for performing the transformation instructions
                 given in the stylesheet.
-                The workflow is as follows: The input for the xsl processor is the xml document and the xslt stylesheet.
+                The workflow is as follows: the input for the xsl processor is the xml document and the xsl stylesheet.
                 Then this document is
                 transformed by the template rules defined in the stylesheet. Finally, the output is a new document, that
                 is compliant to the
-                desired structure/style.
+                desired structure.
 
             </para>
             <para>
@@ -173,22 +172,22 @@
                 or JavaScript.
                 HTML is similar to XML as it is built by elements. The difference is that HTML elements are mostly
                 predefined
-                and have a specific meaning whereas XML elements can be whatever the author decides to structure his
+                and have a specific meaning, whereas XML elements can be whatever the author decides to structure his
                 file with.
                 In our Blackjack app we only used HTML passively. This means that we did not create HTML files
                 ourselves.
-                Instead, we used XSLT to transform the XML database to HTML through a XSL file, every time when
-                changes happened to the database that need to be displayed to the user. The style in this case is given
-                by applying both CSS-styling and XSL-styling.
+                Instead, we used XSLT to transform the XML database into HTML through a XSL file, every time when
+                changes to the database happened, that needed to be displayed to the user. The style in this case is given
+                by applying both, CSS-styling and XSL-styling.
             </para>
         </sect1>
         <sect1>
             <title>DocBook</title>
             <para>
                 The whole documentation for this project was written in DocBook.
-                DocBook is an XML file that has the advantage of allowing transformation into many different formats,
+                DocBook is a XML file that has the advantage of allowing transformation into many different formats,
                 e.g. PDF or HTML.
-                Since it is an XML document and already established as a standard for documentation, it has a validation
+                Since it is a XML document and already established as a standard for documentation, it has a validation
                 mechanism through DTD.
                 This decreases error probabilities and provides more clarity and uniformity, especially for the
                 transformation process.
@@ -198,26 +197,24 @@
             <title>BaseX</title>
             <para>
                 BaseX is a native XML database management system and XQuery processor, specialized in storing,
-                querying and visualizing large XML documents. Since an huge XML file is used to store data
+                querying and visualizing large XML documents. Since a huge XML file is used to store data
                 and therefore represents the whole database, BaseX is a document-oriented database.
-                It is specialized on XML documents; therefore, it supports query languages such as XPath and XQuery.
-                It has a command line interface to start the BaseX server itself and both a User Interface and a web
+                It is specialized on XML documents, therefore, it supports query languages such as XPath and XQuery.
+                It has a command line interface to start the BaseX server itself and both an user interface and a web
                 interface
-                to interact with the single databases. I.e., BaseX is a web server for xml related web apps. It provides
+                to interact with the individual databases. I.e., BaseX is a web server for xml related web apps. It provides
                 APIs for sending and receiving data, such as RestXQ. BaseX STOMP, a release of BaseX that enables the
                 server to realize a STOMP-communication
-                with the clients, plays a big role in our project since we used the STOMP framework to establish the
-                connections of the clients websockets and server, while also allowing for subscription frames, in which
-                the clients
-                always receive view updates of the DB, very much like the subscribe-publish pattern.
+                with the clients, plays a big role in our project, since we used the STOMP framework to establish the
+                connections of the clients websockets and server. It also allows for subscription frames, in which
+                the clients always receive view updates of the DB, very much like the subscribe-publish pattern.
             </para>
         </sect1>
         <sect1>
             <title>Maven</title>
             <para>
                 Maven is a build management and build automation tool from Apache.
-                It is primarily used for Java projects. Since we needed Java to compile compile the complete sources of
-                the main BaseX-STOMP project,
+                It is primarily used for Java projects. Since we needed Java to compile the main BaseX-STOMP project,
                 we were required to use Maven. Furthermore, Maven comes with a Webserver from Apache called Jetty.
                 We used Jetty to enable multiclient communication.
             </para>
@@ -249,21 +246,22 @@
                     <listitem>Value</listitem>
                     <listitem>Turned</listitem>
                 </itemizedlist>
-                <!-- evtl noch ne liste für die farben ? -->
-                The deck consists of the classic french style playing cards, i.e. there are
+                The deck consists of the classic french-style playing cards, i.e. there are
                 four kinds of colors: Spades, Hearts, Diamonds and Clubs and the
-                values range from 2 to Ace with the Court cards equaling to 10.
+                values range from 2 to Ace with the court cards equaling to 10.
                 The value of each ace is determined individually. Depending on the value of the other cards in each
-                players or dealers hand an ace counts as either one or eleven, whichever benefits the play more.
+                players or dealers hand an ace counts as either one or eleven. As long as the value of the hand stays below
+                22, the ace is counted as 11, otherwise 1.
                 "Turned" is a boolean flag determining whether a card is shown or not, and actually is only relevant for
                 the second card the dealer draws at the start of every round, since its the sole card that is shown
                 upside down. All the others are shown normally.
-                All card designs were put together manually (except for the court cards) and are automatically scaled by
+                All card designs were put together manually (except for the court cards, which were extracted from
+                wikimedia) and are automatically scaled by
                 changing the width of the cards. This was achieved by first implementing the single symbol and then
-                from there on transforming it to build the other numbers , e.g. simply build the "two" cards by
-                doubling, scaling and positioning the single symbol and use that particular for the "four" cards
-                symbols, which is then used for the "five" cards symbols, etc.
-                This also provides an abundance of redundancy, which was quite important, as we, every now and then,
+                from there on transforming it to build the other numbers , e.g. simply build the twos by
+                doubling, scaling and positioning the single symbol and use that particular for the symbols of the fours,
+                which is then used for the fives, etc.
+                This also prevents an abundance of redundancy, which was quite important, as we, every now and then,
                 could therefore perform some slight tweaks to our designs very time efficiently.
                 Our deck of cards consists of six standardized decks, which is common for Blackjack. After each round
                 the deck is shuffled, so new random cards can be dealt out.
@@ -274,12 +272,12 @@
                 Chips
             </title>
             <para>
-                Similar to the cards, the design of the chips was also hand-crafted as a svg.
+                Similar to the cards, the design of the chips was also hand-crafted with svg.
                 The chips represent the current bet of each player with the value being displayed on top of them.
-                For a more appealing visuals, we used colors to differentiate the values into clusters, e.g. values
-                below 100 will be displayed as blue chips, whereas values above 5K are black.
+                For more appealing visuals, we used colors to classify the values into clusters, e.g. values
+                below 100 will be displayed as blue chips, whereas values above 5000 are black. Also, to fit the number
+                into the chip, we rounded the thousands and appended a K. E.g. 2450 becomes 2.5K.
                 These color changes also simulate a casino-feeling and makes the game slightly more immersive.
-                <!-- evtl noch ne liste für die farben ? -->
                 <itemizedlist>
                     <para>Possible Chip colors:</para>
                     <listitem>For values 0...100: blue</listitem>
@@ -302,8 +300,8 @@
             <para>
                 For a multi-client game a lobby is indispensable. It’s the starting point for each player.
                 Within the lobby, You, as a player, can either create a new game, or join an existing one.
-                To join a running game from the available games list, you have to simply enter your name and then click
-                on the join button.
+                To join a running game from the list of available games, you have to simply enter your name and then click
+                the join button.
                 If you wish to create a new game, you have to additionally define the range of betting for the new table
                 with a minimum and maximum. The new game can be then joined by others.
                 Games are available, if there is still an open slot and not all players have confirmed the ready-check
@@ -315,7 +313,7 @@
                 Course of the game
             </title>
             <para>
-                Whenever a player joins a game he is provided 10000 balance. Every player plays for himself against the
+                Whenever a player joins a game they are provided with a 10000 balance. Every player plays for themselves against the
                 dealer to maximize their balance.
                 Regardless of their own play, each player has to wait for the rest of the table to perform their
                 actions, before they can execute their own ones.
@@ -339,18 +337,18 @@
                 When all player have set their bets the playing cards are distributed.
                 The players and the dealer receive two cards each, in which one of the dealers card will be shown upside
                 down.
-                Now, sequentially the players actually play out their turn until they press the stand button or surpass
+                Now, the players actually play out their turn sequentially until they press the stand button or surpass
                 21 with the value of their hand.
                 If they hit, they are provided an additional card, if they double they get another card and double their
                 bet.
-                If the first card of the dealer is an ace the players are given the option to buy an insurance.
+                If the first card of the dealer is an ace, the players are given the option to buy an insurance.
                 If they decide to buy an insurance, they only lose half of their bet if, and only if, the dealer hits a
                 blackjack.
                 The cost of the insurance adds up to half of the value of their current bet.
             </para>
             <para>
-                After all players have made their moves it’s the dealers turn,
-                who flips the second card and if this card´s value is below 17 another hit has to be committed until
+                After all players have made their moves it’s the dealers turn.
+                He flips the second card and if this card´s value is below 17 another hit has to be committed until
                 that’s not the case anymore.
                 Afterwards, the outcome will be calculated for each player individually. Their winnings (and possible
                 insurances) will be payed out.
@@ -368,7 +366,16 @@
         <title>Architecture</title>
         <sect1>
             <title>MVC Architecture</title>
-            <!-- Hier können wir irgendein Bild von MVC rein -->
+
+
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="../Konzepte/MVC.png" format="PNG" align="center" scalefit="1"
+                               width="100%"></imagedata>
+                </imageobject>
+                <caption>Image extracted from the documentation of guessTheNumber.</caption>
+            </mediaobject>
+
             <para>
                 We designed our application around the widely used Model-View-Controller design pattern, which finds its
                 usage on a number of webapp scenarios like this project, because of the high cohesion and loose coupling
@@ -382,9 +389,9 @@
                 usage of the controller.
             </para>
 
-            <!-- Bild vom MVC in guessTheNumber DocBook -->
             <para>
-                Our application follows a classic client-server architecture with following characteristics:
+                Our application follows a classic client-server architecture with following characteristics
+                (as mentioned by Mr.Ulrich in the guessTheNumber documentation):
                 <itemizedlist>
                     <listitem>
                         The client runs in a web browser.
@@ -400,10 +407,10 @@
 
             <para>
                 We used the RestXQ API to facilitate XQuery as a server-side processing language, i.e. to interpret and
-                map the HTTP Requests from the client (GET and POST) to the XQuery functions of the Server.
+                map the HTTP requests from the client (GET and POST) to the XQuery functions of the server.
                 To do so, we simply annotated the functions in the controller with %rest:path("somePath") and
                 %rest:HTTP-method.
-                E.g. %rest:path("bj/setup") and %rest:GET for interpreting the an incoming setup request from the
+                E.g. %rest:path("bj/setup") and %rest:GET for interpreting the incoming setup request from the
                 client.
                 But since each function can have parameters, those annotations alone were not sufficient.
                 We needed a way to provide parameters, especially the gameID or playerID, within the request url.
@@ -417,16 +424,21 @@
                 Our whole application server has only one response. That is, the server responses with the visual
                 transformation of each
                 user request that alters the game instance in the DB. We realized that by using the update:output and
-                web:redirect methods
-                provided by BaseX.
+                web:redirect methods provided by BaseX.
             </para>
-            <!-- Hier noch das Bild von unserem Klassendiagramm -->
+
         </sect1>
         <sect1>
             <title>Modules</title>
             <abstract>The following sections will describe the modules used to implement the functionality of the
                 Blackjack game.
             </abstract>
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="../Konzepte/Class Diagram.png" format="PNG" align="center" scalefit="1"
+                               width="100%"></imagedata>
+                </imageobject>
+            </mediaobject>
             <sect2>
                 <title>Controller</title>
                 <para>
@@ -435,13 +447,13 @@
                     Each function in the controller is mapped to an unique url that calls the corresponding function of
                     the model or creates a new view of the changed model.
                     The controller was a very helpful entity when it came to testing, since we could send specific
-                    "Test" GET requests through URLs. We will present the most important "controller-exclusive" methods.
+                    "test" GET requests through URLs. We will present the most important "controller-exclusive" methods.
                 </para>
                 <itemizedlist>
                     <listitem>
                         <para>setup, startingPage</para>
                         <para>
-                            The 'setup' function is the first one that gets called when startig the webapp. It helps the
+                            The 'setup' function is the first one that gets called when starting the webapp. It helps the
                             user to install the game by simply typing in the url in the browser, hence no
                             DB instantiation or manual connection steps are needed. I.e. it automatically creates the
                             XML database and redirects to 'startingPage'.
@@ -452,7 +464,7 @@
                     <listitem>
                         <para>startGame</para>
                         <para>startGame ensures that the min and maxBets, given by the user, are compliant to the rules,
-                            e.g. gt0, min lt; max, etc.
+                            e.g. &gt; 0, min &lt; max, etc.
                         </para>
                     </listitem>
                     <listitem>
@@ -467,8 +479,7 @@
                         <para>
                             Represents the View of the MVC style. Every time the state of the database is changed, this
                             function is called, so that it can transform the game XML into HTML via XSLT. This HTML is
-                            then sent to every user
-                            that is subscribed through the websocket element.
+                            then sent to every user that is subscribed through the websocket element.
                         </para>
                     </listitem>
                 </itemizedlist>
@@ -476,8 +487,8 @@
             <sect2>
                 <title>Game</title>
                 <para>
-                    The core class of the model, which consists of the game, player, and dealer module. It contains most
-                    of the game logic in regards to blackjack rules and non-player-related actions, such as
+                    The MVC model is composed of the game, player, and dealer modules. The game module represents the core.
+                    It contains most of the game logic in regards to blackjack rules and non-player-related actions, such as
                     shuffling the deck, determining winners, paying out, etc.. It is responsible for determining the
                     states of the game as well as assigning players as active/inactive.
                 </para>
@@ -492,15 +503,14 @@
                         <para>setActivePlayer</para>
                         <para>
                             This is the core function/mechanics of the whole system. Besides giving play access rights
-                            to the next active player, it handles every end of a state (call by the last player in the
-                            sequence), expect for the betting state, since this one is regulated by the controller).
+                            to the next active player, it handles every end of a state (called by the last player in the
+                            sequence), expect for the betting state, since this one is regulated by the controller.
                             I.e. when each player has played their round, it calculates winners and losers, after that,
                             gives each player their deserved payouts and finally it resets the table, deletes players
-                            that wanted or had to, assigns the players
-                            to their correct seat position and puts the state into "ready", thus ending the cycle, so
-                            that new players can join again.
+                            that wanted or had to be deleted, assigns the players to their correct seat position
+                            and puts the state into "ready", thus ending the cycle, so that new players can join again.
                             After handling each ending of a state, this function always sets the first player as active
-                            again. So that the new state can be applied to each player.
+                            again, so that the new state can be applied to each player.
                         </para>
                     </listitem>
                     <listitem>
@@ -518,9 +528,8 @@
                     <listitem>
                         <para>dealOutCards</para>
                         <para>
-                            This method is responsible for giving each player and the dealer 2 cards respectively, to
-                            start off the game. It draws the card from the deck with respect to the position of each
-                            player by
+                            To start off the game, this method gives each player and the dealer 2 cards respectively.
+                            It draws the card from the deck with respect to the position of each player by
                             retrieving the Nth and Nth-1 card from the deck where N = playerPosition * 2. The dealer
                             always gets the 11nth and 12th card from the deck since there are never more than 5 players.
                             This is rather simplistic, but it did work quite well for us.
@@ -531,8 +540,7 @@
                         <para>
                             This method is called every time when the "play" round is completed and all the players have
                             played against the dealer. Its job is to update the 'won' tag of each player instance
-                            respecting the
-                            outcome of the game. All the cases are evaluated by comparing the card value of the dealer
+                            respecting the outcome of the game. All the cases are evaluated by comparing the card value of the dealer
                             to the card value of each player. The player can either win, lose or draw with the dealer.
                         </para>
                     </listitem>
@@ -544,8 +552,7 @@
                             applying that to
                             determine the player's resulting balance. Here, we followed the rules implemented in the
                             standard Blackjack game which suggest a payout of 3 to 2, if the player won by Blackjack,
-                            and a
-                            return of the placed bet plus the same amount added, if it is a normal win.
+                            and a return of twice the placed bet, if it is a normal win.
                         </para>
                     </listitem>
                     <listitem>
@@ -582,10 +589,9 @@
                     <listitem>
                         <para>resetTable</para>
                         <para>
-                            This method closes the round by deleting all the players that don't want or cannot affort to
-                            play the next round, resetting all players' won tags to set back to false (standard) and
-                            deletes
-                            all the cards from de hands of players and dealer.
+                            This method closes the round by deleting all the players that don't want or cannot afford to
+                            play the next round, resetting all players' won tags (back to the standard: false) and
+                            deletes all the cards from the hands of players and dealer.
                         </para>
                     </listitem>
                     <listitem>
@@ -595,7 +601,7 @@
                             is necessary that there are no "gaps" between player positions, since every function
                             (especially the draw function) assumes
                             that the player within the sequence position i is also the player with the same named tag
-                            "position" = i. Hence, we implemented this function, that simply rearranges player position
+                            "position" = i. Hence, we implemented this function, that simply rearranges player positions
                             after some left the game.
                         </para>
                     </listitem>
@@ -622,7 +628,7 @@
                     <listitem>
                         <para>createPlayer</para>
                         <para>Just like 'createGame', this method creates an default instance of a player with
-                            respective ID, name (only non-default value), balance, bet, insurance and position on the
+                            respective ID, name (only non-default value), balance, bet, insurance and position at the
                             table.
                         </para>
                     </listitem>
@@ -642,7 +648,7 @@
                     </listitem>
                     <listitem>
                         <para>stand</para>
-                        <para>A player can click on the stand button at any time during his turn to pass the turn to the
+                        <para>A player can click the stand button at any time during his turn to pass the turn to the
                             next player. This function implements just that by simply calling 'setActivePlayer'
                         </para>
                     </listitem>
@@ -652,9 +658,9 @@
                             This is another Blackjack-specific action that the player can choose if he sees a high
                             chance of winning against the dealer. The method implements this process of doubling the bet
                             of a player
-                            in exchange for another card, i.e. after doubling it delegates to hit(). It respects the
-                            bounds of minimum and maximum bet by setting them as the player's bet if double of the bet
-                            would be too big or too little.
+                            in exchange for another card, i.e. after doubling it delegates the work to hit(). It respects the
+                            bound of the maximum bet by setting them as the player's bet, if double of the bet
+                            would be too big.
                         </para>
                     </listitem>
                     <listitem>
@@ -664,7 +670,7 @@
                             the cards the player already has. If that value has already passed 21, an error message will
                             be displayed and the user will
                             not be able to draw the card. If the player's cards value is equal to 21, the turn is
-                            automatically passed to the next player, since anything other than that makes no sense.
+                            automatically passed to the next player, since it is the only logical choice.
                             In the case of the cards´ value being under 21, the player is able to repeat this action
                             until any of the other two cases appear.
                         </para>
@@ -704,8 +710,7 @@
                         <para>
                             Player continuation function. This method processes the decision of the player to either
                             keep playing or to leave the game. It also checks if the balance of that specific player is
-                            lower or equal to zero so that they will get kicked out
-                            automatically.
+                            lower or equal to minimum bet so that they will get kicked out automatically.
                         </para>
                     </listitem>
                 </itemizedlist>
@@ -754,15 +759,13 @@
                         <para>drawCard</para>
                         <para>
                             This is another function that is ,in principle, similar to the 'drawCard' method in the
-                            Player module, that needed to be specifically adjusted to the dealer, since we implemented
-                            the "dealer has to hit 16" type of BJ game,
-                            so that the dealer has to automatically draw according to the current circumstances of the
+                            player module, that needed to be specifically adjusted to the dealer, since we implemented
+                            the "dealer has to hit 16" type of BJ game.
+                            The dealer has to automatically draw according to the current circumstances of the
                             game. Therefore, we altered the old method with some tweaks tailored towards the dealer`s
-                            needs.
-                            It uses the the previously described functions 'cardValueOfDealer' and
-                            'numberOfDrawingCards'.
-                            The former calculates the base value of the dealer's hand and based on that, the latter
-                            decides how many cards the dealer will have to draw.
+                            needs. It uses the the previously described functions 'cardValueOfDealer' and
+                            'numberOfDrawingCards'. The former calculates the base value of the dealer's hand and based
+                            on that, the latter decides how many cards the dealer will have to draw.
                             When the number is calculated, the dealer draws that amount of cards from the deck and
                             deletes them from the stack.
                         </para>
@@ -792,7 +795,7 @@
                         <para>subscribe</para>
                         <para>
                             This method is responsible for the mapping a websocket, which represents the client, to the
-                            current game thorough a url that contains the game ID and player ID. This method is called
+                            current game thorough an url that contains the game ID and player ID. This method is called
                             when a player creates or joins a game,
                             so that this player is subscribed to all the changes that happen within that instance in the
                             database. This player is notified and updated every time changes are sent to this path.
@@ -832,8 +835,8 @@
             <sect2>
                 <title>Helper</title>
                 <para>This module has only one method: 'currentTime'. It returns the exact time in which the method was
-                    called. This method is very helpful to us since we insert events into a notification box and supply
-                    the timestamp of this notification.
+                    called. This method is very helpful to us since we insert notifications into a text box and supply
+                    the timestamp for this notification.
                 </para>
             </sect2>
         </sect1>
@@ -862,8 +865,7 @@
                 if they do not alter their behavior. Finally, after integrating, we always tested the system as a whole
                 by trying to
                 simulate a round of BJ until the next error shows itself, or to fully check if all changes work
-                according to our
-                expectations.
+                according to our expectations.
             </para>
         </sect1>
     </chapter>
@@ -875,13 +877,12 @@
         <sect1>
             <title>XQuery Update Constraints</title>
             <para>
-                This is easily the biggest Challenge we faced during this project.
+                This is easily the biggest challenge we faced during this project.
                 XQuery, by its core, is a purely query and functional language. That means the standard procedures used
-                in imperative or
-                Object Oriented Programming languages, such as Java, cannot be fully applied in this use case.
-                Fortunately, BaseX provides the so called Update Facility, that extends the Xquery language by
+                in imperative or Object Oriented Programming languages, such as Java, cannot be fully applied in this use case.
+                Fortunately, BaseX provides the so called Update Facility, that extends the XQuery language by
                 expressions that allow for
-                changing Instances in the Xpath Xquery Data Model. I.e. we can:
+                changing instances in the Xpath XQuery Data Model. I.e. we can:
                 <itemizedlist>
                     <listitem>Insert a node</listitem>
                     <listitem>Delete a node</listitem>
@@ -892,34 +893,34 @@
                 fatal mistake.
                 Update Expressions are stored in a pending update list. This means that all the update expression in
                 there are performed, regardless
-                of their order. But our game logic required the opposite, for instance, before we set the Results of the
+                of their order. But our game logic required the opposite, for instance, before we set the results of the
                 players, the dealer had to make his play,
                 to determine the winners of the round. Only using update expressions lead to either logical mistakes
                 similar to the one mentioned earlier or
                 to complete errors, e.g. trying to modify a node, that should have been inserted beforehand.
-                To bypass this problem, we made use of the paradigm of functional programming, i.e. try to bind the
+                To bypass this problem, we made use of the paradigms of functional programming, i.e. try to bind the
                 logic in a more mathematical style.
-                Instead of trying to update the same Game over and over again (which only enlarges the pending list), we
+                Instead of trying to update the same game over and over again (which only enlarges the pending list), we
                 passed a copy of the game element as an input, performed all procedures on the copy, and returned the
                 modified copy as an output.
                 That way, all update functions within the copy statement are executed before delivered within the
                 output.
                 Coming back to our previous example, we then modified the dealer:play function such that it returns the
-                game element instead of updating the DB.
+                game element instead of updating the database.
                 Subsequently, this modified copy of the game is given to the setResult function, which can now safely
-                determine all winners correctly because
-                the dealer already made the move.
+                determine all winners correctly because the dealer already made the move. The final updated game element
+                then replaces the corresponding one in the database.
             </para>
         </sect1>
         <sect1>
             <title>Browser View</title>
             <para>
-                Sometimes when an Error regarding the browser view occurred, we tried to change it another browser,
+                Sometimes when an error regarding the browser view occurred, we tried to change it another browser,
                 which solved the problem but ironically,
-                provided a new one. It was very interesting to see how each Browser renders HTML code differently.
+                provided a new one. It was very interesting to see how each browser renders HTML code differently.
                 However, we could not determine why exactly
-                this happens and found out that even though all Browsers more or less provide the correct View, the
-                Safari Browser is the most reliable one for us.
+                this happens and found out that even though all browsers more or less provide the correct view, the
+                Safari browser is the most reliable one for us.
             </para>
         </sect1>
         <sect1>
@@ -929,16 +930,16 @@
                 Strangely, if the first player leaves the game
                 the clients browser should, as it does for the remaining players in the table if they leave, just show
                 the table as a spectator.
-                Logic wise, however, the procedures are correct and the connections are established or cut accordingly.
+                Logic wise, however, the procedures are correct and the connections are established or cut correctly.
             </para>
         </sect1>
 	<sect1>
             <title>Coronavirus Pandemic</title>
             <para>
-                Because of the ongoing Coronavirus it was not possible for us, as a team, to physically meet in our
+                Because of the ongoing covid-19 pandemic it was not possible for us, as a team, to physically meet in our
 		most urgent/final phase of the project. The communication via Zoom and Skype was a big help, but it
 		does not come close to the real thing. Our entire work environment being in our comfortable homes,
-		was holding us back more than we thought. Nonetheless, with current techincal advancement, it was still
+		was holding us back more than we thought. Nonetheless, with current technical advancement, it was still
 		feasible to implement our project in the scope, we intended to achieve. 
             </para>
         </sect1>
@@ -958,15 +959,14 @@
                 E.g. while the back-end team implemented the stand function, the front-end could implement the buttons
                 at the same time, so that the final test could be more intuitive.
                 But of course, there was a lot of cross sectional work, too, because often times we had
-                to identify which part of the system, the GUI or Logic, did not work correctly, so the synergy of front
-                and back end was
-                very important for us.
+                to identify which part of the system, the GUI or logic, did not work correctly, so the synergy of front
+                and back end was very important for us.
             </para>
         </sect1>
         <sect1>
             <title>Development Environment</title>
             <para>
-                All of our members used the IntelliJ IDE, because it covers all aspects of the XML Stack.
+                All of our members used the IntelliJ IDE, because it covers all aspects of the XML-Stack.
                 It has a fully fledged support of the XQuery language as well as XSL, HTML, CSS and also
                 version control via git. This allowed our team members to always be up to date, clearly see changes
                 someone made and overall improve communication and workflow.
@@ -981,13 +981,12 @@
             <para>
                 Overall, the structure of the course was very thoughtfully organized, while also providing very
                 helpful coaching. Even with the current limitations caused by the corona virus, the instructors
-                showcased
-                their flexibility by adapting very quickly, through utilizing software such as zoom.
+                showcased their flexibility by adapting very quickly, through utilizing software such as zoom.
                 This allowed us to stay within the schedule.
             </para>
             <para>
                 In conclusion, this was a very interesting experience, to be able to implement a full web app
-                from scratch, using solely the XDM Languages, which forced us to broaden our horizon and thinking
+                from scratch, using solely the XDM Languages, which forced us to broaden our horizons and thinking
                 patterns. The fact that the semantics of the app was based on BlackJack made it even more interesting.
                 Prof. Brüggemann-Klein and Mr. Ulrich were always ready to help and provide further materials in case
                 you wanted to go further in details and functionality. Basically, the whole experience can be summed up
@@ -1006,9 +1005,9 @@
             </imageobject>
         </mediaobject>
         <para>
-            (1) After inserting the url xLinkbj/setup, the DB is initialized and redirected to xLinkbj/startingPage which prints
+            (1) After inserting the url 'xLinkbj/setup', the database is initialized and redirected to 'xLinkbj/startingPage' which prints out
             the lobby.
-            (2) If an User wants to, here they can create a game by inserting the needed values.
+            (2) If an user wants to, here they can create a game by inserting the needed values.
             (3) Since no game has been created, yet, this section remains empty.
         </para>
         <mediaobject>
@@ -1018,12 +1017,12 @@
             </imageobject>
         </mediaobject>
         <para>
-            Suppose Ikbal has created a game with minBet = 10 and maxBet = 10000. After he pressed on the Start button,
-            following Screen appears:
-            (1) Join Url shows that the client has subscribed to the game with the specific ids. Now this browser will,
+            Suppose Ikbal has created a game with minBet = 10 and maxBet = 10000. After he pressed the start button,
+            following screen appears:
+            (1) Join url shows that the client has subscribed to the game with the specific ids. Now this browser will,
             as long as it stays connected, receive updates on the view
-            (2) Ready Button to handle the ready state
-            (3) Notification Box, that logs all game related statements.
+            (2) Ready button to handle the ready state
+            (3) Notification box, that logs all game related statements.
         </para>
         <mediaobject>
             <imageobject>
@@ -1053,9 +1052,9 @@
             </imageobject>
         </mediaobject>
         <para>
-            After the players Joined the table and clicked on the ready button, the betting stage is opened.
-            (1) Input Box for Bet
-            (2) Error Message if wrong Bet
+            After the players joined the table and clicked on the ready button, the betting stage is opened.
+            (1) Input box for bet
+            (2) Error message if wrong bet
         </para>
         <mediaobject>
             <imageobject>
@@ -1066,7 +1065,7 @@
         <para>
             After everybody has placed their bets, the cards are dealt out and the playing state emerges.
             The active Player has now multiple options to choose from. Hit, Stand and Double.
-            (1) Player Actions
+            (1) Player actions
             (2) Chip with the bet amount and dynamically color adjustment
         </para>
         <mediaobject>
@@ -1085,7 +1084,7 @@
             </imageobject>
         </mediaobject>
         <para>
-            Player presses on Stand and the active Player rights are passed on to the next player in line.
+            Player presses on Stand and the active player rights are passed on to the next player in line.
         </para>
         <mediaobject>
             <imageobject>

@@ -273,7 +273,7 @@ function player:setContinue($gameID as xs:string, $continue as xs:boolean){
     return (
         if ($player/position = $count) then (game:finishRound($gameID, $continue))
         else (
-            if ($continue or ($player/balance <= 0)) then () else (replace value of node $player/@continues with 'false'),
+            if ($continue and ($player/balance >= $player:games/game[id = $gameID]/minBet)) then () else (replace value of node $player/@continues with 'false'),
             game:setActivePlayer($gameID)
         )
     )
