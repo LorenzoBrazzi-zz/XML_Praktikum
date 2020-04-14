@@ -370,8 +370,8 @@
 
             <mediaobject>
                 <imageobject>
-                    <imagedata fileref="../Konzepte/MVC.png" format="PNG" align="center" scalefit="1"
-                               width="100%"></imagedata>
+                    <imagedata fileref="../Konzepte/MVC.png" format="PNG" align="center" scalefit="0.7"
+                               width="70%"></imagedata>
                 </imageobject>
                 <caption>Image extracted from the documentation of guessTheNumber.</caption>
             </mediaobject>

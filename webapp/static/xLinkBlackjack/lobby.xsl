@@ -5,7 +5,7 @@
                 version="2.0">
 
     <xsl:template match="/">
-        <div style="background-image: url('../static/background.jpg')">
+        <div style="background-image: url('../static/xLinkBlackjack/background.jpg')">
             <svg width="100%" height="100%" version="1.1" viewBox="0 0 1600 900"
              xmlns="http://www.w3.org/2000/svg">
 
